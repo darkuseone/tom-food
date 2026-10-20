@@ -1,0 +1,31 @@
+{
+  "metadata": {
+    "soundFile": "/home/user/tom-food/build/001-caesar/vf/s5.wav",
+    "duration": 4.20
+  },
+  "mouthCues": [
+    { "start": 0.00, "end": 0.24, "value": "B" },
+    { "start": 0.24, "end": 0.43, "value": "F" },
+    { "start": 0.43, "end": 0.48, "value": "E" },
+    { "start": 0.48, "end": 0.73, "value": "C" },
+    { "start": 0.73, "end": 0.80, "value": "B" },
+    { "start": 0.80, "end": 0.87, "value": "C" },
+    { "start": 0.87, "end": 0.95, "value": "A" },
+    { "start": 0.95, "end": 1.05, "value": "C" },
+    { "start": 1.05, "end": 1.19, "value": "X" },
+    { "start": 1.19, "end": 1.54, "value": "B" },
+    { "start": 1.54, "end": 1.75, "value": "C" },
+    { "start": 1.75, "end": 2.24, "value": "B" },
+    { "start": 2.24, "end": 2.38, "value": "D" },
+    { "start": 2.38, "end": 2.66, "value": "B" },
+    { "start": 2.66, "end": 2.74, "value": "A" },
+    { "start": 2.74, "end": 2.90, "value": "F" },
+    { "start": 2.90, "end": 3.32, "value": "B" },
+    { "start": 3.32, "end": 3.40, "value": "A" },
+    { "start": 3.40, "end": 3.56, "value": "C" },
+    { "start": 3.56, "end": 4.05, "value": "B" },
+    { "start": 4.05, "end": 4.12, "value": "C" },
+    { "start": 4.12, "end": 4.19, "value": "B" },
+    { "start": 4.19, "end": 4.20, "value": "X" }
+  ]
+}

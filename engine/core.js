@@ -3,7 +3,8 @@ const K = {
   ink: '#1d140e', amber: '#e8a33c', ember: '#ff8a3a', teal: '#3f8f95', cyan: '#7fd8ff', neonP: '#ff4f9a', neonC: '#36d6ff', neonY: '#ffd34a',
   slate: '#3b3a48', slateD: '#24232e', slateL: '#6d6a7e', garnet: '#a8243a', mica: '#e8e3f2', ice: '#cfe6f6', iceM: '#8ebede', iceD: '#3a6e9e',
   snow: '#eef2f4', fern: '#4f6b2e', fernD: '#2e4119', olive: '#6e6a3a', mud: '#6b5236', water: '#3d6f8e', waterL: '#8fbcd0',
-  brick: '#8e4a35', stone: '#b9ab94', stoneD: '#7a6e5e', copper: '#c06a32', patina: '#5aa391', steel: '#59636e', steelD: '#30363d', paper: '#efe3c6', red: '#b8322a'
+  brick: '#8e4a35', stone: '#b9ab94', stoneD: '#7a6e5e', copper: '#c06a32', patina: '#5aa391', steel: '#59636e', steelD: '#30363d', paper: '#efe3c6', red: '#b8322a',
+  tomato: '#d9482b', tomatoD: '#8e2414', mustard: '#e8b53a', oliveB: '#6b7a2e', cream: '#f4e6c8', graphite: '#2b2622', copperK: '#b8733a'   // бренд «ТОМ НА ВКУС»
 };
 /* SC, S0/S1, LS/LE/LF, EV, SHAKES, YEARS, KEYW — объявляет выпуск в episodes/<NNN>/scenes.js */
 const sceneAt = t => { let i = 0; while (i < SC.length - 1 && t >= SC[i + 1][1]) i++; return i; };
@@ -55,40 +56,46 @@ function renderTo(c, fn) { const prev = ctx, pS = S, pSS = SS.splice(0); ctx = c
 
 // ------------------------------------------------------------------ HUD: титр эпохи, таймлайн, субтитры, плашка
 function logPos(yr) { const ago = Math.max(1, 2026 - yr); return 1 - Math.log10(ago) / Math.log10(4.6e8); }   // 0 = 450 млн лет назад … 1 = сейчас
-function titleCard(t) {
-  const i = sceneAt(t), s = SC[i]; if (!s[3]) return; const u = t - s[1], roll = u < 0.5, k = popK(t, s[1], 0.3);
-  push(540, 228, 0.9 + 0.1 * k);
-  const g = ctx.createLinearGradient(-330, 0, 330, 0); g.addColorStop(0, 'rgba(18,12,10,0)'); g.addColorStop(0.2, 'rgba(18,12,10,0.62)'); g.addColorStop(0.8, 'rgba(18,12,10,0.62)'); g.addColorStop(1, 'rgba(18,12,10,0)');
-  ctx.fillStyle = g; ctx.fillRect(-360, -88, 720, 170);
+function titleCard(t) {                                             // «ТОМ НА ВКУС»: карточка рецепта (листок на скрепке) — страна+год, ингредиенты дописываются/зачёркиваются
+  if (typeof RECIPE === 'undefined') return; const i = sceneAt(t), s = SC[i]; if (!s[3]) return;
+  const u = t - s[1], roll = u < 0.45, k = popK(t, s[1], 0.32), items = RECIPE.filter(q => t >= q[1]).slice(-6);
+  const x0 = 34, y0 = 120, w = 410, h = 132 + items.length * 40;
+  push(x0 + w / 2, y0, 0.86 + 0.14 * k, -0.035 + Math.sin(t * 1.3) * 0.004); ctx.translate(-w / 2, 0);
+  ctx.save(); ctx.shadowColor = 'rgba(20,10,4,0.45)'; ctx.shadowBlur = 18; ctx.shadowOffsetY = 8; ctx.fillStyle = '#f4e6c8'; ctx.fillRect(0, 0, w, h); ctx.restore();
+  const g = ctx.createLinearGradient(0, 0, w, h); g.addColorStop(0, 'rgba(255,250,235,0.5)'); g.addColorStop(1, 'rgba(184,115,58,0.22)'); ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+  ctx.save(); ctx.globalAlpha = 0.16; ctx.fillStyle = '#b8733a'; ctx.beginPath(); ctx.ellipse(w - 70, h - 40, 46, 30, 0.4, 0, 6.3); ctx.fill(); ctx.globalAlpha = 0.1; ctx.beginPath(); ctx.ellipse(w - 50, h - 60, 22, 14, 0, 0, 6.3); ctx.fill(); ctx.restore();   // пятно соуса
+  for (let y = 112; y < h - 10; y += 40) pencil([[16, y + 22], [w - 16, y + 22]], { w: 1.2, col: '#9ab8c8', a: 0.5, pass2: false, gap: false });
+  pencil([[56, 100], [56, h - 6]], { w: 1.6, col: '#d9482b', a: 0.55, pass2: false, gap: false });
+  pencil([[0, 0], [w, 0], [w, h], [0, h], [0, 0]], { w: 2.4, col: '#2b2622', a: 0.85, pass2: false });
+  pencil(spline([[w - 64, -18], [w - 50, -26], [w - 40, -10], [w - 44, 60], [w - 56, 64], [w - 62, 10]], false, 5), { w: 4, col: '#8a8e96', pass2: false, gap: false });   // скрепка
   let year = s[3]; if (roll) { const r = rng(hsh(FRAME, 5)); year = year.replace(/[0-9]/g, () => String(Math.floor(r() * 10))); }
-  txt(year, 0, -18, 104, { col: roll ? '#9fd8ff' : '#f6e7c8', font: 'Osw', a: 0.97 });
-  txt(s[4], 0, 54, 34, { col: K.amber, font: 'Osw', a: 0.95 });
+  txt(year, 24, 46, 64, { col: '#d9482b', font: 'Osw', align: 'left' }); txt(s[4], 24, 92, 30, { col: '#2b2622', font: 'Osw', align: 'left', a: 0.9 });
+  items.forEach((q, j) => { const [name, ta, ts, mark] = q, y = 140 + j * 40, rv = clamp((t - ta) / 0.4), add = t - ta < 0.6;
+    if (add) glow(240, y, 160, 'rgba(232,181,58,1)', 0.35 * (1 - (t - ta) / 0.6), 'multiply');
+    txt('•', 36, y, 34, { col: '#6b7a2e', font: 'Hand' }); txt(name, 70, y, 38, { col: mark === 'new' ? '#4a5a14' : '#2b2622', font: 'Hand', align: 'left', reveal: rv });
+    if (mark === '?' || (typeof mark === 'number' && t < mark)) txt('?', w - 34, y, 44, { col: '#d9482b', font: 'Hand' });
+    if (ts !== undefined && ts !== null && t >= ts) { ctx.save(); ctx.font = '38px Hand'; const tw = ctx.measureText(name).width; ctx.restore(); const kk = clamp((t - ts) / 0.25); pencil([[64, y + 2], [64 + (tw + 14) * kk, y - 4]], { w: 5, col: '#d9482b', a: 0.95, pass2: false, gap: false }); } });
   pop();
-  // таймлайн: логарифмическая шкала 450 млн лет → сегодня, маркер едет к эпохе
-  const y = 342, x0 = 140, x1 = 940; const prev = i > 0 ? SC.slice(0, i).reverse().find(q => YEARS[q[0]] !== undefined) : null;
-  const p1 = logPos(YEARS[s[0]] ?? 2026), p0 = prev ? logPos(YEARS[prev[0]]) : p1, p = lerp(p0, p1, sm(u / 0.6));
-  ctx.save(); ctx.globalAlpha = 0.75; ctx.fillStyle = 'rgba(18,12,10,0.45)'; ctx.fillRect(x0 - 20, y - 16, x1 - x0 + 40, 32); ctx.restore();
-  pencil([[x0, y], [x1, y]], { w: 2, col: '#f6e7c8', a: 0.8, pass2: false, gap: false });
-  [['−450 млн', -4.5e8], ['−1 млн', -1e6], ['−1000', 1026], ['2026', 2026]].forEach(([l, yr]) => { const x = lerp(x0, x1, logPos(yr)); pencil([[x, y - 8], [x, y + 8]], { w: 2, col: '#f6e7c8', a: 0.7, pass2: false }); txt(l, x, y + 26, 20, { col: '#f6e7c8', font: 'Osw', a: 0.7 }); });
-  const mx = lerp(x0, x1, p); ell(mx, y, 9, 9, { wash: K.amber, washA: 1, w: 2, col: '#2a1a0c' }); glow(mx, y, 40, 'rgba(255,190,90,0.8)', 0.6);
 }
 function captions(t) {
   const c = CAPS.find(c => t >= c.t0 && t < c.t1 + 0.08); if (!c) return;
   const y = 1588, size = 82; ctx.save(); ctx.font = `600 ${size}px Osw`;
-  const parts = c.words.map(w => ({ w, key: KEYW.includes(w) })); const sp = ctx.measureText(' ').width, widths = parts.map(p => ctx.measureText(p.w).width);
+  const parts = c.words.map(w => ({ w, key: KEYW.includes(w), num: /\d/.test(w) })); const sp = ctx.measureText(' ').width, widths = parts.map(p => ctx.measureText(p.w).width);
   const tw = widths.reduce((a, b) => a + b, 0) + sp * (parts.length - 1); ctx.restore();
   const k = popK(t, c.t0, 0.18); push(540, y, 0.92 + 0.08 * k);
   const rv = clamp(0.3 + (t - c.t0) / 0.16); let x = -tw / 2;
   parts.forEach((p, i) => { const wr = clamp(rv * parts.length - i); if (wr <= 0) { x += widths[i] + sp; return; }
+    if (p.key) { const kk = popK(t, c.t0 + i / parts.length * 0.16, 0.22); ctx.save(); ctx.translate(x + widths[i] / 2, 0); ctx.rotate(-0.05); ctx.scale(0.7 + 0.3 * kk, 0.7 + 0.3 * kk);
+      ctx.shadowColor = 'rgba(20,8,4,0.5)'; ctx.shadowBlur = 10; ctx.shadowOffsetY = 6; ctx.fillStyle = '#d9482b'; ctx.beginPath(); ctx.roundRect(-widths[i] / 2 - 16, -50, widths[i] + 32, 98, 12); ctx.fill(); ctx.restore();
+      pencil([[x - 14, -46], [x + widths[i] + 16, -50], [x + widths[i] + 18, 46], [x - 16, 50], [x - 14, -46]], { w: 2.6, col: '#2b2622', a: 0.8, pass2: false, gap: false }); }
     ctx.save(); ctx.font = `600 ${size}px Osw`; ctx.textAlign = 'left'; ctx.textBaseline = 'middle'; ctx.lineJoin = 'round';
-    ctx.globalAlpha = wr; ctx.lineWidth = 14; ctx.strokeStyle = 'rgba(16,10,8,0.92)'; ctx.strokeText(p.w, x, 0);
-    ctx.fillStyle = p.key ? K.amber : '#f7ecd6'; ctx.fillText(p.w, x, 0); ctx.restore();
-    if (p.key && wr >= 1) pencil([[x, 46], [x + widths[i], 42]], { w: 4, col: K.amber, a: 0.9, pass2: false, gap: false });
+    ctx.globalAlpha = wr; if (!p.key) { ctx.lineWidth = 14; ctx.strokeStyle = 'rgba(43,38,34,0.95)'; ctx.strokeText(p.w, x, 0); }
+    ctx.fillStyle = p.key ? '#fff8ec' : p.num ? '#e8b53a' : '#f4e6c8'; if (p.key) { ctx.translate(x + widths[i] / 2, 0); ctx.rotate(-0.05); ctx.fillText(p.w, -widths[i] / 2, 0); } else ctx.fillText(p.w, x, 0); ctx.restore();
     x += widths[i] + sp; });
   pop();
 }
-function plate() { push(60, 70, 1); txt('ТОМ-ТУР', 0, 0, 40, { align: 'left', font: 'Osw', col: '#f6e7c8', a: 0.9 }); txt(typeof SUBTITLE !== 'undefined' ? SUBTITLE : '', 168, 2, 36, { align: 'left', col: '#f6e7c8', a: 0.75 }); pop(); }
+function plate() { push(60, 70, 1); ctx.save(); ctx.fillStyle = 'rgba(217,72,43,0.92)'; ctx.beginPath(); ctx.roundRect(-14, -28, 262, 56, 10); ctx.fill(); ctx.restore(); txt('ТОМ НА ВКУС', 0, 0, 38, { align: 'left', font: 'Osw', col: '#fff8ec' }); txt(typeof SUBTITLE !== 'undefined' ? SUBTITLE : '', 266, 2, 34, { align: 'left', col: '#f4e6c8', a: 0.8 }); pop(); }
 function endcard(t) { if (t < DUR - 1.0) return; const k = popK(t, DUR - 1.0, 0.3); push(540, 1180, k, -0.03);
-  ctx.save(); ctx.fillStyle = 'rgba(16,10,8,0.82)'; ctx.fillRect(-330, -80, 660, 160); ctx.restore(); pencil([[-330, -80], [330, -80], [330, 80], [-330, 80], [-330, -80]], { w: 3, col: K.amber, pass2: false });
-  txt('ПОДПИШИСЬ', -50, 4, 104, { col: '#f6e7c8', font: 'Osw' });
-  push(282, -6, 1, Math.sin(t * 30) * 0.25); blob([[-26, 22], [-22, -16], [0, -30], [22, -16], [26, 22]], { wash: K.amber, washA: 1, w: 3, col: '#2a1a0c' }); ell(0, 28, 8, 6, { wash: K.amber, washA: 1, w: 2.4 }); pop(); pop(); }
+  ctx.save(); ctx.fillStyle = '#d9482b'; ctx.beginPath(); ctx.roundRect(-330, -80, 660, 160, 16); ctx.fill(); ctx.restore(); pencil([[-330, -80], [330, -80], [330, 80], [-330, 80], [-330, -80]], { w: 3, col: '#2b2622', pass2: false });
+  txt('ПОДПИШИСЬ', -50, 4, 104, { col: '#fff8ec', font: 'Osw' });
+  push(282, -6, 1, Math.sin(t * 30) * 0.25); blob([[-26, 22], [-22, -16], [0, -30], [22, -16], [26, 22]], { wash: K.mustard, washA: 1, w: 3, col: '#2a1a0c' }); ell(0, 28, 8, 6, { wash: K.mustard, washA: 1, w: 2.4 }); pop(); pop(); }
