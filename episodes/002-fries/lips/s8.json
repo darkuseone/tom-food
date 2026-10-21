@@ -1,0 +1,42 @@
+{
+  "metadata": {
+    "soundFile": "/home/user/tom-food/build/002-fries/vf/s8.wav",
+    "duration": 5.16
+  },
+  "mouthCues": [
+    { "start": 0.00, "end": 0.23, "value": "B" },
+    { "start": 0.23, "end": 0.51, "value": "C" },
+    { "start": 0.51, "end": 0.93, "value": "B" },
+    { "start": 0.93, "end": 1.01, "value": "A" },
+    { "start": 1.01, "end": 1.09, "value": "B" },
+    { "start": 1.09, "end": 1.18, "value": "A" },
+    { "start": 1.18, "end": 1.26, "value": "B" },
+    { "start": 1.26, "end": 1.61, "value": "F" },
+    { "start": 1.61, "end": 1.68, "value": "B" },
+    { "start": 1.68, "end": 1.76, "value": "A" },
+    { "start": 1.76, "end": 1.82, "value": "D" },
+    { "start": 1.82, "end": 1.88, "value": "B" },
+    { "start": 1.88, "end": 1.95, "value": "C" },
+    { "start": 1.95, "end": 2.16, "value": "B" },
+    { "start": 2.16, "end": 2.23, "value": "G" },
+    { "start": 2.23, "end": 3.33, "value": "B" },
+    { "start": 3.33, "end": 3.47, "value": "C" },
+    { "start": 3.47, "end": 3.68, "value": "B" },
+    { "start": 3.68, "end": 3.76, "value": "A" },
+    { "start": 3.76, "end": 3.91, "value": "E" },
+    { "start": 3.91, "end": 3.98, "value": "C" },
+    { "start": 3.98, "end": 4.19, "value": "F" },
+    { "start": 4.19, "end": 4.26, "value": "E" },
+    { "start": 4.26, "end": 4.34, "value": "A" },
+    { "start": 4.34, "end": 4.43, "value": "B" },
+    { "start": 4.43, "end": 4.51, "value": "A" },
+    { "start": 4.51, "end": 4.55, "value": "D" },
+    { "start": 4.55, "end": 4.59, "value": "C" },
+    { "start": 4.59, "end": 4.66, "value": "B" },
+    { "start": 4.66, "end": 4.76, "value": "D" },
+    { "start": 4.76, "end": 4.80, "value": "C" },
+    { "start": 4.80, "end": 4.88, "value": "A" },
+    { "start": 4.88, "end": 5.15, "value": "B" },
+    { "start": 5.15, "end": 5.16, "value": "X" }
+  ]
+}
