@@ -38,7 +38,7 @@
     shadeG(sc.path, 30, 0, -30, 0, '#5a1006', 0.4);
   };
   HAT6.toque = (t, o, fx, L) => {                                       // поварской колпак
-    const sw = Math.sin(t * 2.2) * 4; push(fx * 0.3, -84, 0.82);
+    const sw = Math.sin(t * 2.2) * 4; push(fx * 0.3, -64, 0.72);
     rect(-86, -60, 172, 60, { wash: '#f8f5ee', washA: 1, w: 2.6, col: TM.line, key: 9130 }); for (let k = 0; k < 6; k++) pencil([[-72 + k * 29, -56], [-70 + k * 29, -6]], { w: 1.4, col: '#b8b0a0', a: 0.6, pass2: false });
     const cap = blob([[-92, -54], [-130 + sw, -120], [-96, -196], [-30, -214], [30, -220 + sw], [100, -190], [130 + sw, -120], [92, -54]], { wash: '#fffdf8', washA: 1, w: 2.8, col: TM.line, key: 9131 });
     shadeG(cap.path, -L.side * 140, 0, L.side * 40, 0, '#a89e8a', 0.5); for (const x of [-50, 0, 46]) pencil([[x, -62], [x + 6, -170]], { w: 1.6, col: '#b8b0a0', a: 0.5, pass2: false }); pop();
