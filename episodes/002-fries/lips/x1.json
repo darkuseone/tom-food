@@ -1,0 +1,20 @@
+{
+  "metadata": {
+    "soundFile": "/home/user/tom-food/build/002-fries/vf/x1.wav",
+    "duration": 1.81
+  },
+  "mouthCues": [
+    { "start": 0.00, "end": 0.12, "value": "B" },
+    { "start": 0.12, "end": 0.68, "value": "F" },
+    { "start": 0.68, "end": 0.75, "value": "B" },
+    { "start": 0.75, "end": 1.05, "value": "C" },
+    { "start": 1.05, "end": 1.10, "value": "B" },
+    { "start": 1.10, "end": 1.15, "value": "C" },
+    { "start": 1.15, "end": 1.22, "value": "B" },
+    { "start": 1.22, "end": 1.50, "value": "F" },
+    { "start": 1.50, "end": 1.64, "value": "B" },
+    { "start": 1.64, "end": 1.72, "value": "A" },
+    { "start": 1.72, "end": 1.80, "value": "B" },
+    { "start": 1.80, "end": 1.81, "value": "X" }
+  ]
+}

@@ -57,7 +57,7 @@
 7. Обложка `w_cover.js` → `node tools/cover.cjs` (блюдо — герой кадра, 2–3 слова, плашка с названием блюда, полоса y 240–1680; обложка = первый кадр).
 8. Звук `sound.py` (`tools/evdump.cjs`), новые SFX → `tools/sfxcheck.py` → CATALOG.
 9. `tools/render.sh <эп>` фоном → `final.mp4` + `chat.mp4`.
-10. Сдача: chat.mp4 + cover.png в чат, 2–3 строки, тексты выкладки колонкой без подписей (TikTok, потом YouTube Shorts; в описании — ссылка на ТОМ-ТУР), коммит + пуш, `docs/dishes.md`, `STATUS.md`, `tools/libindex.py`.
+10. Сдача: chat.mp4 + cover.png в чат, 2–3 строки, тексты выкладки колонкой без подписей (TikTok, потом YouTube Shorts; **без ссылки/упоминания ТОМ-ТУР** — до команды владельца, 21.10.2026), коммит + пуш, `docs/dishes.md`, `STATUS.md`, `tools/libindex.py`.
 11. Статистика (`/stats`) → `docs/stats.md`; правки владельца → `docs/decisions.md`.
 
 ## 7а. Экономия токенов

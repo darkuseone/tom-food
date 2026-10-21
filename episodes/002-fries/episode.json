@@ -1,0 +1,9 @@
+{
+ "num": "002",
+ "city": "Картошка фри",
+ "title": "Картошка фри — суд Бельгии и Франции",
+ "hook": "ЧЬЯ ФРИ?!",
+ "timeline": {"scene_gap": 0.05, "tail": 0.6, "tunnel": 0.0},
+ "worlds": ["props.js", "food.js", "costumes.js", "fries.js", "w_hook.js", "w_meuse.js", "w_objection.js", "w_paris.js", "w_fritz.js", "w_frietkot.js", "w_trench.js", "w_book.js", "w_idaho.js", "w_tallow.js", "w_lawsuit.js", "w_today.js", "w_cover.js"],
+ "scenes": [["hook", ["h1", "h2"]], ["meuse", ["s1"]], ["objection", ["s2"]], ["paris", ["s3"]], ["fritz", ["s4"]], ["frietkot", ["s5"]], ["trench", ["s6"]], ["book", ["s7"]], ["idaho", ["s8"]], ["tallow", ["s9"]], ["lawsuit", ["s10"]], ["today", ["t1"]], ["button", ["x1"]]]
+}
