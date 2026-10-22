@@ -2,9 +2,10 @@
   python3 tools/tts.py lines <эпизод> [ключи...]          # episodes/<эп>/lines.json -> episodes/<эп>/voice/<ключ>.mp3 (готовые пропускает, если ключи не названы)
   python3 tools/tts.py sfx <out.mp3> <секунды> "<промпт>" [loop]
   python3 tools/tts.py music <out.mp3> <секунды> "<промпт>"
-Ударения: U+0301 после ударной гласной («ка́мень»), «ё» пишем. Теги эмоций в начале: [smug], [shocked, loud] ...
+Ударения: U+0301 после ударной гласной («ка́мень»), «ё» пишем; {показать|сказать} и tools/say.json — только для голоса (tools/voicetext.py). Теги эмоций в начале: [smug], [shocked, loud] ...
 Голоса владельца NIKITA, NIKITA2, Cartman не трогать никогда."""
 import json, os, sys, urllib.request, urllib.error
+sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent)); from voicetext import spoken
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -36,7 +37,7 @@ def lines(ep, keys):
         if (keys and k not in keys) or (not keys and out.exists()):
             continue
         _post(f"{API}/text-to-speech/{v['voice_id']}?output_format=mp3_44100_128",
-              {'text': text, 'model_id': v['model_id'], 'voice_settings': v['voice_settings']}, out)
+              {'text': spoken(text), 'model_id': v['model_id'], 'voice_settings': v['voice_settings']}, out)
 
 
 if __name__ == '__main__':

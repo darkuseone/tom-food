@@ -1,6 +1,7 @@
 """Таймлайн выпуска из реплик: episodes/<эп>/episode.json + durs.json + lips/ -> data.js (DUR, VO, VD, SCN, CAPS, VIS) и times.json.
   python3 tools/build_data.py <эпизод>
 Сцена без реплик (портал/туннель) длится timeline.tunnel секунд. Субтитры: по 1–3 слова, ударения U+0301 вырезаются."""
+import sys; sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent)); from voicetext import shown
 import json, re, sys
 from pathlib import Path
 
@@ -27,7 +28,7 @@ def main(ep):
     for i, s in enumerate(SCN): s.append(SCN[i + 1][1] if i + 1 < len(SCN) else 99)
     CAPS = []
     for k, t0 in VO.items():
-        txt = re.sub(r'\[.*?\]\s*', '', L[k]).replace('́', ''); chunks, cur = [], []
+        txt = shown(L[k]); chunks, cur = [], []
         for wd in txt.split():
             cur.append(wd)
             if len(cur) == 3 or wd[-1] in '.,!?—»' or (len(cur) == 2 and len(''.join(cur)) > 13): chunks.append(cur); cur = []

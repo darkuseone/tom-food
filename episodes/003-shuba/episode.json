@@ -1,0 +1,100 @@
+{
+ "num": "003",
+ "city": "Селёдка под шубой",
+ "title": "Селёдка под шубой — лозунг или легенда",
+ "hook": "ШУБА = ЛОЗУНГ?!",
+ "timeline": {
+  "scene_gap": 0.05,
+  "tail": 0.6,
+  "tunnel": 0.0
+ },
+ "worlds": [
+  "props.js",
+  "food_001.js",
+  "wardrobe_001.js",
+  "wardrobe_002.js",
+  "food_002.js",
+  "wardrobe_003.js",
+  "food_003.js",
+  "w_hook.js",
+  "w_tavern.js",
+  "w_acronym.js",
+  "w_symbols.js",
+  "w_debunk.js",
+  "w_norway.js",
+  "w_names.js",
+  "w_ussr.js",
+  "w_mayo.js",
+  "w_today.js",
+  "w_cover.js"
+ ],
+ "scenes": [
+  [
+   "hook",
+   [
+    "h1",
+    "h2"
+   ]
+  ],
+  [
+   "tavern",
+   [
+    "s1"
+   ]
+  ],
+  [
+   "acronym",
+   [
+    "s2"
+   ]
+  ],
+  [
+   "symbols",
+   [
+    "s3"
+   ]
+  ],
+  [
+   "debunk",
+   [
+    "s4"
+   ]
+  ],
+  [
+   "norway",
+   [
+    "s5"
+   ]
+  ],
+  [
+   "names",
+   [
+    "s6"
+   ]
+  ],
+  [
+   "ussr",
+   [
+    "s7"
+   ]
+  ],
+  [
+   "mayo",
+   [
+    "s8"
+   ]
+  ],
+  [
+   "today",
+   [
+    "t1"
+   ]
+  ],
+  [
+   "button",
+   [
+    "x1"
+   ]
+  ]
+ ]
+}

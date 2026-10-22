@@ -12,7 +12,8 @@ def main(ep, out=None):
     f.mkdir(parents=True)
     E = json.load(open(d / 'episode.json')); DUR = json.load(open(d / 'times.json'))['DUR']
     for p in [*(ROOT / 'engine').glob('*.js'), ROOT / 'engine/vendor/gsap.min.js']: shutil.copy(p, f)
-    for p in d.glob('*.js'): shutil.copy(p, f)
+    for p in (ROOT / 'lib').glob('*.js'): shutil.copy(p, f)          # общий код: режиссура, переходы, еда, гардероб
+    for p in d.glob('*.js'): shutil.copy(p, f)                       # файл выпуска с тем же именем перекрывает lib
     for p in (ROOT / 'assets/fonts').glob('*.ttf'): shutil.copy(p, f)
     html = (ROOT / 'engine/page.html').read_text().replace('__DUR__', str(DUR))
     html = html.replace('__WORLDS__', ''.join(f'<script src="{w}"></script>' for w in E['worlds']))
