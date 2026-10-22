@@ -33,7 +33,7 @@
   DIR.symbols = {
     outfit: 'agit', light: { side: 1, rim: '#ffe0a0' }, grade: ['#ff6040', 0.08],
     act: () => [[S0.symbols, 'proud'], [EV.sy_fish, 'talk'], [EV.sy_pot, 'grin'], [EV.sy_beet, 'proud'], [EV.sy_q, 'sideeye']],
-    pose: (t, u, b) => Object.assign(b, { x: 860, y: 1760, s: 1.15, flip: true, look: t > EV.sy_q ? [-0.2, 0] : [0.6, -0.5], hand: t < EV.sy_q ? [170, -300] : [100, -230], handF: [-90, -220], prop: t < EV.sy_q ? 'megaphone' : undefined, tilt: t > EV.sy_q ? 0.08 : 0 }),
+    pose: (t, u, b) => Object.assign(b, { x: 860, y: 1760, s: 1.15, flip: true, look: t > EV.sy_q ? [-0.2, 0] : [0.6, -0.5], hand: t < EV.sy_q ? [200, -190] : [100, -230], handF: [-90, -220], prop: t < EV.sy_q ? 'megaphone' : undefined, propAng: -0.9, tilt: t > EV.sy_q ? 0.08 : 0 }),
     cam: () => [[S0.symbols, 540, 960, 0.06], [EV.sy_fish, 420, 960, 0.1], [EV.sy_pot, 700, 980, 0.1], [EV.sy_beet, 560, 900, 0.04, 'x'], [EV.sy_q, 620, 1080, 0.18], [S1.symbols, 640, 1100, 0.22]]
   };
   // ---------------------------------------------------------------- переход: прошлый кадр сворачивается рулоном вверх
