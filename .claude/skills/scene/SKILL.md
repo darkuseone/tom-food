@@ -4,7 +4,7 @@ description: Рисование миров выпуска «ТОМ НА ВКУС
 ---
 # Миры выпуска
 
-API — `docs/ref-api.md` (не читать engine/*.js, tom.js). Шаблон сцены — `templates/w_scene.js` (new_episode.py уже разложил по сценам). Писать каждый мир ЦЕЛИКОМ одним Write; правки — python-replace/sed точечно.
+API — `docs/ref-api.md` (не читать engine/*.js, tom.js, lib/*.js). Готовое — `docs/library.md`. Шаблон сцены — `templates/w_scene.js` (new_episode.py уже разложил по сценам). Писать каждый мир ЦЕЛИКОМ одним Write; правки — python-replace/sed точечно.
 
 ## scenes.js
 - `HOOK_LINES` (2 строки ≤ 3 слов), `YR[сцена] = ['год', 'ПОДПИСЬ']` — год и подпись карточки рецепта (пусто у hook/button), `RECIPE = [[строка, WT(k,'слово'), зачеркнуть|null, '?'|'new']]` — видно последние 6.
@@ -20,18 +20,20 @@ API — `docs/ref-api.md` (не читать engine/*.js, tom.js). Шаблон 
 - Предметы с параллаксом на lay 2–6 уезжают при сильном движении камеры — важное (карта, табло) держать ближе к lay 1–2.4.
 - Эмоции только из списка: neutral talk shock awe smug sideeye annoyed grin laugh scared cold proud suspicious wink (`squint`, `sweat`, `frost`, `chatter`, `tailUp`, `point`, `walk`, `apron` — параметры позы, не эмоции).
 
-## Еда и костюмы (готовое — брать)
-- `food.js` (001): leaf, crouton, egg, parm*, lemon, wBottle, anchovy, woodBowl, plateCaesar, caesar3D, hat20 (fedora/boater/cloche/chef/pilot/beret/tophat), stache, crumbs, bubbleTag; PROPS fork, croutonP, leafP, tray, megaphone, magnifier.
-- `nug.js` (002): nugget(x,y,s,rot,{kind:'bell|ball|boot|bone|stick|among', bite, gold, raw, face:'happy|monster'}), mince, sauceCup, nugBox, frost, envelope, onionRing, money(); PROPS nugP nugBiteP stickP rawStickP goldP panP letterP sackP gavelP flaskP sauceP folderP amongP.
-- Костюмы: `docs/ref-costumes.md` (раздел «ТОМ НА ВКУС»). Новый костюм — в `costumes2.js`-подобный файл выпуска: OUTFIT + COST6.<detail> + HAT6.<hat>, `apron: 1`. На фартуке — новый трофей-пятно каждый выпуск (обёртка costume5).
-- Новую еду выпуска — отдельным файлом `<блюдо>.js` (как nug.js), добавить в episode.json → worlds (после costumes).
+## Еда и костюмы — lib/ (общий код канала, не копировать в выпуск)
+- Что уже есть: `grep -n "<слово>" docs/library.md` (функции еды с подписями, PROPS, OUTFIT по файлам) и `docs/ref-costumes.md`. Подходящий по смыслу костюм/реквизит — брать готовый.
+- Новое для этого блюда — в `lib/food_<NNN>.js` (функции + `Object.assign(PROPS, {...})`) и `lib/wardrobe_<NNN>.js` (OUTFIT + COST6.<detail> + HAT6.<hat>, `apron: 1`, трофей-пятно на фартуке — обёртка costume5 как в wardrobe_002/003). Подписывать функции комментарием в той же строке — попадёт в индекс.
+- Перерисовать общую функцию под выпуск — НЕ править lib (сломает старые выпуски): своя функция в lib/food_<NNN>.js с новым именем.
+- Костюмы рига ТОМ-ТУР (engine/tom.js): puffer miner astro safari fur explorer dutch victorian sailor iron hoodie diver tulup knyaz kolchuga master painter founder hussar metro aviator architect bogatyr french rubakha varyag soviet caveman scuba sak chapan botanist director; вариант с фартуком — `Object.assign({}, OUTFIT.x, { apron: 1 })`.
+- После выпуска — `python3 tools/libindex.py` (индекс обновится).
 
 ## Переходы
 - `TRANS_IN[сцена] = { a, b, runA, fx(k,t,A,B) }`; хелперы `drawBuf, inCircle, inPath, smear, whiteOut, scr` (transitions.js).
-- Уже использованы (не повторять): 001 — трещина-гренка, пыль, двери, ныряние в миску по спирали, лист протирает, капли/волна соуса, винт биплана, хлопушка, тарелка, клош. 002 — укус съедает кадр, мясорубка-полоски, желток растекается, дверь морозилки, конверт, пузыри фритюра, луковое кольцо, клапаны коробки, молоток-сплющивание, вспышка-диафрагма, мазок соуса.
-- Идеи в запасе: тесто раскатывается скалкой, нож режет кадр пополам, переворот блина, сито просеивает, пар запотевает и стирается рукой, сахарная вата наматывается, ложка-зеркало, тарелка разбивается, кетчуп из бутылки «плюх», лапша-спагетти затягивает.
+- Уже использованы (не повторять): 003 — вилка-прорези, свекольный сок снизу, рулон плаката, ящик картотеки, гравюра сепия→цвет, подушка-перья, иней, майонезная сетка, ёлочный шар, снежок. 001 — трещина-гренка, пыль, двери, ныряние в миску по спирали, лист протирает, капли/волна соуса, винт биплана, хлопушка, тарелка, клош. 002 — укус съедает кадр, мясорубка-полоски, желток растекается, дверь морозилки, конверт, пузыри фритюра, луковое кольцо, клапаны коробки, молоток-сплющивание, вспышка-диафрагма, мазок соуса.
+- Идеи в запасе: тесто раскатывается скалкой, нож режет кадр пополам, переворот блина, сито просеивает, пар запотевает и стирается рукой, сахарная вата, ложка-зеркало, тарелка разбивается, кетчуп «плюх», спагетти затягивает, тёрка-стружка, крышка кастрюли подпрыгивает, мука-облако, шампур нанизывает кадры.
 
 ## Контроль
+- НЕ запускать check.sh/cover.cjs для выпуска, пока идёт его render.sh (пересобирают build/<эп>/film).
 - `tools/check.sh <эп> t1 t2 …` (без времён — середины сцен) → Read `build/<эп>/shots/sheet.jpg`. Пачки по 3–4 сцены, кадры: S0+0.05 (переход), события, конец сцены.
 - Смотреть: Том в кадре, нет перекрытия карточкой, люди читаются, событие на слове видно, нет пустых полей. 1–2 круга правок на сцену, не больше.
 - Ошибка JS → `node tools/dbg.cjs build/<эп>/film <t>`.

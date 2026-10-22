@@ -2,6 +2,8 @@
 
 ## Структура
 
+> «ТОМ НА ВКУС» (с 22.10.2026): общий код — `lib/` (props, direct, transitions, food_NNN, wardrobe_NNN), mkpage.py копирует его в страницу перед файлами выпуска; в выпуске — только scenes.js, w_*.js, sound.py, lines.json, episode.json. Ниже — исторический текст ТОМ-ТУР.
+
 ```
 engine/            движок (общий для всех выпусков)
   engine.js        canvas, бумага, зерно, pencil/hatch/wash, камера lay/haze, renderTo, грейдинг

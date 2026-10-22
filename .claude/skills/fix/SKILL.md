@@ -5,7 +5,7 @@ description: Правки владельца к готовому выпуску 
 # /fix <эп> <правки>
 
 1. Разобрать по пунктам. Постоянное правило → `docs/decisions.md` (дата) и `CLAUDE.md`; удачный приём → `docs/episode-formula.md`.
-2. Текст/голос: `lines.json` → `python3 tools/tts.py lines <эп> <ключ>` (ТОЛЬКО изменённые ключи — названные перегенерируются) → `python3 tools/prep_voice.py <эп>` → `python3 tools/build_data.py <эп>`. Тайминги сдвинутся — проверить события в соседних сценах.
-3. Картинка: правка `w_<сцена>.js` / `scenes.js` → `tools/check.sh <эп> <времена>` до/после (скил `scene`). Обложка — `node tools/cover.cjs <эп>`.
+2. Текст/голос: `lines.json` (ударения U+0301, `{показать|сказать}`, аббревиатуры — tools/say.json; субтитры остаются обычными) → `python3 tools/est.py <эп>` (проверка озвучки) → `python3 tools/tts.py lines <эп> <ключ>` (ТОЛЬКО изменённые ключи — названные перегенерируются) → `python3 tools/prep_voice.py <эп>` → `python3 tools/build_data.py <эп>`. Тайминги сдвинутся — проверить события в соседних сценах.
+3. Картинка: правка `w_<сцена>.js` / `scenes.js` / `lib/food_<NNN>.js`, `lib/wardrobe_<NNN>.js` (общие функции lib других выпусков не менять) → `tools/check.sh <эп> <времена>` до/после (скил `scene`). Обложка — `node tools/cover.cjs <эп>`.
 4. Звук: `node tools/evdump.cjs <эп>` (если менялись события) → `sound.py` → `python3 tools/mix.py <эп>` (mean ≈ −20, пик ≤ −1).
 5. Рендер фоном `tools/render.sh <эп>` → `tools/final.sh <эп>` → SendUserFile chat.mp4 + список «что исправлено». Если поменялись факты/хук — `publish.md`. Коммит + пуш в ветку выпуска (PR уже открыт — только push).

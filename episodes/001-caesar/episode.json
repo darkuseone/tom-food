@@ -10,8 +10,8 @@
  },
  "worlds": [
   "props.js",
-  "food.js",
-  "costumes.js",
+  "food_001.js",
+  "wardrobe_001.js",
   "w_hook.js",
   "w_tijuana.js",
   "w_cardini.js",

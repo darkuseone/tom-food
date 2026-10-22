@@ -1,8 +1,9 @@
 """Заготовка нового выпуска «ТОМ НА ВКУС» (экономит токены: ничего не читать и не копировать руками).
   python3 tools/new_episode.py 003-ketchup "Кетчуп" hook,s1scene,s2scene,...,today
 Список сцен — через запятую, по одной реплике на сцену (hook → h1+h2, today → t1, button добавляется сам; остальные → s1, s2, …).
-Создаёт episodes/<эп>/: общий код из последнего выпуска (direct, props, transitions, food, costumes*, nug и др. — всё *.js, кроме w_*, data, scenes),
-scenes.js (YR, RECIPE, реестры), episode.json, lines.json, sound.py, w_cover.js, w_<сцена>.js из templates/w_scene.js, script.md; docs/sources/<эп>.md."""
+Общий код канала лежит в lib/ (props, direct, transitions, food_NNN.js — еда выпусков, wardrobe_NNN.js — костюмы выпусков) и НЕ копируется:
+выпуск подключает все lib/food_* и lib/wardrobe_* (весь гардероб и вся еда доступны), а для своего блюда создаются заготовки lib/food_<NNN>.js и lib/wardrobe_<NNN>.js.
+Создаёт episodes/<эп>/: scenes.js (YR, RECIPE, реестры), episode.json, lines.json, sound.py, w_cover.js, w_<сцена>.js из templates/w_scene.js, script.md; docs/sources/<эп>.md."""
 import json, shutil, sys
 from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
@@ -11,10 +12,13 @@ ep, dish, names = sys.argv[1], sys.argv[2], [n.strip() for n in sys.argv[3].spli
 if names[0] != 'hook' or names[-1] != 'today': sys.exit('список сцен: hook,…,today (button добавится сам)')
 d = ROOT / 'episodes' / ep
 if d.exists(): sys.exit(f'{d} уже есть')
-src = max((p for p in (ROOT / 'episodes').iterdir() if (p / 'scenes.js').exists() and (p / 'final.mp4').exists()), key=lambda p: p.name)
 d.mkdir(parents=True); (d / 'voice').mkdir()
-shared = sorted(p.name for p in src.glob('*.js') if not p.name.startswith('w_') and p.name not in ('data.js', 'scenes.js'))
-for f in shared: shutil.copy(src / f, d / f)
+num, LIB = ep[:3], ROOT / 'lib'
+for kind, head in (('food', f'/* {num} — еда выпуска «{dish}»: функции-детали блюда (рисунок по ref-api), реквизит Тома — Object.assign(PROPS, {{ имяP() {{…}} }}). Общее — food_001.js (egg, crumbs, bubbleTag, hat20, stache), food_002.js (sauceCup, envelope, frost…). */\n'),
+                   ('wardrobe', f'/* {num} — костюмы выпуска «{dish}»: OUTFIT + COST6.<detail> + HAT6.<hat>, apron: 1. Сначала проверить готовые (docs/ref-costumes.md). Новый трофей-пятно на фартуке — обёртка costume5 (см. wardrobe_002.js). */\n(() => {{\n}})();\n')):
+    f = LIB / f'{kind}_{num}.js'
+    if not f.exists(): f.write_text(head)
+shared = ['props.js'] + sorted(p.name for p in LIB.glob('food_*.js')) + sorted(p.name for p in LIB.glob('wardrobe_*.js'))
 keys, scenes, n = {}, [], 0
 for s in names:
     if s == 'hook': k = ['h1', 'h2']
@@ -22,9 +26,7 @@ for s in names:
     else: n += 1; k = [f's{n}']
     scenes.append([s, k])
 scenes.append(['button', ['x1']])
-base = [f for f in ('props.js', 'food.js', 'costumes.js') if f in shared]
-extra = [f for f in shared if f not in base + ['direct.js', 'transitions.js']]
-worlds = base + extra + [f'w_{s}.js' for s in names] + ['w_cover.js']
+worlds = shared + [f'w_{s}.js' for s in names] + ['w_cover.js']
 (d / 'episode.json').write_text(json.dumps({'num': ep[:3], 'city': dish, 'title': 'TODO', 'hook': 'TODO', 'timeline': {'scene_gap': 0.05, 'tail': 0.6, 'tunnel': 0.0},
     'worlds': worlds, 'scenes': scenes}, ensure_ascii=False, indent=1))
 L = {'h1': '[shocked, loud] TODO шок-слово первым', 'h2': '[smug, playful] Отку́сим исто́рию!'}
@@ -78,4 +80,4 @@ def sound(T):
 (d / 'script.md').write_text(f'# {ep} — {dish} (сценарий)\n\nХук «…» · структура «…» · ≈… с · укус: … · Том-малыш: … · карта: …\n\n| сцена | реплика | картинка / Том | переход В сцену |\n|---|---|---|---|\n'
     + ''.join(f'| {s} | | | |\n' for s, _ in scenes) + '\nКарточка рецепта: …\nКостюмы: …\nПалитра: …\n')
 (ROOT / 'docs/sources' / f'{ep}.md').write_text(f'# {ep} — {dish}: источники\n\n| факт | источники (2+) |\n|---|---|\n\nОтброшено: …\n')
-print('создан', d.relative_to(ROOT), '← общий код из', src.name, ':', ', '.join(shared))
+print('создан', d.relative_to(ROOT), '| подключено из lib/:', ', '.join(shared))
