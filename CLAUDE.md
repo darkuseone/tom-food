@@ -11,6 +11,7 @@
 2. Перед выпуском: `docs/episode-formula.md`, `docs/dishes.md` (что было — не повторяться), `docs/channel.md` (чем отличаемся от ТОМ-ТУР).
 3. `docs/ref-api.md` — шпаргалка движка и Тома. **Не читать целиком** `engine/tom.js`, `engine.js`, `core.js` — только `grep -n` и диапазоны; готовые детали — `docs/ref-library.md`.
 По задаче: `docs/lessons.md` (уроки ТОМ-ТУР), `docs/market.md`, `docs/ref-character.md`, `docs/ref-costumes.md`, `docs/ref-style.md`, `docs/ref-pipeline.md`, `docs/ref-sound.md`, `docs/sources/<эп>.md`.
+Скилы пайплайна (`.claude/skills`): `episode` (оркестр) → `facts` → `scene` → `sound` → `deliver`; правки — `fix`, статистика — `stats`. Грузить по этапу, а не всё сразу.
 Окружение: `tools/setup.sh`. Ключ `ELEVENLABS_API_KEY` — в переменных окружения, **значения ключей никогда не печатать**.
 
 ## 1. Формат
@@ -47,7 +48,8 @@
 - Спорные «национальные» блюда — только «версии», без вердиктов и оскорблений. Без политики реальных людей.
 - **Не конвейер:** у каждого ролика свой тип хука, структура, переходы, палитра, костюмы, финальная фраза (меню — `docs/episode-formula.md`), учёт в `docs/dishes.md`.
 
-## 7. Пайплайн (как в ТОМ-ТУР, `docs/ref-pipeline.md`)
+## 7. Пайплайн (скил `episode`; техника — `docs/ref-pipeline.md`)
+Заготовка — `tools/new_episode.py <эп> "<Блюдо>" hook,…,today`; новые SFX пакетом — `tools/sfxbatch.py`; проверка готового ролика — `tools/final.sh`.
 1. Блюдо и факты (20–30 кандидатов → 6–9 остановок) → `docs/sources/<эп>.md`.
 2. Сценарий `episodes/<NNN-блюдо>/script.md` → владельцу (SendUserFile) + 3 строки → ждать «ок» (кроме «делай сам»).
 3. `lines.json` → `tools/est.py` → `tools/tts.py lines` → `tools/prep_voice.py`.

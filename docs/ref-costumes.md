@@ -42,3 +42,14 @@
 Реквизит `PROPS`: coin binoc trowel brush spyglass goblet scroll chisel key medal lantern mallet blueprint quill stick folder spear apple megaphone herbarium.
 
 Новые шапки 004: `sakhat` (колпак-конус ≈2 головы), `turban`, `panama`. Обувь: `sak`, `soft`, `field` (шнуровка), `rider`. Помощники в tom.js: `plaques6` (золотые бляшки с бликами), `stripesV`, `quilt4`, `arrow4`, `ram4`, `leo4`, `gl4`; опции `OF.stripes` (полосы на рукавах), `capCol/capTxtCol/printCol/accent` (перекраска худи).
+
+## Канал «ТОМ НА ВКУС» (фартук `apron:1` поверх любого; код — `episodes/<эп>/costumes*.js`)
+| ключ | что | был в | подойдёт для |
+|---|---|---|---|
+| toga / waiter / chef / aviatorA / directorA / tuxA | тога+венок, официант 1920-х, шеф (колпак `toque`), лётчик, режиссёр, смокинг | 001 | Рим; рестораны; кухня; кино |
+| labcoat | белый халат до колен, ручки в кармане, очки `goggles` на лбу | 002 | учёные, лаборатории 1900–1970-х |
+| postman | синий китель почтальона, сумка через плечо, фуражка `postcap` | 002 | почта, рассылка, XX в. |
+| diner | рубашка повара закусочной, бейдж TOM, пилотка `paper` | 002 | фастфуд, бургерные 1950–80-х |
+| prospector | фланель в клетку + подтяжки, панама | 002 | золотая лихорадка, Дикий Запад |
+| lawyer | костюм-тройка, бордовый галстук | 002 | суд, бизнес, XX–XXI вв. |
+Трофеи на фартуке: №1 ромэн (001), №2 пятно барбекю (002).

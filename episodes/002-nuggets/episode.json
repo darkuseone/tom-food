@@ -1,0 +1,105 @@
+{
+ "num": "002",
+ "city": "Наггетсы",
+ "title": "Наггетсы — рецепт, отданный даром",
+ "hook": "$100 000 ЗА НАГГЕТС?!",
+ "timeline": {
+  "scene_gap": 0.05,
+  "tail": 0.6,
+  "tunnel": 0.0
+ },
+ "worlds": [
+  "props.js",
+  "food.js",
+  "costumes.js",
+  "nug.js",
+  "costumes2.js",
+  "w_hook.js",
+  "w_lab.js",
+  "w_mince.js",
+  "w_batter.js",
+  "w_gift.js",
+  "w_diet.js",
+  "w_arend.js",
+  "w_name.js",
+  "w_shapes.js",
+  "w_judge.js",
+  "w_today.js",
+  "w_cover.js"
+ ],
+ "scenes": [
+  [
+   "hook",
+   [
+    "h1",
+    "h2"
+   ]
+  ],
+  [
+   "lab",
+   [
+    "s1"
+   ]
+  ],
+  [
+   "mince",
+   [
+    "s2"
+   ]
+  ],
+  [
+   "batter",
+   [
+    "s3"
+   ]
+  ],
+  [
+   "gift",
+   [
+    "s4"
+   ]
+  ],
+  [
+   "diet",
+   [
+    "s5"
+   ]
+  ],
+  [
+   "arend",
+   [
+    "s6"
+   ]
+  ],
+  [
+   "name",
+   [
+    "s7"
+   ]
+  ],
+  [
+   "shapes",
+   [
+    "s8"
+   ]
+  ],
+  [
+   "judge",
+   [
+    "s9"
+   ]
+  ],
+  [
+   "today",
+   [
+    "t1"
+   ]
+  ],
+  [
+   "button",
+   [
+    "x1"
+   ]
+  ]
+ ]
+}
