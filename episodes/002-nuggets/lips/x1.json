@@ -1,0 +1,21 @@
+{
+  "metadata": {
+    "soundFile": "/home/user/tom-food/build/002-nuggets/vf/x1.wav",
+    "duration": 1.77
+  },
+  "mouthCues": [
+    { "start": 0.00, "end": 0.27, "value": "B" },
+    { "start": 0.27, "end": 0.35, "value": "A" },
+    { "start": 0.35, "end": 0.46, "value": "F" },
+    { "start": 0.46, "end": 0.53, "value": "C" },
+    { "start": 0.53, "end": 0.60, "value": "E" },
+    { "start": 0.60, "end": 0.74, "value": "F" },
+    { "start": 0.74, "end": 1.08, "value": "B" },
+    { "start": 1.08, "end": 1.12, "value": "C" },
+    { "start": 1.12, "end": 1.19, "value": "B" },
+    { "start": 1.19, "end": 1.47, "value": "F" },
+    { "start": 1.47, "end": 1.68, "value": "B" },
+    { "start": 1.68, "end": 1.76, "value": "A" },
+    { "start": 1.76, "end": 1.77, "value": "X" }
+  ]
+}
