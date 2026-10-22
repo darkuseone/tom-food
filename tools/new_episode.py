@@ -54,7 +54,7 @@ const RECIPE = [
 """)
 tpl = (ROOT / 'templates/w_scene.js').read_text()
 for s, k in scenes[:-1]:
-    (d / f'w_{s}.js').write_text(tpl.replace('SCENE', s).replace('KEY', k[-1]) + ("""
+    (d / f'w_{s}.js').write_text(tpl.replace('SCENE', s).replace('__KEY__', k[-1]) + ("""
 (() => {                                                          // кнопка: тот же мир, Том в камеру, подмигивает на «откусим»
   WORLD.button = (t, u, cat) => WORLD.today(t, u, cat);
   DIR.button = Object.assign({}, DIR.today, { act: () => [[S0.button, 'grin'], [LF('x1', 0.7), 'wink']], cam: () => [[S0.button, 660, 900, 0.3], [DUR, 660, 980, 0.36]] });
