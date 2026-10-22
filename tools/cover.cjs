@@ -1,8 +1,8 @@
 // Обложка выпуска: рисует COVER (w_cover.js) → episodes/<эп>/cover.png (1080×1920) и превью build/<эп>/cover_small.jpg.
-//   python3 tools/mkpage.py <эп> && node tools/cover.cjs <эп>
+//   node tools/cover.cjs <эп>   (сам пересобирает страницу через mkpage.py — правки w_cover.js подхватываются сразу)
 const puppeteer = require('puppeteer-core'); const path = require('path'); const fs = require('fs'); const { execFileSync } = require('child_process');
 (async () => {
-  const ep = process.argv[2], film = path.resolve(`build/${ep}/film`);
+  const ep = process.argv[2], film = path.resolve(`build/${ep}/film`); execFileSync('python3', ['tools/build_data.py', ep]); execFileSync('python3', ['tools/mkpage.py', ep]);
   const b = await puppeteer.launch({ executablePath: process.env.CHROME || '/opt/pw-browsers/chromium', args: ['--no-sandbox', '--allow-file-access-from-files'] });
   const p = await b.newPage(); p.on('pageerror', e => console.log('ERR', e.message));
   await p.goto('file://' + film + '/index.html'); await p.evaluate(() => document.fonts.ready); await new Promise(r => setTimeout(r, 800));
