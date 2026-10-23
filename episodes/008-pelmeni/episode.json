@@ -1,0 +1,117 @@
+{
+ "num": "008",
+ "city": "Пельмени",
+ "title": "TODO",
+ "hook": "TODO",
+ "timeline": {
+  "scene_gap": 0.05,
+  "tail": 0.6,
+  "tunnel": 0.0
+ },
+ "worlds": [
+  "props.js",
+  "food_001.js",
+  "food_002.js",
+  "food_003.js",
+  "food_004.js",
+  "food_005.js",
+  "food_006.js",
+  "food_007.js",
+  "food_008.js",
+  "wardrobe_001.js",
+  "wardrobe_002.js",
+  "wardrobe_003.js",
+  "wardrobe_004.js",
+  "wardrobe_005.js",
+  "wardrobe_006.js",
+  "wardrobe_007.js",
+  "wardrobe_008.js",
+  "w_hook.js",
+  "w_ears.js",
+  "w_origin.js",
+  "w_pepper.js",
+  "w_books.js",
+  "w_frozen.js",
+  "w_meat.js",
+  "w_lucky.js",
+  "w_monument.js",
+  "w_machines.js",
+  "w_today.js",
+  "w_cover.js"
+ ],
+ "scenes": [
+  [
+   "hook",
+   [
+    "h1",
+    "h2"
+   ]
+  ],
+  [
+   "ears",
+   [
+    "s1"
+   ]
+  ],
+  [
+   "origin",
+   [
+    "s2"
+   ]
+  ],
+  [
+   "pepper",
+   [
+    "s3"
+   ]
+  ],
+  [
+   "books",
+   [
+    "s4"
+   ]
+  ],
+  [
+   "frozen",
+   [
+    "s5"
+   ]
+  ],
+  [
+   "meat",
+   [
+    "s6"
+   ]
+  ],
+  [
+   "lucky",
+   [
+    "s7"
+   ]
+  ],
+  [
+   "monument",
+   [
+    "s8"
+   ]
+  ],
+  [
+   "machines",
+   [
+    "s9"
+   ]
+  ],
+  [
+   "today",
+   [
+    "t1"
+   ]
+  ],
+  [
+   "button",
+   [
+    "x1"
+   ]
+  ]
+ ]
+}

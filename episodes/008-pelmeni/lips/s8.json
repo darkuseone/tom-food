@@ -1,0 +1,36 @@
+{
+  "metadata": {
+    "soundFile": "/home/user/tom-food/build/008-pelmeni/vf/s8.wav",
+    "duration": 4.53
+  },
+  "mouthCues": [
+    { "start": 0.00, "end": 0.14, "value": "G" },
+    { "start": 0.14, "end": 0.42, "value": "B" },
+    { "start": 0.42, "end": 0.56, "value": "E" },
+    { "start": 0.56, "end": 0.70, "value": "B" },
+    { "start": 0.70, "end": 0.78, "value": "A" },
+    { "start": 0.78, "end": 1.02, "value": "B" },
+    { "start": 1.02, "end": 1.13, "value": "A" },
+    { "start": 1.13, "end": 1.21, "value": "B" },
+    { "start": 1.21, "end": 1.28, "value": "F" },
+    { "start": 1.28, "end": 1.36, "value": "A" },
+    { "start": 1.36, "end": 1.50, "value": "D" },
+    { "start": 1.50, "end": 1.85, "value": "B" },
+    { "start": 1.85, "end": 1.93, "value": "A" },
+    { "start": 1.93, "end": 2.07, "value": "F" },
+    { "start": 2.07, "end": 2.14, "value": "C" },
+    { "start": 2.14, "end": 2.22, "value": "A" },
+    { "start": 2.22, "end": 2.69, "value": "B" },
+    { "start": 2.69, "end": 2.80, "value": "C" },
+    { "start": 2.80, "end": 2.94, "value": "B" },
+    { "start": 2.94, "end": 3.02, "value": "A" },
+    { "start": 3.02, "end": 3.65, "value": "B" },
+    { "start": 3.65, "end": 3.74, "value": "A" },
+    { "start": 3.74, "end": 3.78, "value": "C" },
+    { "start": 3.78, "end": 3.82, "value": "B" },
+    { "start": 3.82, "end": 4.10, "value": "C" },
+    { "start": 4.10, "end": 4.24, "value": "F" },
+    { "start": 4.24, "end": 4.52, "value": "B" },
+    { "start": 4.52, "end": 4.53, "value": "X" }
+  ]
+}
