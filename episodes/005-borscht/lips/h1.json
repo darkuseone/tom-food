@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "soundFile": "/home/user/tom-food/build/005-borscht/vf/h1.wav",
+    "duration": 2.10
+  },
+  "mouthCues": [
+    { "start": 0.00, "end": 0.17, "value": "B" },
+    { "start": 0.17, "end": 0.24, "value": "G" },
+    { "start": 0.24, "end": 0.31, "value": "B" },
+    { "start": 0.31, "end": 0.39, "value": "A" },
+    { "start": 0.39, "end": 0.60, "value": "E" },
+    { "start": 0.60, "end": 0.74, "value": "B" },
+    { "start": 0.74, "end": 0.82, "value": "A" },
+    { "start": 0.82, "end": 0.90, "value": "C" },
+    { "start": 0.90, "end": 1.46, "value": "B" },
+    { "start": 1.46, "end": 1.53, "value": "C" },
+    { "start": 1.53, "end": 1.88, "value": "F" },
+    { "start": 1.88, "end": 2.02, "value": "C" },
+    { "start": 2.02, "end": 2.09, "value": "E" },
+    { "start": 2.09, "end": 2.10, "value": "X" }
+  ]
+}
