@@ -1,0 +1,29 @@
+{
+  "metadata": {
+    "soundFile": "/home/user/tom-food/build/004-kholodets/vf/s1.wav",
+    "duration": 2.81
+  },
+  "mouthCues": [
+    { "start": 0.00, "end": 0.11, "value": "B" },
+    { "start": 0.11, "end": 0.18, "value": "C" },
+    { "start": 0.18, "end": 0.39, "value": "B" },
+    { "start": 0.39, "end": 0.47, "value": "A" },
+    { "start": 0.47, "end": 0.69, "value": "F" },
+    { "start": 0.69, "end": 0.77, "value": "A" },
+    { "start": 0.77, "end": 0.91, "value": "C" },
+    { "start": 0.91, "end": 0.99, "value": "A" },
+    { "start": 0.99, "end": 1.05, "value": "C" },
+    { "start": 1.05, "end": 1.18, "value": "B" },
+    { "start": 1.18, "end": 1.26, "value": "A" },
+    { "start": 1.26, "end": 1.46, "value": "B" },
+    { "start": 1.46, "end": 1.53, "value": "C" },
+    { "start": 1.53, "end": 1.95, "value": "B" },
+    { "start": 1.95, "end": 2.02, "value": "G" },
+    { "start": 2.02, "end": 2.09, "value": "A" },
+    { "start": 2.09, "end": 2.16, "value": "E" },
+    { "start": 2.16, "end": 2.23, "value": "A" },
+    { "start": 2.23, "end": 2.38, "value": "F" },
+    { "start": 2.38, "end": 2.80, "value": "B" },
+    { "start": 2.80, "end": 2.81, "value": "X" }
+  ]
+}
