@@ -1,0 +1,111 @@
+{
+ "num": "005",
+ "city": "Борщ",
+ "title": "TODO",
+ "hook": "TODO",
+ "timeline": {
+  "scene_gap": 0.05,
+  "tail": 0.6,
+  "tunnel": 0.0
+ },
+ "worlds": [
+  "props.js",
+  "food_001.js",
+  "food_002.js",
+  "food_003.js",
+  "food_004.js",
+  "food_005.js",
+  "wardrobe_001.js",
+  "wardrobe_002.js",
+  "wardrobe_003.js",
+  "wardrobe_004.js",
+  "wardrobe_005.js",
+  "w_hook.js",
+  "w_meadow.js",
+  "w_name.js",
+  "w_beet.js",
+  "w_kvass.js",
+  "w_america.js",
+  "w_poland.js",
+  "w_lithuania.js",
+  "w_belt.js",
+  "w_debate.js",
+  "w_today.js",
+  "w_cover.js"
+ ],
+ "scenes": [
+  [
+   "hook",
+   [
+    "h1",
+    "h2"
+   ]
+  ],
+  [
+   "meadow",
+   [
+    "s1"
+   ]
+  ],
+  [
+   "name",
+   [
+    "s2"
+   ]
+  ],
+  [
+   "beet",
+   [
+    "s3"
+   ]
+  ],
+  [
+   "kvass",
+   [
+    "s4"
+   ]
+  ],
+  [
+   "america",
+   [
+    "s5"
+   ]
+  ],
+  [
+   "poland",
+   [
+    "s6"
+   ]
+  ],
+  [
+   "lithuania",
+   [
+    "s7"
+   ]
+  ],
+  [
+   "belt",
+   [
+    "s8"
+   ]
+  ],
+  [
+   "debate",
+   [
+    "s9"
+   ]
+  ],
+  [
+   "today",
+   [
+    "t1"
+   ]
+  ],
+  [
+   "button",
+   [
+    "x1"
+   ]
+  ]
+ ]
+}
