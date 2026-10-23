@@ -1,0 +1,19 @@
+{
+  "metadata": {
+    "soundFile": "/home/user/tom-food/build/008-pelmeni/vf/h2.wav",
+    "duration": 1.56
+  },
+  "mouthCues": [
+    { "start": 0.00, "end": 0.10, "value": "X" },
+    { "start": 0.10, "end": 0.22, "value": "B" },
+    { "start": 0.22, "end": 0.43, "value": "E" },
+    { "start": 0.43, "end": 0.57, "value": "F" },
+    { "start": 0.57, "end": 0.71, "value": "B" },
+    { "start": 0.71, "end": 0.79, "value": "A" },
+    { "start": 0.79, "end": 0.86, "value": "C" },
+    { "start": 0.86, "end": 1.06, "value": "B" },
+    { "start": 1.06, "end": 1.27, "value": "E" },
+    { "start": 1.27, "end": 1.55, "value": "B" },
+    { "start": 1.55, "end": 1.56, "value": "X" }
+  ]
+}
