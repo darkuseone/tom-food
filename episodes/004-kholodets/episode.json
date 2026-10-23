@@ -1,0 +1,109 @@
+{
+ "num": "004",
+ "city": "Холодец",
+ "title": "TODO",
+ "hook": "TODO",
+ "timeline": {
+  "scene_gap": 0.05,
+  "tail": 0.6,
+  "tunnel": 0.0
+ },
+ "worlds": [
+  "props.js",
+  "food_001.js",
+  "food_002.js",
+  "food_003.js",
+  "food_004.js",
+  "wardrobe_001.js",
+  "wardrobe_002.js",
+  "wardrobe_003.js",
+  "wardrobe_004.js",
+  "w_hook.js",
+  "w_vote.js",
+  "w_viandier.js",
+  "w_domostroi.js",
+  "w_names.js",
+  "w_peter.js",
+  "w_servants.js",
+  "w_bones.js",
+  "w_zalivnoe.js",
+  "w_relatives.js",
+  "w_today.js",
+  "w_cover.js"
+ ],
+ "scenes": [
+  [
+   "hook",
+   [
+    "h1",
+    "h2"
+   ]
+  ],
+  [
+   "vote",
+   [
+    "s1"
+   ]
+  ],
+  [
+   "viandier",
+   [
+    "s2"
+   ]
+  ],
+  [
+   "domostroi",
+   [
+    "s3"
+   ]
+  ],
+  [
+   "names",
+   [
+    "s4"
+   ]
+  ],
+  [
+   "peter",
+   [
+    "s5"
+   ]
+  ],
+  [
+   "servants",
+   [
+    "s6"
+   ]
+  ],
+  [
+   "bones",
+   [
+    "s7"
+   ]
+  ],
+  [
+   "zalivnoe",
+   [
+    "s8"
+   ]
+  ],
+  [
+   "relatives",
+   [
+    "s9"
+   ]
+  ],
+  [
+   "today",
+   [
+    "t1"
+   ]
+  ],
+  [
+   "button",
+   [
+    "x1"
+   ]
+  ]
+ ]
+}
