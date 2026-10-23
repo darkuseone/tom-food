@@ -1,0 +1,43 @@
+{
+  "metadata": {
+    "soundFile": "/home/user/tom-food/build/006-shawarma/vf/s10.wav",
+    "duration": 5.63
+  },
+  "mouthCues": [
+    { "start": 0.00, "end": 0.05, "value": "B" },
+    { "start": 0.05, "end": 0.10, "value": "E" },
+    { "start": 0.10, "end": 0.17, "value": "G" },
+    { "start": 0.17, "end": 0.24, "value": "B" },
+    { "start": 0.24, "end": 0.59, "value": "F" },
+    { "start": 0.59, "end": 0.67, "value": "A" },
+    { "start": 0.67, "end": 0.74, "value": "D" },
+    { "start": 0.74, "end": 0.99, "value": "B" },
+    { "start": 0.99, "end": 1.10, "value": "C" },
+    { "start": 1.10, "end": 1.38, "value": "F" },
+    { "start": 1.38, "end": 1.66, "value": "B" },
+    { "start": 1.66, "end": 1.80, "value": "C" },
+    { "start": 1.80, "end": 1.87, "value": "B" },
+    { "start": 1.87, "end": 2.08, "value": "E" },
+    { "start": 2.08, "end": 2.22, "value": "F" },
+    { "start": 2.22, "end": 2.31, "value": "A" },
+    { "start": 2.31, "end": 2.39, "value": "D" },
+    { "start": 2.39, "end": 2.60, "value": "B" },
+    { "start": 2.60, "end": 2.67, "value": "C" },
+    { "start": 2.67, "end": 2.81, "value": "E" },
+    { "start": 2.81, "end": 3.44, "value": "B" },
+    { "start": 3.44, "end": 3.58, "value": "C" },
+    { "start": 3.58, "end": 4.07, "value": "B" },
+    { "start": 4.07, "end": 4.21, "value": "F" },
+    { "start": 4.21, "end": 4.70, "value": "B" },
+    { "start": 4.70, "end": 4.78, "value": "A" },
+    { "start": 4.78, "end": 4.88, "value": "C" },
+    { "start": 4.88, "end": 4.95, "value": "B" },
+    { "start": 4.95, "end": 5.03, "value": "A" },
+    { "start": 5.03, "end": 5.13, "value": "B" },
+    { "start": 5.13, "end": 5.20, "value": "G" },
+    { "start": 5.20, "end": 5.41, "value": "E" },
+    { "start": 5.41, "end": 5.49, "value": "A" },
+    { "start": 5.49, "end": 5.62, "value": "E" },
+    { "start": 5.62, "end": 5.63, "value": "X" }
+  ]
+}

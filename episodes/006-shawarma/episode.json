@@ -1,0 +1,120 @@
+{
+ "num": "006",
+ "city": "Шаурма",
+ "title": "TODO",
+ "hook": "TODO",
+ "timeline": {
+  "scene_gap": 0.05,
+  "tail": 0.6,
+  "tunnel": 0.0
+ },
+ "worlds": [
+  "props.js",
+  "food_001.js",
+  "food_002.js",
+  "food_003.js",
+  "food_004.js",
+  "food_005.js",
+  "food_006.js",
+  "wardrobe_001.js",
+  "wardrobe_002.js",
+  "wardrobe_003.js",
+  "wardrobe_004.js",
+  "wardrobe_005.js",
+  "wardrobe_006.js",
+  "w_hook.js",
+  "w_kebab.js",
+  "w_bursa.js",
+  "w_name.js",
+  "w_gyros.js",
+  "w_mexico.js",
+  "w_pastor.js",
+  "w_berlin.js",
+  "w_money.js",
+  "w_eu.js",
+  "w_record.js",
+  "w_today.js",
+  "w_cover.js"
+ ],
+ "scenes": [
+  [
+   "hook",
+   [
+    "h1",
+    "h2"
+   ]
+  ],
+  [
+   "kebab",
+   [
+    "s1"
+   ]
+  ],
+  [
+   "bursa",
+   [
+    "s2"
+   ]
+  ],
+  [
+   "name",
+   [
+    "s3"
+   ]
+  ],
+  [
+   "gyros",
+   [
+    "s4"
+   ]
+  ],
+  [
+   "mexico",
+   [
+    "s5"
+   ]
+  ],
+  [
+   "pastor",
+   [
+    "s6"
+   ]
+  ],
+  [
+   "berlin",
+   [
+    "s7"
+   ]
+  ],
+  [
+   "money",
+   [
+    "s8"
+   ]
+  ],
+  [
+   "eu",
+   [
+    "s9"
+   ]
+  ],
+  [
+   "record",
+   [
+    "s10"
+   ]
+  ],
+  [
+   "today",
+   [
+    "t1"
+   ]
+  ],
+  [
+   "button",
+   [
+    "x1"
+   ]
+  ]
+ ]
+}

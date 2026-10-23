@@ -1,0 +1,27 @@
+{
+  "metadata": {
+    "soundFile": "/home/user/tom-food/build/006-shawarma/vf/t1.wav",
+    "duration": 3.01
+  },
+  "mouthCues": [
+    { "start": 0.00, "end": 0.40, "value": "B" },
+    { "start": 0.40, "end": 0.54, "value": "F" },
+    { "start": 0.54, "end": 0.89, "value": "B" },
+    { "start": 0.89, "end": 0.98, "value": "A" },
+    { "start": 0.98, "end": 1.34, "value": "B" },
+    { "start": 1.34, "end": 1.48, "value": "E" },
+    { "start": 1.48, "end": 1.55, "value": "F" },
+    { "start": 1.55, "end": 1.65, "value": "A" },
+    { "start": 1.65, "end": 1.73, "value": "B" },
+    { "start": 1.73, "end": 1.83, "value": "A" },
+    { "start": 1.83, "end": 1.92, "value": "B" },
+    { "start": 1.92, "end": 2.06, "value": "X" },
+    { "start": 2.06, "end": 2.54, "value": "B" },
+    { "start": 2.54, "end": 2.61, "value": "C" },
+    { "start": 2.61, "end": 2.75, "value": "E" },
+    { "start": 2.75, "end": 2.83, "value": "A" },
+    { "start": 2.83, "end": 2.93, "value": "D" },
+    { "start": 2.93, "end": 3.00, "value": "B" },
+    { "start": 3.00, "end": 3.01, "value": "X" }
+  ]
+}
