@@ -15,9 +15,11 @@ const puppeteer = require('puppeteer-core'); const path = require('path'); const
     console.log(`t=${t.toFixed(2)}  ${Math.round(r.ms)} мс/кадр`); const f = path.join(out, `t${t.toFixed(2)}.png`); fs.writeFileSync(f, Buffer.from(r.ok.split(',')[1], 'base64')); files.push(f);
   }
   await b.close();
+  // контур безопасной зоны TikTok/Shorts (тонкая красная рамка: текст и важное — внутри; оранжевая — колонка кнопок справа). SAFE_GUIDES=0 — выключить
+  const SAFEG = process.env.SAFE_GUIDES === '0' ? '' : ',drawbox=x=32:y=83:w=296:h=464:color=red@0.7:t=2,drawbox=x=293:y=300:w=35:h=247:color=orange@0.7:t=2';
   if (files.length) {
     const cols = Math.min(4, files.length), rows = Math.ceil(files.length / cols), inp = [], fl = [];
-    files.forEach((f, i) => { inp.push('-i', f); fl.push(`[${i}]scale=360:-1,drawtext=text='${path.basename(f, '.png').slice(1)}':x=8:y=8:fontsize=28:fontcolor=yellow:box=1:boxcolor=black@0.6[v${i}]`); });
+    files.forEach((f, i) => { inp.push('-i', f); fl.push(`[${i}]scale=360:-1,drawtext=text='${path.basename(f, '.png').slice(1)}':x=8:y=8:fontsize=28:fontcolor=yellow:box=1:boxcolor=black@0.6${SAFEG}[v${i}]`); });
     for (let i = files.length; i < rows * cols; i++) { fl.push(`color=black:s=360x640[v${i}]`); }
     const rowsF = []; for (let r = 0; r < rows; r++) { const ins = Array.from({ length: cols }, (_, c) => `[v${r * cols + c}]`).join(''); rowsF.push(cols > 1 ? `${ins}hstack=${cols}[r${r}]` : `${ins}null[r${r}]`); }
     const fin = rows > 1 ? `${Array.from({ length: rows }, (_, r) => `[r${r}]`).join('')}vstack=${rows}[o]` : `[r0]null[o]`;

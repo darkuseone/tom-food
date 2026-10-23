@@ -55,12 +55,16 @@ const BUF = [0, 1].map(() => { const c = document.createElement('canvas'); c.wid
 function renderTo(c, fn) { const prev = ctx, pS = S, pSS = SS.splice(0); ctx = c.getContext('2d'); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, W, H); S = 1; fn(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx = prev; S = pS; SS.push(...pSS); }
 
 // ------------------------------------------------------------------ HUD: титр эпохи, таймлайн, субтитры, плашка
+/* Безопасная зона площадок (владелец, 23.10.2026): на длинных телефонах TikTok/Shorts обрезают ~60 px с боков, сверху — статус-бар, «чёлка» и кнопки
+   площадки (поиск, «назад»), справа — колонка лайков/комментов, снизу — ник и описание. Выпуск включает раскладку флагом `const SAFE = true;` в scenes.js
+   (с 009 — всегда; старые выпуски без флага рендерятся как раньше). Зона для текста: x 96–880 справа ниже y 900, x 96–984 выше; y 250–1640. */
+const SAFEZ = () => (typeof SAFE !== 'undefined' && SAFE) ? { cardX: 96, cardY: 336, cardS: 0.9, cardN: 5, plateX: 110, plateY: 286, capX: 488, capW: 720, capY: 1580, hookX: 520, hookY: 520 } : null;
 function logPos(yr) { const ago = Math.max(1, 2026 - yr); return 1 - Math.log10(ago) / Math.log10(4.6e8); }   // 0 = 450 млн лет назад … 1 = сейчас
 function titleCard(t) {                                             // «ТОМ НА ВКУС»: карточка рецепта (листок на скрепке) — страна+год, ингредиенты дописываются/зачёркиваются
   if (typeof RECIPE === 'undefined') return; const i = sceneAt(t), s = SC[i]; if (!s[3]) return;
-  const u = t - s[1], roll = u < 0.45, k = popK(t, s[1], 0.32), items = RECIPE.filter(q => t >= q[1]).slice(-6);
-  const x0 = 34, y0 = 120, w = 410, h = 132 + items.length * 40;
-  push(x0 + w / 2, y0, 0.86 + 0.14 * k, -0.035 + Math.sin(t * 1.3) * 0.004); ctx.translate(-w / 2, 0);
+  const Z = SAFEZ(), u = t - s[1], roll = u < 0.45, k = popK(t, s[1], 0.32), items = RECIPE.filter(q => t >= q[1]).slice(Z ? -Z.cardN : -6);
+  const x0 = Z ? Z.cardX : 34, y0 = Z ? Z.cardY : 120, w = 410, h = 132 + items.length * 40;
+  push(x0 + w / 2 * (Z ? Z.cardS : 1), y0, (0.86 + 0.14 * k) * (Z ? Z.cardS : 1), -0.035 + Math.sin(t * 1.3) * 0.004); ctx.translate(-w / 2, 0);
   ctx.save(); ctx.shadowColor = 'rgba(20,10,4,0.45)'; ctx.shadowBlur = 18; ctx.shadowOffsetY = 8; ctx.fillStyle = '#f4e6c8'; ctx.fillRect(0, 0, w, h); ctx.restore();
   const g = ctx.createLinearGradient(0, 0, w, h); g.addColorStop(0, 'rgba(255,250,235,0.5)'); g.addColorStop(1, 'rgba(184,115,58,0.22)'); ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
   ctx.save(); ctx.globalAlpha = 0.16; ctx.fillStyle = '#b8733a'; ctx.beginPath(); ctx.ellipse(w - 70, h - 40, 46, 30, 0.4, 0, 6.3); ctx.fill(); ctx.globalAlpha = 0.1; ctx.beginPath(); ctx.ellipse(w - 50, h - 60, 22, 14, 0, 0, 6.3); ctx.fill(); ctx.restore();   // пятно соуса
@@ -79,10 +83,10 @@ function titleCard(t) {                                             // «ТОМ 
 }
 function captions(t) {
   const c = CAPS.find(c => t >= c.t0 && t < c.t1 + 0.08); if (!c) return;
-  const y = 1588, size = 82; ctx.save(); ctx.font = `600 ${size}px Osw`;
+  const Z = SAFEZ(), y = Z ? Z.capY : 1588, size = 82; ctx.save(); ctx.font = `600 ${size}px Osw`;
   const parts = c.words.map(w => ({ w, key: KEYW.includes(w), num: /\d/.test(w) })); const sp = ctx.measureText(' ').width, widths = parts.map(p => ctx.measureText(p.w).width);
   const tw = widths.reduce((a, b) => a + b, 0) + sp * (parts.length - 1); ctx.restore();
-  const k = popK(t, c.t0, 0.18); push(540, y, 0.92 + 0.08 * k);
+  const k = popK(t, c.t0, 0.18), fit = Z ? Math.min(1, Z.capW / (tw + 40)) : 1; push(Z ? Z.capX : 540, y, (0.92 + 0.08 * k) * fit);
   const rv = clamp(0.3 + (t - c.t0) / 0.16); let x = -tw / 2;
   parts.forEach((p, i) => { const wr = clamp(rv * parts.length - i); if (wr <= 0) { x += widths[i] + sp; return; }
     if (p.key) { const kk = popK(t, c.t0 + i / parts.length * 0.16, 0.22); ctx.save(); ctx.translate(x + widths[i] / 2, 0); ctx.rotate(-0.05); ctx.scale(0.7 + 0.3 * kk, 0.7 + 0.3 * kk);
@@ -94,7 +98,7 @@ function captions(t) {
     x += widths[i] + sp; });
   pop();
 }
-function plate() { push(60, 70, 1); ctx.save(); ctx.fillStyle = 'rgba(217,72,43,0.92)'; ctx.beginPath(); ctx.roundRect(-14, -28, 262, 56, 10); ctx.fill(); ctx.restore(); txt('ТОМ НА ВКУС', 0, 0, 38, { align: 'left', font: 'Osw', col: '#fff8ec' }); txt(typeof SUBTITLE !== 'undefined' ? SUBTITLE : '', 266, 2, 34, { align: 'left', col: '#f4e6c8', a: 0.8 }); pop(); }
+function plate() { const Z = SAFEZ(); push(Z ? Z.plateX : 60, Z ? Z.plateY : 70, Z ? 0.9 : 1); ctx.save(); ctx.fillStyle = 'rgba(217,72,43,0.92)'; ctx.beginPath(); ctx.roundRect(-14, -28, 262, 56, 10); ctx.fill(); ctx.restore(); txt('ТОМ НА ВКУС', 0, 0, 38, { align: 'left', font: 'Osw', col: '#fff8ec' }); txt(typeof SUBTITLE !== 'undefined' ? SUBTITLE : '', 266, 2, 34, { align: 'left', col: '#f4e6c8', a: 0.8 }); pop(); }
 function endcard(t) { if (t < DUR - 1.0) return; const k = popK(t, DUR - 1.0, 0.3); push(540, 1180, k, -0.03);
   ctx.save(); ctx.fillStyle = '#d9482b'; ctx.beginPath(); ctx.roundRect(-330, -80, 660, 160, 16); ctx.fill(); ctx.restore(); pencil([[-330, -80], [330, -80], [330, 80], [-330, 80], [-330, -80]], { w: 3, col: '#2b2622', pass2: false });
   txt('ПОДПИШИСЬ', -50, 4, 104, { col: '#fff8ec', font: 'Osw' });

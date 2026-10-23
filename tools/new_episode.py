@@ -38,6 +38,7 @@ yr = ', '.join(f"{s}: ['TODO', 'TODO']" for s in names[1:])
 (d / 'scenes.js').write_text(f"""/* Выпуск {ep[:3]} — {dish}. Сцены, годы/подписи карточки рецепта, реестры для миров. */
 const SUBTITLE = 'история: {dish.lower()}';
 const SAT = 1.1;
+const SAFE = true;                                          // безопасная зона TikTok/Shorts (владелец, 23.10.2026): HUD ниже чёлки и дальше от краёв
 const HOOK_LINES = ['TODO', 'TODO?!'];                     // текст-хук первых ~2.5 с, ≤3 слов в строке
 const YR = {{ hook: ['', ''], {yr}, button: ['', ''] }};
 const SC = SCN.map(([n, a, b]) => [n, a, b, YR[n][0], YR[n][1]]);
@@ -62,7 +63,7 @@ for s, k in scenes[:-1]:
   DIR.button = Object.assign({}, DIR.today, { act: () => [[S0.button, 'grin'], [LF('x1', 0.7), 'wink']], cam: () => [[S0.button, 660, 900, 0.3], [DUR, 660, 980, 0.36]] });
 })();
 """ if s == 'today' else ''))
-(d / 'w_cover.js').write_text(f"/* Обложка {ep[:3]}: блюдо — герой кадра крупно, Том с реакцией; 2–3 слова; плашка с названием блюда. */\nconst COVER = {{ scene: 'hook', t: 2.0, cam: {{ x: 560, y: 1060, z: 0.4 }}, pose: {{ expr: 'shock', expr2: 'shock', ek: 1, tailUp: true }},\n  title: [['TODO', '#f4e6c8'], ['TODO?!', '#d9482b']], size: 150, ty: 300, badge: '{dish.upper()}', sub: 'история за минуту' }};\n")
+(d / 'w_cover.js').write_text(f"/* Обложка {ep[:3]}: блюдо — герой кадра крупно, Том с реакцией; 2–3 слова; плашка с названием блюда. */\nconst COVER = {{ scene: 'hook', t: 2.0, cam: {{ x: 560, y: 1060, z: 0.4 }}, pose: {{ expr: 'shock', expr2: 'shock', ek: 1, tailUp: true }},\n  title: [['TODO', '#f4e6c8'], ['TODO?!', '#d9482b']], size: 150, ty: 360, badge: '{dish.upper()}', sub: 'история за минуту' }};\n")
 (d / 'sound.py').write_text(f'''"""Звук {ep[:3]} — {dish}: SFX от событий картинки (T.EV из ev.json). SFX: (файл, время, дБ). BEDS: (луп, начало, конец). Новые звуки — tools/sfxbatch.py."""
 
 
