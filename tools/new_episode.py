@@ -32,13 +32,15 @@ worlds = shared + [f'w_{s}.js' for s in names] + ['w_cover.js']
 L = {'h1': '[shocked, loud] TODO шок-слово первым', 'h2': '[smug, playful] Отку́сим исто́рию!'}
 for s, k in scenes[1:-1]:
     if s != 'today': L[k[0]] = '[dramatic] TODO ≤14 слов, панчлайн в конце'
-L['t1'] = '[warm, proud] TODO сегодня + цифра, петля к хуку'; L['x1'] = '[playful, to the camera] Пиши́ блю́до — отку́сим!'
+L['t1'] = '[to the camera, sly] TODO сегодня + цифра → вопрос-выбор «А или Б?», петля к хуку'; L['x1'] = '[playful, to the camera] Пиши́ блю́до — отку́сим!'
 (d / 'lines.json').write_text(json.dumps(L, ensure_ascii=False, indent=1))
 yr = ', '.join(f"{s}: ['TODO', 'TODO']" for s in names[1:])
 (d / 'scenes.js').write_text(f"""/* Выпуск {ep[:3]} — {dish}. Сцены, годы/подписи карточки рецепта, реестры для миров. */
 const SUBTITLE = 'история: {dish.lower()}';
 const SAT = 1.1;
 const SAFE = true;                                          // безопасная зона TikTok/Shorts (владелец, 23.10.2026): HUD ниже чёлки и дальше от краёв
+const ENDCARD = false;                                      // тест v1 (25.10.2026): без плашки «ПОДПИШИСЬ» — финал = панчлайн
+const LOOP = 0.4;                                           // тест v1: последние 0.4 с перетекают в первый кадр — ролик зацикливается
 const HOOK_LINES = ['TODO', 'TODO?!'];                     // текст-хук первых ~2.5 с, ≤3 слов в строке
 const YR = {{ hook: ['', ''], {yr}, button: ['', ''] }};
 const SC = SCN.map(([n, a, b]) => [n, a, b, YR[n][0], YR[n][1]]);
@@ -73,10 +75,10 @@ def sound(T):
     sfx = [
         ('whip_whoosh', 0.0, -2),
         # TODO: по событию на каждое EV + переход на каждый S0[сцена]; укус — nugget_bite / crunch_crouton
-        ('cat_meow', DUR - 0.9, -6),
+        # финал: без мяу/заставки — ролик перетекает в хук (LOOP), начальный whip_whoosh звучит уже на повторе
     ]
     beds = [('restaurant_loop', S0['today'], DUR)]
-    return dict(sfx=sfx, beds=beds, music='music_tomnavkus')
+    return dict(sfx=sfx, beds=beds, music='music_tomnavkus', loop=True, lufs=-14)   # тест v1: музыка без затухания на стыке, мастер −14 LUFS
 ''')
 (d / 'script.md').write_text(f'# {ep} — {dish} (сценарий)\n\nХук «…» · структура «…» · ≈… с · укус: … · Том-малыш: … · карта: …\n\n| сцена | реплика | картинка / Том | переход В сцену |\n|---|---|---|---|\n'
     + ''.join(f'| {s} | | | |\n' for s, _ in scenes) + '\nКарточка рецепта: …\nКостюмы: …\nПалитра: …\n')

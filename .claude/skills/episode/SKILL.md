@@ -8,7 +8,7 @@ description: Новый выпуск «ТОМ НА ВКУС» от блюда д
 Этапы — свои скилы, грузить по очереди: `facts` → `scene` → `sound` → `deliver`. Правки — `fix`, статистика — `stats`.
 
 ## Порядок (~2 ч)
-1. **Факты и сценарий** — скил `facts` → `docs/sources/<эп>.md`, `script.md`, `lines.json`, `tools/est.py` 55–62 с (печатает и проверку озвучки).
+1. **Факты и сценарий** — скил `facts` → `docs/sources/<эп>.md`, `script.md`, `lines.json`, `tools/est.py` 55–62 с (с 009, тест v1 — 54–62 с, ≤ 7 остановок) (печатает и проверку озвучки).
    Сценарий владельцу (SendUserFile + 3 строки). Ждать «ок», если не сказано «делай сам / сразу ролик».
 2. **Заготовка:** `git checkout -b episode-<NNN-блюдо>` → `python3 tools/new_episode.py <NNN-блюдо> "<Блюдо>" hook,<сцены>,today` — создаёт выпуск + заготовки `lib/food_<NNN>.js`, `lib/wardrobe_<NNN>.js`; вся еда и все костюмы прошлых выпусков уже подключены (lib/). Реплики — в созданный lines.json.
 3. **Озвучка:** `python3 tools/tts.py lines <эп>` → `python3 tools/prep_voice.py <эп>` → `python3 tools/build_data.py <эп>` (тайминги сцен). Субтитры: `python3 -c "import re,json;s=open('episodes/<эп>/data.js').read();[print(x['key'],round(x['t0'],2),' '.join(x['words'])) for x in json.loads(re.search(r'const CAPS=(\[.*?\]);',s).group(1))]"`.

@@ -1,6 +1,6 @@
 """Таймлайн выпуска из реплик: episodes/<эп>/episode.json + durs.json + lips/ -> data.js (DUR, VO, VD, SCN, CAPS, VIS) и times.json.
   python3 tools/build_data.py <эпизод>
-Сцена без реплик (портал/туннель) длится timeline.tunnel секунд. Субтитры: по 1–3 слова, ударения U+0301 вырезаются."""
+Сцена без реплик (портал/туннель) длится timeline.tunnel секунд. timeline.beats = {сцена: сек} — немая пауза-гэг после реплики (с 009). Субтитры: по 1–3 слова, ударения U+0301 вырезаются."""
 import sys; sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent)); from voicetext import shown
 import json, re, sys
 from pathlib import Path
@@ -23,7 +23,7 @@ def main(ep):
         for i, k in enumerate(keys):
             if i: t += T['line_gap']
             VO[k] = round(t, 3); t += D[k]
-        prev_end = t
+        prev_end = t + T.get('beats', {}).get(name, 0)            # тест v1: немая пауза-гэг после реплики сцены (реакция Тома + SFX), сек
     DUR = round(prev_end + T['tail'], 2)
     for i, s in enumerate(SCN): s.append(SCN[i + 1][1] if i + 1 < len(SCN) else 99)
     CAPS = []

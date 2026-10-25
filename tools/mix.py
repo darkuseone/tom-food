@@ -2,8 +2,10 @@
   python3 tools/mix.py <эпизод> [папка_голоса=vf] [выход=audio.m4a]     # для дубляжа: tools/dub.py вызывает с vf_en audio_en.m4a
 Громкость каждого клипа выравнивается по активному RMS (голос −17, SFX −25+поправка, атмосферы −33, музыка −29 дБ),
 SFX: highpass 35 / lowpass 8.5k / −4 дБ на 4.5k / лимитер — ничего не бьёт по ушам; атмосферы и музыка проседают под голосом (sidechain).
-Цель: mean ≈ −20 дБ, пик ≤ −1 дБ."""
-import importlib.util, json, subprocess, sys
+Цель: mean ≈ −20 дБ, пик ≤ −1 дБ (001–008).
+Тест v1 (с 009): sound.py возвращает lufs=-14 → мастеринг master(): громкость по EBU R128 до −14 LUFS, пик лимитера −2.5 дБ → true peak после AAC ≤ −1 дБ;
+loop=True → музыка без затухания на стыке (ролик зацикливается в хук)."""
+import importlib.util, json, re, subprocess, sys
 from pathlib import Path
 from types import SimpleNamespace
 import numpy as np
@@ -21,6 +23,23 @@ def act_rms(path):
 
 
 gain = lambda p, tg: max(-24, min(24, tg - act_rms(p)))
+
+
+def lufs(path):                                                    # интегральная громкость (LUFS) и пик (дБ) по ebur128
+    r = subprocess.run(['ffmpeg', '-nostats', '-i', str(path), '-af', 'ebur128=peak=true', '-f', 'null', '-'], capture_output=True, text=True).stderr
+    return float(re.findall(r'I:\s+(-?[\d.]+) LUFS', r)[-1]), float(re.findall(r'Peak:\s+(-?[\d.]+) dBFS', r)[-1])
+
+
+def master(src, out, target=-14.0, peak=-2.5):                     # подгон громкости: усиление + лимитер, 2 прохода (лимитер съедает часть громкости)
+    I, _ = lufs(src); g = target - I; tmp = Path(out).with_suffix('.master.wav')
+    lim = f'alimiter=limit={10 ** (peak / 20):.4f}:attack=1:release=60:level=0'
+    for _ in range(3):
+        subprocess.run(['ffmpeg', '-y', '-v', 'error', '-i', str(src), '-af', f'volume={g:.2f}dB,{lim}', '-ar', '48000', '-c:a', 'pcm_f32le', str(tmp)], check=True)
+        I2, _ = lufs(tmp)
+        if abs(I2 - target) < 0.3: break
+        g += target - I2
+    subprocess.run(['ffmpeg', '-y', '-v', 'error', '-i', str(tmp), '-af', lim, '-c:a', 'aac', '-b:a', '192k', str(out)], check=True); tmp.unlink()
+    return lufs(out)
 
 
 def main(ep, vfdir='vf', outname='audio.m4a'):
@@ -53,15 +72,18 @@ def main(ep, vfdir='vf', outname='audio.m4a'):
         f = SF / f'{n}.mp3'; g = gain(f, M['bed_db']); i = add(f); du = e - a; ms = int(a * 1000)
         fl.append(f'[{i}]aloop=loop=-1:size=2e9,atrim=0:{du:.3f},lowpass=f=9000,volume={g:.2f}dB,afade=t=in:d=0.35,afade=t=out:st={du - 0.45:.3f}:d=0.45,adelay={ms}|{ms}[b{i}]'); bl.append(f'[b{i}]')
     f = SF / f"{S['music']}.mp3"; g = gain(f, M['music_db']); i = add(f)
-    fl.append(f'[{i}]aloop=loop=-1:size=2e9,atrim=0:{DUR},volume={g:.2f}dB,afade=t=in:d=0.6,afade=t=out:st={DUR - 1.4}:d=1.4[mus]'); bl.append('[mus]')
+    fi, fo = (0.05, 0.3) if S.get('loop') else (0.6, 1.4)          # петля: музыка не затухает к концу, стык с началом не слышен
+    fl.append(f'[{i}]aloop=loop=-1:size=2e9,atrim=0:{DUR},volume={g:.2f}dB,afade=t=in:d={fi},afade=t=out:st={DUR - fo}:d={fo}[mus]'); bl.append('[mus]')
     fl.append(''.join(vl) + f'amix=inputs={len(vl)}:normalize=0,asplit=2[vo][vsc]')
     fl.append(''.join(bl) + f'amix=inputs={len(bl)}:normalize=0[bed]')
     fl.append('[bed][vsc]sidechaincompress=threshold=0.04:ratio=5:attack=25:release=350[bedd]')
     fl.append('[vo][bedd]' + ''.join(sl) + f'amix=inputs={2 + len(sl)}:normalize=0,apad=whole_dur={DUR},atrim=0:{DUR},'
               'acompressor=threshold=-14dB:ratio=2:attack=10:release=150,volume=2dB,alimiter=limit=0.84:attack=2:release=40:level=0[out]')
     (b / f'mix_{vfdir}.txt').write_text(';\n'.join(fl))
-    out = b / outname
-    subprocess.run(['ffmpeg', '-y', '-v', 'error'] + inp + ['-filter_complex_script', str(b / f'mix_{vfdir}.txt'), '-map', '[out]', '-ar', '48000', '-c:a', 'aac', '-b:a', '192k', str(out)], check=True)
+    out = b / outname; pre = b / f'pre_{vfdir}.wav' if S.get('lufs') else out
+    subprocess.run(['ffmpeg', '-y', '-v', 'error'] + inp + ['-filter_complex_script', str(b / f'mix_{vfdir}.txt'), '-map', '[out]', '-ar', '48000']
+                   + (['-c:a', 'pcm_f32le'] if S.get('lufs') else ['-c:a', 'aac', '-b:a', '192k']) + [str(pre)], check=True)
+    if S.get('lufs'): I, pk = master(pre, out, S['lufs']); pre.unlink(); print(f'мастер: {I:.1f} LUFS, пик {pk:.1f} дБ')
     r = subprocess.run(['ffmpeg', '-i', str(out), '-af', 'volumedetect', '-f', 'null', '-'], capture_output=True, text=True).stderr
     print(out.relative_to(ROOT), *[l.split('] ')[-1] for l in r.splitlines() if 'mean_volume' in l or 'max_volume' in l])
 
