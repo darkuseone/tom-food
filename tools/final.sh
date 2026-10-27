@@ -17,7 +17,7 @@ if v1: w += ['длина ' + ('ок' if 54 <= d <= 62 else f'{d:.1f} с ← те
 print('| ' + ' | '.join(w))
 PY
 if grep -q "const LOOP" "episodes/$EP/scenes.js"; then              # стык петли: последний кадр | первый кадр — должны почти совпадать
-  ffmpeg -v error -y -sseof -0.05 -i "$F" -frames:v 1 -vf scale=270:-1 "$B/fin/last.png"; ffmpeg -v error -y -i "$F" -frames:v 1 -vf scale=270:-1 "$B/fin/first.png"
+  mkdir -p "$B/fin"; ffmpeg -v error -y -sseof -0.3 -i "$F" -update 1 -vf scale=270:-1 "$B/fin/last.png"; ffmpeg -v error -y -i "$F" -frames:v 1 -vf scale=270:-1 "$B/fin/first.png"
   ffmpeg -v error -y -i "$B/fin/last.png" -i "$B/fin/first.png" -filter_complex hstack "$B/loop.jpg" && echo "→ $B/loop.jpg (конец | начало)"; fi
 rm -rf "$B/fin" && mkdir -p "$B/fin"
 for i in 0 1 2 3 4 5 6 7; do t=$(python3 -c "print(round(0.4 + ($D - 0.8) * $i / 7, 2))"); ffmpeg -v error -y -ss "$t" -i "$F" -frames:v 1 -vf scale=270:-1 "$B/fin/$i.png"; done
