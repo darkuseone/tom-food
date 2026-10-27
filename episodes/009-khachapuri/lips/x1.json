@@ -1,0 +1,18 @@
+{
+  "metadata": {
+    "soundFile": "/home/user/tom-food/build/009-khachapuri/vf/x1.wav",
+    "duration": 1.76
+  },
+  "mouthCues": [
+    { "start": 0.00, "end": 0.40, "value": "B" },
+    { "start": 0.40, "end": 0.68, "value": "F" },
+    { "start": 0.68, "end": 0.89, "value": "E" },
+    { "start": 0.89, "end": 1.07, "value": "B" },
+    { "start": 1.07, "end": 1.11, "value": "C" },
+    { "start": 1.11, "end": 1.18, "value": "B" },
+    { "start": 1.18, "end": 1.46, "value": "F" },
+    { "start": 1.46, "end": 1.67, "value": "B" },
+    { "start": 1.67, "end": 1.75, "value": "A" },
+    { "start": 1.75, "end": 1.76, "value": "X" }
+  ]
+}

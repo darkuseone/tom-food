@@ -1,0 +1,33 @@
+{
+  "metadata": {
+    "soundFile": "/home/user/tom-food/build/009-khachapuri/vf/s3.wav",
+    "duration": 5.68
+  },
+  "mouthCues": [
+    { "start": 0.00, "end": 0.10, "value": "B" },
+    { "start": 0.10, "end": 0.17, "value": "C" },
+    { "start": 0.17, "end": 0.66, "value": "B" },
+    { "start": 0.66, "end": 0.73, "value": "F" },
+    { "start": 0.73, "end": 0.87, "value": "D" },
+    { "start": 0.87, "end": 1.01, "value": "B" },
+    { "start": 1.01, "end": 1.18, "value": "A" },
+    { "start": 1.18, "end": 1.58, "value": "B" },
+    { "start": 1.58, "end": 1.92, "value": "E" },
+    { "start": 1.92, "end": 2.33, "value": "B" },
+    { "start": 2.33, "end": 2.54, "value": "F" },
+    { "start": 2.54, "end": 3.10, "value": "B" },
+    { "start": 3.10, "end": 3.17, "value": "F" },
+    { "start": 3.17, "end": 3.62, "value": "B" },
+    { "start": 3.62, "end": 3.70, "value": "A" },
+    { "start": 3.70, "end": 4.12, "value": "B" },
+    { "start": 4.12, "end": 4.33, "value": "C" },
+    { "start": 4.33, "end": 4.68, "value": "B" },
+    { "start": 4.68, "end": 4.75, "value": "C" },
+    { "start": 4.75, "end": 4.82, "value": "E" },
+    { "start": 4.82, "end": 4.90, "value": "A" },
+    { "start": 4.90, "end": 5.39, "value": "F" },
+    { "start": 5.39, "end": 5.53, "value": "C" },
+    { "start": 5.53, "end": 5.67, "value": "E" },
+    { "start": 5.67, "end": 5.68, "value": "X" }
+  ]
+}
