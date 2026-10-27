@@ -1,0 +1,39 @@
+{
+  "metadata": {
+    "soundFile": "/home/user/tom-food/build/010-chips/vf/s3.wav",
+    "duration": 4.68
+  },
+  "mouthCues": [
+    { "start": 0.00, "end": 0.17, "value": "X" },
+    { "start": 0.17, "end": 0.30, "value": "C" },
+    { "start": 0.30, "end": 0.51, "value": "B" },
+    { "start": 0.51, "end": 0.58, "value": "E" },
+    { "start": 0.58, "end": 0.67, "value": "A" },
+    { "start": 0.67, "end": 0.74, "value": "G" },
+    { "start": 0.74, "end": 0.81, "value": "A" },
+    { "start": 0.81, "end": 0.91, "value": "F" },
+    { "start": 0.91, "end": 1.19, "value": "C" },
+    { "start": 1.19, "end": 1.47, "value": "B" },
+    { "start": 1.47, "end": 1.82, "value": "F" },
+    { "start": 1.82, "end": 1.89, "value": "B" },
+    { "start": 1.89, "end": 1.96, "value": "C" },
+    { "start": 1.96, "end": 2.03, "value": "F" },
+    { "start": 2.03, "end": 2.11, "value": "A" },
+    { "start": 2.11, "end": 2.54, "value": "B" },
+    { "start": 2.54, "end": 2.67, "value": "A" },
+    { "start": 2.67, "end": 2.86, "value": "B" },
+    { "start": 2.86, "end": 2.99, "value": "X" },
+    { "start": 2.99, "end": 3.03, "value": "B" },
+    { "start": 3.03, "end": 3.07, "value": "C" },
+    { "start": 3.07, "end": 3.63, "value": "B" },
+    { "start": 3.63, "end": 3.70, "value": "C" },
+    { "start": 3.70, "end": 3.78, "value": "A" },
+    { "start": 3.78, "end": 3.90, "value": "F" },
+    { "start": 3.90, "end": 4.18, "value": "B" },
+    { "start": 4.18, "end": 4.25, "value": "E" },
+    { "start": 4.25, "end": 4.39, "value": "B" },
+    { "start": 4.39, "end": 4.53, "value": "G" },
+    { "start": 4.53, "end": 4.67, "value": "B" },
+    { "start": 4.67, "end": 4.68, "value": "X" }
+  ]
+}

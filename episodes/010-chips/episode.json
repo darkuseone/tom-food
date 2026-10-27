@@ -1,0 +1,111 @@
+{
+ "num": "010",
+ "city": "Картофельные чипсы",
+ "title": "Картофельные чипсы",
+ "hook": "Похоронен в чипсах?!",
+ "timeline": {
+  "scene_gap": 0.05,
+  "tail": 0.6,
+  "tunnel": 0.0,
+  "beats": {
+   "court": 0.6,
+   "bag": 0.5
+  }
+ },
+ "worlds": [
+  "props.js",
+  "food_001.js",
+  "food_002.js",
+  "food_003.js",
+  "food_004.js",
+  "food_005.js",
+  "food_006.js",
+  "food_007.js",
+  "food_008.js",
+  "food_009.js",
+  "food_010.js",
+  "wardrobe_001.js",
+  "wardrobe_002.js",
+  "wardrobe_003.js",
+  "wardrobe_004.js",
+  "wardrobe_005.js",
+  "wardrobe_006.js",
+  "wardrobe_007.js",
+  "wardrobe_008.js",
+  "wardrobe_009.js",
+  "wardrobe_010.js",
+  "w_hook.js",
+  "w_legend.js",
+  "w_debunk.js",
+  "w_crisps.js",
+  "w_bag.js",
+  "w_flavour.js",
+  "w_court.js",
+  "w_baur.js",
+  "w_today.js",
+  "w_cover.js"
+ ],
+ "scenes": [
+  [
+   "hook",
+   [
+    "h1",
+    "h2"
+   ]
+  ],
+  [
+   "legend",
+   [
+    "s1"
+   ]
+  ],
+  [
+   "debunk",
+   [
+    "s2"
+   ]
+  ],
+  [
+   "crisps",
+   [
+    "s3"
+   ]
+  ],
+  [
+   "bag",
+   [
+    "s4"
+   ]
+  ],
+  [
+   "flavour",
+   [
+    "s5"
+   ]
+  ],
+  [
+   "court",
+   [
+    "s6"
+   ]
+  ],
+  [
+   "baur",
+   [
+    "s7"
+   ]
+  ],
+  [
+   "today",
+   [
+    "t1"
+   ]
+  ],
+  [
+   "button",
+   [
+    "x1"
+   ]
+  ]
+ ]
+}
