@@ -32,7 +32,7 @@ worlds = shared + [f'w_{s}.js' for s in names] + ['w_cover.js']
 L = {'h1': '[shocked, loud] TODO шок-слово первым', 'h2': '[smug, playful] Отку́сим исто́рию!'}
 for s, k in scenes[1:-1]:
     if s != 'today': L[k[0]] = '[dramatic] TODO ≤14 слов, панчлайн в конце'
-L['t1'] = '[to the camera, sly] TODO сегодня + цифра → вопрос-выбор «А или Б?», петля к хуку'; L['x1'] = '[playful, to the camera] Пиши́ блю́до — отку́сим!'
+L['t1'] = '[to the camera, sly] TODO сегодня + цифра → вопрос-выбор «А или Б?», петля к хуку'; L['x1'] = '[playful, to the camera] TODO финал — новая фраза (episode-formula §Финалы), напр. Пиши́ блю́до — отку́сим!'
 (d / 'lines.json').write_text(json.dumps(L, ensure_ascii=False, indent=1))
 yr = ', '.join(f"{s}: ['TODO', 'TODO']" for s in names[1:])
 (d / 'scenes.js').write_text(f"""/* Выпуск {ep[:3]} — {dish}. Сцены, годы/подписи карточки рецепта, реестры для миров. */
