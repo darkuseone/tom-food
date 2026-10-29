@@ -8,6 +8,7 @@ description: Новый выпуск «ТОМ НА ВКУС» от блюда д
 Этапы — свои скилы, грузить по очереди: `facts` → `scene` → `sound` → `deliver`. Правки — `fix`, статистика — `stats`.
 
 ## Порядок (~2 ч)
+0. **Старт:** `git checkout main && git pull origin main && git checkout -b episode-<NNN-блюдо>` (номер — следующий после последнего в `docs/dishes.md`). Правила по умолчанию: v1 (`docs/episode-formula.md` §«Тест v1»), детализация миров (скил `scene` §«Детализация»), планка — не хуже прошлого выпуска (Read `build/<прошлый>/final_sheet.jpg`; если build нет — кадры `episodes/<прошлый>/final.mp4` через ffmpeg).
 1. **Факты и сценарий** — скил `facts` → `docs/sources/<эп>.md`, `script.md`, `lines.json`, `tools/est.py` 55–62 с (с 009, тест v1 — 54–62 с, ≤ 7 остановок) (печатает и проверку озвучки).
    Сценарий владельцу (SendUserFile + 3 строки). Ждать «ок», если не сказано «делай сам / сразу ролик».
 2. **Заготовка:** `git checkout -b episode-<NNN-блюдо>` → `python3 tools/new_episode.py <NNN-блюдо> "<Блюдо>" hook,<сцены>,today` — создаёт выпуск + заготовки `lib/food_<NNN>.js`, `lib/wardrobe_<NNN>.js`; вся еда и все костюмы прошлых выпусков уже подключены (lib/). Реплики — в созданный lines.json.
