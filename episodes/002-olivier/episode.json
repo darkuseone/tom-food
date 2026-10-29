@@ -1,0 +1,98 @@
+{
+ "num": "002",
+ "city": "Оливье",
+ "title": "Оливье без оливок",
+ "hook": "ГДЕ ОЛИВКИ?!",
+ "timeline": {
+  "scene_gap": 0.05,
+  "tail": 0.6,
+  "tunnel": 0.0
+ },
+ "worlds": [
+  "props.js",
+  "food.js",
+  "costumes.js",
+  "olivier.js",
+  "w_hook.js",
+  "w_deficit.js",
+  "w_jar.js",
+  "w_moskva.js",
+  "w_swap.js",
+  "w_recipe.js",
+  "w_hermitage.js",
+  "w_nikolai.js",
+  "w_paris.js",
+  "w_today.js",
+  "w_cover.js"
+ ],
+ "scenes": [
+  [
+   "hook",
+   [
+    "h1",
+    "h2"
+   ]
+  ],
+  [
+   "deficit",
+   [
+    "s1"
+   ]
+  ],
+  [
+   "jar",
+   [
+    "s2"
+   ]
+  ],
+  [
+   "moskva",
+   [
+    "s3"
+   ]
+  ],
+  [
+   "swap",
+   [
+    "s4"
+   ]
+  ],
+  [
+   "recipe",
+   [
+    "s5"
+   ]
+  ],
+  [
+   "hermitage",
+   [
+    "s6"
+   ]
+  ],
+  [
+   "nikolai",
+   [
+    "s7"
+   ]
+  ],
+  [
+   "paris",
+   [
+    "s8"
+   ]
+  ],
+  [
+   "today",
+   [
+    "t1",
+    "t2"
+   ]
+  ],
+  [
+   "button",
+   [
+    "x1"
+   ]
+  ]
+ ]
+}
