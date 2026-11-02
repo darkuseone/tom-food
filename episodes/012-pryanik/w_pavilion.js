@@ -44,6 +44,7 @@
   function front(t) {                                                   // передний план: ветка каштана в цвету сверху, скамейка с газетой «LE FIGARO 1900», голуби
     for (let i = 0; i < 9; i++) { const x = -120 + i * 60, y = 120 + Math.sin(i) * 40; blob([[x, y], [x - 60, y + 30], [x - 30, y + 90], [x + 20, y + 60], [x + 50, y + 90], [x + 70, y + 30]], { wash: '#3a7a3a', washA: 1, w: 1.6, col: '#1a3a1a' }); if (i % 2) { ell(x, y - 10, 14, 34, { wash: '#f8f0f0', washA: 1, w: 1.2, col: '#a8a0a0' }); } }
     push(1100, 1900, 1.4); rect(-200, -100, 400, 30, { wash: '#2a4a3a', washA: 1, w: 2 }); for (const sd of [-1, 1]) pencil([[sd * 180, -70], [sd * 180, 40]], { w: 10, col: '#1a1a1a' }); push(-40, -120, 1, -0.1); rect(-90, -26, 180, 52, { wash: '#efe6d0', washA: 1, w: 1.6 }); txt('LE FIGARO · 1900', 0, 6, 18, { font: 'Osw', col: '#2a2a2a' }); pop(); pop();
+    rays(1000, -300, 2.1, 0.4, 2400, 'rgba(255,248,220,1)', 0.14, 6, t); glow(900, 200, 500, 'rgba(255,240,200,1)', 0.2); motes(30, [0, 300, 1080, 1800], '#fff8e0', t, 12660, { sp: 8, sz: 4, a: 0.45, wob: 2 });
     for (let i = 0; i < 3; i++) { const x = 200 + i * 140 + Math.sin(t * 2 + i) * 20; push(x, 1880, 1.3, 0, i % 2 ? 1 : -1); blob([[-30, 0], [-24, -30], [10, -36], [30, -20], [24, 0]], { wash: '#8a8a9a', washA: 1, w: 1.4, col: '#3a3a4a' }); ell(26, -34, 9, 9, { wash: '#6a6a7a', washA: 1, w: 1 }); pop(); }
   }
   WORLD.pavilion = (t, u, cat) => {
