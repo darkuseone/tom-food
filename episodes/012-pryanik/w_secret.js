@@ -22,8 +22,8 @@
   }
   function master(t) {                                                  // мастер у весов: гири с цифрами, сундучок, половица, кот на мешке
     const hide = t > EV.sc_hide;
-    human(700, 1360, 1.15, t, { body: '#4a3a2a', legs: '#2a2a2a', hair: '#d8d0c0', beard: 'long', face: hide ? 'smile' : 'calm', armL: 'hold', armR: t > EV.sc_peb && !hide ? 'point' : 'hold', look: 0.4, seed: 12720, long: 1 });
-    push(700, 1360 - 70, 1.15); rect(-46, -160, 92, 160, { wash: '#efe6d0', washA: 1, w: 1.6, col: '#6a5a3a' }); pop();
+    human(560, 1360, 1.15, t, { body: '#4a3a2a', legs: '#2a2a2a', hair: '#d8d0c0', beard: 'long', face: hide ? 'smile' : 'calm', armL: 'hold', armR: t > EV.sc_peb && !hide ? 'point' : 'hold', look: 0.4, seed: 12720, long: 1 });
+    push(560, 1360 - 70, 1.15); rect(-46, -160, 92, 160, { wash: '#efe6d0', washA: 1, w: 1.6, col: '#6a5a3a' }); pop();
     push(80, 1380, 1); const sk = shape(spline([[-80, 0], [-90, -120], [-60, -170], [60, -170], [90, -120], [80, 0]], true, 6), { wash: '#c8b088', washA: 1, w: 2, col: '#3a2a1a' }); txt('МУКА', 0, -80, 26, { font: 'Osw', col: '#6a3a10' }); push(0, -170, 0.8); blob([[-40, 0], [-36, -40], [0, -54], [36, -40], [40, 0]], { wash: '#3a3a3a', washA: 1, w: 2 }); for (const sd of [-1, 1]) poly([[sd * 30, -40], [sd * 40, -70], [sd * 14, -50]], { wash: '#3a3a3a', washA: 1, w: 1.6 }); for (const sd of [-1, 1]) ell(sd * 14, -26, 6, 4, { wash: '#e8d040', washA: 1, line: false }); pop(); pop();
   }
   function table(t) {                                                   // стол с весами; гири перечёркнуты; камешки на чашу; сундучок прячут
@@ -52,8 +52,8 @@
   DIR.secret = {
     outfit: 'sleuth', light: { side: -1, rim: '#ffb060' }, grade: ['#ff8a30', 0.16],
     act: () => [[S0.secret, 'suspicious'], [EV.sc_gir, 'sideeye'], [EV.sc_peb, 'awe'], [EV.sc_hide, 'smug'], [EV.sc_hide + 0.6, 'wink']],
-    pose: (t, u, b) => Object.assign(b, { x: 840, y: 1720, s: 1.05, flip: -1, look: t < EV.sc_hide ? [-0.8, 0.4] : [0, 0], tilt: -0.06, hand: t > EV.sc_hide + 0.5 ? [-10, -350] : [160, -260], handF: [-80, -220], point: t > EV.sc_hide + 0.5 ? 1 : undefined }),
-    cam: () => [[S0.secret, 600, 1000, 0.1], [EV.sc_gir - 0.2, 360, 1260, 0.22, 'x'], [EV.sc_peb, 560, 1260, 0.22], [EV.sc_hide, 500, 1300, 0.24], [S1.secret, 620, 1240, 0.26]]
+    pose: (t, u, b) => Object.assign(b, { x: 780, y: 1720, s: 1.05, flip: -1, look: t < EV.sc_hide ? [-0.8, 0.4] : [0, 0], tilt: -0.06, hand: t > EV.sc_hide + 0.5 ? [-10, -350] : [160, -260], handF: [-80, -220], point: t > EV.sc_hide + 0.5 ? 1 : undefined }),
+    cam: () => [[S0.secret, 600, 1000, 0.1], [EV.sc_gir - 0.2, 480, 1260, 0.14, 'x'], [EV.sc_peb, 580, 1260, 0.2], [EV.sc_hide, 560, 1300, 0.22], [S1.secret, 600, 1240, 0.26]]
   };
   // ---------------------------------------------------------------- переход: свеча гаснет — тьма — новая свеча вспыхивает
   TRANS_IN.secret = { a: 0.3, b: 0.45, runA: 0.3, fx(k, t, A, B) {
