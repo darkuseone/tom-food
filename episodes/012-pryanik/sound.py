@@ -6,11 +6,11 @@ def sound(T):
     e = lambda k, d=0.0: E[k] + d
     sfx = [
         # хук: камешки сыплются на весы, «рецепт?», «но как?», хруст пряника
-        ('pebbles_pour', 0.0, 2), ('rock_knock', e('hk_drop', 0.2), -6), ('knife_tuk', e('hk_save'), -6), ('record_scratch', e('hk_how'), -14), ('crunch_crouton', e('hk_bite'), 3), ('jaw_chomp', e('hk_bite', 0.1), -6),
+        ('pebbles_pour', 0.0, -2), ('rock_knock', e('hk_drop', 0.2), -6), ('knife_tuk', e('hk_save'), -6), ('record_scratch', e('hk_how'), -14), ('crunch_crouton', e('hk_bite'), 0), ('jaw_chomp', e('hk_bite', 0.1), -6),
         # 1685: трещина глазури, книга, вывески, орехи
         ('ice_shatter', S0['pistsy'] - 0.15, -10), ('scroll_unroll', e('ps_book'), -8), ('pencil_scribble', e('ps_book', 0.5), -10), ('wood_bonk', e('ps_shops'), -8), ('wood_bonk', e('ps_shops', 0.15), -10), ('coins_pouch', e('ps_nuts'), -6),
         # доска (Том-малыш): стружка, пресс теста, зеркало, лист и груша, стамеска
-        ('grater_scrape', S0['boards'] - 0.2, -10), ('weight_slam', e('bd_print', 0.3), -6), ('shimmer', e('bd_mirror'), -6), ('bird_flutter', e('bd_lipa'), -16), ('wood_bonk', e('bd_lipa', 0.6), -6), ('chisel_strike', e('bd_gag'), -4), ('chisel_strike', e('bd_gag', 0.3), -8),
+        ('grater_scrape', S0['boards'] - 0.2, -10), ('weight_slam', e('bd_print', 0.3), -9), ('shimmer', e('bd_mirror'), -6), ('bird_flutter', e('bd_lipa'), -16), ('wood_bonk', e('bd_lipa', 0.6), -6), ('chisel_strike', e('bd_gag'), -4), ('chisel_strike', e('bd_gag', 0.3), -8),
         # Париж 1889: доска-штамп, вывеска, весы, медаль, аплодисменты
         ('stamp_thud', S0['paris'] - 0.05, -2), ('shimmer', e('pr_par'), -10), ('boulder_drop', e('pr_pud'), -10), ('medal_fanfare', e('pr_gp'), -6), ('crowd_cheer', e('pr_gp', 0.1), -10),
         # 1900: глазурь, башня, павильон собирается, хруст стены
