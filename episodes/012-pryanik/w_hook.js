@@ -46,7 +46,7 @@
     const k = popK(t, EV.hk_drop, 0.5), gone = t > EV.hk_grab + 0.1 && t < S1.hook + 0.1 || (t > S0.button && t < DUR - 0.75);
     const tilt = lerp(-0.22, 0.0, k);
     balance(400, 1450, 0.85, t, tilt, (px, py) => { if (!gone) pryanik(px, py, 0.7, t, { key: 12231 }); }, (px, py) => { if (t > EV.hk_drop - 0.05) { const f = clamp((t - EV.hk_drop + 0.05) / 0.25); pebbles(px, py - (1 - f) * 300, 14, 12232, 2.2); } });
-    if (t > EV.hk_save) { const q = popK(t, EV.hk_save, 0.4); push(560, 1060, q, -0.05); rect(-150, -40, 300, 80, { wash: '#f4ecd8', washA: 1, w: 3, col: '#5a3a1a' }); txt('РЕЦЕПТ?', 0, 16, 46, { font: 'Osw', col: '#a8221a' }); pop(); }
+    if (t > EV.hk_save && t < S1.hook + 0.3) { const q = popK(t, EV.hk_save, 0.4); push(560, 1060, q, -0.05); rect(-150, -40, 300, 80, { wash: '#f4ecd8', washA: 1, w: 3, col: '#5a3a1a' }); txt('РЕЦЕПТ?', 0, 16, 46, { font: 'Osw', col: '#a8221a' }); pop(); }
     samovar(30, 1440, 0.95, t); for (let i = 0; i < 3; i++) { const q = (t * 0.5 + i / 3) % 1; pencil(spline([[30, 1240], [30 + Math.sin(q * 6 + i) * 30, 1240 - q * 200], [30 + Math.sin(q * 9 + i) * 40, 1240 - q * 380]], false, 5), { w: 9, col: '#ffffff', a: 0.3 * (1 - q), pass2: false }); }
     baranki(1000, 1300, 0.9); push(160, 1620, 1); rect(-90, -110, 180, 110, { wash: '#c8221a', washA: 1, w: 2, col: '#1a0a04' }); txt('ТУЛЬСКИЕ', 0, -70, 24, { font: 'Osw', col: '#fff4d0' }); pryanikTop(0, -34, 140, 50, { key: 12233, text: '' }); pop();
     for (const [x, y] of [[420, 1640], [700, 1700]]) { push(x, y, 1); ell(0, 0, 70, 18, { wash: '#f8f6f0', washA: 1, w: 1.6, col: '#5a5a62' }); const g = rect(-30, -110, 60, 100, { wash: '#a8441a', washA: 0.85, w: 1.6, col: '#3a1a08' }); glow(-14, -80, 14, 'rgba(255,255,255,1)', 0.6);
