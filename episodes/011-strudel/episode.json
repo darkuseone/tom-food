@@ -2,11 +2,15 @@
  "num": "011",
  "city": "Яблочный штрудель",
  "title": "TODO",
- "hook": "TODO",
+ "hook": "Штрудель — самозванец?!",
  "timeline": {
   "scene_gap": 0.05,
   "tail": 0.6,
-  "tunnel": 0.0
+  "tunnel": 0.0,
+  "beats": {
+   "dough": 0.6,
+   "whirl": 0.5
+  }
  },
  "worlds": [
   "props.js",

@@ -1,0 +1,43 @@
+{
+  "metadata": {
+    "soundFile": "/home/user/tom-food/build/011-strudel/vf/t1.wav",
+    "duration": 5.05
+  },
+  "mouthCues": [
+    { "start": 0.00, "end": 0.12, "value": "X" },
+    { "start": 0.12, "end": 0.28, "value": "F" },
+    { "start": 0.28, "end": 0.35, "value": "E" },
+    { "start": 0.35, "end": 0.49, "value": "B" },
+    { "start": 0.49, "end": 0.56, "value": "G" },
+    { "start": 0.56, "end": 0.70, "value": "C" },
+    { "start": 0.70, "end": 0.77, "value": "B" },
+    { "start": 0.77, "end": 0.84, "value": "H" },
+    { "start": 0.84, "end": 0.91, "value": "C" },
+    { "start": 0.91, "end": 1.12, "value": "B" },
+    { "start": 1.12, "end": 1.82, "value": "F" },
+    { "start": 1.82, "end": 2.17, "value": "B" },
+    { "start": 2.17, "end": 2.31, "value": "C" },
+    { "start": 2.31, "end": 2.59, "value": "B" },
+    { "start": 2.59, "end": 2.73, "value": "C" },
+    { "start": 2.73, "end": 2.80, "value": "H" },
+    { "start": 2.80, "end": 2.87, "value": "C" },
+    { "start": 2.87, "end": 3.01, "value": "B" },
+    { "start": 3.01, "end": 3.08, "value": "C" },
+    { "start": 3.08, "end": 3.15, "value": "B" },
+    { "start": 3.15, "end": 3.29, "value": "E" },
+    { "start": 3.29, "end": 3.45, "value": "B" },
+    { "start": 3.45, "end": 3.53, "value": "A" },
+    { "start": 3.53, "end": 3.63, "value": "C" },
+    { "start": 3.63, "end": 3.84, "value": "F" },
+    { "start": 3.84, "end": 4.05, "value": "B" },
+    { "start": 4.05, "end": 4.12, "value": "E" },
+    { "start": 4.12, "end": 4.19, "value": "F" },
+    { "start": 4.19, "end": 4.54, "value": "B" },
+    { "start": 4.54, "end": 4.62, "value": "A" },
+    { "start": 4.62, "end": 4.69, "value": "C" },
+    { "start": 4.69, "end": 4.83, "value": "B" },
+    { "start": 4.83, "end": 4.90, "value": "G" },
+    { "start": 4.90, "end": 5.04, "value": "E" },
+    { "start": 5.04, "end": 5.05, "value": "X" }
+  ]
+}
