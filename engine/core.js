@@ -99,7 +99,7 @@ function captions(t) {
   pop();
 }
 function plate() { const Z = SAFEZ(); push(Z ? Z.plateX : 60, Z ? Z.plateY : 70, Z ? 0.9 : 1); ctx.save(); ctx.fillStyle = 'rgba(217,72,43,0.92)'; ctx.beginPath(); ctx.roundRect(-14, -28, 262, 56, 10); ctx.fill(); ctx.restore(); txt('ТОМ НА ВКУС', 0, 0, 38, { align: 'left', font: 'Osw', col: '#fff8ec' }); txt(typeof SUBTITLE !== 'undefined' ? SUBTITLE : '', 266, 2, 34, { align: 'left', col: '#f4e6c8', a: 0.8 }); pop(); }
-function endcard(t) { if (t < DUR - 1.0) return; const k = popK(t, DUR - 1.0, 0.3); push(540, 1180, k, -0.03);
+function endcard(t) { const L = (typeof LOOP !== 'undefined' && LOOP) ? LOOP : 0, t0 = DUR - 1.2 - L; if (t < t0) return; const k = popK(t, t0, 0.3) * (L && t > DUR - L ? clamp((DUR - t) / L) : 1); if (k <= 0) return; push(540, 1180, k, -0.03);   // с петлёй (LOOP): плашка до стыка, тает в последние LOOP с
   ctx.save(); ctx.fillStyle = '#d9482b'; ctx.beginPath(); ctx.roundRect(-330, -80, 660, 160, 16); ctx.fill(); ctx.restore(); pencil([[-330, -80], [330, -80], [330, 80], [-330, 80], [-330, -80]], { w: 3, col: '#2b2622', pass2: false });
   txt('ПОДПИШИСЬ', -50, 4, 104, { col: '#fff8ec', font: 'Osw' });
   push(282, -6, 1, Math.sin(t * 30) * 0.25); blob([[-26, 22], [-22, -16], [0, -30], [22, -16], [26, 22]], { wash: K.mustard, washA: 1, w: 3, col: '#2a1a0c' }); ell(0, 28, 8, 6, { wash: K.mustard, washA: 1, w: 2.4 }); pop(); pop(); }

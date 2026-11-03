@@ -13,7 +13,7 @@ python3 - "$EP" "$D" <<'PY'
 import json, sys; ep, d = sys.argv[1], float(sys.argv[2]); s = open(f'episodes/{ep}/scenes.js').read(); v1 = 'const LOOP' in s
 t0 = min(json.load(open(f'episodes/{ep}/times.json'))['start'].values())
 w = [f'голос с {t0:.2f} с' + (' ← позже 0.1 с' if t0 > 0.1 else '')]
-if v1: w += ['длина ' + ('ок' if 54 <= d <= 62 else f'{d:.1f} с ← тест v1: 54–62'), 'ПОДПИШИСЬ ' + ('выкл' if 'ENDCARD = false' in s else '← включён')]
+if v1: w += ['длина ' + ('ок' if 54 <= d <= 62 else f'{d:.1f} с ← тест v1: 54–62'), 'ПОДПИШИСЬ ' + ('← ВЫКЛ, нужна плашка (владелец 03.11.2026)' if 'ENDCARD = false' in s else 'вкл')]
 print('| ' + ' | '.join(w))
 PY
 if grep -q "const LOOP" "episodes/$EP/scenes.js"; then              # стык петли: последний кадр | первый кадр — должны почти совпадать
