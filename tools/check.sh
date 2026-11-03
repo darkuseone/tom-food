@@ -9,3 +9,4 @@ TS="$*"; [ -z "$TS" ] && TS=$(python3 -c "import json;d=json.load(open('episodes
 node tools/dbg.cjs "$B/film" $TS | tail -2
 rm -rf "$B/shots"; node tools/shot.cjs "$B/film" "$B/shots" $TS | awk '/мс\/кадр/{split($2,a," "); ms=$2+0; if(ms>max)max=ms; s+=ms; n++} !/мс\/кадр/{print} END{if(n) printf "мс/кадр: средн %d, макс %d\n", s/n, max}'
 python3 tools/worldstat.py "$EP" | grep -E "⚠|ниже" || true                    # планка детализации (эталон 002-olivier / 002-fries / 002-nuggets)
+python3 tools/qa.py "$EP" | grep -E "⚠|→" || true                         # ворота качества (объём кода, Том по пояс, камера, звук, ПОДПИШИСЬ) — tools/qa.py
