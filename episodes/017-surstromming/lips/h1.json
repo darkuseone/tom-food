@@ -1,0 +1,40 @@
+{
+  "metadata": {
+    "soundFile": "/home/user/tom-food/build/017-surstromming/vf/h1.wav",
+    "duration": 4.36
+  },
+  "mouthCues": [
+    { "start": 0.00, "end": 0.17, "value": "X" },
+    { "start": 0.17, "end": 0.22, "value": "B" },
+    { "start": 0.22, "end": 0.33, "value": "F" },
+    { "start": 0.33, "end": 0.40, "value": "B" },
+    { "start": 0.40, "end": 0.54, "value": "G" },
+    { "start": 0.54, "end": 0.68, "value": "F" },
+    { "start": 0.68, "end": 0.89, "value": "B" },
+    { "start": 0.89, "end": 1.10, "value": "F" },
+    { "start": 1.10, "end": 1.17, "value": "B" },
+    { "start": 1.17, "end": 1.38, "value": "E" },
+    { "start": 1.38, "end": 1.66, "value": "F" },
+    { "start": 1.66, "end": 1.87, "value": "B" },
+    { "start": 1.87, "end": 1.94, "value": "E" },
+    { "start": 1.94, "end": 2.02, "value": "A" },
+    { "start": 2.02, "end": 2.18, "value": "D" },
+    { "start": 2.18, "end": 2.22, "value": "E" },
+    { "start": 2.22, "end": 2.62, "value": "F" },
+    { "start": 2.62, "end": 2.70, "value": "A" },
+    { "start": 2.70, "end": 2.82, "value": "E" },
+    { "start": 2.82, "end": 2.96, "value": "B" },
+    { "start": 2.96, "end": 3.14, "value": "X" },
+    { "start": 3.14, "end": 3.26, "value": "B" },
+    { "start": 3.26, "end": 3.41, "value": "A" },
+    { "start": 3.41, "end": 3.48, "value": "F" },
+    { "start": 3.48, "end": 3.62, "value": "B" },
+    { "start": 3.62, "end": 3.70, "value": "A" },
+    { "start": 3.70, "end": 3.79, "value": "B" },
+    { "start": 3.79, "end": 3.86, "value": "C" },
+    { "start": 3.86, "end": 4.14, "value": "F" },
+    { "start": 4.14, "end": 4.28, "value": "E" },
+    { "start": 4.28, "end": 4.35, "value": "F" },
+    { "start": 4.35, "end": 4.36, "value": "X" }
+  ]
+}
