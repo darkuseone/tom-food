@@ -41,7 +41,8 @@
     if (t > EV.md_duka - 0.2) { push(lerp(1600, 1000, hk) - 70, 1310 - 340, 1, -0.6); pencil([[0, 0], [-120, 0]], { w: 6, col: '#e8b030' }); poly([[-120, 0], [-170, -30], [-170, 30]], { wash: '#e8b030', washA: 1, w: 1.6, col: '#6a4a08' }); pop(); for (let i = 0; i < 3; i++) { const q = (t * 2 + i / 3) % 1; txt('♪', lerp(1600, 1000, hk) - 260 - q * 100, 1310 - 360 - q * 80, 40, { col: '#5a3a10', a: 1 - q }); } }
   }
   function front(t) {                                                     // стол-край телеги: мешок, корзина початков, кувшин; стебли растут перед Томом
-    const tb = rect(-400, 1440, 1900, 700, { wash: '#b88a4a', washA: 1, w: 3, col: '#3a2010', key: 18650 }); for (let i = 0; i < 8; i++) pencil([[-400, 1470 + i * 70], [1500, 1460 + i * 72]], { w: 2, col: '#6a4420', a: 0.5, pass2: false }); shadeG(tb.path, 540, 2000, 540, 1440, '#4a2a10', 0.35);
+    mmTable(1440, 'wood', t, { key: 18650, col: '#b88a4a', lx: 640, lc: 'rgba(255,240,180,1)', la: 0.3 });
+    tableBits([['bread', 560, 1559, 1], ['onion', 700, 1567, 1], ['cup', 1230, 1534, 1], ['tomato', 640, 1542, 1], ['pepper', 760, 1542, 1], ['crumbs', 420, 1559, 1]], t, 18659);
     push(260, 1500, 1); const bk = blob([[-130, 0], [-140, -110], [140, -110], [130, 0], [0, 20]], { wash: '#c8944a', washA: 1, w: 2.4, col: '#4a2a10', key: 18651 }); hatch(bk.path, bk.bb, { gap: 10, a: 0.35, col: '#6a4420', ang: 0.8, key: 18652 }); hatch(bk.path, bk.bb, { gap: 10, a: 0.35, col: '#6a4420', ang: -0.8, key: 18653 }); for (let i = 0; i < 7; i++) cornCob(-110 + i * 36, -120 - (i % 2) * 20, 0.36, -0.5 + i * 0.16, { key: 18654 + i, husk: 0.5, silk: false }); pop();
     grainSack(980, 1540, 0.85, { key: 18660, label: 'PORUMB', grain: 'c', lcol: '#3a5a1a' });
     const g = sm(clamp((t - EV.md_grow) / 0.9)); for (let i = 0; i < 4; i++) { const x = [-80, 120, 900, 1120][i], h = 900 * g * (0.8 + i * 0.07), sw = Math.sin(t * 1.6 + i) * 14; if (h < 10) continue; pencil(spline([[x, 1960], [x + sw * 0.4, 1960 - h * 0.5], [x + sw, 1960 - h]], false, 6), { w: 12, col: '#4a7a2a' });
@@ -50,9 +51,14 @@
     motes(26, [-100, 300, 1200, 1500], '#fff4c0', t, 18680, { sp: 10, vx: 20, sz: 3, a: 0.45, wob: 4 }); haze('#f4e0a0', 0.04);
     if (t > EV.md_year) { push(840, 900, popK(t, EV.md_year, 0.35), 0.06); rect(-120, -50, 240, 100, { wash: '#7a4a24', washA: 1, w: 3, col: '#2a1408' }); txt('1690-е', 0, 20, 56, { font: 'Osw', col: '#f4e0a0' }); pencil([[0, 50], [0, 200]], { w: 8, col: '#5a3a1a' }); pop(); }
   }
+  function sunny(t) { beam(1100, -300, 2.1, 1800, 360, 'rgba(255,240,190,A)', 0.2, t); }
+  function flowers(t) {                                                   // подсолнухи и мальвы на переднем плане по краям
+    for (const [x, h, s] of [[-40, 520, 1], [1180, 600, 1.1], [1060, 460, 0.8]]) { const sw = Math.sin(t * 1.3 + x) * 10; pencil(spline([[x, 1960], [x + sw * 0.5, 1960 - h * 0.5], [x + sw, 1960 - h]], false, 5), { w: 9, col: '#4a7a2a' }); for (let k = 0; k < 2; k++) blob([[x, 1800 - k * 160], [x + 90, 1760 - k * 160], [x + 120, 1810 - k * 160]], { wash: '#5a8a3a', washA: 1, w: 1.2, col: '#1a4a1a' });
+      push(x + sw, 1960 - h, s, sw * 0.01); for (let i = 0; i < 16; i++) { push(0, 0, 1, i / 16 * 6.283); blob([[0, -40], [-12, -80], [0, -100], [12, -80]], { wash: '#f4c020', washA: 1, w: 1.2, col: '#8a6008' }); pop(); } const c = ell(0, 0, 46, 46, { wash: '#5a3a14', washA: 1, w: 2, col: '#2a1a08' }); hatch(c.path, c.bb, { gap: 6, a: 0.5, col: '#2a1a08', ang: 0.8 }); hatch(c.path, c.bb, { gap: 6, a: 0.5, col: '#2a1a08', ang: -0.8 }); pop(); } }
   WORLD.moldavia = (t, u, cat) => {
-    lay(16, () => { land(t); haze('#f4e8c0', 0.06); }); lay(3.4, () => { field(t); });
-    lay(1, () => { cat(); }); lay(0.94, () => { front(t); });
+    lay(16, () => { land(t); haze('#f4e8c0', 0.06); }); lay(10, () => { sunny(t); }); lay(3.4, () => { field(t); });
+    lay(1, () => { cat(); }); lay(0.94, () => { front(t); }); lay(0.6, () => { flowers(t); });
+    vign(0.32, '40,30,4');
   };
   DIR.moldavia = {
     outfit: 'knyazA', light: { side: -1, rim: '#fff0b0' }, grade: ['#f0d070', 0.1],

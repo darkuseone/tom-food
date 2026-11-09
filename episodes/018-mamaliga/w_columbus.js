@@ -37,7 +37,8 @@
     pencil(spline([[-260, 1100], [-120, 1000], [40, 1010], [200, 940]], false, 6), { w: 6, col: '#b8945a' });
   }
   function deck(t) {                                                      // палуба: доски, сундук с початками (герой), бочки, попугай, карта, компас, астролябия, канат
-    const dk = rect(-400, 1440, 1900, 700, { wash: '#a8784a', washA: 1, w: 3, col: '#3a2010', key: 18540 }); for (let i = 0; i < 10; i++) pencil([[-400, 1460 + i * 60], [1500, 1450 + i * 64]], { w: 2, col: '#5a3a1a', a: 0.6, pass2: false }); shadeG(dk.path, 540, 2000, 540, 1440, '#4a2a10', 0.35);
+    mmTable(1440, 'wood', t, { key: 18540, col: '#a8784a', lx: 700, lc: 'rgba(255,250,210,1)', la: 0.3 }); for (let i = 0; i < 12; i++) pencil([[-500, 1500 + i * 48], [1600, 1500 + i * 50]], { w: 4, col: '#2a1408', a: 0.35, pass2: false });
+    tableBits([['bread', 1240, 1559, 0.9], ['cup', 860, 1559, 1], ['knife', 520, 1567, 1], ['crumbs', 640, 1550, 1]], t, 18549);
     const op = t > EV.cl_corn ? sm(clamp((t - EV.cl_corn) / 0.35)) : 0; push(380, 1470, 1); const ch = rect(-160, -150, 320, 150, { wash: '#7a4a24', washA: 1, w: 3, col: '#2a1408', key: 18541 }); for (const x of [-120, 120]) rect(x - 10, -150, 20, 150, { wash: '#c8a040', washA: 1, w: 1.6 });
     if (op > 0) { for (let i = 0; i < 6; i++) cornCob(-110 + i * 44, -160 - Math.sin(i) * 20, 0.42, -0.6 + i * 0.24, { key: 18542 + i, husk: 0.8 }); glow(0, -200, 260 * op, 'rgba(255,220,100,1)', 0.6 * op); rays(0, -200, -1.57, 1.2, 500, 'rgba(255,230,140,1)', 0.25 * op, 8, t); }
     push(0, -150, 1, 0, 1); ctx.save(); ctx.translate(0, 0); const lid = rect(-160, -70 + 60 * op, 320, 70 - 60 * op, { wash: '#8a5a2a', washA: 1, w: 3, col: '#2a1408' }); ctx.restore(); pop(); txt('AMÉRICA', 0, -60, 30, { font: 'Osw', col: '#f4e0a0' }); pop();
@@ -50,11 +51,19 @@
   }
   function front(t) { push(-60, 1900, 1.5); pencil([[0, 0], [0, -800]], { w: 22, col: '#5a3a1a' }); for (let k = 0; k < 4; k++) pencil([[0, -700 + k * 140], [140, -680 + k * 140]], { w: 4, col: '#b8945a', pass2: false }); pop();
     pencil(spline([[1100, -100], [1000, 400], [1150, 900]], false, 6), { w: 6, col: '#b8945a' }); motes(20, [-100, 600, 1200, 1500], '#ffffff', t, 18560, { sp: 30, vx: 40, sz: 4, a: 0.5, wob: 6 }); haze('#e8f4fc', 0.04); }
+  function shine(t) {                                                     // солнечные блики на воде, лучи, фонарь, пушка, сеть с рыбой, клетка с курами
+    for (let i = 0; i < 40; i++) { const r = rng(18570 + i), x = -300 + r() * 1700, y = 760 + r() * 300, tw = Math.sin(t * 6 + i * 2) * 0.5 + 0.5; ell(x, y, 10 * tw + 2, 2, { wash: '#ffffff', washA: 0.8 * tw, line: false }); }
+    beam(240, -120, 1.2, 1600, 260, 'rgba(255,250,220,A)', 0.18, t);
+  }
+  function deckProps(t) { push(1150, 1300, 1); const cn = rect(-120, -40, 240, 70, { wash: '#2a2826', washA: 1, w: 2, col: '#000' }); metalG(cn.path, -40, -20, 140, '#8a8680', '#2a2826', '#0a0a0a'); for (const sd of [-1, 1]) ell(sd * 70, 40, 34, 34, { wash: '#6a4424', washA: 1, w: 2 }); pop();
+    push(-160, 1040, 1); pencil([[0, -200], [0, 0]], { w: 3, col: '#3a2a1a', pass2: false }); rect(-26, 0, 52, 70, { wash: '#c8a040', washA: 0.9, w: 2, col: '#4a3008' }); ell(0, 36, 12, 20, { wash: '#ffe080', washA: 0.8, line: false }); pop();
+    push(80, 1360, 1); pencil(spline([[-120, -100], [-60, 20], [60, 30], [120, -90]], false, 6), { w: 2, col: '#8a7a5a', pass2: false }); for (let i = 0; i < 5; i++) for (let j = 0; j < 3; j++) pencil([[-100 + i * 50, -80 + j * 30], [-80 + i * 50, -50 + j * 30]], { w: 1.4, col: '#8a7a5a', pass2: false }); for (let i = 0; i < 3; i++) { push(-50 + i * 50, -20, 0.6, 0.3 * i); blob([[-40, 0], [-20, -14], [30, -10], [44, 0], [30, 10], [-20, 12]], { wash: '#a8b8c8', washA: 1, w: 1.4, col: '#3a4a5a' }); pop(); } pop(); }
   WORLD.columbus = (t, u, cat) => {
     const roll = Math.sin(t * 1.4) * 0.012; ctx.save(); ctx.translate(540, 960); ctx.rotate(roll); ctx.translate(-540, -960);
-    lay(18, () => { sea(t); }); lay(5, () => { ship(t); }); lay(3, () => { crew(t); });
+    lay(18, () => { sea(t); }); lay(12, () => { shine(t); }); lay(5, () => { ship(t); }); lay(3, () => { crew(t); deckProps(t); });
     lay(1, () => { cat(); }); lay(0.94, () => { deck(t); }); lay(0.6, () => { front(t); });
     ctx.restore();
+    vign(0.32, '10,30,60');
   };
   DIR.columbus = {
     outfit: 'sailorA', light: { side: -1, rim: '#fff4d0' }, grade: ['#80c0f0', 0.06],

@@ -34,7 +34,8 @@
     for (const [x, y] of [[-20 + 80, 1300 - 330], [1050 - 80, 1310 - 330]]) { push(x, y, 1); blob([[-14, -30], [14, -30], [10, 20], [-10, 20]], { wash: '#f4f0e8', washA: 0.5, w: 1.4, col: '#8a8a8a' }); rect(-10, -10, 20, 26, { wash: '#8a1a3a', washA: 0.85, line: false }); pop(); }
   }
   function table(t) {                                                     // хиро-стол: мамалыга, брынза, сметана, шкварки на сковороде, яичница, вино
-    const tb = rect(-400, 1440, 1900, 700, { wash: '#f4efe2', washA: 1, w: 3, col: '#5a4a30', key: 19130 }); shadeG(tb.path, 540, 2000, 540, 1440, '#c8bca0', 0.4); for (let i = 0; i < 20; i++) for (let j = 0; j < 6; j++) if ((i + j) % 2) rect(-400 + i * 100, 1440 + j * 100, 100, 100, { wash: '#c8221a', washA: 0.18, line: false });
+    mmTable(1440, 'cloth', t, { key: 19130, rc: '#c8221a', runner: 120, lx: 700, lc: 'rgba(255,190,110,1)', la: 0.35 });
+    tableBits([['tomato', 300, 1567, 1], ['tomato', 350, 1576, 0.8], ['cucumber', 560, 1571, 1], ['pepper', 470, 1559, 1], ['bread', 860, 1567, 1], ['glass', 1080, 1559, 1], ['glass', 160, 1559, 0.9], ['herbs', 1220, 1550, 1], ['onion', 640, 1584, 0.8], ['crumbs', 760, 1550, 1]], t, 19139);
     const cut = t > EV.td_mm ? sm(clamp((t - EV.td_mm - 0.1) / 0.4)) : 0; mmBoard(420, 1470, 230, 64, { key: 19131 }); mamaliga(420, 1460, 170, 170, t, { key: 19132, steam: 1, cut }); if (t > EV.td_mm - 0.1 && cut < 1) { const ty = lerp(1260, 1470, cut); mmThread(220, ty, 620, ty, { w: 3 }); }
     const brUp = t > EV.td_br ? popK(t, EV.td_br, 0.35) : 0; brinza(150, 1530, 1 + brUp * 0.3, -0.1, { key: 19133 }); if (t > EV.td_br) { glow(150, 1520, 140, 'rgba(255,255,230,1)', 0.4); bubbleTag('БРЫНЗА', 170, 1320, t, EV.td_br, '#3a5a1a', 40, -0.05); }
     smBowl(700, 1540, 0.75, t, { key: 19134, spoon: 1 });
@@ -47,9 +48,11 @@
   function front(t) { push(-40, 160, 1.5); for (let r = 0; r < 6; r++) for (let c = 0; c <= 5 - r; c++) ell(-50 + c * 20 + r * 10, r * 18, 11, 11, { wash: (r + c) % 2 ? '#5a2a5a' : '#7a3a7a', washA: 1, w: 1, col: '#2a0a2a' }); for (let i = 0; i < 4; i++) blob([[0, -40 - i * 40], [-80, -10 - i * 40], [-60, 40 - i * 40], [40, 20 - i * 40]], { wash: '#4a8a3a', washA: 1, w: 1.4, col: '#1a3a1a' }); pop();
     push(1180, 1980, 1.6); const gl = blob([[-40, 0], [-50, -140], [50, -140], [40, 0]], { wash: '#f4f0e8', washA: 0.4, w: 2, col: '#8a8a8a' }); rect(-46, -100, 92, 96, { wash: '#8a1a3a', washA: 0.8, line: false }); pop();
     motes(30, [-100, 200, 1200, 1500], '#ffd8a0', t, 19140, { sp: 6, sz: 3, a: 0.5, wob: 3, add: 1 }); haze('#f8c890', 0.05); }
+  function sunset(t) { beam(700, 560, -2.4, 1600, 400, 'rgba(255,200,140,A)', 0.18, t); beam(700, 560, -0.8, 1400, 300, 'rgba(255,200,140,A)', 0.14, t); }
   WORLD.today = (t, u, cat) => {
-    lay(18, () => { land(t); haze('#f0b890', 0.06); }); lay(3.2, () => { veranda(t); });
+    lay(18, () => { land(t); haze('#f0b890', 0.06); }); lay(15, () => { sunset(t); }); lay(3.2, () => { veranda(t); });
     lay(1, () => { cat(); }); lay(0.94, () => { table(t); }); lay(0.6, () => { front(t); });
+    vign(0.4, '50,20,8');
   };
   DIR.today = {
     outfit: 'dacha', light: { side: 1, rim: '#ffc890' }, grade: ['#f0a070', 0.1],

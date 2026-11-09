@@ -35,7 +35,8 @@
     push(lerp(1300, 1060, wk), 1340 - 330, 1, -0.1); for (let k = 0; k < 5; k++) { pencil([[-60 + k * 30, 40], [-40 + k * 26, -80]], { w: 3, col: '#a8944a', pass2: false }); blob([[-46 + k * 26, -80], [-56 + k * 26, -130], [-30 + k * 26, -150], [-30 + k * 26, -100]], { wash: '#d8c070', washA: 1, w: 1, col: '#8a7030' }); } pop();
   }
   function table(t) {                                                     // ящик-стол: миски каши, амфора, хлеб, метёлки проса, мешок MILIUM, жёлтый купол → серый с крестом
-    const tb = rect(-400, 1440, 1900, 700, { wash: '#8a6a42', washA: 1, w: 3, col: '#2a1808', key: 18430 }); for (let i = 0; i < 6; i++) pencil([[-400, 1480 + i * 70], [1500, 1470 + i * 70]], { w: 2, col: '#4a3418', a: 0.6, pass2: false }); hatch(tb.path, tb.bb, { gap: 10, a: 0.14, col: '#3a2410', ang: 0.04, key: 18431 }); shadeG(tb.path, 540, 2000, 540, 1440, '#3a2410', 0.4);
+    mmTable(1440, 'wood', t, { key: 18430, col: '#8a6a42', lx: 200, lc: 'rgba(255,160,80,1)', la: 0.35 });
+    tableBits([['bread', 1150, 1559, 1], ['onion', 330, 1559, 1], ['garlic', 420, 1567, 0.9], ['cup', 1240, 1517, 1], ['herbs', -120, 1542, 1], ['crumbs', 560, 1559, 1], ['knife', 900, 1567, 1]], t, 18439);
     for (let i = 0; i < 6; i++) ell(-200 + i * 260, 1460, 10, 10, { wash: '#3a3a3a', washA: 1, w: 1.2 });
     const g = clamp((t - EV.ml_grey) / 0.5); push(420, 1460, 1); mmBoard(0, 0, 150, 44, { key: 18432 }); const d = blob([[-110, -6], [-100, -90], [-50, -130], [50, -130], [100, -90], [110, -6]], { wash: lerpC(MM.y, MM.millet, g), washA: 1, w: 2.2, col: '#5a4420', key: 18433 }); shadeG(d.path, 100, 0, -50, -100, lerpC(MM.yD, MM.milletD, g), 0.45); const r = rng(18434); for (let i = 0; i < 40; i++) ell(-90 + r() * 180, -110 + r() * 100, 2.4, 2.4, { wash: g > 0.5 ? '#e8dcb0' : MM.yD, washA: 0.8, line: false });
     if (t > EV.ml_grey + 0.3) { const k = clamp((t - EV.ml_grey - 0.3) / 0.3); pencil([[-120, -150], [-120 + 240 * k, -150 + 160 * k]], { w: 12, col: '#c8221a', pass2: false }); if (k >= 1) pencil([[120, -150], [-120, 10]], { w: 12, col: '#c8221a', pass2: false }); } pop();
@@ -51,12 +52,14 @@
   function front(t) { push(-40, 1900, 1.5); pencil([[0, 0], [60, -400]], { w: 10, col: '#6a4a2a' }); poly([[50, -400], [70, -400], [60, -520]], { wash: '#a8acb0', washA: 1, w: 2 }); pop();
     push(1160, 1960, 1.6); const sh = blob([[-100, -260], [100, -260], [110, 0], [-110, 0]], { wash: '#a8221a', washA: 1, w: 3, col: '#3a0a04' }); shadeG(sh.path, 100, 0, -80, 0, '#5a0a04', 0.4); ell(0, -130, 30, 30, { wash: '#d8a830', washA: 1, w: 2 }); pencil([[-90, -130], [90, -130]], { w: 6, col: '#d8a830', pass2: false }); pop();
     motes(30, [-100, 400, 1200, 1500], '#ffd8a0', t, 18440, { sp: 18, sz: 3, a: 0.5, wob: 4 }); haze('#f0b890', 0.05); }
+  function embers(t) { lightPool(160, 1200, 700, 'rgba(255,140,60,1)', 0.35 + Math.sin(t * 9) * 0.04); motes(26, [0, 600, 400, 1300], '#ffb050', t, 18445, { sp: -60, sz: 3, a: 0.8, wob: 12, add: 1 }); }
   WORLD.millet = (t, u, cat) => {
     lay(18, () => { sky(t); }); lay(6, () => { camp(t); haze('#e8b890', 0.08); });
-    lay(3, () => { soldiers(t); });
+    lay(3, () => { soldiers(t); }); lay(2.8, () => { embers(t); });
     lay(1, () => { cat(); });
     lay(0.94, () => { table(t); });
     lay(0.6, () => { front(t); });
+    vign(0.42, '40,16,4');
   };
   DIR.millet = {
     outfit: 'legioA', light: { side: -1, rim: '#ffc890' }, grade: ['#e8a070', 0.1],

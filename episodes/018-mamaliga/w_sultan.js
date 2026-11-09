@@ -44,7 +44,8 @@
     if (t > EV.su_self) { ceaun(lerp(80, -140, run), 1230, 0.42, t, { fill: 'y', key: 19026, bail: true }); bubbleTag('КАШУ — СЕБЕ!', 120, 960, t, EV.su_self, '#3a5a1a', 40, -0.06); }
   }
   function table(t) {                                                     // стол писаря: весы (герой), мешки, реестр с тугрой, монеты, чернильница, кукуруза
-    const tb = rect(-400, 1440, 1900, 700, { wash: '#7a3a24', washA: 1, w: 3, col: '#2a0a04', key: 19030 }); for (let i = 0; i < 20; i++) for (let j = 0; j < 4; j++) poly([[-380 + i * 100, 1500 + j * 120], [-330 + i * 100, 1460 + j * 120], [-280 + i * 100, 1500 + j * 120], [-330 + i * 100, 1540 + j * 120]], { wash: (i + j) % 2 ? '#c8a040' : '#2a5a8a', washA: 0.8, w: 1, col: '#2a0a04' }); shadeG(tb.path, 540, 2000, 540, 1440, '#2a0a04', 0.4);
+    mmTable(1440, 'carpet', t, { key: 19030, lx: 560, lc: 'rgba(255,220,140,1)', la: 0.3 });
+    tableBits([['cup', 1200, 1534, 0.9], ['glass', 1250, 1567, 0.8], ['plate', 640, 1567, 1], ['pepper', 620, 1559, 0.8], ['bread', -60, 1559, 1]], t, 19039);
     const wh = t > EV.su_wheat ? sm(clamp((t - EV.su_wheat) / 0.3)) : 0, cr = t > EV.su_corn + 0.2 ? 1 : 0, tilt = -0.22 * wh + (cr && t < EV.su_zero ? Math.sin(t * 30) * 0.01 : 0);
     balance(330, 1470, 0.75, t, tilt, (px, py) => { if (wh > 0) grainSack(px, py + 10 - (1 - wh) * 400, 0.55, { key: 19031, grain: 'w', label: 'BUĞDAY', lsize: 22 }); }, (px, py) => { if (cr) cornCob(px, py - 20, 0.42, 1.4, { key: 19032, husk: 0.5, silk: false }); });
     push(800, 1530, 1, 0.04); const bk = rect(-170, -70, 340, 140, { wash: '#efe0b8', washA: 1, w: 2.4, col: '#5a4030', key: 19033 }); rect(-180, -78, 360, 156, { line: true, w: 6, col: '#6a1a1a' }); pencil([[0, -70], [0, 70]], { w: 3, col: '#8a6a4a', pass2: false });
@@ -57,9 +58,15 @@
   function front(t) { push(-60, 1960, 1.6); const jg = blob([[-60, 0], [-70, -120], [-40, -200], [-30, -280], [30, -280], [40, -200], [70, -120], [60, 0]], { wash: '#c8783a', washA: 1, w: 2.4, col: '#3a1a08' }); metalG(jg.path, -20, -140, 160, '#ffd8a0', '#c8783a', '#5a2a10'); pop();
     push(1180, 600, 1.4); for (let i = 0; i < 5; i++) { blob([[0, i * 120], [-60, i * 120 + 50], [-30, i * 120 + 110], [30, i * 120 + 110], [60, i * 120 + 50]], { wash: i % 2 ? '#2a8aa8' : '#c8221a', washA: 0.9, w: 1.4, col: '#1a1a1a' }); } pop();
     motes(24, [-100, 300, 1200, 1500], '#ffe8a0', t, 19040, { sp: 8, sz: 3, a: 0.45, wob: 3 }); haze('#f4e0b0', 0.04); }
+  function lights(t) {                                                    // лучи сквозь арку, голуби, медные лампы с цветным стеклом
+    beam(560, -100, 1.75, 1700, 300, 'rgba(255,240,200,A)', 0.2, t);
+    for (let i = 0; i < 5; i++) { const x = 60 + i * 240, sw = Math.sin(t * 1.2 + i) * 0.05; push(x, -120, 1, sw); pencil([[0, -200], [0, 0]], { w: 2, col: '#4a3008', pass2: false }); blob([[-30, 0], [30, 0], [24, 50], [0, 70], [-24, 50]], { wash: ['#2a8aa8', '#c8221a', '#e8b030'][i % 3], washA: 0.85, w: 1.6, col: '#4a3008' }); glow(0, 40, 140, 'rgba(255,210,120,1)', 0.4); pop(); }
+    for (let i = 0; i < 3; i++) { const q = (t * 0.2 + i * 0.33) % 1, x = 1300 - q * 1600, y = 300 + Math.sin(q * 9 + i) * 60, f = Math.sin(t * 12 + i) * 16; push(x, y, 0.7); pencil([[-30, f], [0, 0], [30, f]], { w: 5, col: '#8a8a9a', pass2: false }); ell(0, 4, 14, 10, { wash: '#9a9aaa', washA: 1, w: 1 }); pop(); }
+  }
   WORLD.sultan = (t, u, cat) => {
-    lay(14, () => { court(t); haze('#f4e8c8', 0.05); }); lay(3.2, () => { crowd(t); });
+    lay(14, () => { court(t); haze('#f4e8c8', 0.05); }); lay(8, () => { lights(t); }); lay(3.2, () => { crowd(t); });
     lay(1, () => { cat(); }); lay(0.94, () => { table(t); }); lay(0.6, () => { front(t); });
+    vign(0.38, '40,20,4');
   };
   DIR.sultan = {
     outfit: 'ottomanA', light: { side: 1, rim: '#fff0c0' }, grade: ['#e8c070', 0.08],

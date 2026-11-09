@@ -45,7 +45,8 @@
     if (off > 0) { screenFill('#000', 0); pencil([[-180 * off, -160 * off], [180 * off, 160 * off]], { w: 16, col: '#c8221a', pass2: false }); pencil([[180 * off, -160 * off], [-180 * off, 160 * off]], { w: 16, col: '#c8221a', pass2: false }); } pop();
   }
   function table(t) {                                                     // стол доктора: злой початок, миска мамалыги, склянки, стетоскоп-трубка, журнал, весы, лупа
-    const tb = rect(-400, 1440, 1900, 700, { wash: '#6a5a40', washA: 1, w: 3, col: '#1a140a', key: 18970 }); hatch(tb.path, tb.bb, { gap: 10, a: 0.14, col: '#1a140a', ang: 0.03, key: 18971 }); shadeG(tb.path, 540, 2000, 540, 1440, '#1a140a', 0.4);
+    mmTable(1440, 'wood', t, { key: 18970, col: '#6a5a40', lx: 560, lc: 'rgba(255,210,140,1)', la: 0.25 });
+    tableBits([['candle', 1240, 1534, 1], ['cup', 300, 1559, 0.9], ['knife', 860, 1567, 1], ['crumbs', 200, 1550, 1]], t, 18979);
     const ev = t > EV.pg_rev; push(380, 1460, 1, ev ? -0.15 + Math.sin(t * 20) * (t < EV.pg_rev + 0.4 ? 0.06 : 0) : -0.4); cornCob(0, -60, 0.8, 0, { key: 18972, husk: 0.4 });
     if (ev) { for (const sd of [-1, 1]) { poly([[sd * 26, -110], [sd * 6, -96], [sd * 26, -88]], { wash: '#1a0a04', washA: 1, w: 1 }); ell(sd * 14, -96, 7, 5, { wash: '#ff2a1a', washA: 1, line: false }); glow(sd * 14, -96, 30, 'rgba(255,60,30,1)', 0.7); } pencil(spline([[-16, -60], [0, -68], [16, -60]], false, 4), { w: 3, col: '#1a0a04', pass2: false }); } pop();
     push(120, 1540, 1); ell(0, 0, 110, 28, { wash: '#d8d8d0', washA: 1, w: 2, col: '#4a4a4a' }); mamaliga(0, -4, 70, 60, t, { key: 18973 }); pop();
@@ -55,10 +56,12 @@
   }
   function front(t) { push(-40, 1960, 1.6); const ls = blob([[-60, 0], [-50, -140], [-20, -220], [20, -220], [50, -140], [60, 0]], { wash: '#c8c8c0', washA: 0.6, w: 2, col: '#5a5a5a' }); rect(-20, -260, 40, 50, { wash: '#3a3a3a', washA: 1, w: 1.4 }); pop();
     push(1180, 1980, 1.6); for (let i = 0; i < 3; i++) cornCob(-60 + i * 50, -80, 0.6, -0.3 + i * 0.3, { key: 18980 + i, husk: 0.8, silk: false }); pop(); motes(20, [-100, 200, 1200, 1500], '#d8e8d0', t, 18985, { sp: 5, sz: 3, a: 0.3, wob: 2 }); haze('#2a3a30', 0.08); }
+  function lampCone(t) { beam(540, -240, 1.5708, 1700, 520, 'rgba(255,220,150,A)', 0.16 + Math.sin(t * 9) * 0.01, t); }
   WORLD.pellagra = (t, u, cat) => {
-    lay(14, () => { room(t); haze('#3a4a40', 0.06); }); lay(5, () => { board(t); }); lay(3.2, () => { people(t); });
+    lay(14, () => { room(t); haze('#3a4a40', 0.06); }); lay(6, () => { lampCone(t); }); lay(5, () => { board(t); }); lay(3.2, () => { people(t); });
     lay(1, () => { cat(); }); lay(0.94, () => { table(t); }); lay(0.9, () => { memory(t); }); lay(0.6, () => { front(t); });
     if (t > EV.pg_rev && t < EV.pg_rev + 0.25) screenFill('rgba(200,230,255,1)', 0.3 * (1 - (t - EV.pg_rev) / 0.25));
+    vign(0.55, '4,12,8');
   };
   DIR.pellagra = {
     outfit: 'labA', light: { side: -1, rim: '#d8f0d0' }, grade: ['#6a9a80', 0.14],

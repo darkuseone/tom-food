@@ -40,6 +40,13 @@
     for (const [x, len] of [[-100, 6], [180, 5]]) for (let k = 0; k < len; k++) cornCob(x + (k % 2) * 26, -400 + k * 52, 0.32, (k % 2 ? 0.4 : -0.4) + Math.sin(t + k) * 0.03, { key: 18250 + k + x, husk: 1, silk: false });
     for (let k = 0; k < 7; k++) { push(380 + k * 12, -400 + k * 46, 1, 0.2 + Math.sin(t * 1.3 + k) * 0.05); blob([[0, 0], [-10, 30], [-4, 70], [6, 74], [10, 30]], { wash: k % 3 ? '#c8221a' : '#e8402a', washA: 1, w: 1.2, col: '#4a0a04' }); pop(); }
   }
+  function lamp(t) {                                                      // висячая масляная лампа: цепь, латунь, стекло, тёплое пятно света на стене и столе; полки с горшками у окна
+    push(560, -40, 1, Math.sin(t * 0.8) * 0.02); pencil([[0, -500], [0, 0]], { w: 3, col: '#3a2a1a', pass2: false }); const lb = blob([[-50, 0], [50, 0], [36, 60], [-36, 60]], { wash: '#c8a040', washA: 1, w: 2, col: '#4a3008' }); metalG(lb.path, -16, 20, 60, '#fff0b0', '#c8a040', '#5a3a08');
+    const gl = blob([[-30, 60], [-36, 120], [-20, 160], [20, 160], [36, 120], [30, 60]], { wash: '#fff4c0', washA: 0.5, w: 1.6, col: '#8a7a40' }); ell(0, 120, 8, 18, { wash: '#ffd860', washA: 1, line: false }); pop();
+    lightPool(560, 80, 700, 'rgba(255,190,110,1)', 0.32 + Math.sin(t * 7) * 0.02);
+    rect(1000, 200, 300, 24, { wash: '#6a4424', washA: 1, w: 2, col: '#2a1408' }); for (let i = 0; i < 4; i++) { push(1030 + i * 70, 200, 1); blob([[-26, 0], [-32, -50], [-18, -86], [18, -86], [32, -50], [26, 0]], { wash: ['#b8642a', '#2a5aa8', '#c8783a', '#f4ecd8'][i], washA: 1, w: 1.4, col: '#1a0a04' }); for (let k = 0; k < 4; k++) ell(-14 + k * 9, -46, 3, 3, { wash: ['#f4ecd8', '#c8221a'][k % 2], washA: 1, line: false }); pop(); }
+    for (const sd of [-1, 1]) { const g = rect(sd < 0 ? -400 : 1100, -600, 400, 2100, { wash: '#2a1408', washA: 0.25, line: false }); }
+  }
   function hearth(t) {                                                    // печь-сoба: белёная, с изразцовым краем, устье с огнём, чугунок, бабушка с мешалкой, внук
     push(1240, 1300, 1); const p = rect(-260, -720, 420, 720, { wash: '#efe6d2', washA: 1, w: 3, col: '#5a4a30', key: 18260 }); shadeG(p.path, 160, 0, -260, 0, '#b8a888', 0.4); for (let i = 0; i < 6; i++) rect(-260 + i * 70, -740, 70, 34, { wash: i % 2 ? '#2a5aa8' : '#f4ecd8', washA: 1, w: 1.4, col: '#1a2a5a' });
     const mo = blob([[-200, -40], [-200, -240], [-120, -320], [-40, -240], [-40, -40]], { wash: '#2a1408', washA: 1, w: 2.6, col: '#000' }); glow(-120, -120, 220, 'rgba(255,140,40,1)', 0.6); pop();
@@ -48,11 +55,11 @@
     push(940 + 70, 1300 - 330, 1, 0.6 + st * 0.15); facalet(0, 120, 0.6, 0); pop(); rect(860, 1300 - 230, 160, 120, { wash: '#f4f0e4', washA: 1, w: 1.4, col: '#8a8070' }); for (let k = 0; k < 4; k++) pencil([[870 + k * 40, 1180], [880 + k * 40, 1200]], { w: 3, col: '#c8221a', pass2: false });
     const peek = sm(clamp((t - EV.hk_q) / 0.4)); human(1110, 1310, 0.78, t, { body: '#c8221a', legs: '#3a2a1a', hair: '#5a3a1a', face: t > EV.hk_grab ? 'grin' : 'shock', armL: 'up', armR: 'hold', look: -0.7, seed: 18271, flip: -1 });
   }
-  function grandpa(t) { human(-60, 1300, 1.12, t, { body: '#f4f0e4', legs: '#2a2a2a', hair: '#9a9a9a', face: t > EV.hk_bite ? 'grin' : t > EV.hk_tax ? 'shock' : 'smile', armL: 'down', armR: t > EV.hk_tax && t < EV.hk_grab ? 'point' : 'hold', look: 0.6, seed: 18280, belt: '#c8221a', hat: 'fur', hatCol: '#1a1414' }); stache(-60, 1300, 1.12);
-    push(-60 + 40, 1300 - 230, 1); blob([[-16, -30], [16, -30], [14, 20], [-14, 20]], { wash: '#b8642a', washA: 1, w: 1.4, col: '#3a1a08' }); ell(0, -30, 16, 5, { wash: '#6a0a1a', washA: 1, w: 1 }); pop(); }
+  function grandpa(t) { human(150, 1300, 1.12, t, { body: '#f4f0e4', legs: '#2a2a2a', hair: '#9a9a9a', face: t > EV.hk_bite ? 'grin' : t > EV.hk_tax ? 'shock' : 'smile', armL: 'down', armR: t > EV.hk_tax && t < EV.hk_grab ? 'point' : 'hold', look: 0.6, seed: 18280, belt: '#c8221a', hat: 'fur', hatCol: '#1a1414' }); stache(150, 1300, 1.12);
+    push(150 + 40, 1300 - 230, 1); blob([[-16, -30], [16, -30], [14, 20], [-14, 20]], { wash: '#b8642a', washA: 1, w: 1.4, col: '#3a1a08' }); ell(0, -30, 16, 5, { wash: '#6a0a1a', washA: 1, w: 1 }); pop(); }
   function table(t) {                                                     // стол: скатерть с вышитой дорожкой, доска с мамалыгой (герой), брынза, сметана, шкварки, кувшин, чеснок, свиток НАЛОГ
-    const tb = rect(-400, 1440, 1900, 700, { wash: '#f4efe2', washA: 1, w: 3, col: '#5a4a30', key: 18300 }); shadeG(tb.path, 540, 2000, 540, 1440, '#c8bca0', 0.4);
-    rect(-400, 1480, 1900, 70, { wash: '#c8221a', washA: 1, w: 1.6, col: '#4a0a04' }); for (let i = 0; i < 46; i++) poly([[-390 + i * 42, 1515], [-378 + i * 42, 1500], [-366 + i * 42, 1515], [-378 + i * 42, 1530]], { wash: i % 2 ? '#1a1414' : '#f4e6c8', washA: 1, w: 0.6, col: '#000' });
+    mmTable(1440, 'cloth', t, { key: 18300, lx: 560, lr: 520, lc: 'rgba(255,200,130,1)', la: 0.3 });
+    tableBits([['bread', -40, 1534, 1.1], ['garlic', 640, 1555, 1], ['onion', 1020, 1555, 0.9], ['pepper', 1110, 1542, 0.9], ['cup', 560, 1559, 1], ['cup', 1180, 1517, 0.9], ['spoon', 240, 1559, 1.2], ['salt', 880, 1559, 1], ['herbs', -150, 1500, 1], ['crumbs', 420, 1534, 1], ['candle', 1240, 1492, 1]], t, 18305);
     const cut = t > EV.bt_cut ? sm(clamp((t - EV.bt_cut) / 0.4)) : 0, piece = t > EV.hk_grab && t < S1.hook + 0.05;
     mmBoard(400, 1450, 210, 60, { key: 18310 }); mamaliga(400, 1440, 160, 165, t, { key: 18320, steam: 1, cut: t > S0.button ? cut : 0 });
     if (t > EV.hk_cook && t < S1.hook) for (let i = 0; i < 5; i++) { const q = clamp((t - EV.hk_cook) / 1.2 - i * 0.1); if (q <= 0) continue; ell(380 + i * 30 + Math.sin(i * 2) * 40, 1200 - q * 300, 40 + q * 70, 30 + q * 50, { wash: '#ffffff', washA: 0.45 * (1 - q), line: false }); }
@@ -71,11 +78,12 @@
     push(1170, 1960, 1.5); const jg = blob([[-60, 0], [-70, -110], [-40, -200], [40, -200], [70, -110], [60, 0]], { wash: '#a85a2a', washA: 1, w: 2.4, col: '#3a1a08' }); shadeG(jg.path, 70, 0, -40, 0, '#5a2a10', 0.5); pop();
     motes(24, [-100, 200, 1200, 1500], '#fff0c8', t, 18370, { sp: 6, sz: 4, a: 0.35, wob: 2 }); haze('#f0c890', 0.04); }
   WORLD.hook = (t, u, cat) => {
-    lay(14, () => { room(t); haze('#e8c898', 0.05); });
+    lay(14, () => { room(t); lamp(t); haze('#e8c898', 0.05); });
     lay(3.2, () => { hearth(t); grandpa(t); haze('#f0d0a0', 0.05); });
     lay(1, () => { cat(); });
     lay(0.94, () => { table(t); });
     lay(0.6, () => { front(t); });
+    vign(0.42, '40,16,4');
   };
   const stPose = (b, t) => Object.assign(b, { x: 700, y: 1600, s: 1.2, flip: 1, look: [-0.3, 0.3], hand: [180, -300], handF: [-80, -210] });
   EV.bt_cut = wtw('x1', 'разрежем');

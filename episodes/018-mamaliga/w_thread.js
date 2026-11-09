@@ -22,6 +22,13 @@
     for (let k = 0; k < 6; k++) { push(-200 + k * 26, -500 + k * 70, 1.6, 0.2); blob([[0, 0], [-10, 30], [-4, 70], [6, 74], [10, 30]], { wash: '#c8221a', washA: 1, w: 1.2, col: '#4a0a04' }); pop(); }
     rect(200, -360, 500, 30, { wash: '#6a4424', washA: 1, w: 2, col: '#2a1408' }); for (let i = 0; i < 5; i++) { push(240 + i * 100, -360, 1.4); blob([[-30, 0], [-36, -40], [-20, -70], [20, -70], [36, -40], [30, 0]], { wash: ['#b8642a', '#8a4a2a', '#c8783a'][i % 3], washA: 1, w: 1.6, col: '#3a1a08' }); pop(); }
   }
+  function giant(t) {                                                    // великанша-бабушка заглядывает сверху справа: платок в горошек, очки, улыбка; лампа с тёплым светом
+    const look = t > EV.th_knife ? 1 : 0.6; push(820, 160, 2.0, -0.15); const hd = ell(0, 0, 150, 170, { wash: '#e8b890', washA: 1, w: 3, col: '#5a3418', key: 18690 }); shadeG(hd.path, 150, 0, -60, 0, '#a8764e', 0.45);
+    const kc = blob([[-170, 40], [-180, -100], [-110, -200], [0, -230], [110, -200], [180, -100], [170, 40], [120, -60], [0, -110], [-120, -60]], { wash: '#2a4a8a', washA: 1, w: 3, col: '#0a1a3a', key: 18691 }); for (let i = 0; i < 14; i++) { const a = -2.8 + i * 0.2; ell(Math.cos(a) * 150, -60 + Math.sin(a) * 150, 9, 9, { wash: '#f4f0e4', washA: 1, line: false }); }
+    for (const sd of [-1, 1]) { ell(sd * 55, -10, 34, 26, { line: true, w: 4, col: '#5a3a1a' }); ell(sd * 55 - 10 * look, -8, 10, 12, { wash: '#2a1a0a', washA: 1, line: false }); ell(sd * 55 - 12 * look, -12, 3, 3, { wash: '#ffffff', washA: 1, line: false }); } pencil([[-21, -12], [21, -12]], { w: 4, col: '#5a3a1a', pass2: false });
+    pencil(spline([[-60, 80], [0, 110], [60, 80]], false, 5), { w: 5, col: '#8a3a2a', pass2: false }); for (const sd of [-1, 1]) ell(sd * 90, 50, 26, 16, { wash: '#e88a7a', washA: 0.5, line: false }); pencil([[0, 10], [-10, 50], [8, 56]], { w: 3, col: '#a8764e', pass2: false }); pop();
+    push(200, -600, 1.6); pencil([[0, -300], [0, 0]], { w: 3, col: '#2a1a0a', pass2: false }); blob([[-60, 0], [60, 0], [40, 70], [-40, 70]], { wash: '#c8a040', washA: 1, w: 2, col: '#4a3008' }); ell(0, 90, 30, 30, { wash: '#fff0b0', washA: 0.9, line: false }); pop(); lightPool(200, -460, 900, 'rgba(255,200,120,1)', 0.35);
+  }
   function hands(t) {                                                     // огромные руки бабушки с ниткой и рука с ножом
     if (t > EV.th_thread - 0.3) { const q = sm(clamp((t - EV.th_thread + 0.3) / 0.5)), c = CUT(t), y = lerp(-700, 640, q) + c * 1500;
       for (const sd of [-1, 1]) { push(520 + sd * 400, y, 1.5, sd * 0.2); const h = blob([[-60, -400], [-70, -120], [-90, -40], [-50, 30], [40, 30], [70, -30], [60, -400]], { wash: '#e8b890', washA: 1, w: 3, col: '#5a3418', key: 18700 + sd }); shadeG(h.path, sd * 60, 0, -sd * 40, 0, '#a8764e', 0.4); for (let k = 0; k < 3; k++) pencil([[-40 + k * 26, -10], [-38 + k * 26, 24]], { w: 2, col: '#8a5430', pass2: false }); rect(-70, -420, 140, 80, { wash: '#1a3a7a', washA: 1, w: 2, col: '#0a1a3a' }); pop(); }
@@ -39,7 +46,10 @@
       ctx.save(); if (c > 0) { ctx.beginPath(); if (sx < 0) ctx.rect(-2000, -2000, 2000, 5000); else ctx.rect(0, -2000, 2000, 5000); ctx.clip(); }
       const m = shape(spline(P, true, 10), { wash: MM.y, washA: 1, w: 3, col: '#6a4410', key: kk }); shadeG(m.path, 700, 1500 + oy, -200, 1000 + oy, MM.yD, 0.5); hatch(m.path, m.bb, { gap: 14, a: 0.1, col: MM.crust, ang: 0.6, key: kk + 1, w: 1.2 });
       const r = rng(18730); for (let i = 0; i < 46; i++) { const x = -800 + r() * 1600, yb = 1000 + Math.abs(x) * 0.45 + r() * 600 + oy; ell(x, yb, 10 + r() * 22, 5 + r() * 9, { wash: MM.yD, washA: 0.75, w: 1.2, col: MM.crust, a: 0.5 }); ell(x - 4, yb - 2, 4, 2, { wash: MM.yL, washA: 0.8, line: false }); }
-      pencil(spline([[-600, 1180 + oy], [-200, 1020 + oy], [200, 1000 + oy]], false, 8), { w: 26, col: MM.yL, a: 0.6, pass2: false }); ctx.restore(); pop(); };
+      pencil(spline([[-600, 1180 + oy], [-200, 1020 + oy], [200, 1000 + oy]], false, 8), { w: 26, col: MM.yL, a: 0.6, pass2: false });
+      const r2 = rng(18735); for (let i = 0; i < 14; i++) { const x = -700 + r2() * 1400, yb = 1030 + Math.abs(x) * 0.42 + r2() * 260 + oy, R = 22 + r2() * 30; ell(x, yb, R, R * 0.4, { wash: MM.crust, washA: 0.55, w: 2, col: '#6a4410' }); pencil(spline([[x - R, yb - 2], [x, yb - R * 0.5], [x + R, yb - 2]], false, 4), { w: 3, col: MM.yL, a: 0.8, pass2: false }); }
+      for (let i = 0; i < 6; i++) { const x = -500 + i * 200, yb = 1000 + Math.abs(x) * 0.45 + oy; pencil(spline([[x, yb], [x + 20, yb + 120], [x + 4, yb + 260]], false, 5), { w: 7, col: '#fff2b0', a: 0.45, pass2: false }); }
+      ctx.restore(); pop(); };
     half(-1, 18740); half(1, 18740);
     if (c > 0) { const sl = rect(540 - c * 110, 970 + oy, c * 220, 1000, { wash: '#8a5a20', washA: 0.6, line: false }); for (const sd of [-1, 1]) pencil([[540 + sd * c * 110, 990], [540 + sd * c * 110, 1900]], { w: 10, col: MM.yL, a: 0.9, pass2: false }); }
     if (d >= 1) for (let i = 0; i < 4; i++) { const x = [-200, 120, 860, 1180][i], q = (t * 0.6 + i * 0.27) % 1; for (let k = 0; k < 3; k++) ell(x + Math.sin(q * 6 + k) * 30, 1080 + Math.abs(x - 540) * 0.4 - q * 700 - k * 60, 50 + q * 90, 30 + q * 50, { wash: '#ffffff', washA: 0.35 * (1 - q), line: false }); }
@@ -58,12 +68,13 @@
   function front(t) { const r = rng(18760); for (let i = 0; i < 5; i++) { push(-40 + i * 290 + r() * 50, 1980, 1.6, r()); ell(0, -20, 30, 20, { wash: MM.y, washA: 1, w: 1.6, col: MM.yD }); pop(); }
     motes(30, [-100, 300, 1200, 1700], '#ffffff', t, 18765, { sp: 20, sz: 6, a: 0.35, wob: 8 }); haze('#f8e0a0', 0.06); }
   WORLD.thread = (t, u, cat) => {
-    lay(16, () => { kitchen(t); haze('#c89868', 0.06); });
+    lay(16, () => { kitchen(t); haze('#c89868', 0.06); }); lay(7, () => { giant(t); haze('#d8b080', 0.1); });
     lay(1.3, () => { hill(t); boulders(t); });
     lay(1.2, () => { hands(t); });
     lay(1, () => { cat(); });
     lay(0.95, () => { labels(t); });
     lay(0.6, () => { front(t); });
+    vign(0.4, '60,30,6');
   };
   DIR.thread = {
     outfit: 'moldA', light: { side: 1, rim: '#fff0c0' }, grade: ['#f0c060', 0.08],
