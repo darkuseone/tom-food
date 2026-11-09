@@ -1,0 +1,35 @@
+{
+  "metadata": {
+    "soundFile": "/home/user/tom-food/build/018-mamaliga/vf/h1.wav",
+    "duration": 3.16
+  },
+  "mouthCues": [
+    { "start": 0.00, "end": 0.05, "value": "B" },
+    { "start": 0.05, "end": 0.10, "value": "C" },
+    { "start": 0.10, "end": 0.17, "value": "D" },
+    { "start": 0.17, "end": 0.24, "value": "H" },
+    { "start": 0.24, "end": 0.35, "value": "A" },
+    { "start": 0.35, "end": 0.48, "value": "B" },
+    { "start": 0.48, "end": 0.56, "value": "A" },
+    { "start": 0.56, "end": 0.69, "value": "C" },
+    { "start": 0.69, "end": 0.76, "value": "H" },
+    { "start": 0.76, "end": 0.83, "value": "C" },
+    { "start": 0.83, "end": 1.04, "value": "B" },
+    { "start": 1.04, "end": 1.11, "value": "C" },
+    { "start": 1.11, "end": 1.25, "value": "B" },
+    { "start": 1.25, "end": 1.46, "value": "F" },
+    { "start": 1.46, "end": 1.67, "value": "B" },
+    { "start": 1.67, "end": 1.74, "value": "C" },
+    { "start": 1.74, "end": 1.81, "value": "F" },
+    { "start": 1.81, "end": 2.06, "value": "C" },
+    { "start": 2.06, "end": 2.13, "value": "E" },
+    { "start": 2.13, "end": 2.37, "value": "F" },
+    { "start": 2.37, "end": 2.51, "value": "B" },
+    { "start": 2.51, "end": 2.55, "value": "C" },
+    { "start": 2.55, "end": 2.66, "value": "D" },
+    { "start": 2.66, "end": 2.87, "value": "F" },
+    { "start": 2.87, "end": 2.94, "value": "C" },
+    { "start": 2.94, "end": 3.15, "value": "B" },
+    { "start": 3.15, "end": 3.16, "value": "X" }
+  ]
+}
