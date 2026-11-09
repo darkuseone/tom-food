@@ -1,12 +1,16 @@
 {
  "num": "018",
  "city": "Мамалыга",
- "title": "TODO",
- "hook": "TODO",
+ "title": "Мамалыга: налоговая лазейка",
+ "hook": "Каша из лазейки?!",
  "timeline": {
   "scene_gap": 0.05,
   "tail": 0.6,
-  "tunnel": 0.0
+  "tunnel": 0.0,
+  "beats": {
+   "thread": 0.6,
+   "dracula": 0.5
+  }
  },
  "worlds": [
   "props.js",
