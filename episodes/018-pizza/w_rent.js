@@ -62,9 +62,10 @@
   function front(t) { push(-200, 1950, 1.6); for (let i = 0; i < 7; i++) blob([[i * 30, 0], [i * 30 - 20 + Math.sin(t * 2 + i) * 6, -200 - i * 10], [i * 30 + 10, -260 - i * 12], [i * 30 + 18, -200]], { wash: '#c8a850', washA: 1, w: 1.6, col: '#6a5a1a' }); pop();
     push(1260, -300, 1.5); for (let i = 0; i < 6; i++) { const x = i * 40 - 100; pencil(spline([[x, -400], [x + Math.sin(t + i) * 10, 0], [x - 10, 120]], false, 5), { w: 6, col: '#4a7a2a', pass2: false }); for (let j = 0; j < 4; j++) blob([[x, j * 30], [x + 30, j * 30 + 10], [x + 4, j * 30 + 24]], { wash: '#5a8a3a', washA: 1, w: 1 }); } pop(); }
   WORLD.rent = (t, u, cat) => {
-    lay(12, () => { court(t); haze('#fff0d0', 0.06); });
+    lay(12, () => { court(t); rays(-300, 300, 0.9, 0.25, 1800, 'rgba(255,236,190,1)', 0.12, 4, t); glow(-300, 200, 200, 'rgba(255,240,200,1)', 0.25); haze('#fff0d0', 0.06); });
     lay(1.7, () => { push(240, 110, 1); people(t); pop(); });
     lay(1, () => { yard(t); cat(); counter(t); });
+    lay(0.85, () => { push(1150, 1980, 1.4); rect(-160, -120, 320, 120, { wash: '#8a6a4a', washA: 1, w: 2.4, col: '#3a2a14' }); for (let i = 0; i < 3; i++) ell(-90 + i * 90, -130, 40, 22, { wash: '#e8b860', washA: 1, w: 1.4 }); pop(); });
     lay(0.6, () => { front(t); motes(22, [-200, 200, 1200, 1500], '#fff4d0', t, 18430, { sp: 6, sz: 3, a: 0.5, wob: 3 }); moodDark(200, 900, 600, 1500, '#1a1428', 0.4); });
   };
   DIR.rent = {
