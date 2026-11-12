@@ -49,7 +49,7 @@
     pencil(spline([[-160, -120], [-110, -170], [-40, -190]], false, 4), { w: 10, col: '#ffffff', a: 0.6, pass2: false }); pencil([[160, 160], [260, 300]], { w: 30, col: '#5a3a1a' }); pop();
   }
   function sign(t) { if (t < EV.lt_sign - 0.2) return; const k = sm(clamp((t - EV.lt_sign + 0.2) / 0.5)), sw = Math.sin((t - EV.lt_sign) * 5) * 0.08 * Math.exp(-(t - EV.lt_sign) * 1.2);
-    push(500, lerp(-300, 380, k), 1, sw); for (const sd of [-1, 1]) pencil([[sd * 200, -600], [sd * 200, -60]], { w: 4, col: '#8a8a8a', pass2: false }); const b = rect(-280, -60, 560, 150, { wash: '#1a3a2a', washA: 1, w: 4, col: '#d6a842' }); shadeG(b.path, 0, 90, 0, -60, '#0a1a10', 0.4);
+    push(500, lerp(-200, 720, k), 1, sw); for (const sd of [-1, 1]) pencil([[sd * 200, -600], [sd * 200, -60]], { w: 4, col: '#8a8a8a', pass2: false }); const b = rect(-280, -60, 560, 150, { wash: '#1a3a2a', washA: 1, w: 4, col: '#d6a842' }); shadeG(b.path, 0, 90, 0, -60, '#0a1a10', 0.4);
     txt('PIZZERIA', 0, -2, 40, { font: 'Osw', col: '#e8c060' }); txt('BRANDI', 0, 66, 64, { font: 'Osw', col: '#f8f4ea' }); pop(); }
   function front(t) { push(-220, 1980, 1.6); for (let i = 0; i < 4; i++) rect(-160, -60 - i * 50, 320, 48, { wash: ['#a8946a', '#8a6a4a', '#b8a47a', '#6a5a4a'][i], washA: 1, w: 1.6, col: '#2a1a0a' }); pop(); push(1240, 1900, 1.6); blob([[-60, 0], [-70, -180], [-40, -220], [40, -220], [70, -180], [60, 0]], { wash: '#2a3a2a', washA: 1, w: 2 }); for (let i = 0; i < 5; i++) blob([[0, -220], [-80 + i * 40, -360 - (i % 2) * 40], [-60 + i * 40, -330]], { wash: '#3a6a3a', washA: 1, w: 1.2 }); pop(); }
   WORLD.letter = (t, u, cat) => {
@@ -62,7 +62,7 @@
   DIR.letter = {
     outfit: 'labA', light: { side: 1, rim: '#d0ffc8' }, grade: ['#6a9a7a', 0.07],
     act: () => [[S0.letter, 'suspicious'], [EV.lt_in, 'talk'], [EV.lt_brandi, 'shock'], [EV.lt_sign, 'sideeye'], [EV.lt_forty, 'awe']],
-    pose: (t, u, b) => Object.assign(b, { x: 560, y: 1600, s: 1.15, flip: 0, look: t < EV.lt_sign ? [0.6, 0.5] : t < EV.lt_forty ? [-0.2, -0.9] : [0.8, -0.8], hand: [-170, -300], handF: t > EV.lt_brandi ? [160, -280] : [120, -230], prop: 'magnP', propAng: -0.4, point: t > EV.lt_forty ? 1 : undefined }),
+    pose: (t, u, b) => Object.assign(b, { x: 560, y: 1600, s: 1.15, flip: 0, look: t < EV.lt_sign ? [0.6, 0.5] : t < EV.lt_forty ? [-0.2, -0.9] : [0.8, -0.8], hand: [-220, -180], handF: t > EV.lt_brandi ? [160, -280] : [120, -230], prop: 'magnP', propAng: -0.4, point: t > EV.lt_forty ? 1 : undefined }),
     cam: () => [[S0.letter, 600, 1100, 0.24], [EV.lt_in, 680, 1250, 0.3, 'x'], [EV.lt_brandi, 600, 1050, 0.3], [EV.lt_sign, 560, 900, 0.24], [EV.lt_forty, 760, 800, 0.26], [S1.letter, 720, 900, 0.26]]
   };
   // ---------------------------------------------------------------- переход: круг лупы раскрывает сцену из центра

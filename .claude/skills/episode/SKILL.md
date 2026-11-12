@@ -24,7 +24,7 @@ description: Новый выпуск «ТОМ НА ВКУС» от блюда д
 
 ## Порядок (~2 ч)
 0. **Старт:** `git checkout main && git pull origin main && git checkout -b episode-<NNN-блюдо>` (если сессия задала свою ветку — работать в ней). Номер — следующий после последнего в `docs/dishes.md`.
-1. **Факты и сценарий** — скил `facts` → `docs/sources/<эп>.md`, `script.md`, `lines.json`, `tools/est.py` (54–62 с, ≤ 7 остановок). Сценарий владельцу и «ок» — только если он не сказал «делай сам» и это не очередь/неделя.
+1. **Факты и сценарий** — скил `facts` → `docs/sources/<эп>.md`, `script.md`, `lines.json`, `tools/est.py` (50–80 с, до 85 — тест; ≤ 7 остановок). Сценарий владельцу и «ок» — только если он не сказал «делай сам» и это не очередь/неделя.
 2. **Заготовка:** `python3 tools/new_episode.py <NNN-блюдо> "<Блюдо>" hook,<сцены>,today` — выпуск + `lib/food_<NNN>.js`, `lib/wardrobe_<NNN>.js`; вся еда и все костюмы прошлых выпусков уже подключены.
 3. **Озвучка:** `python3 tools/tts.py lines <эп>` → `python3 tools/prep_voice.py <эп>` → `episode.json` (hook, beats на паузы-гэги) → `python3 tools/build_data.py <эп>`.
 4. **Миры** — скил `scene` (костюмы можно отдать 1 агенту-помощнику: бриф как в `docs/ref-costumes.md`). Контакт-лист `bash tools/check.sh <эп> t1 t2 …` по 2 круга на сцену; `check.sh` печатает worldstat и qa.
