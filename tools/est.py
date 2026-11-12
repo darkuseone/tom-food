@@ -16,5 +16,5 @@ for k, v in L.items():
 gaps = T['tunnel'] + T['scene_gap'] * (len(E['scenes']) - 1) + T['tail'] + sum(T.get('beats', {}).values())   # beats — паузы-гэги (тест v1)
 W = [x for k, v in L.items() for x in check(k, v)]
 if W: print('ПРОВЕРЬ ОЗВУЧКУ:\n  ' + '\n  '.join(W))
-print(f'речь ≈{tot:.1f} с + паузы {gaps:.1f} с = ≈{tot + gaps:.1f} с (цель 50–70; тест v1 с 009 — 54–62, без воды)'
+print(f'речь ≈{tot:.1f} с + паузы {gaps:.1f} с = ≈{tot + gaps:.1f} с (цель 50–80, до 85 — тест (12.11.2026); без воды)'
       + f"  | остановок s*: {sum(1 for k in L if k.startswith('s'))} (тест v1: ≤ 7)")
