@@ -6,8 +6,8 @@ const JUICE = 0.2;                                          // «сочност�
 const SAFE = true;                                          // безопасная зона TikTok/Shorts (владелец, 23.10.2026): HUD ниже чёлки и дальше от краёв
 const ENDCARD = true;                                       // владелец 03.11.2026: плашка «ПОДПИШИСЬ» в конце обязательна (тает перед петлёй)
 const LOOP = 0.4;                                           // тест v1: последние 0.4 с перетекают в первый кадр — ролик зацикливается
-const HOOK_LINES = ['TODO', 'TODO?!'];                     // текст-хук первых ~2.5 с, ≤3 слов в строке
-const YR = { hook: ['', ''], palace: ['TODO', 'TODO'], flag: ['TODO', 'TODO'], rent: ['TODO', 'TODO'], street: ['TODO', 'TODO'], morse: ['TODO', 'TODO'], news: ['TODO', 'TODO'], letter: ['TODO', 'TODO'], pizza: ['TODO', 'TODO'], verdict: ['TODO', 'TODO'], today: ['TODO', 'TODO'], button: ['', ''] };
+const HOOK_LINES = ['ПИСЬМО КОРОЛЕВЫ —', 'ФАЛЬШИВКА?!'];                     // текст-хук первых ~2.5 с, ≤3 слов в строке
+const YR = { hook: ['', ''], palace: ['1889', 'НЕАПОЛЬ · ЛЕГЕНДА'], rent: ['997', 'ГАЭТА · ПЕРВАЯ ЗАПИСЬ'], street: ['1831', 'НЕАПОЛЬ · УЛИЦА'], news: ['1889', 'УЛИКА №1'], letter: ['1930-е', 'УЛИКА №2'], pizza: ['1866', 'УЛИКА №3'], verdict: ['1930-е', 'РАЗГАДКА'], today: ['2017+', 'ЮНЕСКО · НЕАПОЛЬ'], button: ['', ''] };
 const SC = SCN.map(([n, a, b]) => [n, a, b, YR[n][0], YR[n][1]]);
 const S0 = {}, S1 = {}; SC.forEach(s => { S0[s[0]] = s[1]; S1[s[0]] = Math.min(s[2], DUR); });
 const LS = k => VO[k], LE = k => VO[k] + VD[k], LF = (k, f) => VO[k] + VD[k] * f;
@@ -19,5 +19,12 @@ const DIR = {}, WORLD = {}, TRANS_IN = {};
 const WT = (k, w) => { const n = s => s.toLowerCase().replace(/[^а-яёa-z0-9-]/g, ''); const c = CAPS.find(c => c.key === k && c.words.some(x => n(x) === n(w))) || CAPS.find(c => c.key === k && c.words.some(x => n(x).startsWith(n(w)))); return c ? c.t0 : LS(k); };
 /* карточка рецепта: [строка, когда дописать, когда зачеркнуть, метка ('?' | 'new')]; видно последние 6 */
 const RECIPE = [
-  // ['ингредиент', WT('s1', 'слово'), null, 'new'],
+  ['лепёшка из печи', WT('s2', '997-м'), null, 'new'],
+  ['сало, сыр, рыбка', WT('s3', 'бедняков'), null, null],
+  ['сложить вчетверо', WT('s3', 'лотка.'), null, null],
+  ['томат', WT('s6', 'томатом,'), null, 'new'],
+  ['моцарелла', WT('s6', 'моцареллой'), null, 'new'],
+  ['базилик', WT('s6', 'базиликом'), null, 'new'],
+  ['имя «Маргарита»', WT('s7', 'рекламы.'), null, '?'],
+  ['485° · 90 секунд', WT('t1', 'девяносто'), null, 'new'],
 ];
