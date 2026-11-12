@@ -26,8 +26,8 @@
   function crew(t) {                                                    // печь, пиццайоло с подбрасываемым тестом, второй раскатывает
     const fire = t > EV.td_bake ? 1 + 0.4 * Math.exp(-(t - EV.td_bake) * 2) : 1; woodOven(-80, 1260, 1.25, t, { tile: '#2a5aa8', tile2: '#e8eef4', txt: 'NAPOLI', fire, arch: '#f4ecd6', key: 19010 }); glow(-80, 1130, 340, 'rgba(255,140,50,1)', 0.35 * fire);
     for (let i = 0; i < 8; i++) rect(-560 + (i % 4) * 34, 1240 - Math.floor(i / 4) * 30, 140, 28, { wash: '#6a4424', washA: 1, w: 1.4, col: '#2a1408' });
-    const tz = Math.abs(Math.sin(t * 2.6)); human(420, 1300, 1.05, t, { body: '#f4f1ea', legs: '#2a2a34', hair: '#2a1a0a', face: 'grin', armL: 'up', armR: 'up', look: -0.2, seed: 19020, belt: '#c8221a' }); hat20(420, 1300, 1.05, 'chef');
-    push(420, 1300 - 420 - tz * 160, 1, t * 6); ell(0, 0, 90, 26 + Math.sin(t * 6) * 6, { wash: PZ.dough, washA: 1, w: 2, col: '#8a6a3a' }); pop(); motes(10, [300, 700, 540, 1000], '#ffffff', t, 19021, { sp: 20, sz: 4, a: 0.5, wob: 8 });
+    const tz = Math.abs(Math.sin(t * 2.6)); human(250, 1300, 1.05, t, { body: '#f4f1ea', legs: '#2a2a34', hair: '#2a1a0a', face: 'grin', armL: 'up', armR: 'up', look: -0.2, seed: 19020, belt: '#c8221a' }); hat20(250, 1300, 1.05, 'chef');
+    push(250, 1300 - 420 - tz * 160, 1, t * 6); ell(0, 0, 90, 26 + Math.sin(t * 6) * 6, { wash: PZ.dough, washA: 1, w: 2, col: '#8a6a3a' }); pop(); motes(10, [130, 700, 370, 1000], '#ffffff', t, 19021, { sp: 20, sz: 4, a: 0.5, wob: 8 });
     human(880, 1300, 1.0, t, { body: '#2a2a2a', legs: '#2a2a34', hair: '#6a3a1a', face: 'smile', armL: 'hold', armR: 'hold', look: -0.5, seed: 19022, flip: -1, belt: '#f4f0e6' }); push(820, 1150, 1); ell(0, 0, 70, 18, { wash: PZ.dough, washA: 1, w: 1.6, col: '#8a6a3a' }); pop();
   }
   function counter(t) {                                                 // мрамор, шарики теста, моцарелла, базилик, банки, таймер, термометр
@@ -36,8 +36,9 @@
     push(1100, 1470, 1); ell(0, -20, 90, 26, { wash: '#f4f4f4', washA: 1, w: 2, col: '#5a5a5a' }); for (let i = 0; i < 4; i++) ell(-40 + i * 26, -34, 20, 16, { wash: PZ.mozz, washA: 1, w: 1.2, col: PZ.mozzD }); pop();
     push(1260, 1470, 1); rect(-50, -80, 100, 80, { wash: '#b8542a', washA: 1, w: 2, col: '#4a1a08' }); for (let i = 0; i < 9; i++) basilLeaf(-40 + i * 10, -80, 0.6, -0.8 + i * 0.2, 19031 + i); pop();
     push(-260, 1470, 1); rect(-34, -90, 68, 90, { wash: '#c8221a', washA: 1, w: 1.6, col: '#4a0a04' }); rect(-34, -70, 68, 40, { wash: '#f4e8c8', washA: 1, w: 1 }); txt('SAN MARZANO', 0, -46, 10, { font: 'Osw', col: '#8a1a0e' }); pop();
-    if (t > EV.td_90 - 0.2 && t < EV.td_ab - 0.1) { const k = popK(t, EV.td_90 - 0.2, 0.35), sec = Math.max(0, 90 - Math.floor((t - EV.td_90) / 1.2 * 90)); push(330, 1080, k); const b = rect(-150, -80, 300, 160, { wash: '#1a1a1a', washA: 1, w: 4, col: '#c8a050' }); txt(String(sec) + ' c', 0, 30, 90, { font: 'Osw', col: sec < 10 ? '#ff6040' : '#7aff9a' }); pop();
+    if (t > EV.td_90 - 0.2 && t < EV.td_ab - 0.1 && !(typeof COVER_ON !== 'undefined' && COVER_ON)) { const k = popK(t, EV.td_90 - 0.2, 0.35), sec = Math.max(0, 90 - Math.floor((t - EV.td_90) / 1.2 * 90)); push(330, 1080, k); const b = rect(-150, -80, 300, 160, { wash: '#1a1a1a', washA: 1, w: 4, col: '#c8a050' }); txt(String(sec) + ' c', 0, 30, 90, { font: 'Osw', col: sec < 10 ? '#ff6040' : '#7aff9a' }); pop();
       push(330, 1260, k); rect(-150, -40, 300, 70, { wash: '#f4ecd6', washA: 1, w: 3, col: '#8a1a0e' }); txt('485 °C', 0, 16, 50, { font: 'Osw', col: '#8a1a0e' }); pop(); }
+    margherita(560, 1560, 0.62, t, { tilt: 0.32, steam: 1, key: 19035 }); castShadow(560, 1600, 300, 160, 0.6, 0.25);
     castShadow(700, 1600, 280, 200, 0.6, 0.3); lightPool(160, 1500, 640, 170, 'rgba(255,160,70,1)', 0.4);
   }
   function choice(t) { if (t < EV.td_ab - 0.1) return; for (const [i, [lab, sym, c, x]] of [['ПИСЬМУ', '♛', '#d6a842', 300], ['ИСТОРИКАМ', '✎', '#2a5aa8', 780]].entries()) { const k = popK(t, EV.td_ab - 0.1 + i * 0.35, 0.4), sw = Math.sin(t * 3 + i) * 0.04; push(x, 880, k, sw);
@@ -47,15 +48,15 @@
   WORLD.today = (t, u, cat) => {
     lay(12, () => { room(t); haze('#ffb070', 0.04); });
     lay(2.6, () => { crew(t); });
-    lay(1, () => { counter(t); cat(); choice(t); });
+    lay(1, () => { cat(); counter(t); choice(t); });
     lay(0.6, () => { front(t); motes(20, [-200, 600, 1300, 1500], '#ffb050', t, 19040, { sp: 30, sz: 3, a: 0.6, add: 1, wob: 6 }); moodDark(500, 1100, 500, 1500, '#140818', 0.45); });
   };
   DIR.today = {
     outfit: 'chef', light: { side: -1, rim: '#ffb070' }, grade: ['#ff9a50', 0.08],
     act: () => [[S0.today, 'proud'], [EV.td_bake, 'grin'], [EV.td_90, 'awe'], [EV.td_out, 'proud'], [EV.td_ask, 'sideeye'], [EV.td_ab, 'smug']],
-    pose: (t, u, b) => { const out = t > EV.td_out - 0.2; return Object.assign(b, { x: 680, y: 1600, s: 1.18, flip: 1, look: t < EV.td_ask ? [-0.7, -0.2] : [0, 0], hand: out ? [140, -300] : [220, -260], handF: out ? [-120, -300] : [60, -240], prop: out ? 'peelP' : undefined, propAng: out ? -0.1 : 0 }); },
+    pose: (t, u, b) => { const out = t > EV.td_out - 0.2; return Object.assign(b, { x: 620, y: 1600, s: 1.18, flip: 1, look: t < EV.td_ask ? [-0.7, -0.2] : [0, 0], hand: out ? [140, -300] : [220, -260], handF: out ? [-120, -300] : [60, -240], prop: out ? 'peelP' : undefined, propAng: out ? -0.1 : 0 }); },
     afterCat: (t, u, P) => { if (t > EV.td_out - 0.2) steamWisps(P.x - 140 * P.s, P.y - 420 * P.s, 1, t, 4, 19050, 0.5); },
-    cam: () => [[S0.today, 500, 950, 0.22], [EV.td_bake, 400, 1120, 0.26, 'x'], [EV.td_90, 480, 1150, 0.26], [EV.td_out, 620, 1150, 0.3], [EV.td_ask, 640, 1080, 0.3], [EV.td_ab, 560, 1000, 0.24], [S1.today, 580, 1050, 0.26]]
+    cam: () => [[S0.today, 500, 950, 0.22], [EV.td_bake, 440, 1120, 0.26, 'x'], [EV.td_90, 520, 1150, 0.26], [EV.td_out, 620, 1150, 0.3], [EV.td_ask, 640, 1080, 0.3], [EV.td_ab, 560, 1000, 0.24], [S1.today, 580, 1050, 0.26]]
   };
   // ---------------------------------------------------------------- переход: языки пламени из устья печи заливают кадр
   TRANS_IN.today = { a: 0.3, b: 0.4, runA: 0.5, fx(k, t, A, B) {

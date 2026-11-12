@@ -61,8 +61,8 @@
   DIR.palace = {
     outfit: 'liveryA', light: { side: 1, rim: '#ffd090' }, grade: ['#ffb070', 0.08],
     act: () => [[S0.palace, 'proud'], [EV.pl_queen, 'awe'], [EV.pl_esp, 'smug'], [EV.pl_flag, 'grin'], [EV.pl_name, 'proud']],
-    pose: (t, u, b) => Object.assign(b, { x: 720, y: 1600, s: 1.15, flip: 1, look: t < EV.pl_esp ? [-0.8, -0.3] : [-0.6, 0.1], hand: [150, -300], handF: t > EV.pl_name ? [-160, -420] : [-80, -220], prop: 'trayP', propAng: 0, point: t > EV.pl_flag && t < EV.pl_name ? 1 : undefined }),
-    cam: () => [[S0.palace, 540, 1000, 0.26], [EV.pl_queen, 420, 1130, 0.3, 'x'], [EV.pl_esp, 500, 1150, 0.26], [EV.pl_flag, 440, 1130, 0.3], [EV.pl_name, 560, 1150, 0.26], [S1.palace, 580, 1160, 0.28]]
+    pose: (t, u, b) => Object.assign(b, { x: 740, y: 1600, s: 1.15, flip: 1, look: t < EV.pl_esp ? [-0.8, -0.3] : [-0.6, 0.1], hand: [150, -300], handF: t > EV.pl_name ? [-160, -420] : [-80, -220], prop: 'trayP', propAng: 0, point: t > EV.pl_flag && t < EV.pl_name ? 1 : undefined }),
+    cam: () => [[S0.palace, 540, 1000, 0.26], [EV.pl_queen, 380, 1130, 0.3, 'x'], [EV.pl_esp, 440, 1150, 0.26], [EV.pl_flag, 400, 1130, 0.3], [EV.pl_name, 480, 1150, 0.26], [S1.palace, 500, 1160, 0.28]]
   };
   // ---------------------------------------------------------------- переход: золотая рама письма наезжает и становится окном дворца
   TRANS_IN.palace = { a: 0.3, b: 0.45, runA: 0.5, fx(k, t, A, B) {

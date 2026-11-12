@@ -56,7 +56,7 @@
     lay(12, () => { room(t); calendar(t); haze('#4a6a5a', 0.05); });
     lay(2.6, () => { staff(t); });
     lay(1.5, () => { sign(t); });
-    lay(1, () => { desk(t); cat(); zoom(t); });
+    lay(1, () => { cat(); desk(t); zoom(t); });
     lay(0.6, () => { front(t); motes(16, [-200, 600, 1300, 1500], '#e8f0d0', t, 18750, { sp: 3, sz: 3, a: 0.35, wob: 3 }); moodDark(820, 1300, 400, 1400, '#0a0a14', 0.6); });
   };
   DIR.letter = {

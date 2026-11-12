@@ -69,7 +69,7 @@
     lay(14, () => { wall(t); haze('#ffb070', 0.04); });
     lay(4, () => { oven(t); guests(t); lightPool(-120, 1300, 700, 260, 'rgba(255,150,60,1)', 0.3); });
     lay(2.6, () => { letterFrame(t); });
-    lay(1, () => { counter(t); cat(); });
+    lay(1, () => { cat(); counter(t); });
     lay(0.6, () => { front(t); moodDark(500, 1100, 500, 1500, '#140818', 0.5); steamWisps(860, 1440, 1, t, 3, 18299, 0.3); });
   };
   const stPose = (b, t) => Object.assign(b, { x: 640, y: 1590, s: 1.18, flip: 1, look: [0.3, -0.2], hand: [200, -300], handF: [-70, -210], prop: 'sliceP', propAng: -0.2 });
@@ -77,7 +77,7 @@
     outfit: 'hoodiePZ', light: { side: -1, rim: '#ffb070' }, grade: ['#ff9a50', 0.08],
     act: () => [[0, 'suspicious'], [EV.hk_hall, 'talk'], [EV.hk_fake, 'shock'], [EV.hk_grab, 'smug'], [EV.hk_bite + 0.1, 'laugh']],
     pose: (t, u, b) => { if (t < EV.hk_grab) return Object.assign(stPose(b, t), { look: t < EV.hk_hall ? [0.7, -0.8] : t < EV.hk_fake ? [-0.6, -0.2] : [0.8, -0.7], point: t > EV.hk_fake ? 1 : undefined, hand: t > EV.hk_fake ? [220, -400] : [200, -300], sweat: t > EV.hk_fake });
-      const bite = t > EV.hk_bite; return Object.assign(b, { x: 640, y: 1590, s: 1.18, flip: 1, look: bite ? [-0.2, 0] : [0.4, 0.3], hand: bite ? [40, -360] : [160, -300], handF: [-70, -210], prop: 'sliceP', propAng: 0.4, tailUp: bite, squash: b.squash + (bite && t < EV.hk_bite + 0.12 ? 0.1 : 0) }); },
+      const bite = t > EV.hk_bite; return Object.assign(b, { x: 640, y: 1590, s: 1.18, flip: 1, look: bite ? [-0.2, 0] : [0.4, 0.3], hand: bite ? [70, -300] : [160, -300], handF: [-70, -210], prop: 'sliceP', propAng: 0.4, tailUp: bite, squash: b.squash + (bite && t < EV.hk_bite + 0.12 ? 0.1 : 0) }); },
     afterCat: (t, u, P) => { if (t > EV.hk_bite && t < S1.hook) { const k = clamp((t - EV.hk_bite) / 0.6); cheeseString(P.x + 40 * P.s, P.y - 330 * P.s, P.x + (40 + 160 * k) * P.s, P.y - (330 - 120 * k) * P.s, 30 + 40 * k, 7); } },
     cam: () => [[0, 780, 560, 0.4], [EV.hk_hall, 600, 1050, 0.24, 'x'], [EV.hk_fake, 740, 760, 0.32], [EV.hk_grab, 640, 1150, 0.28], [EV.hk_bite, 640, 1180, 0.34], [S1.hook, 640, 1180, 0.36]]
   };
