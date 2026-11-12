@@ -1,0 +1,39 @@
+{
+  "metadata": {
+    "soundFile": "/home/user/tom-food/build/018-pizza/vf/s4.wav",
+    "duration": 4.98
+  },
+  "mouthCues": [
+    { "start": 0.00, "end": 0.05, "value": "B" },
+    { "start": 0.05, "end": 0.10, "value": "C" },
+    { "start": 0.10, "end": 0.31, "value": "B" },
+    { "start": 0.31, "end": 0.39, "value": "A" },
+    { "start": 0.39, "end": 0.63, "value": "B" },
+    { "start": 0.63, "end": 0.77, "value": "H" },
+    { "start": 0.77, "end": 1.26, "value": "C" },
+    { "start": 1.26, "end": 1.32, "value": "A" },
+    { "start": 1.32, "end": 1.38, "value": "F" },
+    { "start": 1.38, "end": 1.46, "value": "A" },
+    { "start": 1.46, "end": 2.01, "value": "B" },
+    { "start": 2.01, "end": 2.08, "value": "C" },
+    { "start": 2.08, "end": 2.22, "value": "A" },
+    { "start": 2.22, "end": 2.28, "value": "F" },
+    { "start": 2.28, "end": 2.33, "value": "B" },
+    { "start": 2.33, "end": 2.54, "value": "C" },
+    { "start": 2.54, "end": 2.82, "value": "B" },
+    { "start": 2.82, "end": 2.89, "value": "F" },
+    { "start": 2.89, "end": 3.18, "value": "E" },
+    { "start": 3.18, "end": 3.38, "value": "C" },
+    { "start": 3.38, "end": 3.59, "value": "B" },
+    { "start": 3.59, "end": 3.66, "value": "F" },
+    { "start": 3.66, "end": 3.87, "value": "E" },
+    { "start": 3.87, "end": 4.01, "value": "B" },
+    { "start": 4.01, "end": 4.08, "value": "C" },
+    { "start": 4.08, "end": 4.15, "value": "B" },
+    { "start": 4.15, "end": 4.22, "value": "C" },
+    { "start": 4.22, "end": 4.44, "value": "A" },
+    { "start": 4.44, "end": 4.62, "value": "E" },
+    { "start": 4.62, "end": 4.97, "value": "B" },
+    { "start": 4.97, "end": 4.98, "value": "X" }
+  ]
+}
