@@ -1,0 +1,123 @@
+{
+ "num": "018",
+ "city": "Пицца Маргарита",
+ "title": "Пицца Маргарита",
+ "hook": "ПИСЬМО КОРОЛЕВЫ — ФАЛЬШИВКА?",
+ "timeline": {
+  "scene_gap": 0.05,
+  "tail": 0.6,
+  "tunnel": 0.0
+ },
+ "worlds": [
+  "props.js",
+  "food_001.js",
+  "food_002.js",
+  "food_003.js",
+  "food_004.js",
+  "food_005.js",
+  "food_006.js",
+  "food_007.js",
+  "food_008.js",
+  "food_009.js",
+  "food_010.js",
+  "food_011.js",
+  "food_012.js",
+  "food_013.js",
+  "food_014.js",
+  "food_015.js",
+  "food_016.js",
+  "food_017.js",
+  "food_018.js",
+  "wardrobe_001.js",
+  "wardrobe_002.js",
+  "wardrobe_003.js",
+  "wardrobe_004.js",
+  "wardrobe_005.js",
+  "wardrobe_006.js",
+  "wardrobe_007.js",
+  "wardrobe_008.js",
+  "wardrobe_009.js",
+  "wardrobe_010.js",
+  "wardrobe_011.js",
+  "wardrobe_012.js",
+  "wardrobe_013.js",
+  "wardrobe_014.js",
+  "wardrobe_015.js",
+  "wardrobe_016.js",
+  "wardrobe_017.js",
+  "wardrobe_018.js",
+  "w_hook.js",
+  "w_palace.js",
+  "w_rent.js",
+  "w_street.js",
+  "w_news.js",
+  "w_letter.js",
+  "w_pizza.js",
+  "w_verdict.js",
+  "w_today.js",
+  "w_cover.js"
+ ],
+ "scenes": [
+  [
+   "hook",
+   [
+    "h1",
+    "h2"
+   ]
+  ],
+  [
+   "palace",
+   [
+    "s1"
+   ]
+  ],
+  [
+   "rent",
+   [
+    "s2"
+   ]
+  ],
+  [
+   "street",
+   [
+    "s3"
+   ]
+  ],
+  [
+   "news",
+   [
+    "s4"
+   ]
+  ],
+  [
+   "letter",
+   [
+    "s5"
+   ]
+  ],
+  [
+   "pizza",
+   [
+    "s6"
+   ]
+  ],
+  [
+   "verdict",
+   [
+    "s7"
+   ]
+  ],
+  [
+   "today",
+   [
+    "t1"
+   ]
+  ],
+  [
+   "button",
+   [
+    "x1"
+   ]
+  ]
+ ]
+}
