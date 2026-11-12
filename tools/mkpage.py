@@ -15,7 +15,8 @@ def main(ep, out=None):
     for p in (ROOT / 'lib').glob('*.js'): shutil.copy(p, f)          # общий код: режиссура, переходы, еда, гардероб
     for p in d.glob('*.js'): shutil.copy(p, f)                       # файл выпуска с тем же именем перекрывает lib
     for p in (ROOT / 'assets/fonts').glob('*.ttf'): shutil.copy(p, f)
-    html = (ROOT / 'engine/page.html').read_text().replace('__DUR__', str(DUR))
+    FPS = E.get('fps') or json.load(open(ROOT / 'tools/config.json'))['render'].get('fps', 24)
+    html = (ROOT / 'engine/page.html').read_text().replace('__DUR__', str(DUR)).replace('__FPS__', str(FPS))
     html = html.replace('__WORLDS__', ''.join(f'<script src="{w}"></script>' for w in E['worlds']))
     (f / 'index.html').write_text(html)
     print(f, 'DUR', DUR)

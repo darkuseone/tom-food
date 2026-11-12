@@ -12,11 +12,13 @@ if [ "${2:-}" = snap ]; then
 fi
 node tools/dbg.cjs "$B/film"
 [ -f "$E/w_cover.js" ] && node tools/cover.cjs "$EP"                     # обложка → $E/cover.png (первый кадр + отдельным файлом в чат)
-npx hyperframes render "$B/film" -f 24 -q high -w 4 -o "$B/video.mp4"
+FPS=$(python3 -c "import json;e=json.load(open('$E/episode.json'));print(e.get('fps') or json.load(open('tools/config.json'))['render'].get('fps',24))")
+if [ "${2:-}" = remix ] && [ -f "$B/video.mp4" ]; then echo "remix: картинка из $B/video.mp4"; else npx hyperframes render "$B/film" -f "$FPS" -q high -w 4 -o "$B/video.mp4"; fi   # remix — только звук, без перерендера картинки
 python3 tools/mix.py "$EP"
 VIN=(-i "$B/video.mp4" -i "$B/audio.m4a"); VMAP=(-map 0:v)                # обложка (если есть) = первый кадр ролика (владелец, 15.10.2026)
 if [ -f "$E/cover.png" ]; then VIN+=(-i "$E/cover.png"); VMAP=(-filter_complex "[0:v][2:v]overlay=enable='lt(n,1)'[v]" -map "[v]"); fi
-X264=(-c:v libx264 -preset slow -b:v 5000k -pix_fmt yuv420p -passlogfile "$B/pf")   # зерно бумаги раздувает -q high до ~500 МБ → 2-pass 5 Мбит/с ≈ 38 МБ
+VB264=$([ "$FPS" -gt 30 ] && echo 8000k || { [ "$FPS" -gt 24 ] && echo 6000k || echo 5000k; })
+X264=(-c:v libx264 -preset slow -b:v $VB264 -pix_fmt yuv420p -passlogfile "$B/pf")   # зерно бумаги раздувает -q high до ~500 МБ → 2-pass 5 Мбит/с ≈ 38 МБ
 ffmpeg -y -v error "${VIN[@]}" "${VMAP[@]}" "${X264[@]}" -pass 1 -an -f mp4 /dev/null
 ffmpeg -y -v error "${VIN[@]}" "${VMAP[@]}" -map 1:a "${X264[@]}" -pass 2 -c:a copy -shortest -movflags +faststart "$E/final.mp4"
 DUR=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$E/final.mp4")

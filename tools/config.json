@@ -9,5 +9,5 @@
   },
   "timeline": {"scene_gap": 0.08, "line_gap": 0.1, "tunnel": 0.55, "tail": 0.74},
   "mix": {"voice_db": -17, "sfx_db": -25, "bed_db": -33, "music_db": -29},
-  "render": {"fps": 24, "chat_limit_mib": 29}
+  "render": {"fps": 30, "chat_limit_mib": 29}
 }

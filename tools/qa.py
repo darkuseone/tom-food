@@ -37,6 +37,12 @@ def main(ep):
     chk(not far, f"камера близко (после первого ключа большинство z ≥ {MIN['cam_z']}; общий план — коротко)" + (f" — далеко: {'; '.join(far)}" if far else ''))
     no_tr = [n for n, t in txt.items() if n not in ('w_hook.js',) and 'TRANS_IN.' not in t]
     chk(not no_tr, "свой переход TRANS_IN в каждую сцену" + (f" — нет: {', '.join(no_tr)}" if no_tr else ''))
+    no_light = [n for n, t in txt.items() if not re.search(r'\b(lightPool|shaft|castShadow|moodDark)\(', t)]
+    chk(not no_light, "свет по рецепту в каждой сцене (lightPool/shaft/castShadow/moodDark — скил scene §«Свет»)" + (f" — нет: {', '.join(no_light)}" if no_light else ''))
+    no_act = [n for n, t in txt.items() if not re.search(r'\b(prop:|afterCat|handF?:)', t)]
+    chk(not no_act, "Том взаимодействует с предметом в каждой сцене (prop/hand/afterCat)" + (f" — нет: {', '.join(no_act)}" if no_act else ''))
+    halo = [f"{n} ({len(re.findall(r'glow\(', t))})" for n, t in txt.items() if len(re.findall(r'\bglow\(', t)) > 8]
+    chk(not halo, "glow только у источников света (≤ 8 вызовов на мир, без ореолов вокруг объектов)" + (f" — много: {', '.join(halo)}" if halo else ''))
     sc = (d / 'scenes.js').read_text() if (d / 'scenes.js').exists() else ''
     chk(re.search(r'const ENDCARD = true', sc) is not None, "плашка «ПОДПИШИСЬ» (ENDCARD = true, владелец 03.11.2026)")
     snd = (d / 'sound.py').read_text() if (d / 'sound.py').exists() else ''; ev = d / 'ev.json'
