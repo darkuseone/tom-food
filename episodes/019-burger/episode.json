@@ -1,0 +1,129 @@
+{
+ "num": "019",
+ "city": "Бургер",
+ "title": "Бургер",
+ "hook": "Гамбургер — из Гамбурга?!",
+ "timeline": {
+  "scene_gap": 0.05,
+  "tail": 0.6,
+  "tunnel": 0.0,
+  "beats": {
+   "fair": 0.7,
+   "burger": 0.8
+  }
+ },
+ "worlds": [
+  "props.js",
+  "food_001.js",
+  "food_002.js",
+  "food_003.js",
+  "food_004.js",
+  "food_005.js",
+  "food_006.js",
+  "food_007.js",
+  "food_008.js",
+  "food_009.js",
+  "food_010.js",
+  "food_011.js",
+  "food_012.js",
+  "food_013.js",
+  "food_014.js",
+  "food_015.js",
+  "food_016.js",
+  "food_017.js",
+  "food_018.js",
+  "food_019.js",
+  "wardrobe_001.js",
+  "wardrobe_002.js",
+  "wardrobe_003.js",
+  "wardrobe_004.js",
+  "wardrobe_005.js",
+  "wardrobe_006.js",
+  "wardrobe_007.js",
+  "wardrobe_008.js",
+  "wardrobe_009.js",
+  "wardrobe_010.js",
+  "wardrobe_011.js",
+  "wardrobe_012.js",
+  "wardrobe_013.js",
+  "wardrobe_014.js",
+  "wardrobe_015.js",
+  "wardrobe_016.js",
+  "wardrobe_017.js",
+  "wardrobe_018.js",
+  "wardrobe_019.js",
+  "w_hook.js",
+  "w_port.js",
+  "w_ship.js",
+  "w_fair.js",
+  "w_claim.js",
+  "w_menches.js",
+  "w_liberty.js",
+  "w_burger.js",
+  "w_today.js",
+  "w_cover.js"
+ ],
+ "scenes": [
+  [
+   "hook",
+   [
+    "h1",
+    "h2"
+   ]
+  ],
+  [
+   "port",
+   [
+    "s1"
+   ]
+  ],
+  [
+   "ship",
+   [
+    "s2"
+   ]
+  ],
+  [
+   "fair",
+   [
+    "s3"
+   ]
+  ],
+  [
+   "claim",
+   [
+    "s4"
+   ]
+  ],
+  [
+   "menches",
+   [
+    "s5"
+   ]
+  ],
+  [
+   "liberty",
+   [
+    "s6"
+   ]
+  ],
+  [
+   "burger",
+   [
+    "s7"
+   ]
+  ],
+  [
+   "today",
+   [
+    "t1"
+   ]
+  ],
+  [
+   "button",
+   [
+    "x1"
+   ]
+  ]
+ ]
+}

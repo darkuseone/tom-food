@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "soundFile": "/home/user/tom-food/build/019-burger/vf/s3.wav",
+    "duration": 5.15
+  },
+  "mouthCues": [
+    { "start": 0.00, "end": 0.06, "value": "B" },
+    { "start": 0.06, "end": 0.18, "value": "D" },
+    { "start": 0.18, "end": 0.25, "value": "B" },
+    { "start": 0.25, "end": 0.32, "value": "H" },
+    { "start": 0.32, "end": 0.46, "value": "C" },
+    { "start": 0.46, "end": 0.95, "value": "B" },
+    { "start": 0.95, "end": 1.37, "value": "C" },
+    { "start": 1.37, "end": 1.48, "value": "A" },
+    { "start": 1.48, "end": 1.60, "value": "F" },
+    { "start": 1.60, "end": 1.88, "value": "B" },
+    { "start": 1.88, "end": 2.01, "value": "X" },
+    { "start": 2.01, "end": 2.08, "value": "B" },
+    { "start": 2.08, "end": 2.15, "value": "A" },
+    { "start": 2.15, "end": 2.22, "value": "D" },
+    { "start": 2.22, "end": 2.30, "value": "A" },
+    { "start": 2.30, "end": 2.37, "value": "C" },
+    { "start": 2.37, "end": 2.43, "value": "B" },
+    { "start": 2.43, "end": 2.50, "value": "C" },
+    { "start": 2.50, "end": 2.57, "value": "B" },
+    { "start": 2.57, "end": 2.65, "value": "A" },
+    { "start": 2.65, "end": 2.89, "value": "B" },
+    { "start": 2.89, "end": 3.03, "value": "F" },
+    { "start": 3.03, "end": 4.18, "value": "B" },
+    { "start": 4.18, "end": 4.25, "value": "E" },
+    { "start": 4.25, "end": 4.46, "value": "B" },
+    { "start": 4.46, "end": 4.54, "value": "A" },
+    { "start": 4.54, "end": 4.72, "value": "F" },
+    { "start": 4.72, "end": 4.86, "value": "B" },
+    { "start": 4.86, "end": 5.14, "value": "E" },
+    { "start": 5.14, "end": 5.15, "value": "X" }
+  ]
+}
