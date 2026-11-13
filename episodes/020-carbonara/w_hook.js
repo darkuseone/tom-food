@@ -41,10 +41,6 @@
       else { const jb = rect(x - 26, y - 70, 52, 70, { wash: ['#d8c088', '#c86a3a', '#8a9a4a', '#e8d8a8'][i % 4], washA: 0.9, w: 1.4, col: '#3a2a1a' }); rect(x - 28, y - 82, 56, 14, { wash: '#a8743a', washA: 1, w: 1 }); rect(x - 20, y - 50, 40, 24, { wash: '#f4ecd4', washA: 1, w: 0.8 }); } } }
     push(560, 170, 0.85); const mb = rect(-170, -150, 340, 230, { wash: '#1e2a22', washA: 1, w: 8, col: '#6a4424', key: 20835 }); txt('OGGI', 0, -100, 34, { font: 'Osw', col: '#f4efe0' });
     [['Carbonara', '12'], ['Cacio e pepe', '11'], ['Amatriciana', '12'], ['Gricia', '11']].forEach(([a, b], i) => { txt(a, -40, -50 + i * 36, 28, { font: 'Hand', col: i === 0 ? '#ffd860' : '#f4efe0' }); txt(b, 120, -50 + i * 36, 28, { font: 'Hand', col: '#f4efe0' }); }); pop();
-    const gk = t > EV.hk_gran ? popK(t, EV.hk_gran, 0.4) : 0;                // фото бабушки 1944
-    push(790, 190, 0.55 + 0.3 * gk, (1 - gk) * 0.05); const ph = rect(-110, -140, 220, 280, { wash: '#d8b878', washA: 1, w: 6, col: '#5a3a14', key: 20836 }); rect(-90, -120, 180, 200, { wash: '#d8c8a0', washA: 1, w: 1.4, col: '#6a5a3a' });
-    human(0, 80, 0.48, 0, { body: '#6a5a4a', legs: '#4a3a2a', hair: '#3a2a1a', face: 'smile', armL: 'hold', armR: 'down', seed: 20837, long: 1 }); screenFill('#a88a5a', 0); txt('1944', 0, 116, 26, { font: 'Hand', col: '#3a2a1a' }); pop();
-    if (gk > 0) bubbleTag('РОВЕСНИЦА!', 760, 30, t, EV.hk_gran + 0.1, '#c8321a', 40, 0.05);
     for (let i = 0; i < 3; i++) { push(-280 + i * 60, 300 + i * 10, 1); pencil([[0, -260], [0, 0]], { w: 2, col: '#6a5a3a', pass2: false }); for (let k = 0; k < 6; k++) ell((k % 2 ? 10 : -10), -220 + k * 36, 18, 16, { wash: i === 1 ? '#c8241e' : '#f4ecdc', washA: 1, w: 1.4, col: i === 1 ? '#5a0a08' : '#8a7a5a' }); pop(); }   // связки чеснока и перца
     for (let i = 0; i < 3; i++) { push(1230, 500 + i * 120, 1); const pn = ell(0, 0, 60 - i * 8, 60 - i * 8, { wash: '#c8743a', washA: 1, w: 2, col: '#5a2a0a' }); metalG(pn.path, -20, -20, 70, '#ffd8a0', '#c8743a', '#5a2a0a'); pencil([[0, -60 + i * 8], [0, -110]], { w: 6, col: '#5a2a0a' }); pop(); }
   }
@@ -55,6 +51,10 @@
   }
   function guests(t) {                                                  // пожилая пара римлян, повар в окне раздачи
     const ask = t > EV.hk_who && t < LS('h2') + 0.6, gr = t > EV.hk_gran && t < EV.hk_who;
+    const gk = t > EV.hk_gran ? popK(t, EV.hk_gran, 0.4) : 0;                // фото бабушки 1944
+    push(300, 840, 0.55 + 0.25 * gk, (1 - gk) * 0.05); const ph = rect(-110, -140, 220, 280, { wash: '#d8b878', washA: 1, w: 6, col: '#5a3a14', key: 20836 }); rect(-90, -120, 180, 200, { wash: '#d8c8a0', washA: 1, w: 1.4, col: '#6a5a3a' });
+    human(0, 80, 0.48, 0, { body: '#6a5a4a', legs: '#4a3a2a', hair: '#3a2a1a', face: 'smile', armL: 'hold', armR: 'down', seed: 20837, long: 1 }); screenFill('#a88a5a', 0); txt('1944', 0, 116, 26, { font: 'Hand', col: '#3a2a1a' }); pop();
+    if (gk > 0) bubbleTag('РОВЕСНИЦА!', 300, 700, t, EV.hk_gran + 0.1, '#c8321a', 40, 0.05);
     push(280, 1080, 1); rect(-170, 0, 340, 22, { wash: '#f4ecdc', washA: 1, w: 1.6, col: '#6a5a4a' }); for (let i = 0; i < 6; i++) rect(-170 + i * 56, 0, 28, 22, { wash: '#c8241e', washA: 0.85, line: false }); pencil([[-150, 22], [-150, 200]], { w: 6, col: '#3a2010' }); pencil([[150, 22], [150, 200]], { w: 6, col: '#3a2010' }); fiasco(-40, 0, 0.6, 2); ell(60, -4, 40, 10, { wash: '#ffffff', washA: 1, w: 1 }); pop();
     human(150, 1200, 1.0, t, { body: '#5a4a6a', legs: '#3a3a3a', hair: '#e8e4dc', face: gr ? 'grin' : ask ? 'shock' : 'smile', armL: 'hold', armR: gr ? 'wave' : ask ? 'up' : 'hold', look: 0.5, seed: 20850, long: 1 });
     human(420, 1200, 1.0, t, { body: '#3a3a3a', legs: '#2a2a2a', hair: '#c8c4bc', face: ask ? 'shock' : 'calm', armL: ask ? 'up' : 'hold', armR: 'hold', look: -0.5, seed: 20851, flip: -1, beard: 'short', hat: 'cap', hatCol: '#4a4a4a' });
