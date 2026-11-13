@@ -6,8 +6,8 @@ const JUICE = 0.2;                                          // «сочност�
 const SAFE = true;                                          // безопасная зона TikTok/Shorts (владелец, 23.10.2026): HUD ниже чёлки и дальше от краёв
 const ENDCARD = true;                                       // владелец 03.11.2026: плашка «ПОДПИШИСЬ» в конце обязательна (тает перед петлёй)
 const LOOP = 0.4;                                           // тест v1: последние 0.4 с перетекают в первый кадр — ролик зацикливается
-const HOOK_LINES = ['TODO', 'TODO?!'];                     // текст-хук первых ~2.5 с, ≤3 слов в строке
-const YR = { hook: ['', ''], port: ['TODO', 'TODO'], ship: ['TODO', 'TODO'], fair: ['TODO', 'TODO'], claim: ['TODO', 'TODO'], menches: ['TODO', 'TODO'], liberty: ['TODO', 'TODO'], burger: ['TODO', 'TODO'], today: ['TODO', 'TODO'], button: ['', ''] };
+const HOOK_LINES = ['ГАМБУРГЕР —', 'ИЗ ГАМБУРГА?!'];                     // текст-хук первых ~2.5 с, ≤3 слов в строке
+const YR = { hook: ['', ''], port: ['1840-е', 'ГАМБУРГ · ПОРТ'], ship: ['1847', 'ГАМБУРГ → НЬЮ-ЙОРК'], fair: ['1885', 'ЯРМАРКА · США'], claim: ['1885–1900', 'ВЕРСИИ'], menches: ['1885', 'ГАМБУРГ, ШТАТ НЬЮ-ЙОРК'], liberty: ['1918', 'ВОЙНА · США'], burger: ['РАЗГАДКА', 'КОТЛЕТА + БУЛКА'], today: ['СЕГОДНЯ', 'США · В СЕКУНДУ'], button: ['', ''] };
 const SC = SCN.map(([n, a, b]) => [n, a, b, YR[n][0], YR[n][1]]);
 const S0 = {}, S1 = {}; SC.forEach(s => { S0[s[0]] = s[1]; S1[s[0]] = Math.min(s[2], DUR); });
 const LS = k => VO[k], LE = k => VO[k] + VD[k], LF = (k, f) => VO[k] + VD[k] * f;
@@ -19,5 +19,14 @@ const DIR = {}, WORLD = {}, TRANS_IN = {};
 const WT = (k, w) => { const n = s => s.toLowerCase().replace(/[^а-яёa-z0-9-]/g, ''); const c = CAPS.find(c => c.key === k && c.words.some(x => n(x) === n(w))) || CAPS.find(c => c.key === k && c.words.some(x => n(x).startsWith(n(w)))); return c ? c.t0 : LS(k); };
 /* карточка рецепта: [строка, когда дописать, когда зачеркнуть, метка ('?' | 'new')]; видно последние 6 */
 const RECIPE = [
-  // ['ингредиент', WT('s1', 'слово'), null, 'new'],
+  ['рубленая говядина', WT('s1', 'рубленую'), null, 'new'],
+  ['лук, соль, перец', WT('s1', 'жарили'), null, null],
+  ['лепёшкой на сковороду', WT('s1', 'лепёшкой'), null, null],
+  ['котлета в дорогу', WT('s2', 'уплыла:'), null, 'new'],
+  ['вилка и тарелка', WT('s3', 'вилкой.'), WT('s3', 'булку.'), null],
+  ['+ булка!', WT('s3', 'булку.'), null, 'new'],
+  ['имя «гамбургер»', WT('s5', 'Гамбург,'), null, '?'],
+  ['«сэндвич свободы»', WT('s6', 'свободы».'), WT('s6', 'немецкое!'), null],
+  ['сыр, кетчуп, огурчик', WT('s7', 'булку'), null, 'new'],
+  ['1 500 в секунду', WT('t1', 'полутора'), null, 'new'],
 ];
