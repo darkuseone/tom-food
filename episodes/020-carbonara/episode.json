@@ -1,0 +1,134 @@
+{
+ "num": "020",
+ "city": "Карбонара",
+ "title": "TODO",
+ "hook": "Карбонаре всего 80?!",
+ "timeline": {
+  "scene_gap": 0.05,
+  "tail": 0.6,
+  "tunnel": 0.0,
+  "beats": {
+   "mag": 0.7,
+   "pasta": 0.9
+  }
+ },
+ "worlds": [
+  "props.js",
+  "food_001.js",
+  "food_002.js",
+  "food_003.js",
+  "food_004.js",
+  "food_005.js",
+  "food_006.js",
+  "food_007.js",
+  "food_008.js",
+  "food_009.js",
+  "food_010.js",
+  "food_011.js",
+  "food_012.js",
+  "food_013.js",
+  "food_014.js",
+  "food_015.js",
+  "food_016.js",
+  "food_017.js",
+  "food_018.js",
+  "food_019.js",
+  "food_020.js",
+  "wardrobe_001.js",
+  "wardrobe_002.js",
+  "wardrobe_003.js",
+  "wardrobe_004.js",
+  "wardrobe_005.js",
+  "wardrobe_006.js",
+  "wardrobe_007.js",
+  "wardrobe_008.js",
+  "wardrobe_009.js",
+  "wardrobe_010.js",
+  "wardrobe_011.js",
+  "wardrobe_012.js",
+  "wardrobe_013.js",
+  "wardrobe_014.js",
+  "wardrobe_015.js",
+  "wardrobe_016.js",
+  "wardrobe_017.js",
+  "wardrobe_018.js",
+  "wardrobe_019.js",
+  "wardrobe_020.js",
+  "w_hook.js",
+  "w_cream.js",
+  "w_mag.js",
+  "w_chicago.js",
+  "w_news.js",
+  "w_legend.js",
+  "w_ration.js",
+  "w_pasta.js",
+  "w_today.js",
+  "w_cover.js"
+ ],
+ "scenes": [
+  [
+   "hook",
+   [
+    "h1",
+    "h2"
+   ]
+  ],
+  [
+   "cream",
+   [
+    "s1",
+    "s2"
+   ]
+  ],
+  [
+   "mag",
+   [
+    "s3",
+    "s4"
+   ]
+  ],
+  [
+   "chicago",
+   [
+    "s5"
+   ]
+  ],
+  [
+   "news",
+   [
+    "s6"
+   ]
+  ],
+  [
+   "legend",
+   [
+    "s7",
+    "s8"
+   ]
+  ],
+  [
+   "ration",
+   [
+    "s9"
+   ]
+  ],
+  [
+   "pasta",
+   [
+    "s10"
+   ]
+  ],
+  [
+   "today",
+   [
+    "t1"
+   ]
+  ],
+  [
+   "button",
+   [
+    "x1"
+   ]
+  ]
+ ]
+}
