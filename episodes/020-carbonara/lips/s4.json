@@ -1,0 +1,25 @@
+{
+  "metadata": {
+    "soundFile": "/home/user/tom-food/build/020-carbonara/vf/s4.wav",
+    "duration": 2.27
+  },
+  "mouthCues": [
+    { "start": 0.00, "end": 0.04, "value": "B" },
+    { "start": 0.04, "end": 0.08, "value": "C" },
+    { "start": 0.08, "end": 0.15, "value": "B" },
+    { "start": 0.15, "end": 0.23, "value": "A" },
+    { "start": 0.23, "end": 0.28, "value": "B" },
+    { "start": 0.28, "end": 0.40, "value": "C" },
+    { "start": 0.40, "end": 0.48, "value": "A" },
+    { "start": 0.48, "end": 0.68, "value": "E" },
+    { "start": 0.68, "end": 0.76, "value": "A" },
+    { "start": 0.76, "end": 1.07, "value": "B" },
+    { "start": 1.07, "end": 1.14, "value": "C" },
+    { "start": 1.14, "end": 1.21, "value": "B" },
+    { "start": 1.21, "end": 1.28, "value": "F" },
+    { "start": 1.28, "end": 1.36, "value": "A" },
+    { "start": 1.36, "end": 1.84, "value": "B" },
+    { "start": 1.84, "end": 2.26, "value": "F" },
+    { "start": 2.26, "end": 2.27, "value": "X" }
+  ]
+}
