@@ -64,7 +64,7 @@ for s, k in scenes[:-1]:
     (d / f'w_{s}.js').write_text(tpl.replace('SCENE', s).replace('__KEY__', k[-1]) + ("""
 (() => {                                                          // кнопка: тот же мир, Том в камеру, подмигивает на «откусим»
   WORLD.button = (t, u, cat) => WORLD.today(t, u, cat);
-  DIR.button = Object.assign({}, DIR.today, { act: () => [[S0.button, 'grin'], [LF('x1', 0.7), 'wink']], cam: () => [[S0.button, 660, 900, 0.3], [DUR, 660, 980, 0.36]] });
+  DIR.button = Object.assign({}, DIR.today, { act: () => [[S0.button, 'grin'], [LF('x1', 0.7), 'wink']], cam: () => { const L = DIR.today.cam().slice(-1)[0]; return [[S0.button, L[1], L[2], L[3]], [DUR, L[1], L[2] + 30, L[3] + 0.04]]; } });   // 14.11.2026: продолжение кадра today без скачка; ПОДПИШИСЬ всплывает поверх
 })();
 """ if s == 'today' else ''))
 (d / 'w_cover.js').write_text(f"/* Обложка {ep[:3]}: блюдо — герой кадра крупно, Том с реакцией; 2–3 слова; плашка с названием блюда. */\nconst COVER = {{ scene: 'hook', t: 2.0, cam: {{ x: 560, y: 1060, z: 0.4 }}, pose: {{ expr: 'shock', expr2: 'shock', ek: 1, tailUp: true }},\n  title: [['TODO', '#f4e6c8'], ['TODO?!', '#d9482b']], size: 150, ty: 360, badge: '{dish.upper()}', sub: 'история за минуту' }};\n")

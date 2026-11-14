@@ -43,6 +43,16 @@ def main(ep):
     chk(not no_act, "Том взаимодействует с предметом в каждой сцене (prop/hand/afterCat)" + (f" — нет: {', '.join(no_act)}" if no_act else ''))
     halo = [f"{n} ({len(re.findall(r'glow\(', t))})" for n, t in txt.items() if len(re.findall(r'\bglow\(', t)) > 8]
     chk(not halo, "glow только у источников света (≤ 8 вызовов на мир, без ореолов вокруг объектов)" + (f" — много: {', '.join(halo)}" if halo else ''))
+    allw = '\n'.join(txt.values()); mb = re.search(r"WORLD\.button = \(t, u, cat\) => WORLD\.(\w+)", allw)
+    okb = bool((mb and mb.group(1) == 'today') or 'TRANS_IN.button' in allw)
+    chk(okb, "финал без склейки: WORLD.button = WORLD.today (последняя реплика в том же кадре, ПОДПИШИСЬ всплывает поверх) — владелец 14.11.2026" + (f" — сейчас WORLD.{mb.group(1)} без перехода" if not okb and mb else ''))
+    film = ROOT / 'build' / ep / 'film' / 'index.html'
+    if film.exists():
+        import subprocess
+        cc = subprocess.run(['node', str(ROOT / 'tools/camcheck.cjs'), ep], capture_output=True, text=True, cwd=ROOT, timeout=600).stdout.strip().splitlines()
+        warn = [l for l in cc if l.startswith('⚠')]
+        chk(not warn and any('camcheck: OK' in l for l in cc), "камера: без рывков, Том в кадре, пока говорит (tools/camcheck.cjs)" + (' — ' + '; '.join(w[2:] for w in warn[:6]) if warn else ''))
+    else: chk(False, "камера: нет build/<эп>/film — сначала check.sh, потом qa.py (camcheck)")
     sc = (d / 'scenes.js').read_text() if (d / 'scenes.js').exists() else ''
     chk(re.search(r'const ENDCARD = true', sc) is not None, "плашка «ПОДПИШИСЬ» (ENDCARD = true, владелец 03.11.2026)")
     snd = (d / 'sound.py').read_text() if (d / 'sound.py').exists() else ''; ev = d / 'ev.json'
