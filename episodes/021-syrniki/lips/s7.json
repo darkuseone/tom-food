@@ -1,0 +1,26 @@
+{
+  "metadata": {
+    "soundFile": "/home/user/tom-food/build/021-syrniki/vf/s7.wav",
+    "duration": 3.19
+  },
+  "mouthCues": [
+    { "start": 0.00, "end": 0.05, "value": "B" },
+    { "start": 0.05, "end": 0.16, "value": "C" },
+    { "start": 0.16, "end": 0.27, "value": "X" },
+    { "start": 0.27, "end": 0.36, "value": "F" },
+    { "start": 0.36, "end": 0.44, "value": "A" },
+    { "start": 0.44, "end": 1.24, "value": "B" },
+    { "start": 1.24, "end": 1.52, "value": "C" },
+    { "start": 1.52, "end": 1.59, "value": "B" },
+    { "start": 1.59, "end": 1.87, "value": "F" },
+    { "start": 1.87, "end": 1.95, "value": "A" },
+    { "start": 1.95, "end": 2.29, "value": "B" },
+    { "start": 2.29, "end": 2.42, "value": "A" },
+    { "start": 2.42, "end": 2.55, "value": "B" },
+    { "start": 2.55, "end": 2.62, "value": "F" },
+    { "start": 2.62, "end": 2.69, "value": "C" },
+    { "start": 2.69, "end": 3.04, "value": "B" },
+    { "start": 3.04, "end": 3.18, "value": "C" },
+    { "start": 3.18, "end": 3.19, "value": "X" }
+  ]
+}

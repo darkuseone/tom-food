@@ -6,7 +6,11 @@
  "timeline": {
   "scene_gap": 0.05,
   "tail": 0.6,
-  "tunnel": 0.0
+  "tunnel": 0.0,
+  "beats": {
+   "domo": 0.7,
+   "syrnik": 0.8
+  }
  },
  "worlds": [
   "props.js",
