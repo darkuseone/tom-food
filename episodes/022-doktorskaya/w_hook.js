@@ -92,12 +92,12 @@
     lay(1, () => { cat(); desk(t); rx(t); });
     lay(0.6, () => { front(t); motes(16, [-200, 200, 1200, 1500], '#ffffff', t, 22460, { sp: 5, sz: 3, a: 0.35, wob: 5 }); moodDark(600, 1150, 520, 1500, '#1a2a3a', 0.4); });
   };
-  const stPose = (b) => Object.assign(b, { x: 640, y: 1590, s: 1.18, flip: 1, look: [0.2, -0.1], hand: [190, -300], handF: [-150, -260], prop: 'sandwichDP', propAng: -0.1 });
+  const stPose = (b) => Object.assign(b, { x: 640, y: 1590, s: 1.18, flip: 1, look: [0.2, -0.1], hand: [190, -260], handF: [-150, -260], prop: 'sandwichDP', propAng: -0.1 });
   DIR.hook = {
     outfit: 'docA', light: { side: -1, rim: '#d8ecff' }, grade: ['#a8d0d0', 0.06],
     act: () => [[0, 'smug'], [EV.hk_rx, 'proud'], [EV.hk_ill, 'sideeye'], [EV.hk_q, 'suspicious'], [EV.hk_bet, 'wink'], [EV.hk_bite + 0.1, 'laugh']],
     pose: (t, u, b) => { const bite = t > EV.hk_bite, sign = t > EV.hk_rx && t < EV.hk_rx + 0.7, bet = t > EV.hk_bet && t < EV.hk_bite;
-      Object.assign(stPose(b), { look: t < EV.hk_rx ? [0.4, -0.1] : t < EV.hk_ill ? [-0.3, 0.6] : t < EV.hk_q ? [0.8, -0.1] : [0, 0], hand: bite ? [70, -310] : bet ? [170, -360] : [190, -300], handF: sign ? [-120 + Math.sin(t * 30) * 20, -150] : [-150, -200], prop: bite ? 'sandwichDBiteP' : 'sandwichDP', squint: t > EV.hk_q && t < EV.hk_bet, tailUp: bite });
+      Object.assign(stPose(b), { look: t < EV.hk_rx ? [0.4, -0.1] : t < EV.hk_ill ? [-0.3, 0.6] : t < EV.hk_q ? [0.8, -0.1] : [0, 0], hand: bite ? [70, -240] : bet ? [170, -330] : [190, -260], handF: sign ? [-120 + Math.sin(t * 30) * 20, -150] : [-150, -200], prop: bite ? 'sandwichDBiteP' : 'sandwichDP', squint: t > EV.hk_q && t < EV.hk_bet, tailUp: bite });
       if (bite && t < EV.hk_bite + 0.12) b.squash = (b.squash || 0) + 0.1; return b; },
     afterCat: (t, u, P) => {
       if (t > EV.hk_bite && t < EV.hk_bite + 1.4) { crumbs(P.x - 70 * P.s, P.y - 360 * P.s, t, EV.hk_bite, 12, 22470, DK.crust); for (let i = 0; i < 4; i++) { const k = clamp((t - EV.hk_bite) / 0.8); ell(P.x - 80 * P.s + i * 14 - k * 40, P.y - 360 * P.s + k * 120 + i * 8, 6, 6, { wash: DK.pink, washA: 1 - k, line: false }); } }
