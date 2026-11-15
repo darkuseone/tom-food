@@ -6,8 +6,8 @@ const JUICE = 0.2;                                          // «сочност�
 const SAFE = true;                                          // безопасная зона TikTok/Shorts (владелец, 23.10.2026): HUD ниже чёлки и дальше от краёв
 const ENDCARD = true;                                       // владелец 03.11.2026: плашка «ПОДПИШИСЬ» в конце обязательна (тает перед петлёй)
 const LOOP = 0.4;                                           // тест v1: последние 0.4 с перетекают в первый кадр — ролик зацикливается
-const HOOK_LINES = ['TODO', 'TODO?!'];                     // текст-хук первых ~2.5 с, ≤3 слов в строке
-const YR = { hook: ['', ''], lab: ['TODO', 'TODO'], plant: ['TODO', 'TODO'], deficit: ['TODO', 'TODO'], sausage: ['TODO', 'TODO'], gastro: ['TODO', 'TODO'], train: ['TODO', 'TODO'], archive: ['TODO', 'TODO'], today: ['TODO', 'TODO'], button: ['', ''] };
+const HOOK_LINES = ['КОЛБАСА', 'ПО РЕЦЕПТУ?!'];                     // текст-хук первых ~2.5 с, ≤3 слов в строке
+const YR = { hook: ['', ''], lab: ['1936', 'НАЗНАЧЕНИЕ'], plant: ['1936–1974', 'РЕЦЕПТ НЕ ТРОГАЮТ'], deficit: ['1970-е', 'ОСЛОЖНЕНИЕ'], sausage: ['1979', 'ГОСТ · СОСТАВ'], gastro: ['1970–80-е', 'ДЕФИЦИТ'], train: ['1970–80-е', 'ЗАГАДКА'], archive: ['★', 'ДИАГНОЗ'], today: ['сегодня', '9 ИЗ 40'], button: ['', ''] };
 const SC = SCN.map(([n, a, b]) => [n, a, b, YR[n][0], YR[n][1]]);
 const S0 = {}, S1 = {}; SC.forEach(s => { S0[s[0]] = s[1]; S1[s[0]] = Math.min(s[2], DUR); });
 const LS = k => VO[k], LE = k => VO[k] + VD[k], LF = (k, f) => VO[k] + VD[k] * f;
@@ -19,5 +19,16 @@ const DIR = {}, WORLD = {}, TRANS_IN = {};
 const WT = (k, w) => { const n = s => s.toLowerCase().replace(/[^а-яёa-z0-9-]/g, ''); const c = CAPS.find(c => c.key === k && c.words.some(x => n(x) === n(w))) || CAPS.find(c => c.key === k && c.words.some(x => n(x).startsWith(n(w)))); return c ? c.t0 : LS(k); };
 /* карточка рецепта: [строка, когда дописать, когда зачеркнуть, метка ('?' | 'new')]; видно последние 6 */
 const RECIPE = [
-  // ['ингредиент', WT('s1', 'слово'), null, 'new'],
+  ['Rp.: колбаса варёная', WT('s1', '1936-й.'), null, null],
+  ['свинина — 85 %', WT('s2', 'свинина,'), null, 'new'],
+  ['говядина — 15 %', WT('s2', 'говядина,'), null, 'new'],
+  ['соль · сахар', WT('s2', 'соль,'), null, null],
+  ['кардамон', WT('s2', 'кардамон.'), null, null],
+  ['для кого? — ???', WT('s3', 'каких'), WT('s12', 'деспотизма».'), '?'],
+  ['+ крахмал 2 %', WT('s5', 'крахмал.'), null, 'new'],
+  ['буйвол? як?', WT('s6', 'буйвола…'), null, '?'],
+  ['туалетная бумага?', WT('s8', 'туалетная'), WT('t1', 'Бумаги'), '?'],
+  ['Дз: царский деспотизм', WT('s12', 'деспотизма».'), null, 'new'],
+  ['бумага — 0 из 40', WT('t1', 'Бумаги'), null, null],
+  ['знак качества — 9', WT('t2', 'только'), null, 'new'],
 ];
