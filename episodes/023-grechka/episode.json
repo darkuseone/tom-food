@@ -4,13 +4,14 @@
  "title": "Гречка",
  "hook": "Гречка — вовсе не злак! Её родня растёт у тебя на грядке.",
  "timeline": {
-  "scene_gap": 0.05,
-  "tail": 0.6,
+  "scene_gap": 0.03,
+  "tail": 0.4,
   "tunnel": 0.0,
   "beats": {
-   "grain": 0.8,
-   "botany": 0.6
-  }
+   "grain": 0.7,
+   "botany": 0.5
+  },
+  "line_gap": 0.07
  },
  "worlds": [
   "props.js",
