@@ -15,7 +15,7 @@
   EV.sx_gag = LE('s7') + 0.05;
   SHAKES.push([EV.sx_yak + 0.1, 0.12, 5], [EV.sx_gag + 0.18, 0.25, 12]);
   KEYW.push('яка.', 'врач.');
-  const knifeY = t => t < EV.sx_gag ? lerp(420, 560, clamp((t - S0.sausage) / 6)) + Math.sin(t * 1.4) * 12 : lerp(560, 1180, Math.min(1, ((t - EV.sx_gag) / 0.18) ** 2));
+  const knifeY = t => t < EV.sx_gag ? lerp(640, 740, clamp((t - S0.sausage) / 6)) + Math.sin(t * 1.4) * 12 : lerp(740, 1180, Math.min(1, ((t - EV.sx_gag) / 0.18) ** 2));
   function giant(t) {                                                    // великанская кухня за оболочкой: стена, окно со светом, банка-башня, доска
     vgrad(-900, 1300, ['#e8d8c0', '#f4e6d0', '#d8c0a0']);
     for (let y = -900; y < 1300; y += 160) pencil([[-800, y], [2000, y]], { w: 4, col: '#c8b090', a: 0.5, pass2: false }); for (let x = -800; x < 2000; x += 220) pencil([[x, -900], [x, 1300]], { w: 4, col: '#c8b090', a: 0.4, pass2: false });
@@ -37,9 +37,9 @@
     pop();
   }
   function marble(t, near) {                                             // розовый «мрамор» среза: точки жира в перспективе, лужицы, блики
-    const y0 = near ? 1300 : 860, y1 = near ? 2200 : 1320, r = rng(near ? 22821 : 22820);
+    const y0 = near ? 1420 : 860, y1 = near ? 2200 : 1440, r = rng(near ? 22821 : 22820);
     const g = rect(-900, y0, 2900, y1 - y0, { wash: DK.pink, washA: 1, line: false, key: 22822 + (near ? 1 : 0) }); shadeG(g.path, 0, y0, 0, y1, near ? '#ffd0c8' : '#d88080', 0.35);
-    for (let i = 0; i < (near ? 44 : 70); i++) { const yy = y0 + r() * (y1 - y0), sc = near ? 1 : 0.3 + (yy - y0) / (y1 - y0) * 0.7, x = -800 + r() * 2700; const rr = (near ? 20 : 8) * sc * (0.6 + r());
+    for (let i = 0; i < (near ? 44 : 70); i++) { const yy = y0 + r() * (y1 - y0), sc = near ? 1 : 0.3 + (yy - y0) / (y1 - y0) * 0.7, x = -800 + r() * 2700; const rr = (near ? 20 : 15) * sc * (0.6 + r());
       ell(x, yy, rr * 1.6, rr * 0.6, { wash: DK.fat, washA: 1, w: 1.2, col: '#d8a8a0' }); ell(x - rr * 0.4, yy - rr * 0.2, rr * 0.5, rr * 0.15, { wash: '#ffffff', washA: 0.8, line: false }); }
     for (let i = 0; i < (near ? 10 : 20); i++) { const yy = y0 + r() * (y1 - y0), x = -800 + r() * 2700; ell(x, yy, 30 + r() * 30, 6 + r() * 6, { wash: '#e07a80', washA: 0.4, line: false }); }
     if (!near) for (let i = 0; i < 6; i++) { const yy = y0 + 40 + i * 70, x = -600 + ((i * 523) % 2400); ell(x, yy, 60 + i * 12, 10 + i * 2, { wash: '#ffe4e0', washA: 0.5, w: 1, col: '#e8a8a8' }); }
@@ -49,6 +49,9 @@
     for (const [x, y, s] of [[120, 1620, 1.6], [980, 1700, 1.3], [1300, 1560, 1.1], [-160, 1760, 1.8]]) { const b = ell(x, y, 60 * s, 26 * s, { wash: DK.fat, washA: 1, w: 2, col: '#c8a098' }); shadeG(b.path, x, y - 26 * s, x, y + 26 * s, '#e8c0b8', 0.5); ell(x - 20 * s, y - 10 * s, 22 * s, 6 * s, { wash: '#ffffff', washA: 0.9, line: false }); }
     push(740, 1500, 1.3); const cr = poly([[-40, 0], [-30, -70], [0, -100], [36, -70], [44, 0], [0, 20]], { wash: '#f8fbff', washA: 0.9, w: 2, col: '#8a9aa8', key: 22830 }); shadeG(cr.path, 44, 0, -40, -60, '#a8b8c8', 0.45); pencil([[0, -100], [0, 20]], { w: 1.6, col: '#a8b8c8', pass2: false }); pencil([[-30, -70], [36, -70]], { w: 1.4, col: '#c8d4e0', pass2: false }); ell(-10, -60, 8, 14, { wash: '#ffffff', washA: 1, line: false });
     if (t > EV.sx_listen - 0.5) { rect(-60, -170, 120, 40, { wash: '#f4f0e0', washA: 1, w: 1.4 }); txt('КРАХМАЛ', 0, -142, 18, { font: 'Osw', col: '#2a6aa8' }); } pop();
+    push(1180, 1500, 1); for (let i = 0; i < 3; i++) { const p = rect(-30 + i * 70, -900, 44, 900, { wash: '#c8ccd4', washA: 1, w: 2.4, col: '#3a4048', key: 22835 + i }); metalG(p.path, -20 + i * 70, -500, 300, '#ffffff', '#c8ccd4', '#5a6068', 0.6); pencil([[-18 + i * 70, -880], [-18 + i * 70, -20]], { w: 6, col: '#ffffff', a: 0.6, pass2: false }); ell(-8 + i * 70, 0, 30, 10, { wash: '#a85a60', washA: 0.5, line: false }); } pop();
+    push(-120, 1420, 1); const md = blob([[-160, 0], [-120, -40], [40, -50], [160, -10], [120, 30], [-80, 34]], { wash: '#e8b830', washA: 1, w: 2, col: '#8a6a10', key: 22836 }); shadeG(md.path, 0, -50, 0, 34, '#a87a10', 0.4); ell(-40, -26, 50, 8, { wash: '#fff4c0', washA: 0.8, line: false }); pop();
+    for (let i = 0; i < 6; i++) { const x = 420 + i * 140, y = 1360 + (i % 2) * 40; const c = blob([[x - 24, y], [x - 18, y - 22], [x + 10, y - 26], [x + 24, y - 6], [x + 14, y + 10]], { wash: '#d89a4a', washA: 1, w: 1.4, col: '#6a3a10' }); }
     for (let i = 0; i < 4; i++) { const x = 300 + i * 260, k = (t * 0.6 + i * 0.3) % 1; ell(x, 1460 + i * 20, 24 * (1 - k), 8 * (1 - k), { wash: '#ffd8d8', washA: 0.6, w: 1, col: '#e8a0a0' }); }
     if (t > EV.sx_gag + 0.18) { pencil([[-900, 1180], [2000, 1180]], { w: 10, col: '#8a3a40', pass2: false }); pencil([[-900, 1188], [2000, 1188]], { w: 4, col: '#ffe0d8', a: 0.7, pass2: false }); const k = clamp((t - EV.sx_gag - 0.18) / 0.5); for (let i = 0; i < 10; i++) ell(260 + (i - 5) * 50 * k * 2, 1170 - Math.sin(i) * 80 * k, 10, 8, { wash: DK.pink, washA: 1 - k, line: false }); if (k < 0.9) { push(560, 1000, popK(t, EV.sx_gag + 0.18, 0.3), -0.1); txt('ХРЯСЬ!', 0, 0, 80, { font: 'Osw', col: '#c8241e' }); pop(); } }
   }
@@ -66,6 +69,9 @@
     lay(18, () => { giant(t); haze('#ffeede', 0.08); });
     lay(8, () => { casing(t); shaft(-160, -300, 520, 2600, -0.4, 'rgba(255,246,220,1)', 0.14); });
     lay(3, () => { marble(t, false); haze('#ffe8e0', 0.05); });
+    lay(1.8, () => { for (const [x, y, s] of [[-300, 1220, 1.4], [180, 1190, 0.9], [760, 1210, 1.2], [1250, 1190, 1.0], [1600, 1230, 1.5]]) { const b = ell(x, y, 70 * s, 30 * s, { wash: DK.fat, washA: 1, w: 2, col: '#c8a098' }); shadeG(b.path, x, y - 30 * s, x, y + 30 * s, '#e0b0a8', 0.5); ell(x - 24 * s, y - 12 * s, 26 * s, 7 * s, { wash: '#ffffff', washA: 0.85, line: false }); castShadow(x, y + 20 * s, 120 * s, 40, 0.5, 0.15); }
+      for (const [x, y] of [[480, 1180], [1020, 1200]]) { const pc = ell(x, y - 20, 34, 34, { wash: '#2a1a14', washA: 1, w: 2, col: '#0a0604' }); hatch(pc.path, pc.bb, { gap: 4, a: 0.3, col: '#5a3a2a', ang: 0.8, key: 22837 + x, w: 1 }); ell(x - 10, y - 32, 8, 5, { wash: '#8a7a6a', washA: 0.8, line: false }); }
+      push(-60, 1150, 1); const cr = blob([[-120, 40], [-100, -40], [-20, -70], [90, -50], [130, 20], [60, 50]], { wash: '#d8a050', washA: 1, w: 2, col: '#6a3a10', key: 22838 }); shadeG(cr.path, 0, -70, 0, 50, '#8a4a10', 0.4); for (let i = 0; i < 10; i++) ell(-80 + i * 20, -20 + (i % 3) * 14, 5, 4, { wash: '#f4d8a0', washA: 0.8, line: false }); pop(); });
     lay(1, () => { knife(t); surface(t); cat(); lightPool(520, 1540, 420, 80, 'rgba(255,240,220,1)', 0.3); });
     lay(0.6, () => { front(t); motes(14, [-100, 300, 1200, 1500], '#fff4ee', t, 22860, { sp: 4, sz: 3, a: 0.3, wob: 6 }); moodDark(560, 1150, 520, 1500, '#4a1a28', 0.32); });
   };
