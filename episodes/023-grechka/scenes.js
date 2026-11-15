@@ -6,8 +6,8 @@ const JUICE = 0.2;                                          // «сочност�
 const SAFE = true;                                          // безопасная зона TikTok/Shorts (владелец, 23.10.2026): HUD ниже чёлки и дальше от краёв
 const ENDCARD = true;                                       // владелец 03.11.2026: плашка «ПОДПИШИСЬ» в конце обязательна (тает перед петлёй)
 const LOOP = 0.4;                                           // тест v1: последние 0.4 с перетекают в первый кадр — ролик зацикливается
-const HOOK_LINES = ['TODO', 'TODO?!'];                     // текст-хук первых ~2.5 с, ≤3 слов в строке
-const YR = { hook: ['', ''], yunnan: ['TODO', 'TODO'], byzant: ['TODO', 'TODO'], names: ['TODO', 'TODO'], pech: ['TODO', 'TODO'], grain: ['TODO', 'TODO'], panic: ['TODO', 'TODO'], botany: ['TODO', 'TODO'], today: ['TODO', 'TODO'], button: ['', ''] };
+const HOOK_LINES = ['ГРЕЧКА —', 'НЕ ЗЛАК?!'];                     // текст-хук первых ~2.5 с, ≤3 слов в строке
+const YR = { hook: ['', ''], yunnan: ['древность', 'ЮНЬНАНЬ · ГИМАЛАИ'], byzant: ['Средние века', 'ВИЗАНТИЯ → СЛАВЯНЕ'], names: ['XIV–XV вв.', 'ЕВРОПА · ИМЕНА'], pech: ['века', 'РУССКАЯ ПЕЧЬ'], grain: ['улика', 'ЗЕРНО'], panic: ['всегда', 'ЧЁРНЫЙ ДЕНЬ'], botany: ['★', 'КТО ОНА?'], today: ['сегодня', '≈ 2 МЛН ТОНН'], button: ['', ''] };
 const SC = SCN.map(([n, a, b]) => [n, a, b, YR[n][0], YR[n][1]]);
 const S0 = {}, S1 = {}; SC.forEach(s => { S0[s[0]] = s[1]; S1[s[0]] = Math.min(s[2], DUR); });
 const LS = k => VO[k], LE = k => VO[k] + VD[k], LF = (k, f) => VO[k] + VD[k] * f;
@@ -19,5 +19,13 @@ const DIR = {}, WORLD = {}, TRANS_IN = {};
 const WT = (k, w) => { const n = s => s.toLowerCase().replace(/[^а-яёa-z0-9-]/g, ''); const c = CAPS.find(c => c.key === k && c.words.some(x => n(x) === n(w))) || CAPS.find(c => c.key === k && c.words.some(x => n(x).startsWith(n(w)))); return c ? c.t0 : LS(k); };
 /* карточка рецепта: [строка, когда дописать, когда зачеркнуть, метка ('?' | 'new')]; видно последние 6 */
 const RECIPE = [
-  // ['ингредиент', WT('s1', 'слово'), null, 'new'],
+  ['семья: злаки?', 0.7, WT('s14', 'гречишных.'), '?'],
+  ['родина — горы Юньнань', WT('s1', 'Юньнань'), null, 'new'],
+  ['имя: «гречка» — от греков', WT('s4', 'гречка».'), null, null],
+  ['сарацинская · языческая', WT('s5', 'сарацинской,'), null, null],
+  ['buckwheat = буковая', WT('s7', 'буковая'), null, 'new'],
+  ['цвет — от огня', WT('s9', 'огонь:'), null, null],
+  ['зерно — три грани', WT('s10', 'три'), null, 'new'],
+  ['семья: гречишные ✓', WT('s14', 'гречишных.'), null, 'new'],
+  ['родня — щавель, ревень', WT('s14', 'щавель…'), null, 'new'],
 ];
