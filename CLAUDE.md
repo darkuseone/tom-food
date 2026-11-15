@@ -11,7 +11,7 @@
 2. Перед выпуском: `docs/episode-formula.md`, `docs/dishes.md` (что было — не повторяться), `docs/channel.md` (чем отличаемся от ТОМ-ТУР).
 3. `docs/ref-api.md` — шпаргалка движка и Тома. **Не читать целиком** `engine/tom.js`, `engine.js`, `core.js` — только `grep -n` и диапазоны; готовые детали — `docs/ref-library.md`.
 По задаче: `docs/lessons.md` (уроки ТОМ-ТУР), `docs/research.md` (данные площадок 2025–26), `docs/market.md`, `docs/ref-character.md`, `docs/ref-costumes.md`, `docs/ref-style.md`, `docs/ref-pipeline.md`, `docs/ref-sound.md`, `docs/sources/<эп>.md`.
-**Git:** `main` — источник правды (всё до 020 там, 14.11.2026). Новый выпуск — ветка `episode-<NNN-блюдо>` от свежего `main`; при сдаче — fast-forward в `main` + push (владелец, 29.10.2026). 002-olivier и 002-fries (бывшие PR #2, #3) влиты в main 29.10.2026 как **эталон визуала**.
+**Git:** `main` — источник правды (всё до 023 там, 15.11.2026). Новый выпуск — ветка `episode-<NNN-блюдо>` от свежего `main`; при сдаче — fast-forward в `main` + push (владелец, 29.10.2026). 002-olivier и 002-fries (бывшие PR #2, #3) влиты в main 29.10.2026 как **эталон визуала**.
 Скилы пайплайна (`.claude/skills`): `week` (неделя: N тем → N роликов), `episode` (один ролик) → `facts` → `scene` → `sound` → `deliver`; правки — `fix`, статистика — `stats`. Грузить по этапу, а не всё сразу.
 Окружение: `tools/setup.sh`. Ключ `ELEVENLABS_API_KEY` — в переменных окружения, **значения ключей никогда не печатать**.
 
