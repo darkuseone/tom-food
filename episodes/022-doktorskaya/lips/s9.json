@@ -1,0 +1,43 @@
+{
+  "metadata": {
+    "soundFile": "/home/user/tom-food/build/022-doktorskaya/vf/s9.wav",
+    "duration": 4.40
+  },
+  "mouthCues": [
+    { "start": 0.00, "end": 0.13, "value": "B" },
+    { "start": 0.13, "end": 0.20, "value": "C" },
+    { "start": 0.20, "end": 0.27, "value": "B" },
+    { "start": 0.27, "end": 0.41, "value": "C" },
+    { "start": 0.41, "end": 0.69, "value": "B" },
+    { "start": 0.69, "end": 0.76, "value": "C" },
+    { "start": 0.76, "end": 0.83, "value": "B" },
+    { "start": 0.83, "end": 0.94, "value": "A" },
+    { "start": 0.94, "end": 1.07, "value": "B" },
+    { "start": 1.07, "end": 1.21, "value": "C" },
+    { "start": 1.21, "end": 1.28, "value": "B" },
+    { "start": 1.28, "end": 1.49, "value": "C" },
+    { "start": 1.49, "end": 1.56, "value": "B" },
+    { "start": 1.56, "end": 1.84, "value": "C" },
+    { "start": 1.84, "end": 2.12, "value": "B" },
+    { "start": 2.12, "end": 2.20, "value": "A" },
+    { "start": 2.20, "end": 2.24, "value": "B" },
+    { "start": 2.24, "end": 2.49, "value": "C" },
+    { "start": 2.49, "end": 2.56, "value": "F" },
+    { "start": 2.56, "end": 2.63, "value": "C" },
+    { "start": 2.63, "end": 2.73, "value": "F" },
+    { "start": 2.73, "end": 2.77, "value": "E" },
+    { "start": 2.77, "end": 2.91, "value": "H" },
+    { "start": 2.91, "end": 3.33, "value": "B" },
+    { "start": 3.33, "end": 3.47, "value": "X" },
+    { "start": 3.47, "end": 3.51, "value": "B" },
+    { "start": 3.51, "end": 3.62, "value": "C" },
+    { "start": 3.62, "end": 3.69, "value": "B" },
+    { "start": 3.69, "end": 3.83, "value": "C" },
+    { "start": 3.83, "end": 3.90, "value": "E" },
+    { "start": 3.90, "end": 3.97, "value": "B" },
+    { "start": 3.97, "end": 4.04, "value": "H" },
+    { "start": 4.04, "end": 4.11, "value": "C" },
+    { "start": 4.11, "end": 4.39, "value": "B" },
+    { "start": 4.39, "end": 4.40, "value": "X" }
+  ]
+}

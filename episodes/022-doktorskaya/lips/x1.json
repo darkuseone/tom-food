@@ -1,0 +1,23 @@
+{
+  "metadata": {
+    "soundFile": "/home/user/tom-food/build/022-doktorskaya/vf/x1.wav",
+    "duration": 2.50
+  },
+  "mouthCues": [
+    { "start": 0.00, "end": 0.42, "value": "B" },
+    { "start": 0.42, "end": 0.56, "value": "C" },
+    { "start": 0.56, "end": 0.77, "value": "B" },
+    { "start": 0.77, "end": 0.91, "value": "C" },
+    { "start": 0.91, "end": 1.05, "value": "F" },
+    { "start": 1.05, "end": 1.61, "value": "B" },
+    { "start": 1.61, "end": 1.68, "value": "G" },
+    { "start": 1.68, "end": 1.76, "value": "A" },
+    { "start": 1.76, "end": 1.86, "value": "C" },
+    { "start": 1.86, "end": 1.93, "value": "B" },
+    { "start": 1.93, "end": 2.00, "value": "H" },
+    { "start": 2.00, "end": 2.07, "value": "C" },
+    { "start": 2.07, "end": 2.35, "value": "B" },
+    { "start": 2.35, "end": 2.49, "value": "E" },
+    { "start": 2.49, "end": 2.50, "value": "X" }
+  ]
+}

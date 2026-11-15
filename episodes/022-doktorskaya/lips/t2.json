@@ -1,0 +1,34 @@
+{
+  "metadata": {
+    "soundFile": "/home/user/tom-food/build/022-doktorskaya/vf/t2.wav",
+    "duration": 4.42
+  },
+  "mouthCues": [
+    { "start": 0.00, "end": 0.16, "value": "B" },
+    { "start": 0.16, "end": 0.30, "value": "C" },
+    { "start": 0.30, "end": 0.51, "value": "B" },
+    { "start": 0.51, "end": 0.64, "value": "C" },
+    { "start": 0.64, "end": 0.78, "value": "B" },
+    { "start": 0.78, "end": 0.86, "value": "A" },
+    { "start": 0.86, "end": 1.01, "value": "F" },
+    { "start": 1.01, "end": 1.45, "value": "B" },
+    { "start": 1.45, "end": 1.79, "value": "F" },
+    { "start": 1.79, "end": 2.14, "value": "B" },
+    { "start": 2.14, "end": 2.49, "value": "C" },
+    { "start": 2.49, "end": 2.91, "value": "B" },
+    { "start": 2.91, "end": 2.98, "value": "C" },
+    { "start": 2.98, "end": 3.33, "value": "B" },
+    { "start": 3.33, "end": 3.46, "value": "X" },
+    { "start": 3.46, "end": 3.54, "value": "B" },
+    { "start": 3.54, "end": 3.68, "value": "C" },
+    { "start": 3.68, "end": 3.75, "value": "B" },
+    { "start": 3.75, "end": 3.82, "value": "C" },
+    { "start": 3.82, "end": 3.89, "value": "B" },
+    { "start": 3.89, "end": 3.97, "value": "A" },
+    { "start": 3.97, "end": 4.01, "value": "B" },
+    { "start": 4.01, "end": 4.12, "value": "C" },
+    { "start": 4.12, "end": 4.22, "value": "A" },
+    { "start": 4.22, "end": 4.41, "value": "B" },
+    { "start": 4.41, "end": 4.42, "value": "X" }
+  ]
+}
