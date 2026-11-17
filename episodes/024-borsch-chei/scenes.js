@@ -17,28 +17,30 @@ const YEARS = {};
 const KEYW = ['историю!', 'откусим!'];
 const DIR = {}, WORLD = {}, TRANS_IN = {};
 const WT = (k, w) => { const n = s => s.toLowerCase().replace(/[^а-яёa-z0-9-]/g, ''); const c = CAPS.find(c => c.key === k && c.words.some(x => n(x) === n(w))) || CAPS.find(c => c.key === k && c.words.some(x => n(x).startsWith(n(w)))); return c ? c.t0 : LS(k); };
+const wtS = (k, w) => { const n = s => s.toLowerCase().replace(/[^а-яёa-z0-9-]/g, ''); const c = CAPS.find(c => c.key === k && c.words.some(x => n(x) === n(w))) || CAPS.find(c => c.key === k && c.words.some(x => n(x).startsWith(n(w)))); if (!c) return LS(k);
+  const i = c.words.findIndex(x => n(x).startsWith(n(w))), L = c.words.map(x => x.length + 1), tot = L.reduce((a, b) => a + b, 0), pre = L.slice(0, i).reduce((a, b) => a + b, 0); return c.t0 + (c.t1 - c.t0) * pre / tot; };   // = wtw из props.js (он грузится позже scenes.js)
 /* карточка рецепта: [строка, когда дописать, когда зачеркнуть, метка ('?' | 'new')]; видно последние 5 (SAFE) */
 const RECIPE = [
-  ['чей? — спорят', wtw('s1', 'Ныряем'), wtw('s10', 'земель.'), '?'],
-  ['цвет: зелёный', wtw('s1', 'зелёный'), wtw('s4', 'краснеет!'), null],
-  ['кислинка — квас', wtw('s2', 'кисло!'), wtw('s6', 'квас!'), null],
-  ['варит каждый сам', wtw('s3', 'каждый'), null, 'new'],
-  ['цвет: красный ✓', wtw('s4', 'краснеет!'), null, 'new'],
-  ['кислинка — томат', wtw('s6', 'квас!') + 0.1, null, 'new'],
-  ['у соседей — свой', wtw('s7', 'соседи'), null, null],
-  ['борш = закваска', wtw('s9', 'борш'), null, 'new'],
-  ['красный — укр. земли', wtw('s10', 'земель.'), null, 'new'],
-  ['ЮНЕСКО · 2022', wtw('s11', 'ЮНЕСКО'), null, 'new'],
+  ['чей? — спорят', wtS('s1', 'Ныряем'), wtS('s10', 'земель.'), '?'],
+  ['цвет: зелёный', wtS('s1', 'зелёный'), wtS('s4', 'краснеет!'), null],
+  ['кислинка — квас', wtS('s2', 'кисло!'), wtS('s6', 'квас!'), null],
+  ['варит каждый сам', wtS('s3', 'каждый'), null, 'new'],
+  ['цвет: красный ✓', wtS('s4', 'краснеет!'), null, 'new'],
+  ['кислинка — томат', wtS('s6', 'квас!') + 0.1, null, 'new'],
+  ['у соседей — свой', wtS('s7', 'соседи'), null, null],
+  ['борш = закваска', wtS('s9', 'борш'), null, 'new'],
+  ['красный — укр. земли', wtS('s10', 'земель.'), null, 'new'],
+  ['ЮНЕСКО · 2022', wtS('s11', 'ЮНЕСКО'), null, 'new'],
 ];
 /* шкала ингредиентов слева (17.11.2026, engine/core.js ingrStrip): [иконка, подпись, появилась, зачёркнута, эпоха] */
 const INGR = [
-  ['borshchevik', 'борщевик', wtw('s1', 'борщевика.'), wtw('s4', 'свёкла'), '1000 л.'],
-  ['kvas', 'квас', wtw('s2', 'кисло!'), wtw('s6', 'квас!'), ''],
-  ['beet', 'свёкла', wtw('s4', 'свёкла'), null, 'XVIII'],
-  ['cabbage', 'капуста', wtw('s4', 'капустой'), null, ''],
-  ['turnip', 'репа', wtw('s4', 'капустой') + 0.45, wtw('s5', 'уволена!'), ''],
-  ['potato', 'картошка', wtw('s5', 'картошка'), null, 'XIX'],
-  ['tomato', 'томат', wtw('s6', 'помидор:'), null, 'XX'],
-  ['smetana', 'сметана', wtw('s10', 'земель.') + 0.3, null, 'сейчас'],
+  ['borshchevik', 'борщевик', wtS('s1', 'борщевика.'), wtS('s4', 'свёкла'), '1000 л.'],
+  ['kvas', 'квас', wtS('s2', 'кисло!'), wtS('s6', 'квас!'), ''],
+  ['beet', 'свёкла', wtS('s4', 'свёкла'), null, 'XVIII'],
+  ['cabbage', 'капуста', wtS('s4', 'капустой'), null, ''],
+  ['turnip', 'репа', wtS('s4', 'капустой') + 0.45, wtS('s5', 'уволена!'), ''],
+  ['potato', 'картошка', wtS('s5', 'картошка'), null, 'XIX'],
+  ['tomato', 'томат', wtS('s6', 'помидор:'), null, 'XX'],
+  ['smetana', 'сметана', wtS('s10', 'земель.') + 0.3, null, 'сейчас'],
 ];
 const INGR_OPT = { from: S0.grass + 0.2 };

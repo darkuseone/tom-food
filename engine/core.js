@@ -119,10 +119,10 @@ function depthFog(col, a) { screenFill(col, a); }                    // межд
       Рисуется ТОЛЬКО если в scenes.js задан INGR (старые выпуски не меняются; вызов — lib/direct.js hudFrame).
       const INGR = [[иконка, 'подпись', tAdd, tStrike | null, 'эпоха' | ''], ...];   // tAdd/tStrike — WT('s4','свёкла') и т.п.
       иконка — ключ INGR_ICONS (см. ниже) или своя функция (s, t) => {...} (рисует в квадрате ±30 вокруг 0,0).
-      const INGR_OPT = { x: 96, y0: 724, title: 'СОСТАВ', from: <время появления ленты>, n: 8 };   // необязательно; по умолчанию — после хука
-      Раскладка (SAFE): x 96–208, y 724–1474 — под карточкой рецепта (y ≤ 640), над субтитрами (y ≥ 1530), левее Тома. Видно последние n строк.
+      const INGR_OPT = { x: 96, y0: 712, title: 'СОСТАВ', from: <время появления ленты>, n: 8 };   // необязательно; по умолчанию — после хука
+      Раскладка (SAFE): x 96–218, y 712–1518 — под карточкой рецепта (y ≤ 640), над субтитрами (y ≥ 1530), левее Тома. Видно последние n строк.
    2) ИНФО-ПЛАШКА — крупно справа от карточки (x 470–970, y ≈ 420–640), вызывать из DIR.<сцена>.hud(t):
-      infoPlate(t, t0, t1, { kind: 'swap', a: 'КВАС', b: 'ТОМАТ', ia: 'kvas', ib: 'tomato', title: 'КИСЛИНКА' })   // было → стало
+      infoPlate(t, t0, t1, { kind: 'swap', a: 'КВАС', b: 'ТОМАТ', ia: 'kvas', ib: 'tomato', title: 'КИСЛИНКА', tb })   // было → стало (tb — когда появляется «стало»)
       infoPlate(t, t0, t1, { kind: 'num', big: '3 ТОННЫ', sub: 'кефира за праздник', icon: 'kefir' })            // число-сувенир
       infoPlate(t, t0, t1, { kind: 'list', title: 'БОРЩ У СОСЕДЕЙ', rows: [['Польша', 'прозрачный, с ушками', '#c8243a'], ...] })   // мини-карта/список */
 const INGR_ICONS = {
@@ -148,7 +148,7 @@ const INGR_ICONS = {
 function ingrIcon(id, x, y, s, t) { push(x, y, s); const f = typeof id === 'function' ? id : INGR_ICONS[id]; if (f) f(s, t); else { ell(0, 0, 24, 24, { wash: '#e8b53a', washA: 1, w: 2 }); txt(String(id).slice(0, 1).toUpperCase(), 0, 10, 30, { font: 'Osw', col: '#2b2622' }); } pop(); }
 function ingrStrip(t) {
   if (typeof INGR === 'undefined' || !INGR.length) return;
-  const O = Object.assign({ x: 96, y0: 724, title: 'СОСТАВ', from: (typeof EV !== 'undefined' && EV.hookEnd) || 2.6, n: 8, rh: 88, w: 112 }, typeof INGR_OPT !== 'undefined' ? INGR_OPT : {});
+  const O = Object.assign({ x: 96, y0: 712, title: 'СОСТАВ', from: (typeof EV !== 'undefined' && EV.hookEnd) || 2.6, n: 8, rh: 92, w: 122 }, typeof INGR_OPT !== 'undefined' ? INGR_OPT : {});
   if (t < O.from) return; const all = INGR.filter(q => t >= q[2]), items = all.slice(-O.n), e = sm(clamp((t - O.from) / 0.45));
   const h = 54 + Math.max(1, items.length) * O.rh + 16, x0 = O.x - (1 - e) * 160;
   push(x0, O.y0, 1, -0.012 + Math.sin(t * 1.1) * 0.003); ctx.globalAlpha = e;
@@ -161,8 +161,8 @@ function ingrStrip(t) {
   items.forEach((q, j) => { const [id, name, ta, ts, era] = q, y = 54 + j * O.rh, k = popK(t, ta, 0.4), fresh = t - ta < 0.7, gone = ts !== null && ts !== undefined && t >= ts;
     if (fresh) glow(O.w / 2 - 6, y + 36, 70, 'rgba(232,181,58,1)', 0.45 * (1 - (t - ta) / 0.7), 'multiply');
     if (era) txt(era, 8, y + 10, 17, { font: 'Osw', col: '#d9482b', align: 'left', a: 0.85 });
-    push(O.w / 2 - 6, y + 36, 0.35 + 0.65 * k); ell(0, 0, 32, 32, { wash: '#fffaf0', washA: 0.9, w: 1.4, col: '#b8a890' }); ingrIcon(id, 0, 0, 0.92, t); if (gone) { ctx.save(); ctx.fillStyle = 'rgba(244,230,200,0.62)'; ctx.beginPath(); ctx.arc(0, 0, 33, 0, 6.3); ctx.fill(); ctx.restore(); } pop();
-    txt(name, O.w / 2 - 6, y + 80, 22, { font: 'Hand', col: gone ? '#8a7a6a' : '#2b2622', a: k });
+    push(O.w / 2 - 6, y + 36, 0.35 + 0.65 * k); ell(0, 0, 36, 36, { wash: '#fffaf0', washA: 0.9, w: 1.4, col: '#b8a890' }); ingrIcon(id, 0, 0, 1.0, t); if (gone) { ctx.save(); ctx.fillStyle = 'rgba(244,230,200,0.62)'; ctx.beginPath(); ctx.arc(0, 0, 37, 0, 6.3); ctx.fill(); ctx.restore(); } pop();
+    txt(name, O.w / 2 - 6, y + 84, 24, { font: 'Hand', col: gone ? '#8a7a6a' : '#2b2622', a: k });
     if (gone) { const kk = clamp((t - ts) / 0.3); pencil([[O.w / 2 - 40, y + 8], [O.w / 2 - 40 + 70 * kk, y + 8 + 74 * kk]], { w: 6, col: '#d9482b', a: 0.95, pass2: false, gap: false }); pencil([[O.w / 2 + 28, y + 8], [O.w / 2 + 28 - 70 * kk, y + 8 + 74 * kk]], { w: 6, col: '#d9482b', a: 0.95, pass2: false, gap: false }); }
     if (j === items.length - 1 && !gone) { const b = Math.sin(t * 6) * 3; poly([[-14 + b, y + 26], [-2 + b, y + 36], [-14 + b, y + 46]], { wash: '#d9482b', washA: 1, w: 1.4, col: '#2b2622' }); } });
   ctx.globalAlpha = 1; pop();
@@ -175,11 +175,11 @@ function infoPlate(t, t0, t1, o = {}) {
   pencil([[-w / 2, -h / 2], [w / 2, -h / 2], [w / 2, h / 2], [-w / 2, h / 2], [-w / 2, -h / 2]], { w: 3, col: '#2b2622', a: 0.85, pass2: false });
   ctx.save(); ctx.fillStyle = '#d9482b'; ctx.beginPath(); ctx.roundRect(-w / 2, -h / 2, w, 46, 14); ctx.fill(); ctx.fillRect(-w / 2, -h / 2 + 24, w, 22); ctx.restore();
   txt(o.title || '', 0, -h / 2 + 32, 30, { font: 'Osw', col: '#fff8ec' });
-  if (o.kind === 'swap') { const s2 = clamp((t - t0 - 0.35) / 0.35), cy = 30;
-    ingrIcon(o.ia, -w / 2 + 70, cy - 8, 1.25, t); txt(o.a, -w / 2 + 70, cy + 62, 34, { font: 'Osw', col: '#2b2622' });
-    if (s2 > 0) { pencil([[-w / 2 + 30, cy - 40], [-w / 2 + 30 + 84 * s2, cy + 60 * s2]], { w: 7, col: '#d9482b', pass2: false, gap: false }); pencil([[-w / 2 + 114, cy - 40], [-w / 2 + 114 - 84 * s2, cy + 60 * s2]], { w: 7, col: '#d9482b', pass2: false, gap: false }); }
-    const ax = lerp(-60, 60, s2); pencil([[-70, cy], [ax, cy]], { w: 7, col: '#2b2622', pass2: false, gap: false }); if (s2 > 0.3) poly([[ax - 6, cy - 20], [ax + 20, cy], [ax - 6, cy + 20]], { wash: '#2b2622', washA: 1, line: false });
-    const kb = popK(t, t0 + 0.6, 0.35); if (t > t0 + 0.6) { push(w / 2 - 80, cy - 8, kb); ingrIcon(o.ib, 0, 0, 1.25, t); pop(); txt(o.b, w / 2 - 80, cy + 62, 34, { font: 'Osw', col: '#4a5a14', a: kb }); } }
+  if (o.kind === 'swap') { const tb = o.tb || t0 + 0.6, s2 = clamp((t - tb + 0.25) / 0.35), ar = clamp((t - t0 - 0.2) / 0.5), cy = 30;
+    ingrIcon(o.ia, -w / 2 + 90, cy - 8, 1.25, t); txt(o.a, -w / 2 + 90, cy + 62, 32, { font: 'Osw', col: '#2b2622' });
+    if (s2 > 0) { pencil([[-w / 2 + 50, cy - 40], [-w / 2 + 50 + 84 * s2, cy + 60 * s2]], { w: 7, col: '#d9482b', pass2: false, gap: false }); pencil([[-w / 2 + 134, cy - 40], [-w / 2 + 134 - 84 * s2, cy + 60 * s2]], { w: 7, col: '#d9482b', pass2: false, gap: false }); }
+    const ax = lerp(-60, 50, ar); pencil([[-70, cy], [ax, cy]], { w: 7, col: '#2b2622', pass2: false, gap: false }); if (ar > 0.3) poly([[ax - 6, cy - 20], [ax + 20, cy], [ax - 6, cy + 20]], { wash: '#2b2622', washA: 1, line: false });
+    const kb = popK(t, tb, 0.35); if (t > tb) { push(w / 2 - 90, cy - 8, kb); ingrIcon(o.ib, 0, 0, 1.25, t); pop(); txt(o.b, w / 2 - 90, cy + 62, 32, { font: 'Osw', col: '#4a5a14' }); } }
   else if (o.kind === 'num') { if (o.icon) ingrIcon(o.icon, -w / 2 + 70, 20, 1.4, t); const kb = popK(t, t0 + 0.15, 0.4); push(o.icon ? 50 : 0, 26, 0.7 + 0.3 * kb); txt(o.big || '', 0, 22, 96, { font: 'Osw', col: '#d9482b' }); pop(); txt(o.sub || '', o.icon ? 50 : 0, h / 2 - 22, 30, { font: 'Hand', col: '#2b2622' }); }
   else if (o.kind === 'list') (o.rows || []).forEach((r, j) => { const kr = popK(t, t0 + 0.15 + j * 0.25, 0.3), yy = -h / 2 + 80 + j * 52; if (t < t0 + 0.15 + j * 0.25) return;
     ell(-w / 2 + 34, yy, 16 * kr, 16 * kr, { wash: r[2] || '#c8243a', washA: 1, w: 2, col: '#2b2622' }); txt(r[0], -w / 2 + 62, yy + 2, 30, { font: 'Osw', col: '#2b2622', align: 'left', a: kr }); txt(r[1], w / 2 - 16, yy + 4, 28, { font: 'Hand', col: '#5a4a3a', align: 'right', a: kr }); });
