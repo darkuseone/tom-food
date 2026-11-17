@@ -1,0 +1,40 @@
+{
+  "metadata": {
+    "soundFile": "/home/user/tom-food/build/024-borsch-chei/vf/h1.wav",
+    "duration": 4.53
+  },
+  "mouthCues": [
+    { "start": 0.00, "end": 0.20, "value": "B" },
+    { "start": 0.20, "end": 0.28, "value": "A" },
+    { "start": 0.28, "end": 0.35, "value": "C" },
+    { "start": 0.35, "end": 0.42, "value": "B" },
+    { "start": 0.42, "end": 0.63, "value": "F" },
+    { "start": 0.63, "end": 0.84, "value": "E" },
+    { "start": 0.84, "end": 1.05, "value": "B" },
+    { "start": 1.05, "end": 1.21, "value": "X" },
+    { "start": 1.21, "end": 1.32, "value": "B" },
+    { "start": 1.32, "end": 1.46, "value": "C" },
+    { "start": 1.46, "end": 1.81, "value": "B" },
+    { "start": 1.81, "end": 1.89, "value": "A" },
+    { "start": 1.89, "end": 2.02, "value": "E" },
+    { "start": 2.02, "end": 2.37, "value": "B" },
+    { "start": 2.37, "end": 2.43, "value": "A" },
+    { "start": 2.43, "end": 2.49, "value": "D" },
+    { "start": 2.49, "end": 2.57, "value": "A" },
+    { "start": 2.57, "end": 2.80, "value": "F" },
+    { "start": 2.80, "end": 2.87, "value": "C" },
+    { "start": 2.87, "end": 2.95, "value": "A" },
+    { "start": 2.95, "end": 3.08, "value": "D" },
+    { "start": 3.08, "end": 3.29, "value": "F" },
+    { "start": 3.29, "end": 3.57, "value": "B" },
+    { "start": 3.57, "end": 3.68, "value": "A" },
+    { "start": 3.68, "end": 3.78, "value": "B" },
+    { "start": 3.78, "end": 3.86, "value": "A" },
+    { "start": 3.86, "end": 3.91, "value": "F" },
+    { "start": 3.91, "end": 3.96, "value": "B" },
+    { "start": 3.96, "end": 4.10, "value": "C" },
+    { "start": 4.10, "end": 4.31, "value": "F" },
+    { "start": 4.31, "end": 4.52, "value": "B" },
+    { "start": 4.52, "end": 4.53, "value": "X" }
+  ]
+}
