@@ -1,0 +1,151 @@
+{
+ "num": "024",
+ "city": "Борщ",
+ "title": "Чей борщ?",
+ "hook": "Чей борщ? Соседи спорят до хрипоты. А ответ — на самом дне тарелки!",
+ "timeline": {
+  "scene_gap": 0.03,
+  "tail": 0.4,
+  "tunnel": 0.0,
+  "line_gap": 0.07,
+  "beats": {
+   "kyiv": 0.7,
+   "pot": 0.6
+  }
+ },
+ "worlds": [
+  "props.js",
+  "food_001.js",
+  "food_002.js",
+  "food_003.js",
+  "food_004.js",
+  "food_005.js",
+  "food_006.js",
+  "food_007.js",
+  "food_008.js",
+  "food_009.js",
+  "food_010.js",
+  "food_011.js",
+  "food_012.js",
+  "food_013.js",
+  "food_014.js",
+  "food_015.js",
+  "food_016.js",
+  "food_017.js",
+  "food_018.js",
+  "food_019.js",
+  "food_020.js",
+  "food_021.js",
+  "food_022.js",
+  "food_023.js",
+  "food_024.js",
+  "wardrobe_001.js",
+  "wardrobe_002.js",
+  "wardrobe_003.js",
+  "wardrobe_004.js",
+  "wardrobe_005.js",
+  "wardrobe_006.js",
+  "wardrobe_007.js",
+  "wardrobe_008.js",
+  "wardrobe_009.js",
+  "wardrobe_010.js",
+  "wardrobe_011.js",
+  "wardrobe_012.js",
+  "wardrobe_013.js",
+  "wardrobe_014.js",
+  "wardrobe_015.js",
+  "wardrobe_016.js",
+  "wardrobe_017.js",
+  "wardrobe_018.js",
+  "wardrobe_019.js",
+  "wardrobe_020.js",
+  "wardrobe_021.js",
+  "wardrobe_022.js",
+  "wardrobe_023.js",
+  "wardrobe_024.js",
+  "w_hook.js",
+  "w_grass.js",
+  "w_kyiv.js",
+  "w_beet.js",
+  "w_pot.js",
+  "w_tomato.js",
+  "w_neighbors.js",
+  "w_moldova.js",
+  "w_answer.js",
+  "w_today.js",
+  "w_cover.js"
+ ],
+ "scenes": [
+  [
+   "hook",
+   [
+    "h1",
+    "h2"
+   ]
+  ],
+  [
+   "grass",
+   [
+    "s1",
+    "s2"
+   ]
+  ],
+  [
+   "kyiv",
+   [
+    "s3"
+   ]
+  ],
+  [
+   "beet",
+   [
+    "s4"
+   ]
+  ],
+  [
+   "pot",
+   [
+    "s5"
+   ]
+  ],
+  [
+   "tomato",
+   [
+    "s6"
+   ]
+  ],
+  [
+   "neighbors",
+   [
+    "s7",
+    "s8"
+   ]
+  ],
+  [
+   "moldova",
+   [
+    "s9"
+   ]
+  ],
+  [
+   "answer",
+   [
+    "s10",
+    "s11",
+    "s12"
+   ]
+  ],
+  [
+   "today",
+   [
+    "t1"
+   ]
+  ],
+  [
+   "button",
+   [
+    "x1"
+   ]
+  ]
+ ]
+}
