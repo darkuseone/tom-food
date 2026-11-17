@@ -113,3 +113,75 @@ function shaft(x, y, w, len, ang, col, a = 0.3) { ctx.save(); ctx.translate(x, y
 function castShadow(x, y, w, len, ang = 0.6, a = 0.32, col = '#0a0818') { ctx.save(); ctx.translate(x, y); ctx.transform(1, 0, Math.tan(ang), 0.3, 0, 0); const g = ctx.createLinearGradient(0, 0, 0, -len); g.addColorStop(0, col); g.addColorStop(1, 'rgba(0,0,0,0)'); ctx.globalCompositeOperation = 'multiply'; ctx.globalAlpha = a; ctx.fillStyle = g; ctx.beginPath(); ctx.ellipse(0, -len / 2, w / 2, len / 2, 0, 0, 6.3); ctx.fill(); ctx.restore(); }   // длинная тень от ног (x,y) в сторону от света; ang > 0 — вправо
 function moodDark(x, y, r0, r1, col = '#0a0818', a = 0.55) { ctx.save(); const g = ctx.createRadialGradient(x, y, r0, x, y, r1); g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, col); ctx.globalCompositeOperation = 'multiply'; ctx.globalAlpha = a; ctx.fillStyle = g; ctx.fillRect(x - 5000, y - 5000, 10000, 10000); ctx.restore(); }   // затемнение вдали от источника (свет «вырезает» центр)
 function depthFog(col, a) { screenFill(col, a); }                    // между планами: дальние — светлее и холоднее (воздушная перспектива)
+
+/* ------------------------------------------------------------------ ИНФОГРАФИКА РЕЦЕПТА (владелец, 17.11.2026; с 024)
+   1) ШКАЛА ИНГРЕДИЕНТОВ СЛЕВА — лента-стикер через весь ролик: сверху вниз = время, иконка продукта выскакивает на своём слове и зачёркивается, когда его выкинули.
+      Рисуется ТОЛЬКО если в scenes.js задан INGR (старые выпуски не меняются; вызов — lib/direct.js hudFrame).
+      const INGR = [[иконка, 'подпись', tAdd, tStrike | null, 'эпоха' | ''], ...];   // tAdd/tStrike — WT('s4','свёкла') и т.п.
+      иконка — ключ INGR_ICONS (см. ниже) или своя функция (s, t) => {...} (рисует в квадрате ±30 вокруг 0,0).
+      const INGR_OPT = { x: 96, y0: 724, title: 'СОСТАВ', from: <время появления ленты>, n: 8 };   // необязательно; по умолчанию — после хука
+      Раскладка (SAFE): x 96–208, y 724–1474 — под карточкой рецепта (y ≤ 640), над субтитрами (y ≥ 1530), левее Тома. Видно последние n строк.
+   2) ИНФО-ПЛАШКА — крупно справа от карточки (x 470–970, y ≈ 420–640), вызывать из DIR.<сцена>.hud(t):
+      infoPlate(t, t0, t1, { kind: 'swap', a: 'КВАС', b: 'ТОМАТ', ia: 'kvas', ib: 'tomato', title: 'КИСЛИНКА' })   // было → стало
+      infoPlate(t, t0, t1, { kind: 'num', big: '3 ТОННЫ', sub: 'кефира за праздник', icon: 'kefir' })            // число-сувенир
+      infoPlate(t, t0, t1, { kind: 'list', title: 'БОРЩ У СОСЕДЕЙ', rows: [['Польша', 'прозрачный, с ушками', '#c8243a'], ...] })   // мини-карта/список */
+const INGR_ICONS = {
+  borshchevik(s, t) { pencil([[0, 28], [2, -6]], { w: 4, col: '#4a7a2a', pass2: false }); blob([[2, 14], [-22, 4], [-28, 18], [-10, 22]], { wash: '#6a9a3a', washA: 1, w: 1.6, col: '#2a4a14' }); for (let i = 0; i < 7; i++) { const a = -2.6 + i * 0.35, x = Math.cos(a) * 24, y = -6 + Math.sin(a) * 18; pencil([[2, -6], [x, y]], { w: 1.6, col: '#4a7a2a', pass2: false }); ell(x, y - 2, 5, 4, { wash: '#fbf6e8', washA: 1, w: 1, col: '#6a7a5a' }); } },
+  kvas(s, t) { const b = blob([[-20, 26], [-24, -10], [-18, -20], [18, -20], [24, -10], [20, 26]], { wash: '#a8743e', washA: 1, w: 2, col: '#3a1a08' }); for (const y of [-8, 14]) pencil([[-23, y], [23, y]], { w: 3, col: '#4a4048', pass2: false }); ell(0, -20, 18, 6, { wash: '#c8a040', washA: 1, w: 1.4, col: '#5a3a08' }); for (let i = 0; i < 3; i++) ell(-8 + i * 8, -22 - ((t * 20 + i * 7) % 12), 2.5, 2.5, { wash: '#fff4c0', washA: 0.9, line: false }); },
+  beet(s, t) { for (const a of [-0.4, 0, 0.4]) { pencil([[0, -14], [Math.sin(a) * 26, -32]], { w: 3, col: '#a8243a', pass2: false }); blob([[Math.sin(a) * 26, -32], [Math.sin(a) * 26 - 8, -24], [Math.sin(a) * 18, -18], [Math.sin(a) * 30, -26]], { wash: '#5a9a3a', washA: 1, w: 1.2, col: '#2a4a14' }); } const b = ell(0, 4, 20, 20, { wash: '#8a1438', washA: 1, w: 2, col: '#3a0414' }); ell(-7, -4, 6, 4, { wash: '#e86a8a', washA: 0.6, line: false }); pencil([[0, 24], [3, 34]], { w: 2, col: '#5a0a20', pass2: false }); },
+  cabbage(s, t) { ell(0, 2, 26, 24, { wash: '#a8cc78', washA: 1, w: 2, col: '#3a5a1a' }); for (const k of [-1, 1]) pencil(spline([[0, 22], [k * 12, 4], [k * 22, -12]], false, 4), { w: 1.6, col: '#5a8a3a', pass2: false }); pencil(spline([[-20, -8], [0, -18], [20, -8]], false, 4), { w: 2, col: '#3a5a1a', pass2: false }); pencil([[0, 24], [0, -18]], { w: 1.6, col: '#e8f4d0', pass2: false }); },
+  turnip(s, t) { for (const a of [-0.3, 0.3]) blob([[0, -14], [Math.sin(a) * 30, -34], [Math.sin(a) * 18, -36]], { wash: '#6a9a3a', washA: 1, w: 1.2, col: '#2a4a14' }); const b = blob([[0, 30], [-22, 6], [-18, -12], [18, -12], [22, 6]], { wash: '#f4ecd8', washA: 1, w: 2, col: '#4a3a3a' }); shadeG(b.path, 0, -12, 0, 6, '#9a5ab8', 0.85); },
+  potato(s, t) { const b = blob([[-26, 4], [-18, -16], [6, -20], [24, -8], [24, 12], [4, 20], [-18, 18]], { wash: '#c89a5a', washA: 1, w: 2, col: '#4a2a10' }); for (const [x, y] of [[-10, -6], [8, 4], [-2, 12], [14, -10]]) ell(x, y, 2.4, 1.6, { wash: '#6a4a20', washA: 1, line: false }); },
+  tomato(s, t) { ell(0, 4, 24, 21, { wash: '#e0302a', washA: 1, w: 2, col: '#5a0a08' }); ell(-8, -4, 6, 4, { wash: '#ffb0a0', washA: 0.7, line: false }); for (let i = 0; i < 5; i++) { const a = i * 1.256; pencil([[0, -16], [Math.cos(a) * 12, -16 + Math.sin(a) * 6]], { w: 3, col: '#3a7a2a', pass2: false }); } },
+  smetana(s, t) { const b = blob([[-26, -4], [26, -4], [20, 22], [-20, 22]], { wash: '#c86a3a', washA: 1, w: 2, col: '#3a1a08' }); blob([[-22, -4], [-12, -18], [0, -14], [4, -26], [14, -12], [22, -4]], { wash: '#fffaf0', washA: 1, w: 1.6, col: '#8a7a6a' }); pencil(spline([[-6, -10], [4, -16], [8, -8]], false, 4), { w: 1.4, col: '#c8b8a8', pass2: false }); },
+  meat(s, t) { blob([[-24, 6], [-18, -14], [10, -18], [26, -2], [16, 18], [-12, 18]], { wash: '#c8505a', washA: 1, w: 2, col: '#4a0a14' }); pencil(spline([[-14, -4], [0, 4], [14, -6]], false, 4), { w: 3, col: '#f4e0d8', pass2: false }); ell(16, 6, 6, 6, { wash: '#f4ecd8', washA: 1, w: 1.4 }); },
+  onion(s, t) { blob([[0, -30], [-6, -14], [-22, 4], [-14, 22], [14, 22], [22, 4], [6, -14]], { wash: '#d8a050', washA: 1, w: 2, col: '#5a3a08' }); for (const k of [-1, 1]) pencil(spline([[0, -24], [k * 12, 0], [k * 6, 20]], false, 4), { w: 1.4, col: '#8a5a18', pass2: false }); },
+  carrot(s, t) { blob([[-6, -18], [6, -18], [2, 30], [-2, 30]], { wash: '#f0802a', washA: 1, w: 2, col: '#6a2a04' }); for (const a of [-0.5, 0, 0.5]) pencil([[0, -18], [Math.sin(a) * 16, -34]], { w: 3, col: '#4a8a2a', pass2: false }); },
+  garlic(s, t) { blob([[0, -28], [-6, -14], [-22, 2], [-16, 22], [16, 22], [22, 2], [6, -14]], { wash: '#f8f2e4', washA: 1, w: 2, col: '#6a5a4a' }); for (const k of [-1, 0, 1]) pencil([[k * 9, -12], [k * 12, 20]], { w: 1.2, col: '#b8a8c0', pass2: false }); },
+  dill(s, t) { pencil([[0, 30], [0, -24]], { w: 2.4, col: '#4a7a2a', pass2: false }); for (let i = 0; i < 6; i++) for (const k of [-1, 1]) pencil([[0, -18 + i * 7], [k * (18 - i), -26 + i * 7]], { w: 1.4, col: '#5a9a3a', pass2: false }); },
+  bread(s, t) { blob([[-26, 12], [-24, -6], [-8, -16], [14, -14], [26, 0], [24, 14]], { wash: '#c88a3a', washA: 1, w: 2, col: '#4a2a08' }); for (let i = 0; i < 3; i++) pencil([[-12 + i * 10, -10], [-6 + i * 10, 4]], { w: 2, col: '#7a4a18', pass2: false }); },
+  kefir(s, t) { blob([[-14, 28], [-14, -6], [-6, -16], [-6, -26], [6, -26], [6, -16], [14, -6], [14, 28]], { wash: '#f4f4f8', washA: 1, w: 2, col: '#4a5a6a' }); rect(-14, 2, 28, 14, { wash: '#e8689a', washA: 1, line: false }); rect(-7, -30, 14, 6, { wash: '#2a7ac8', washA: 1, line: false }); },
+  bran(s, t) { for (let i = 0; i < 14; i++) { const r = rng(9100 + i); ell(-20 + r() * 40, -4 + r() * 26, 5, 3, { wash: i % 2 ? '#c89a5a' : '#a87a3a', washA: 1, w: 1, col: '#5a3a10', rot: r() * 3 }); } blob([[-24, 22], [0, -14], [24, 22]], { wash: '#d8b070', washA: 0.5, line: false }); },
+  egg(s, t) { ell(0, 2, 18, 24, { wash: '#f8f0e0', washA: 1, w: 2, col: '#6a5a4a' }); },
+  salt(s, t) { rect(-12, -20, 24, 44, { wash: '#f4f4f8', washA: 1, w: 2, col: '#4a5a6a' }); ell(0, -20, 12, 4, { wash: '#b8b8c0', washA: 1, w: 1.2 }); }
+};
+function ingrIcon(id, x, y, s, t) { push(x, y, s); const f = typeof id === 'function' ? id : INGR_ICONS[id]; if (f) f(s, t); else { ell(0, 0, 24, 24, { wash: '#e8b53a', washA: 1, w: 2 }); txt(String(id).slice(0, 1).toUpperCase(), 0, 10, 30, { font: 'Osw', col: '#2b2622' }); } pop(); }
+function ingrStrip(t) {
+  if (typeof INGR === 'undefined' || !INGR.length) return;
+  const O = Object.assign({ x: 96, y0: 724, title: 'СОСТАВ', from: (typeof EV !== 'undefined' && EV.hookEnd) || 2.6, n: 8, rh: 88, w: 112 }, typeof INGR_OPT !== 'undefined' ? INGR_OPT : {});
+  if (t < O.from) return; const all = INGR.filter(q => t >= q[2]), items = all.slice(-O.n), e = sm(clamp((t - O.from) / 0.45));
+  const h = 54 + Math.max(1, items.length) * O.rh + 16, x0 = O.x - (1 - e) * 160;
+  push(x0, O.y0, 1, -0.012 + Math.sin(t * 1.1) * 0.003); ctx.globalAlpha = e;
+  ctx.save(); ctx.shadowColor = 'rgba(20,10,4,0.45)'; ctx.shadowBlur = 16; ctx.shadowOffsetY = 7; ctx.fillStyle = '#f4e6c8'; ctx.beginPath(); ctx.roundRect(0, 0, O.w, h, 8); ctx.fill(); ctx.restore();
+  const g = ctx.createLinearGradient(0, 0, O.w, h); g.addColorStop(0, 'rgba(255,250,235,0.5)'); g.addColorStop(1, 'rgba(184,115,58,0.2)'); ctx.fillStyle = g; ctx.fillRect(0, 0, O.w, h);
+  pencil([[0, 0], [O.w, 0], [O.w, h], [0, h], [0, 0]], { w: 2.2, col: '#2b2622', a: 0.8, pass2: false });
+  ctx.save(); ctx.globalAlpha = 0.55 * e; ctx.fillStyle = '#e8d890'; ctx.translate(O.w / 2, -4); ctx.rotate(0.06); ctx.fillRect(-36, -12, 72, 24); ctx.restore();   // малярный скотч
+  txt(O.title, O.w / 2, 34, 26, { font: 'Osw', col: '#d9482b' }); pencil([[12, 50], [O.w - 12, 50]], { w: 1.6, col: '#d9482b', a: 0.6, pass2: false, gap: false });
+  pencil([[O.w - 9, 58], [O.w - 9, h - 14]], { w: 2, col: '#8a7a6a', a: 0.6, pass2: false, gap: false }); pencil([[O.w - 15, h - 22], [O.w - 9, h - 12], [O.w - 3, h - 22]], { w: 2, col: '#8a7a6a', a: 0.6, pass2: false, gap: false });   // стрелка времени вниз
+  items.forEach((q, j) => { const [id, name, ta, ts, era] = q, y = 54 + j * O.rh, k = popK(t, ta, 0.4), fresh = t - ta < 0.7, gone = ts !== null && ts !== undefined && t >= ts;
+    if (fresh) glow(O.w / 2 - 6, y + 36, 70, 'rgba(232,181,58,1)', 0.45 * (1 - (t - ta) / 0.7), 'multiply');
+    if (era) txt(era, 8, y + 10, 17, { font: 'Osw', col: '#d9482b', align: 'left', a: 0.85 });
+    push(O.w / 2 - 6, y + 36, 0.35 + 0.65 * k); ell(0, 0, 32, 32, { wash: '#fffaf0', washA: 0.9, w: 1.4, col: '#b8a890' }); ingrIcon(id, 0, 0, 0.92, t); if (gone) { ctx.save(); ctx.fillStyle = 'rgba(244,230,200,0.62)'; ctx.beginPath(); ctx.arc(0, 0, 33, 0, 6.3); ctx.fill(); ctx.restore(); } pop();
+    txt(name, O.w / 2 - 6, y + 80, 22, { font: 'Hand', col: gone ? '#8a7a6a' : '#2b2622', a: k });
+    if (gone) { const kk = clamp((t - ts) / 0.3); pencil([[O.w / 2 - 40, y + 8], [O.w / 2 - 40 + 70 * kk, y + 8 + 74 * kk]], { w: 6, col: '#d9482b', a: 0.95, pass2: false, gap: false }); pencil([[O.w / 2 + 28, y + 8], [O.w / 2 + 28 - 70 * kk, y + 8 + 74 * kk]], { w: 6, col: '#d9482b', a: 0.95, pass2: false, gap: false }); }
+    if (j === items.length - 1 && !gone) { const b = Math.sin(t * 6) * 3; poly([[-14 + b, y + 26], [-2 + b, y + 36], [-14 + b, y + 46]], { wash: '#d9482b', washA: 1, w: 1.4, col: '#2b2622' }); } });
+  ctx.globalAlpha = 1; pop();
+}
+function infoPlate(t, t0, t1, o = {}) {
+  if (t < t0 || t > t1 + 0.35) return; const k = popK(t, t0, 0.4), out = clamp((t - t1) / 0.35), a = 1 - out, x = o.x || 720, y = o.y || 520, w = o.w || 500;
+  const h = o.kind === 'list' ? 86 + (o.rows || []).length * 52 : o.kind === 'num' ? 200 : 210;
+  push(x, y + out * 40, (0.6 + 0.4 * k) * (1 - out * 0.2), o.rot !== undefined ? o.rot : 0.03); ctx.globalAlpha = a;
+  ctx.save(); ctx.shadowColor = 'rgba(20,8,4,0.5)'; ctx.shadowBlur = 20; ctx.shadowOffsetY = 9; ctx.fillStyle = o.bg || '#f4e6c8'; ctx.beginPath(); ctx.roundRect(-w / 2, -h / 2, w, h, 14); ctx.fill(); ctx.restore();
+  pencil([[-w / 2, -h / 2], [w / 2, -h / 2], [w / 2, h / 2], [-w / 2, h / 2], [-w / 2, -h / 2]], { w: 3, col: '#2b2622', a: 0.85, pass2: false });
+  ctx.save(); ctx.fillStyle = '#d9482b'; ctx.beginPath(); ctx.roundRect(-w / 2, -h / 2, w, 46, 14); ctx.fill(); ctx.fillRect(-w / 2, -h / 2 + 24, w, 22); ctx.restore();
+  txt(o.title || '', 0, -h / 2 + 32, 30, { font: 'Osw', col: '#fff8ec' });
+  if (o.kind === 'swap') { const s2 = clamp((t - t0 - 0.35) / 0.35), cy = 30;
+    ingrIcon(o.ia, -w / 2 + 70, cy - 8, 1.25, t); txt(o.a, -w / 2 + 70, cy + 62, 34, { font: 'Osw', col: '#2b2622' });
+    if (s2 > 0) { pencil([[-w / 2 + 30, cy - 40], [-w / 2 + 30 + 84 * s2, cy + 60 * s2]], { w: 7, col: '#d9482b', pass2: false, gap: false }); pencil([[-w / 2 + 114, cy - 40], [-w / 2 + 114 - 84 * s2, cy + 60 * s2]], { w: 7, col: '#d9482b', pass2: false, gap: false }); }
+    const ax = lerp(-60, 60, s2); pencil([[-70, cy], [ax, cy]], { w: 7, col: '#2b2622', pass2: false, gap: false }); if (s2 > 0.3) poly([[ax - 6, cy - 20], [ax + 20, cy], [ax - 6, cy + 20]], { wash: '#2b2622', washA: 1, line: false });
+    const kb = popK(t, t0 + 0.6, 0.35); if (t > t0 + 0.6) { push(w / 2 - 80, cy - 8, kb); ingrIcon(o.ib, 0, 0, 1.25, t); pop(); txt(o.b, w / 2 - 80, cy + 62, 34, { font: 'Osw', col: '#4a5a14', a: kb }); } }
+  else if (o.kind === 'num') { if (o.icon) ingrIcon(o.icon, -w / 2 + 70, 20, 1.4, t); const kb = popK(t, t0 + 0.15, 0.4); push(o.icon ? 50 : 0, 26, 0.7 + 0.3 * kb); txt(o.big || '', 0, 22, 96, { font: 'Osw', col: '#d9482b' }); pop(); txt(o.sub || '', o.icon ? 50 : 0, h / 2 - 22, 30, { font: 'Hand', col: '#2b2622' }); }
+  else if (o.kind === 'list') (o.rows || []).forEach((r, j) => { const kr = popK(t, t0 + 0.15 + j * 0.25, 0.3), yy = -h / 2 + 80 + j * 52; if (t < t0 + 0.15 + j * 0.25) return;
+    ell(-w / 2 + 34, yy, 16 * kr, 16 * kr, { wash: r[2] || '#c8243a', washA: 1, w: 2, col: '#2b2622' }); txt(r[0], -w / 2 + 62, yy + 2, 30, { font: 'Osw', col: '#2b2622', align: 'left', a: kr }); txt(r[1], w / 2 - 16, yy + 4, 28, { font: 'Hand', col: '#5a4a3a', align: 'right', a: kr }); });
+  ctx.globalAlpha = 1; pop();
+}
