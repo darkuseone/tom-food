@@ -7,13 +7,13 @@ EP=$1; B=build/$EP; F=episodes/$EP/final.mp4
 D=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$F")
 ffmpeg -i "$F" -af volumedetect -f null - 2>&1 | grep -oE "(mean|max)_volume: [-0-9.]+ dB" | tr '\n' ' '
 python3 -c "import os;print(f'| длина {float(\"$D\"):.1f} с | chat {os.path.getsize(\"$B/chat.mp4\")/2**20:.1f} МиБ')"
-# тест v1 (с 009): громкость по LUFS (цель −14, true peak ≤ −1), голос с первых 0.1 с, длина 54–62 с, без «ПОДПИШИСЬ», петля в хук
+# тест v1 (с 009): громкость по LUFS (цель −14, true peak ≤ −1), голос с первых 0.1 с, длина 50–65 с (17.11.2026), с «ПОДПИШИСЬ», петля в хук
 ffmpeg -nostats -i "$F" -af ebur128=peak=true -f null - 2>&1 | grep -E "^ +(I|Peak):" | tr -s ' ' | tr '\n' ' '; echo
 python3 - "$EP" "$D" <<'PY'
 import json, sys; ep, d = sys.argv[1], float(sys.argv[2]); s = open(f'episodes/{ep}/scenes.js').read(); v1 = 'const LOOP' in s
 t0 = min(json.load(open(f'episodes/{ep}/times.json'))['start'].values())
 w = [f'голос с {t0:.2f} с' + (' ← позже 0.1 с' if t0 > 0.1 else '')]
-if v1: w += ['длина ' + ('ок' if 54 <= d <= 62 else f'{d:.1f} с ← тест v1: 54–62'), 'ПОДПИШИСЬ ' + ('← ВЫКЛ, нужна плашка (владелец 03.11.2026)' if 'ENDCARD = false' in s else 'вкл')]
+if v1: w += ['длина ' + ('ок' if 50 <= d <= 65 else f'{d:.1f} с ← норма 50–65 (17.11.2026)'), 'ПОДПИШИСЬ ' + ('← ВЫКЛ, нужна плашка (владелец 03.11.2026)' if 'ENDCARD = false' in s else 'вкл')]
 print('| ' + ' | '.join(w))
 PY
 if grep -q "const LOOP" "episodes/$EP/scenes.js"; then              # стык петли: последний кадр | первый кадр — должны почти совпадать
