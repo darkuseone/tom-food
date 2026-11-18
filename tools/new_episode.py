@@ -58,6 +58,13 @@ const WT = (k, w) => {{ const n = s => s.toLowerCase().replace(/[^а-яёa-z0-9-
 const RECIPE = [
   // ['ингредиент', WT('s1', 'слово'), null, 'new'],
 ];
+/* шкала ингредиентов слева (17.11.2026, engine/core.js ingrStrip; docs/ref-api.md §Инфографика) — раскомментировать: [иконка, подпись, появилась, зачёркнута|null, эпоха]
+const INGR = [
+  ['beet', 'свёкла', WT('s2', 'свёкла'), null, 'XVIII'],
+  ['kvas', 'квас', WT('s1', 'квас'), WT('s4', 'томат'), ''],
+];
+const INGR_OPT = {{ from: S0.<вторая сцена> }};   // необязательно
+   инфо-плашка «было → стало»: в DIR.<сцена> — hud: t => infoPlate(t, t0, t1, {{ kind: 'swap', title: 'КИСЛИНКА', a: 'КВАС', b: 'ТОМАТ', ia: 'kvas', ib: 'tomato', tb }}) */
 """)
 tpl = (ROOT / 'templates/w_scene.js').read_text()
 for s, k in scenes[:-1]:
