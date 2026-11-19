@@ -35,8 +35,8 @@
     for (let i = 0; i < 6; i++) pencil([[600 + i * 50, 1400], [612 + i * 50, 1386]], { w: 3, col: '#4a8a2a', pass2: false });
     push(240, 1460, 1); blob([[-36, 0], [-40, -130], [-22, -150], [22, -150], [40, -130], [36, 0]], { wash: '#8a5a2a', washA: 0.85, w: 2, col: '#3a1a08' }); rect(-30, -90, 60, 50, { wash: '#f4ecd0', washA: 1, w: 1 }); txt('GIRA', 0, -58, 16, { font: 'Osw', col: '#5a2a08' }); pop();
     push(380, 1470, 1); blob([[-60, 0], [-56, -40], [0, -54], [56, -40], [60, 0]], { wash: '#5a3018', washA: 1, w: 2, col: '#2a1408' }); for (let i = 0; i < 4; i++) ell(-36 + i * 24, -36, 4, 3, { wash: '#c8a868', washA: 1, line: false }); pop();
-    if (t > EV.td_2014 && t < EV.td_meat) { push(640, 900, popK(t, EV.td_2014, 0.35)); rect(-170, -60, 340, 120, { wash: '#f4ecd6', washA: 1, w: 4, col: '#2a7a3a' }); txt('С 2014', 0, 2, 60, { font: 'Osw', col: '#2a7a3a' }); txt('1-е воскресенье февраля', 0, 44, 22, { font: 'Hand', col: '#3a2a1a' }); pop(); }
-    if (t > EV.td_meat - 0.1 && t < S1.today) for (const [i, [lab, c, x]] of [['С МЯСОМ', '#9a4a3a', 330], ['С ТВОРОГОМ', '#8a8070', 760]].entries()) { const k = popK(t, (i ? EV.td_curd : EV.td_meat) - 0.1, 0.4); if (k <= 0) continue; push(x, 880, k, Math.sin(t * 3 + i) * 0.04); rect(-180, -60, 360, 120, { wash: '#f8f4ea', washA: 1, w: 5, col: c }); txt(i ? 'Б' : 'А', -150, -20, 36, { font: 'Osw', col: c }); txt(lab, 10, 16, 44, { font: 'Osw', col: '#1a1a1a' }); pop(); }
+    // «С 2014» — в hud (19.11.2026)
+    // карточки выбора А/Б — в hud (19.11.2026)
     castShadow(760, 1540, 380, 150, 0.6, 0.25);
   }
   function decor(t) {                                                  // детали зала: полки с горшками и янтарём, рушник, связка лука, корзина картошки
@@ -57,6 +57,7 @@
     outfit: 'chef', light: { side: 1, rim: '#ffd8a0' }, grade: ['#ffb070', 0.07],
     act: () => [[S0.today, 'proud'], [EV.td_day, 'grin'], [EV.td_2014, 'awe'], [EV.td_meat, 'smug'], [EV.td_curd, 'suspicious']],
     pose: (t, u, b) => Object.assign(b, { x: 520, y: 1600, s: 1.17, flip: 1, look: t < EV.td_meat ? [0.2, -0.1] : [0.7, 0.5], hand: t > EV.td_meat ? [230, -250] : [200, -300], handF: [-80, -220], prop: 'forkCepP', propAng: 0.1 }),
+    hud: t => { if (t > EV.td_2014 && t < EV.td_meat) { push(735, 470, popK(t, EV.td_2014, 0.35)); if (t > EV.td_2014 + 0.35) hudBox('табличка С 2014', -170, -60, 170, 120); rect(-170, -60, 340, 120, { wash: '#f4ecd6', washA: 1, w: 4, col: '#2a7a3a' }); txt('С 2014', 0, 2, 60, { font: 'Osw', col: '#2a7a3a' }); txt('1-е воскресенье февраля', 0, 44, 22, { font: 'Hand', col: '#3a2a1a' }); pop(); } if (t > EV.td_meat - 0.1 && t < S1.today) for (const [i, [lab, c, x]] of [['С МЯСОМ', '#9a4a3a', 360], ['С ТВОРОГОМ', '#8a8070', 740]].entries()) { const k = popK(t, (i ? EV.td_curd : EV.td_meat) - 0.1, 0.4); if (k <= 0) continue; push(x, 760, k * 0.9, Math.sin(t * 3 + i) * 0.03); if (k > 0.95) hudBox('выбор ' + lab, -180, -60, 180, 60); rect(-180, -60, 360, 120, { wash: '#f8f4ea', washA: 1, w: 5, col: c }); txt(i ? 'Б' : 'А', -150, -20, 36, { font: 'Osw', col: c }); txt(lab, 10, 16, 44, { font: 'Osw', col: '#1a1a1a' }); pop(); } },
     cam: () => [[S0.today, 560, 1050, 0.24], [EV.td_day, 520, 980, 0.24], [EV.td_2014, 580, 1100, 0.28], [EV.td_meat, 620, 1160, 0.3], [S1.today, 620, 1160, 0.31]]
   };
   WORLD.button = (t, u, cat) => WORLD.today(t, u, cat);

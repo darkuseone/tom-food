@@ -23,7 +23,7 @@
     for (let i = 0; i < 5; i++) { push(-300 + i * 120, 620, 1); pencil([[0, -40], [0, 0]], { w: 2, col: '#3a2a1a', pass2: false }); const p = ell(0, 30, 44, 36, { wash: '#c87a3a', washA: 1, w: 2, col: '#5a2a08' }); shadeG(p.path, 40, 30, -40, 30, '#f0b070', 0.5); pop(); }
   }
   function mapWall(t) {                                                 // карта Балтики: Пруссия → Литва, пунктир полёта
-    push(430, 820, 0.95); const m = rect(-320, -300, 640, 520, { wash: '#efe0b8', washA: 1, w: 4, col: '#5a3a1a', key: 25810 }); shadeG(m.path, 320, 220, -200, -300, '#c8a878', 0.5);
+    push(705, 630, 0.64); hudBox('карта', -320, -300, 320, 220); const m = rect(-320, -300, 640, 520, { wash: '#efe0b8', washA: 1, w: 4, col: '#5a3a1a', key: 25810 }); shadeG(m.path, 320, 220, -200, -300, '#c8a878', 0.5);
     blob([[-320, -300], [-100, -300], [-60, -180], [-140, -40], [-320, -20]], { wash: '#9ac0d8', washA: 1, w: 1.6, col: '#4a6a8a' }); txt('BALTIJA', -230, -170, 24, { font: 'Hand', col: '#2a4a7a' });
     const pk = t > EV.pr_prus ? sm(clamp((t - EV.pr_prus) / 0.4)) : 0; const pr = blob([[-140, -40], [40, -60], [80, 80], [-120, 120], [-200, 40]], { wash: pk ? lerpC('#d8c890', '#e8a050', pk) : '#d8c890', washA: 1, w: 2, col: '#5a3a1a' }); txt('PREUSSEN', -60, 40, 26, { font: 'Osw', col: '#5a2a08' });
     const lt = blob([[40, -60], [260, -180], [300, 60], [80, 80]], { wash: t > EV.pr_cent ? '#a8d098' : '#d8d0a0', washA: 1, w: 2, col: '#5a3a1a' }); txt('LIETUVA', 180, -40, 26, { font: 'Osw', col: '#2a5a2a' }); pencil(spline([[-100, 200], [0, 120], [120, 60], [220, -80]], false, 6), { w: 3, col: '#4a6a8a', a: 0.7, pass2: false });
@@ -40,7 +40,7 @@
     const tb = rect(-500, 1440, 2100, 700, { wash: '#a8845a', washA: 1, w: 3, col: '#3a2010', key: 25830 }); for (let i = 0; i < 6; i++) pencil([[-500, 1470 + i * 50], [1600, 1470 + i * 50]], { w: 2, col: '#6a4a24', a: 0.5, pass2: false });
     push(800, 1470, 1); rect(-170, -20, 340, 30, { wash: '#c89a5a', washA: 1, w: 2 }); for (let i = 0; i < 4; i++) ell(-120 + i * 80, -40, 34, 30, { wash: CP.dough, washA: 1, w: 1.6, col: '#6a5a3a' }); if (t > EV.pr_cent) cepelinas(0, -110, 0.42, t, { smet: 1, key: 25831 }); for (let i = 0; i < 10; i++) ell(-160 + i * 34, 0, 10, 3, { wash: '#f8f4ec', washA: 0.7, line: false }); pop();
     push(200, 1460, 1); const p = blob([[-80, 0], [-90, -110], [90, -110], [80, 0]], { wash: '#c8743a', washA: 1, w: 2.4, col: '#4a1a08' }); shadeG(p.path, 90, 0, -40, 0, '#f0b070', 0.4); pop(); steamWisps(200, 1340, 1, t, 3, 25835, 0.4);
-    if (t > EV.pr_key - 0.1) { push(760, 520, popK(t, EV.pr_key - 0.1, 0.4) * 0.85, -0.03); rect(-210, -56, 420, 104, { wash: '#e8c060', washA: 1, w: 4, col: '#1a1a1a' }); txt('★ РАЗГАДКА', 0, 18, 52, { font: 'Osw', col: '#1a1a1a' }); pop(); }
+    // ★ РАЗГАДКА — в hud (19.11.2026)
     castShadow(520, 1600, 260, 220, -0.5, 0.3);
   }
   function front(t) { push(-220, 1980, 1.6); const p = blob([[-150, 0], [-160, -160], [160, -160], [150, 0]], { wash: '#c8743a', washA: 1, w: 2.4, col: '#4a1a08' }); shadeG(p.path, 150, 0, -60, 0, '#f0b070', 0.4); pop(); push(1250, -150, 1.5); for (let i = 0; i < 3; i++) { pencil([[i * 50 - 50, -450], [i * 50 - 50, -150 - i * 30]], { w: 3, col: '#6a4a2a', pass2: false }); ell(i * 50 - 50, -130 - i * 30, 30, 18, { wash: '#c84a2a', washA: 1, w: 1.4 }); } pop(); }
@@ -56,7 +56,8 @@
     act: () => [[S0.prussia, 'smug'], [EV.pr_key, 'proud'], [EV.pr_prus, 'talk'], [EV.pr_ger, 'awe'], [EV.pr_cent, 'grin']],
     pose: (t, u, b) => Object.assign(b, { x: 600, y: 1600, s: 1.16, flip: 0, look: t < EV.pr_prus ? [0, 0] : [-0.6, -0.7], hand: t > EV.pr_prus ? [-200, -420] : [-150, -300], handF: [120, -230], point: t > EV.pr_prus ? 1 : undefined, prop: t > EV.pr_cent ? 'cepP' : undefined }),
     cam: () => [[S0.prussia, 560, 1100, 0.26], [EV.pr_key, 580, 1120, 0.28], [EV.pr_prus, 520, 1020, 0.26], [EV.pr_cent, 540, 1040, 0.26], [S1.prussia, 560, 1080, 0.27]],
-    hud: t => { infoPlate(t, EV.pr_cent + 0.2, S1.prussia + 0.3, { kind: 'list', title: 'ОТКУДА ПРИЛЕТЕЛ', rows: [['Пруссия, Германия', 'Klöße — клёцки', '#5a3a1a'], ['нач. XX века', '→ в Литву', '#c8221a'], ['1930-е', 'первые рецепты', '#2a6a3a']] }); }
+    hud: t => { const out = clamp((t - EV.pr_cent) / 0.3); if (t > EV.pr_key - 0.1 && out < 1) { push(560, 795, popK(t, EV.pr_key - 0.1, 0.4) * 0.85 * (1 - 0.3 * out), -0.03); ctx.globalAlpha = 1 - out; if (t > EV.pr_key + 0.3) hudBox('★ РАЗГАДКА', -210, -56, 210, 48); rect(-210, -56, 420, 104, { wash: '#e8c060', washA: 1, w: 4, col: '#1a1a1a' }); txt('★ РАЗГАДКА', 0, 18, 52, { font: 'Osw', col: '#1a1a1a' }); pop(); } ctx.globalAlpha = 1;
+      infoPlate(t, EV.pr_cent + 0.2, S1.prussia + 0.3, { x: 600, y: 840, kind: 'list', title: 'ОТКУДА ПРИЛЕТЕЛ', rows: [['Пруссия, Германия', 'Klöße — клёцки', '#5a3a1a'], ['нач. XX века', '→ в Литву', '#c8221a'], ['1930-е', 'первые рецепты', '#2a6a3a']] }); }
   };
   // ---------------------------------------------------------------- переход: карта разворачивается на весь кадр, складки расправляются
   TRANS_IN.prussia = { a: 0.25, b: 0.5, runA: 0.4, fx(k, t, A, B) {

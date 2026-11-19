@@ -53,6 +53,10 @@ def main(ep):
         warn = [l for l in cc if l.startswith('⚠')]
         chk(not warn and any('camcheck: OK' in l for l in cc), "камера: без рывков, Том в кадре, пока говорит (tools/camcheck.cjs)" + (' — ' + '; '.join(w[2:] for w in warn[:6]) if warn else ''))
     else: chk(False, "камера: нет build/<эп>/film — сначала check.sh, потом qa.py (camcheck)")
+    if (ROOT / 'build' / ep / 'film' / 'index.html').exists():   # 19.11.2026: плашки не наслаиваются и не вылезают за край (tools/hudcheck.cjs)
+        hc = subprocess.run(['node', str(ROOT / 'tools/hudcheck.cjs'), ep], capture_output=True, text=True, cwd=ROOT, timeout=900).stdout.strip().splitlines()
+        hw = [l for l in hc if l.startswith('⚠') or l.startswith('ERR')]
+        chk(not hw and any('hudcheck: OK' in l for l in hc), "плашки: не наслаиваются, в кадре, текст влезает (tools/hudcheck.cjs)" + (' — ' + '; '.join(w[2:] for w in hw[:6]) if hw else ''))
     sc = (d / 'scenes.js').read_text() if (d / 'scenes.js').exists() else ''
     chk(re.search(r'const ENDCARD = true', sc) is not None, "плашка «ПОДПИШИСЬ» (ENDCARD = true, владелец 03.11.2026)")
     snd = (d / 'sound.py').read_text() if (d / 'sound.py').exists() else ''; ev = d / 'ev.json'

@@ -27,15 +27,15 @@
     const fr = t > EV.nm_frown && t < EV.nm_pl;
     for (const [i, x] of [[0, 40], [1, 190], [2, 340]].map(v => v)) { human(x, 1260, 1.0, t, { body: ['#3a3a4a', '#5a4a3a', '#4a5a4a'][i], legs: '#1a1a1a', hair: ['#c8c8c8', '#3a2a1a', '#8a6a4a'][i], face: fr ? 'angry' : t > EV.nm_big ? 'smile' : 'calm', armL: 'hold', armR: fr && i === 1 ? 'point' : 'hold', look: 0.3, seed: 25310 + i, beard: i === 0 ? 'short' : null, long: i === 2 ? 1 : 0 });
       push(x, 1260 - 290, 1); for (const sd of [-1, 1]) ell(sd * 12, 0, 10, 8, { wash: '#d8ecf4', washA: 0.3, w: 2, col: '#2a2a2a' }); pop(); }
-    push(190, 1000, 0.9); const b = rect(-190, -50, 380, 100, { wash: '#f4ecd6', washA: 1, w: 3, col: '#3a2a1a' }); txt('CEPELINAI', 0, 18, 56, { font: 'Osw', col: '#3a2a1a' }); if (t > EV.nm_frown) { const k = clamp((t - EV.nm_frown) / 0.3); pencil([[-180, -40], [-180 + 360 * k, 40]], { w: 8, col: '#c8221a', pass2: false }); } pop();
+    push(430, 1000, 0.9); hudBox('табличка CEPELINAI', -190, -50, 190, 50); const b = rect(-190, -50, 380, 100, { wash: '#f4ecd6', washA: 1, w: 3, col: '#3a2a1a' }); txt('CEPELINAI', 0, 18, 56, { font: 'Osw', col: '#3a2a1a' }); if (t > EV.nm_frown) { const k = clamp((t - EV.nm_frown) / 0.3); pencil([[-180, -40], [-180 + 360 * k, 40]], { w: 8, col: '#c8221a', pass2: false }); } pop();
     if (t > EV.nm_air && t < EV.nm_pl + 0.3) { const k = clamp((t - EV.nm_air) / 0.9); push(lerp(-300, 200, k), lerp(600, 1180, k * k), 1, 0.4 + k); poly([[-40, 0], [40, -6], [-40, 14], [-20, 4]], { wash: '#f8f4ea', washA: 1, w: 1.6 }); pop(); }
   }
   function poland(t) {                                                  // польский угол: пушка, ядра-клёцки, флажок, табличка KARTACZ
-    if (t < EV.nm_pl - 0.3) return; const k = sm(clamp((t - EV.nm_pl + 0.3) / 0.6)), x = lerp(1500, 960, k);
+    if (t < EV.nm_pl - 0.3) return; const k = sm(clamp((t - EV.nm_pl + 0.3) / 0.6)), x = lerp(1500, 770, k);   // 19.11.2026: угол целиком в кадре (табличка KARTACZ не режется краем)
     push(x, 1260, 1); rect(-150, -620, 300, 620, { wash: '#e8e0d0', washA: 0.95, w: 2.4, col: '#5a4a3a' }); rect(-150, -620, 300, 70, { wash: '#f4f4f4', washA: 1, line: false }); rect(-150, -550, 300, 70, { wash: '#c8221a', washA: 1, line: false }); txt('POLSKA', 0, -500, 30, { font: 'Osw', col: '#f8f4ea' });
     const kick = t > EV.nm_bang && t < EV.nm_bang + 0.3 ? (1 - (t - EV.nm_bang) / 0.3) * 30 : 0; push(-40 + kick, -60, 1, -0.35); rect(-20, -40, 240, 70, { wash: '#2a2a2a', washA: 1, w: 3, col: '#000' }); ell(220, -5, 20, 36, { wash: '#1a1a1a', washA: 1, w: 2 }); pop();
     for (const sd of [-1, 1]) { ell(-40 + sd * 50, -10, 44, 44, { wash: '#6a4a2a', washA: 1, w: 3, col: '#2a1408' }); for (let i = 0; i < 6; i++) pencil([[-40 + sd * 50, -10], [-40 + sd * 50 + Math.cos(i) * 40, -10 + Math.sin(i) * 40]], { w: 2, col: '#2a1408', pass2: false }); }
-    if (t > EV.nm_bang) { const q = popK(t, EV.nm_bang, 0.35); push(0, -330, q, 0.06); rect(-130, -40, 260, 80, { wash: '#f4ecd6', washA: 1, w: 3, col: '#c8221a' }); txt('KARTACZ', 0, 18, 50, { font: 'Osw', col: '#c8221a' }); txt('= картечь', 0, 66, 28, { font: 'Hand', col: '#3a2a1a' }); pop(); }
+    if (t > EV.nm_bang) { const q = popK(t, EV.nm_bang, 0.35); push(0, -385, q * 0.88, 0.06); if (q > 0.9) hudBox('табличка KARTACZ', -130, -40, 130, 80); rect(-130, -40, 260, 80, { wash: '#f4ecd6', washA: 1, w: 3, col: '#c8221a' }); txt('KARTACZ', 0, 18, 50, { font: 'Osw', col: '#c8221a' }); txt('= картечь', 0, 66, 28, { font: 'Hand', col: '#3a2a1a' }); pop(); }
     pop();
     if (t > EV.nm_bang) for (let i = 0; i < 6; i++) { const q = clamp((t - EV.nm_bang - i * 0.07) / 0.8); if (q <= 0) continue; const tx = t > EV.nm_ars ? lerp(x - 160 + (i % 3) * 70, x - 200 + (i % 3) * 80, 1) : lerp(x - 80, x - 900 + i * 60, q), ty = t > EV.nm_ars ? 1240 - Math.floor(i / 3) * 50 : 1150 - Math.sin(q * 3.14) * 300; cepelinas(tx, ty, 0.2, t, { key: 25330 + i, rot: q * 4 }); }
     if (t > EV.nm_bang && t < EV.nm_bang + 0.5) glow(x - 260, 1100, 160, 'rgba(255,200,120,1)', 0.6 * (1 - (t - EV.nm_bang) / 0.5));
@@ -59,11 +59,19 @@
     act: () => [[S0.names, 'talk'], [EV.nm_frown, 'sideeye'], [EV.nm_big, 'smug'], [EV.nm_air, 'laugh'], [EV.nm_pl, 'suspicious'], [EV.nm_bang, 'shock'], [EV.nm_ars, 'grin'], [EV.nm_gag + 0.2, 'proud']],
     pose: (t, u, b) => { const gag = t > EV.nm_gag; return Object.assign(b, { x: 580, y: 1600, s: 1.15, flip: 0, look: t < EV.nm_pl ? [-0.6, -0.2] : [0.8, -0.2], hand: gag ? [-40, -330] : [-180, -300], handF: gag ? [60, -330] : [120, -230], prop: gag ? 'cepP' : undefined, point: t > EV.nm_frown && t < EV.nm_big ? 1 : undefined, squash: b.squash + (gag && t < EV.nm_gag + 0.15 ? 0.1 : 0) }); },
     cam: () => [[S0.names, 380, 1050, 0.24], [EV.nm_big, 480, 1150, 0.28], [EV.nm_pl, 640, 1100, 0.24], [EV.nm_bang, 700, 1080, 0.26], [EV.nm_gag, 560, 1180, 0.3], [S1.names, 560, 1180, 0.3]],
-    hud: t => { infoPlate(t, EV.nm_big, EV.nm_pl - 0.1, { kind: 'swap', tb: EV.nm_big + 0.4, title: 'ПО-ЛИТОВСКИ', a: 'ЦЕППЕЛИНЫ', b: 'БОЛЬШИЕ КЛЁЦКИ', ia: (s, t) => INGR_C.cep(s, t), ib: (s, t) => INGR_C.cep(s, t) }); infoPlate(t, EV.nm_bang + 0.2, S1.names, { kind: 'list', title: 'ОДНА КЛЁЦКА — ТРИ ИМЕНИ', rows: [['Литва', 'цеппелины / «большие клёцки»', '#2a6a3a'], ['Польша', 'kartacz — картечь', '#c8221a'], ['Германия', 'Klöße — клёцки', '#3a3a3a']] }); }
+    hud: t => { infoPlate(t, EV.nm_big, EV.nm_pl - 0.1, { kind: 'swap', tb: EV.nm_big + 0.4, title: 'ПО-ЛИТОВСКИ', a: 'ЦЕППЕЛИНЫ', b: 'БОЛЬШИЕ КЛЁЦКИ', ia: (s, t) => INGR_C.cep(s, t), ib: (s, t) => INGR_C.cep(s, t) }); infoPlate(t, EV.nm_bang + 0.2, S1.names, { y: 470, kind: 'list', title: 'ОДНА КЛЁЦКА — ТРИ ИМЕНИ', rows: [['Литва', '«большие клёцки»', '#2a6a3a'], ['Польша', 'kartacz — картечь', '#c8221a'], ['Германия', 'Klöße — клёцки', '#3a3a3a']] }); }
   };
-  // ---------------------------------------------------------------- переход: толстый словарь захлопывается на весь кадр
-  TRANS_IN.names = { a: 0.3, b: 0.4, runA: 0.4, fx(k, t, A, B) {
-    const e = sm(k); if (e < 0.5) { const q = e / 0.5; drawBuf(A, 1, 540, 960); scr(() => { const xL = lerp(-1080, 0, q), xR = lerp(1080 * 2, 1080, q); for (const [x0, flip] of [[xL, 1], [xR - 1080, -1]]) { const p = rect(x0, 0, 1080, 1920, { wash: '#f4ecd6', washA: 1, w: 4, col: '#5a4a2a' }); for (let i = 0; i < 40; i++) pencil([[x0 + 80, 100 + i * 44], [x0 + 1000, 100 + i * 44]], { w: 2, col: '#8a7a5a', a: 0.5, pass2: false }); } }); }
-    else { const q = (e - 0.5) / 0.5; drawBuf(B, 1, 540, 960); scr(() => { const y = lerp(0, 2000, sm(q)); rect(0, y - 1920, 1080, 1920, { wash: '#7a2a1a', washA: 1, w: 4, col: '#2a0a04' }); txt('ŽODYNAS', 540, y - 900, 120, { font: 'Osw', col: '#d6a842' }); }); }
+  // ---------------------------------------------------------------- переход: страница словаря перелистывается по диагонали (19.11.2026 — вместо красной обложки-вспышки)
+  TRANS_IN.names = { a: 0.35, b: 0.45, runA: 0.3, fx(k, t, A, B) {
+    const e = sm(k), X = lerp(1500, -700, e), sl = 0.42;                                  // линия сгиба: x = X + (y - 960) * sl
+    const fx_ = y => X + (y - 960) * sl;
+    drawBuf(A, 1, 540, 960);
+    ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.beginPath(); ctx.moveTo(fx_(-50), -50); ctx.lineTo(1200, -50); ctx.lineTo(1200, 1970); ctx.lineTo(fx_(1970), 1970); ctx.closePath(); ctx.clip(); drawBuf(B, 1, 540, 960); ctx.restore();
+    scr(() => { const wf = 260 * Math.sin(Math.PI * e);                                   // загнутый лист: кремовый с тенью, без цветной заливки
+      ctx.save(); ctx.beginPath(); ctx.moveTo(fx_(-50), -50); ctx.lineTo(fx_(-50) - wf, -50); ctx.lineTo(fx_(1970) - wf * 0.7, 1970); ctx.lineTo(fx_(1970), 1970); ctx.closePath();
+      const g = ctx.createLinearGradient(X - wf, 960, X, 960); g.addColorStop(0, '#fbf3e0'); g.addColorStop(0.7, '#efe2c4'); g.addColorStop(1, '#c8b48a'); ctx.fillStyle = g; ctx.globalAlpha = 0.97; ctx.fill(); ctx.restore();
+      for (let i = 0; i < 14; i++) { const y = 140 + i * 128; pencil([[fx_(y) - wf * 0.85, y], [fx_(y) - 30, y]], { w: 1.6, col: '#8a7a5a', a: 0.35, pass2: false }); }
+      pencil([[fx_(-50), -50], [fx_(1970), 1970]], { w: 3, col: '#5a4a2a', a: 0.6, pass2: false });
+      ctx.save(); const g2 = ctx.createLinearGradient(X, 960, X + 90, 960); g2.addColorStop(0, 'rgba(30,16,6,0.35)'); g2.addColorStop(1, 'rgba(30,16,6,0)'); ctx.fillStyle = g2; ctx.beginPath(); ctx.moveTo(fx_(-50), -50); ctx.lineTo(fx_(-50) + 90, -50); ctx.lineTo(fx_(1970) + 90, 1970); ctx.lineTo(fx_(1970), 1970); ctx.closePath(); ctx.fill(); ctx.restore(); });
   } };
 })();

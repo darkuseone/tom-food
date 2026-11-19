@@ -60,11 +60,14 @@ function renderTo(c, fn) { const prev = ctx, pS = S, pSS = SS.splice(0); ctx = c
    (с 009 — всегда; старые выпуски без флага рендерятся как раньше). Зона для текста: x 96–880 справа ниже y 900, x 96–984 выше; y 250–1640. */
 const SAFEZ = () => (typeof SAFE !== 'undefined' && SAFE) ? { cardX: 96, cardY: 336, cardS: 0.9, cardN: 5, plateX: 110, plateY: 286, capX: 488, capW: 720, capY: 1580, hookX: 520, hookY: 520 } : null;
 function logPos(yr) { const ago = Math.max(1, 2026 - yr); return 1 - Math.log10(ago) / Math.log10(4.6e8); }   // 0 = 450 млн лет назад … 1 = сейчас
+let HUDB = [], HUDM = null;                                              // 19.11.2026: рамки HUD-плашек кадра — для проверки наложений (tools/hudcheck.cjs)
+function hudBox(id, x0, y0, x1, y1) { const m = ctx.getTransform(), b = HUDM ? HUDM.inverse() : new DOMMatrix(), M = b.multiply(m), P = [[x0, y0], [x1, y0], [x0, y1], [x1, y1]].map(([x, y]) => [M.a * x + M.c * y + M.e, M.b * x + M.d * y + M.f]); HUDB.push({ id, x0: Math.min(...P.map(p => p[0])), y0: Math.min(...P.map(p => p[1])), x1: Math.max(...P.map(p => p[0])), y1: Math.max(...P.map(p => p[1])), a: ctx.globalAlpha }); }
+function fitSize(s, size, font, maxW) { ctx.save(); ctx.font = `700 ${size}px ${font || 'Hand'}`; const w = ctx.measureText(String(s)).width; ctx.restore(); return w > maxW ? size * maxW / w : size; }   // 19.11.2026: текст не вылезает за плашку — ужимается по ширине
 function titleCard(t) {                                             // «ТОМ НА ВКУС»: карточка рецепта (листок на скрепке) — страна+год, ингредиенты дописываются/зачёркиваются
   if (typeof RECIPE === 'undefined') return; const i = sceneAt(t), s = SC[i]; if (!s[3]) return;
   const Z = SAFEZ(), u = t - s[1], roll = u < 0.45, k = popK(t, s[1], 0.32), items = RECIPE.filter(q => t >= q[1]).slice(Z ? -Z.cardN : -6);
   const x0 = Z ? Z.cardX : 34, y0 = Z ? Z.cardY : 120, w = 410, h = 132 + items.length * 40;
-  push(x0 + w / 2 * (Z ? Z.cardS : 1), y0, (0.86 + 0.14 * k) * (Z ? Z.cardS : 1), -0.035 + Math.sin(t * 1.3) * 0.004); ctx.translate(-w / 2, 0);
+  push(x0 + w / 2 * (Z ? Z.cardS : 1), y0, (0.86 + 0.14 * k) * (Z ? Z.cardS : 1), -0.035 + Math.sin(t * 1.3) * 0.004); ctx.translate(-w / 2, 0); if (k > 0.9) hudBox('карточка рецепта', 0, 0, w, h);
   ctx.save(); ctx.shadowColor = 'rgba(20,10,4,0.45)'; ctx.shadowBlur = 18; ctx.shadowOffsetY = 8; ctx.fillStyle = '#f4e6c8'; ctx.fillRect(0, 0, w, h); ctx.restore();
   const g = ctx.createLinearGradient(0, 0, w, h); g.addColorStop(0, 'rgba(255,250,235,0.5)'); g.addColorStop(1, 'rgba(184,115,58,0.22)'); ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
   ctx.save(); ctx.globalAlpha = 0.16; ctx.fillStyle = '#b8733a'; ctx.beginPath(); ctx.ellipse(w - 70, h - 40, 46, 30, 0.4, 0, 6.3); ctx.fill(); ctx.globalAlpha = 0.1; ctx.beginPath(); ctx.ellipse(w - 50, h - 60, 22, 14, 0, 0, 6.3); ctx.fill(); ctx.restore();   // пятно соуса
@@ -73,12 +76,12 @@ function titleCard(t) {                                             // «ТОМ 
   pencil([[0, 0], [w, 0], [w, h], [0, h], [0, 0]], { w: 2.4, col: '#2b2622', a: 0.85, pass2: false });
   pencil(spline([[w - 64, -18], [w - 50, -26], [w - 40, -10], [w - 44, 60], [w - 56, 64], [w - 62, 10]], false, 5), { w: 4, col: '#8a8e96', pass2: false, gap: false });   // скрепка
   let year = s[3]; if (roll) { const r = rng(hsh(FRAME, 5)); year = year.replace(/[0-9]/g, () => String(Math.floor(r() * 10))); }
-  txt(year, 24, 46, 64, { col: '#d9482b', font: 'Osw', align: 'left' }); txt(s[4], 24, 92, 30, { col: '#2b2622', font: 'Osw', align: 'left', a: 0.9 });
+  txt(year, 24, 46, fitSize(year, 64, 'Osw', w - 110), { col: '#d9482b', font: 'Osw', align: 'left' }); txt(s[4], 24, 92, fitSize(s[4], 30, 'Osw', w - 48), { col: '#2b2622', font: 'Osw', align: 'left', a: 0.9 });
   items.forEach((q, j) => { const [name, ta, ts, mark] = q, y = 140 + j * 40, rv = clamp((t - ta) / 0.4), add = t - ta < 0.6;
     if (add) glow(240, y, 160, 'rgba(232,181,58,1)', 0.35 * (1 - (t - ta) / 0.6), 'multiply');
-    txt('•', 36, y, 34, { col: '#6b7a2e', font: 'Hand' }); txt(name, 70, y, 38, { col: mark === 'new' ? '#4a5a14' : '#2b2622', font: 'Hand', align: 'left', reveal: rv });
+    txt('•', 36, y, 34, { col: '#6b7a2e', font: 'Hand' }); const fs = fitSize(name, 38, 'Hand', w - 70 - 46); txt(name, 70, y, fs, { col: mark === 'new' ? '#4a5a14' : '#2b2622', font: 'Hand', align: 'left', reveal: rv });
     if (mark === '?' || (typeof mark === 'number' && t < mark)) txt('?', w - 34, y, 44, { col: '#d9482b', font: 'Hand' });
-    if (ts !== undefined && ts !== null && t >= ts) { ctx.save(); ctx.font = '38px Hand'; const tw = ctx.measureText(name).width; ctx.restore(); const kk = clamp((t - ts) / 0.25); pencil([[64, y + 2], [64 + (tw + 14) * kk, y - 4]], { w: 5, col: '#d9482b', a: 0.95, pass2: false, gap: false }); } });
+    if (ts !== undefined && ts !== null && t >= ts) { ctx.save(); ctx.font = `700 ${fitSize(name, 38, 'Hand', w - 70 - 46)}px Hand`; const tw = ctx.measureText(name).width; ctx.restore(); const kk = clamp((t - ts) / 0.25); pencil([[64, y + 2], [64 + (tw + 14) * kk, y - 4]], { w: 5, col: '#d9482b', a: 0.95, pass2: false, gap: false }); } });
   pop();
 }
 function captions(t) {
@@ -148,10 +151,10 @@ const INGR_ICONS = {
 function ingrIcon(id, x, y, s, t) { push(x, y, s); const f = typeof id === 'function' ? id : INGR_ICONS[id]; if (f) f(s, t); else { ell(0, 0, 24, 24, { wash: '#e8b53a', washA: 1, w: 2 }); txt(String(id).slice(0, 1).toUpperCase(), 0, 10, 30, { font: 'Osw', col: '#2b2622' }); } pop(); }
 function ingrStrip(t) {
   if (typeof INGR === 'undefined' || !INGR.length) return;
-  const O = Object.assign({ x: 96, y0: 712, title: 'СОСТАВ', from: (typeof EV !== 'undefined' && EV.hookEnd) || 2.6, n: 8, rh: 92, w: 122 }, typeof INGR_OPT !== 'undefined' ? INGR_OPT : {});
+  const O = Object.assign({ x: 40, y0: 700, s: 1.1, title: 'СОСТАВ', from: (typeof EV !== 'undefined' && EV.hookEnd) || 2.6, n: 8, rh: 92, w: 122 }, typeof INGR_OPT !== 'undefined' ? INGR_OPT : {});
   if (t < O.from) return; const all = INGR.filter(q => t >= q[2]), items = all.slice(-O.n), e = sm(clamp((t - O.from) / 0.45));
   const h = 54 + Math.max(1, items.length) * O.rh + 16, x0 = O.x - (1 - e) * 160;
-  push(x0, O.y0, 1, -0.012 + Math.sin(t * 1.1) * 0.003); ctx.globalAlpha = e;
+  push(x0, O.y0, O.s, -0.012 + Math.sin(t * 1.1) * 0.003); ctx.globalAlpha = e; if (e > 0.9) hudBox('шкала СОСТАВ', 0, 0, O.w, h);   // 19.11.2026: у самого левого края, на 10 % крупнее
   ctx.save(); ctx.shadowColor = 'rgba(20,10,4,0.45)'; ctx.shadowBlur = 16; ctx.shadowOffsetY = 7; ctx.fillStyle = '#f4e6c8'; ctx.beginPath(); ctx.roundRect(0, 0, O.w, h, 8); ctx.fill(); ctx.restore();
   const g = ctx.createLinearGradient(0, 0, O.w, h); g.addColorStop(0, 'rgba(255,250,235,0.5)'); g.addColorStop(1, 'rgba(184,115,58,0.2)'); ctx.fillStyle = g; ctx.fillRect(0, 0, O.w, h);
   pencil([[0, 0], [O.w, 0], [O.w, h], [0, h], [0, 0]], { w: 2.2, col: '#2b2622', a: 0.8, pass2: false });
@@ -160,28 +163,28 @@ function ingrStrip(t) {
   pencil([[O.w - 9, 58], [O.w - 9, h - 14]], { w: 2, col: '#8a7a6a', a: 0.6, pass2: false, gap: false }); pencil([[O.w - 15, h - 22], [O.w - 9, h - 12], [O.w - 3, h - 22]], { w: 2, col: '#8a7a6a', a: 0.6, pass2: false, gap: false });   // стрелка времени вниз
   items.forEach((q, j) => { const [id, name, ta, ts, era] = q, y = 54 + j * O.rh, k = popK(t, ta, 0.4), fresh = t - ta < 0.7, gone = ts !== null && ts !== undefined && t >= ts;
     if (fresh) glow(O.w / 2 - 6, y + 36, 70, 'rgba(232,181,58,1)', 0.45 * (1 - (t - ta) / 0.7), 'multiply');
-    if (era) txt(era, 8, y + 10, 17, { font: 'Osw', col: '#d9482b', align: 'left', a: 0.85 });
+    if (era) txt(era, 8, y + 10, fitSize(era, 17, 'Osw', O.w - 20), { font: 'Osw', col: '#d9482b', align: 'left', a: 0.85 });
     push(O.w / 2 - 6, y + 36, 0.35 + 0.65 * k); ell(0, 0, 36, 36, { wash: '#fffaf0', washA: 0.9, w: 1.4, col: '#b8a890' }); ingrIcon(id, 0, 0, 1.0, t); if (gone) { ctx.save(); ctx.fillStyle = 'rgba(244,230,200,0.62)'; ctx.beginPath(); ctx.arc(0, 0, 37, 0, 6.3); ctx.fill(); ctx.restore(); } pop();
-    txt(name, O.w / 2 - 6, y + 84, 24, { font: 'Hand', col: gone ? '#8a7a6a' : '#2b2622', a: k });
+    txt(name, O.w / 2 - 6, y + 84, fitSize(name, 24, 'Hand', O.w - 14), { font: 'Hand', col: gone ? '#8a7a6a' : '#2b2622', a: k });
     if (gone) { const kk = clamp((t - ts) / 0.3); pencil([[O.w / 2 - 40, y + 8], [O.w / 2 - 40 + 70 * kk, y + 8 + 74 * kk]], { w: 6, col: '#d9482b', a: 0.95, pass2: false, gap: false }); pencil([[O.w / 2 + 28, y + 8], [O.w / 2 + 28 - 70 * kk, y + 8 + 74 * kk]], { w: 6, col: '#d9482b', a: 0.95, pass2: false, gap: false }); }
     if (j === items.length - 1 && !gone) { const b = Math.sin(t * 6) * 3; poly([[-14 + b, y + 26], [-2 + b, y + 36], [-14 + b, y + 46]], { wash: '#d9482b', washA: 1, w: 1.4, col: '#2b2622' }); } });
   ctx.globalAlpha = 1; pop();
 }
 function infoPlate(t, t0, t1, o = {}) {
-  if (t < t0 || t > t1 + 0.35) return; const k = popK(t, t0, 0.4), out = clamp((t - t1) / 0.35), a = 1 - out, x = o.x || 720, y = o.y || 520, w = o.w || 500;
+  if (t < t0 || t > t1 + 0.35) return; const k = popK(t, t0, 0.4), out = clamp((t - t1) / 0.35), a = 1 - out, x = o.x || 735, y = o.y || 520, w = o.w || 420;   // 19.11.2026: справа от карточки рецепта (x 96–465), не наезжает на неё
   const h = o.kind === 'list' ? 86 + (o.rows || []).length * 52 : o.kind === 'num' ? 200 : 210;
-  push(x, y + out * 40, (0.6 + 0.4 * k) * (1 - out * 0.2), o.rot !== undefined ? o.rot : 0.03); ctx.globalAlpha = a;
+  push(x, y + out * 40, (0.6 + 0.4 * k) * (1 - out * 0.2), o.rot !== undefined ? o.rot : 0.03); ctx.globalAlpha = a; if (k > 0.9 && out < 0.1) hudBox('плашка «' + (o.title || '') + '»', -w / 2, -h / 2, w / 2, h / 2);
   ctx.save(); ctx.shadowColor = 'rgba(20,8,4,0.5)'; ctx.shadowBlur = 20; ctx.shadowOffsetY = 9; ctx.fillStyle = o.bg || '#f4e6c8'; ctx.beginPath(); ctx.roundRect(-w / 2, -h / 2, w, h, 14); ctx.fill(); ctx.restore();
   pencil([[-w / 2, -h / 2], [w / 2, -h / 2], [w / 2, h / 2], [-w / 2, h / 2], [-w / 2, -h / 2]], { w: 3, col: '#2b2622', a: 0.85, pass2: false });
   ctx.save(); ctx.fillStyle = '#d9482b'; ctx.beginPath(); ctx.roundRect(-w / 2, -h / 2, w, 46, 14); ctx.fill(); ctx.fillRect(-w / 2, -h / 2 + 24, w, 22); ctx.restore();
-  txt(o.title || '', 0, -h / 2 + 32, 30, { font: 'Osw', col: '#fff8ec' });
+  txt(o.title || '', 0, -h / 2 + 32, fitSize(o.title || '', 30, 'Osw', w - 40), { font: 'Osw', col: '#fff8ec' });
   if (o.kind === 'swap') { const tb = o.tb || t0 + 0.6, s2 = clamp((t - tb + 0.25) / 0.35), ar = clamp((t - t0 - 0.2) / 0.5), cy = 30;
-    ingrIcon(o.ia, -w / 2 + 90, cy - 8, 1.25, t); txt(o.a, -w / 2 + 90, cy + 62, 32, { font: 'Osw', col: '#2b2622' });
+    ingrIcon(o.ia, -w / 2 + 90, cy - 8, 1.25, t); txt(o.a, -w / 2 + 90, cy + 62, fitSize(o.a, 32, 'Osw', 160), { font: 'Osw', col: '#2b2622' });
     if (s2 > 0) { pencil([[-w / 2 + 50, cy - 40], [-w / 2 + 50 + 84 * s2, cy + 60 * s2]], { w: 7, col: '#d9482b', pass2: false, gap: false }); pencil([[-w / 2 + 134, cy - 40], [-w / 2 + 134 - 84 * s2, cy + 60 * s2]], { w: 7, col: '#d9482b', pass2: false, gap: false }); }
     const ax = lerp(-60, 50, ar); pencil([[-70, cy], [ax, cy]], { w: 7, col: '#2b2622', pass2: false, gap: false }); if (ar > 0.3) poly([[ax - 6, cy - 20], [ax + 20, cy], [ax - 6, cy + 20]], { wash: '#2b2622', washA: 1, line: false });
-    const kb = popK(t, tb, 0.35); if (t > tb) { push(w / 2 - 90, cy - 8, kb); ingrIcon(o.ib, 0, 0, 1.25, t); pop(); txt(o.b, w / 2 - 90, cy + 62, 32, { font: 'Osw', col: '#4a5a14' }); } }
+    const kb = popK(t, tb, 0.35); if (t > tb) { push(w / 2 - 90, cy - 8, kb); ingrIcon(o.ib, 0, 0, 1.25, t); pop(); txt(o.b, w / 2 - 90, cy + 62, fitSize(o.b, 32, 'Osw', 160), { font: 'Osw', col: '#4a5a14' }); } }
   else if (o.kind === 'num') { if (o.icon) ingrIcon(o.icon, -w / 2 + 70, 20, 1.4, t); const kb = popK(t, t0 + 0.15, 0.4); ctx.save(); ctx.font = '96px Osw'; const bw0 = ctx.measureText(o.big || '').width; ctx.restore(); const fit = Math.min(1, (w - (o.icon ? 170 : 60)) / Math.max(1, bw0)); push(o.icon ? 50 : 0, 26, (0.7 + 0.3 * kb) * fit); txt(o.big || '', 0, 22, 96, { font: 'Osw', col: '#d9482b' }); pop(); txt(o.sub || '', o.icon ? 50 : 0, h / 2 - 22, 30, { font: 'Hand', col: '#2b2622' }); }
   else if (o.kind === 'list') (o.rows || []).forEach((r, j) => { const kr = popK(t, t0 + 0.15 + j * 0.25, 0.3), yy = -h / 2 + 80 + j * 52; if (t < t0 + 0.15 + j * 0.25) return;
-    ell(-w / 2 + 34, yy, 16 * kr, 16 * kr, { wash: r[2] || '#c8243a', washA: 1, w: 2, col: '#2b2622' }); txt(r[0], -w / 2 + 62, yy + 2, 30, { font: 'Osw', col: '#2b2622', align: 'left', a: kr }); txt(r[1], w / 2 - 16, yy + 4, 28, { font: 'Hand', col: '#5a4a3a', align: 'right', a: kr }); });
+    ell(-w / 2 + 34, yy, 16 * kr, 16 * kr, { wash: r[2] || '#c8243a', washA: 1, w: 2, col: '#2b2622' }); const w0 = (() => { ctx.save(); ctx.font = '700 30px Osw'; const a0 = ctx.measureText(r[0]).width; ctx.font = '700 28px Hand'; const a1 = ctx.measureText(r[1]).width; ctx.restore(); return Math.min(1, (w - 62 - 16 - 22) / (a0 + a1)); })(); txt(r[0], -w / 2 + 62, yy + 2, 30 * w0, { font: 'Osw', col: '#2b2622', align: 'left', a: kr }); txt(r[1], w / 2 - 16, yy + 4, 28 * w0, { font: 'Hand', col: '#5a4a3a', align: 'right', a: kr }); });   // 19.11.2026: обе колонки ужимаются вместе — текст не вылезает и не налезает
   ctx.globalAlpha = 1; pop();
 }

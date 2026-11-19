@@ -30,7 +30,8 @@
     push(-120, 1300, 1); const s = blob([[-90, 0], [-100, -150], [-60, -200], [60, -200], [100, -150], [90, 0]], { wash: '#c8b080', washA: 1, w: 2, col: '#5a4a2a' }); for (let i = 0; i < 5; i++) ell(-50 + i * 25, -200, 22, 16, { wash: '#c89a5a', washA: 1, w: 1.4, col: '#4a2a10' }); pop();
   }
   function scheme(t) {                                                  // чертёж-инженерия над столом
-    if (t < EV.kt_eng - 0.1) return; const k = popK(t, EV.kt_eng - 0.1, 0.4); push(620, 900, k * 0.9);
+    if (t < EV.kt_eng - 0.1) return; const k = popK(t, EV.kt_eng - 0.1, 0.4); push(560, 780, k * 0.8);   // 19.11.2026: в hud — не ездит с камерой, не наезжает на карточку и шкалу
+    if (k > 0.9) hudBox('схема', -300, -90, 300, 90);
     rect(-300, -90, 600, 180, { wash: '#2a4a7a', washA: 0.92, w: 3, col: '#f4f0e6' }); for (let i = 0; i < 12; i++) pencil([[-300 + i * 50, -90], [-300 + i * 50, 90]], { w: 1, col: '#6a8ab8', a: 0.5, pass2: false });
     const steps = [['ТЁРКА', EV.kt_grate], ['МАРЛЯ', EV.kt_squeeze], ['КРАХМАЛ', EV.kt_starch], ['ТЕСТО', EV.kt_back]];
     steps.forEach(([s, t0], i) => { const x = -225 + i * 150, on = t > t0 - 0.05; rect(x - 62, -30, 124, 60, { wash: on ? '#f4f0e6' : '#3a5a8a', washA: 1, w: 2, col: '#f4f0e6' }); txt(s, x, 10, 24, { font: 'Osw', col: on ? '#2a4a7a' : '#a8c0e0' }); if (i < 3) pencil([[x + 64, 0], [x + 86, 0]], { w: 3, col: '#f4f0e6', pass2: false }); });
@@ -48,13 +49,14 @@
   WORLD.kitchen = (t, u, cat) => {
     lay(12, () => { room(t); haze('#ffc890', 0.05); });
     lay(2.6, () => { folk(t); });
-    lay(1, () => { cat(); table(t); scheme(t); lightPool(400, 1480, 560, 130, 'rgba(255,170,80,1)', 0.35); });
+    lay(1, () => { cat(); table(t); lightPool(400, 1480, 560, 130, 'rgba(255,170,80,1)', 0.35); });
     lay(0.6, () => { front(t); motes(14, [-200, 300, 1300, 1400], '#fff0d0', t, 25460, { sp: 4, sz: 3, a: 0.4, wob: 3 }); moodDark(500, 1000, 500, 1500, '#140a08', 0.5); });
   };
   DIR.kitchen = {
     outfit: 'selA', light: { side: -1, rim: '#ffb070' }, grade: ['#ff9a50', 0.07],
     act: () => [[S0.kitchen, 'talk'], [EV.kt_eng, 'proud'], [EV.kt_grate, 'grin'], [EV.kt_squeeze, 'awe'], [EV.kt_starch, 'smug'], [EV.kt_back, 'laugh']],
     pose: (t, u, b) => { const gr = t > EV.kt_grate && t < EV.kt_back, rub = gr ? Math.sin(t * 16) * 40 : 0; return Object.assign(b, { x: 580, y: 1600, s: 1.16, flip: 1, look: t < EV.kt_squeeze ? [0.7, 0.5] : [-0.6, -0.1], hand: gr ? [230, -230 + rub] : [200, -280], handF: [-80, -220], prop: gr ? 'potatoP' : undefined }); },
+    hud: t => scheme(t),
     cam: () => [[S0.kitchen, 520, 1050, 0.24], [EV.kt_eng, 600, 1000, 0.26], [EV.kt_grate, 640, 1150, 0.3], [EV.kt_squeeze, 420, 1100, 0.28], [EV.kt_back, 580, 1100, 0.28], [S1.kitchen, 580, 1120, 0.28]]
   };
   // ---------------------------------------------------------------- переход: тёрка проезжает по кадру и сдирает прошлую сцену стружкой

@@ -34,7 +34,7 @@
     const ah = t > EV.as_ships;
     for (const [i, x] of [[0, -300], [1, -170], [2, 1000], [3, 1130]].map(v => v)) { human(x, 1190, 0.95, t, { body: ['#2a2a3a', '#7a2a3a', '#3a4a6a', '#f4ecd8'][i], legs: '#1a1a1a', hair: '#3a2a1a', face: ah ? 'shock' : 'smile', armL: ah ? 'up' : 'hold', armR: 'hold', look: 0.5 * (i < 2 ? 1 : -1), seed: 25220 + i, flip: i < 2 ? 1 : -1, long: i % 2 }); hat20(x, 1190, 0.95, i % 2 ? 'boater' : 'fedora', '#3a3028', i < 2 ? 1 : -1); }
     const cw = t > EV.as_count; human(160, 1190, 1.05, t, { body: '#2a3050', legs: '#1a1a2a', hair: '#e8e8e8', face: cw ? 'grin' : 'smile', armL: 'hold', armR: cw ? 'wave' : 'hold', look: 0.4, seed: 25230, trim: '#d6a842' }); stache(160, 1190, 1.05); hat20(160 + (cw ? 30 : 0), 1190 - (cw ? 40 : 0), 1.05, 'pilot', '#2a3050');
-    if (t > EV.as_count) { push(160, 760, popK(t, EV.as_count, 0.35)); rect(-170, -32, 340, 64, { wash: '#f4ecd6', washA: 1, w: 3, col: '#2a3050' }); txt('ГРАФ ЦЕППЕЛИН', 0, 12, 34, { font: 'Osw', col: '#2a3050' }); pop(); }
+    // табличка «ГРАФ ЦЕППЕЛИН» — в hud (19.11.2026: не под шкалой СОСТАВ)
   }
   function deck(t) {                                                    // пирс перед Томом (после cat): ящики, канаты, ведро, рулетка 30 см
     const d = rect(-600, 1440, 2400, 600, { wash: '#7a5a3a', washA: 1, w: 3, col: '#2a1408', key: 25240 }); for (let i = 0; i < 12; i++) pencil([[-600, 1460 + i * 40], [1800, 1460 + i * 40]], { w: 2, col: '#4a3420', a: 0.6, pass2: false });
@@ -55,6 +55,7 @@
     outfit: 'aviatorA', light: { side: 1, rim: '#fff0c8' }, grade: ['#c8d8f0', 0.06],
     act: () => [[S0.airship, 'proud'], [EV.as_cep, 'grin'], [EV.as_30, 'awe'], [EV.as_count, 'smug'], [EV.as_ships, 'awe']],
     pose: (t, u, b) => Object.assign(b, { x: 580, y: 1600, s: 1.16, flip: 0, look: t < EV.as_count ? [0.5, -0.3] : [-0.4, -0.7], hand: [-160, -320], handF: [130, -240], prop: 'trayCepP', propAng: 0.05 }),
+    hud: t => { if (t > EV.as_count) { push(720, 470, popK(t, EV.as_count, 0.35)); if (t > EV.as_count + 0.35) hudBox('табличка ГРАФ ЦЕППЕЛИН', -170, -32, 170, 32); rect(-170, -32, 340, 64, { wash: '#f4ecd6', washA: 1, w: 3, col: '#2a3050' }); txt('ГРАФ ЦЕППЕЛИН', 0, 12, 34, { font: 'Osw', col: '#2a3050' }); pop(); } },
     cam: () => [[S0.airship, 440, 950, 0.22], [EV.as_cep, 520, 1100, 0.26], [EV.as_30, 600, 1150, 0.28], [EV.as_count, 420, 1050, 0.26], [EV.as_ships, 480, 960, 0.22], [S1.airship, 500, 1000, 0.24]]
   };
   // ---------------------------------------------------------------- переход: винт раскручивается на весь кадр и разгоняет прошлую сцену
