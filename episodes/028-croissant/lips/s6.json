@@ -1,0 +1,35 @@
+{
+  "metadata": {
+    "soundFile": "/home/user/tom-food/build/028-croissant/vf/s6.wav",
+    "duration": 6.17
+  },
+  "mouthCues": [
+    { "start": 0.00, "end": 0.21, "value": "B" },
+    { "start": 0.21, "end": 0.42, "value": "E" },
+    { "start": 0.42, "end": 0.63, "value": "B" },
+    { "start": 0.63, "end": 0.77, "value": "C" },
+    { "start": 0.77, "end": 0.84, "value": "E" },
+    { "start": 0.84, "end": 1.40, "value": "B" },
+    { "start": 1.40, "end": 1.61, "value": "C" },
+    { "start": 1.61, "end": 2.03, "value": "B" },
+    { "start": 2.03, "end": 2.17, "value": "D" },
+    { "start": 2.17, "end": 2.55, "value": "B" },
+    { "start": 2.55, "end": 2.63, "value": "A" },
+    { "start": 2.63, "end": 3.85, "value": "B" },
+    { "start": 3.85, "end": 4.13, "value": "C" },
+    { "start": 4.13, "end": 4.34, "value": "E" },
+    { "start": 4.34, "end": 4.42, "value": "A" },
+    { "start": 4.42, "end": 4.46, "value": "B" },
+    { "start": 4.46, "end": 4.64, "value": "E" },
+    { "start": 4.64, "end": 4.71, "value": "F" },
+    { "start": 4.71, "end": 4.79, "value": "A" },
+    { "start": 4.79, "end": 4.90, "value": "C" },
+    { "start": 4.90, "end": 5.18, "value": "B" },
+    { "start": 5.18, "end": 5.32, "value": "G" },
+    { "start": 5.32, "end": 5.46, "value": "B" },
+    { "start": 5.46, "end": 5.67, "value": "F" },
+    { "start": 5.67, "end": 5.81, "value": "B" },
+    { "start": 5.81, "end": 6.16, "value": "C" },
+    { "start": 6.16, "end": 6.17, "value": "X" }
+  ]
+}
