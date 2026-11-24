@@ -26,7 +26,7 @@
     for (let i = 0; i < 5; i++) { push(720 + i * 80, 320, 1); pencil([[0, 0], [0, 40]], { w: 2, col: '#3a3a3a', pass2: false }); ell(0, 80, 32, 36, { wash: '#a8acb4', washA: 1, w: 2, col: '#3a3a40' }); pop(); }
     push(620, 640, 1); rect(-150, 0, 300, 14, { wash: '#6a4a2a', washA: 1, w: 1.6 }); for (let i = 0; i < 3; i++) mascarponeTub(-100 + i * 100, 0, 0.6); rect(-150, 200, 300, 14, { wash: '#6a4a2a', washA: 1, w: 1.6 }); push(-70, 200, 1); rect(-60, -70, 120, 70, { wash: '#6a3a1a', washA: 1, w: 2 }); ell(30, -36, 18, 18, { wash: '#c8a040', washA: 1, w: 1.4 }); rect(-50, -60, 50, 30, { wash: '#f0e0a0', washA: 1, w: 1 }); pop(); pop();
     push(1060, 820, 1); rect(-90, -130, 180, 260, { wash: '#f4ecd8', washA: 1, w: 3, col: '#6a4a2a' }); txt('TREVISO', 0, -70, 30, { font: 'Osw', col: '#a8241e' }); txt('1970', 0, -20, 40, { font: 'Osw', col: '#2a2a2a' }); pop();
-    if (t > EV.tv_city) { push(560, 560, popK(t, EV.tv_city, 0.35)); poly([[-130, -36], [100, -36], [140, 0], [100, 36], [-130, 36]], { wash: '#2a5a3a', washA: 1, w: 2.4, col: '#f8f4ec' }); txt('TREVISO', -10, 14, 40, { font: 'Osw', col: '#f8f4ec' }); hudBox('указатель TREVISO', -130, -36, 140, 36); pop(); }
+    if (t > EV.tv_city) { push(660, 560, popK(t, EV.tv_city, 0.35)); poly([[-130, -36], [100, -36], [140, 0], [100, 36], [-130, 36]], { wash: '#2a5a3a', washA: 1, w: 2.4, col: '#f8f4ec' }); txt('TREVISO', -10, 14, 40, { font: 'Osw', col: '#f8f4ec' }); hudBox('указатель TREVISO', -130, -36, 140, 36); pop(); }
   }
   function staff(t) {                                                     // шеф с бакенбардами взбивает; официантка с подносом
     const taste = t > EV.tv_yolk;
@@ -43,7 +43,7 @@
     castShadow(640, 1450, 320, 90, -0.5, 0.25);
   }
   WORLD.treviso = (t, u, cat) => {
-    lay(9, () => { kitchen(t); haze('#ffd8a8', 0.05); });
+    lay(9, () => { kitchen(t); hatch(pathOf([[-500, -500], [1700, -500], [1700, 900], [-500, 900]]), bbOf([[-500, -500], [1700, 900]]), { gap: 26, a: 0.05, col: '#3a2a1a', ang: 0.9, key: 29120 }); shadeG(pathOf([[-500, 600], [1700, 600], [1700, 1440], [-500, 1440]]), 0, 1440, 0, 600, '#2a1a10', 0.18); haze('#ffd8a8', 0.05); });
     lay(2.6, () => { staff(t); shaft(260, 380, 300, 1400, -0.4, 'rgba(255,240,210,1)', 0.14); });
     lay(1, () => { lightPool(560, 1460, 660, 120, 'rgba(255,215,160,1)', 0.35); cat(); table(t); });
     lay(0.65, () => { push(-150, 300, 1.4); pencil([[0, -400], [0, -60]], { w: 4, col: '#2a2a2a', pass2: false }); blob([[-80, -60], [-60, -120], [60, -120], [80, -60]], { wash: '#e8783a', washA: 1, w: 2 }); glow(0, -40, 160, 'rgba(255,190,110,1)', 0.3); pop(); push(1230, 1950, 1.4); for (let i = 0; i < 3; i++) mascarponeTub(i * 60 - 60, -i * 30, 0.9); pop();

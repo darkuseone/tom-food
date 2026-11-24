@@ -34,8 +34,14 @@
     push(1000, 1450, 1); rect(-12, -100, 24, 100, { wash: '#f8f0d8', washA: 1, w: 1.4 }); ell(0, -112, 8, 14, { wash: '#ffc060', washA: 1, line: false }); glow(0, -112, 70, 'rgba(255,190,100,1)', 0.25); pop();
     castShadow(640, 1450, 320, 90, 0.5, 0.25);
   }
+  function extra(t) {                                                     // мелочи: коробка от пиццы, пульт, плед, кошачья миска, кассета, растение
+    push(1020, 1300, 0.8); rect(-90, -16, 180, 16, { wash: '#c8a070', washA: 1, w: 2 }); txt('PIZZA', 0, -2, 18, { font: 'Osw', col: '#a8241e' }); pop();
+    push(560, 1300, 0.7); rect(-30, -70, 60, 70, { wash: '#2a2a2e', washA: 1, w: 2 }); for (let i = 0; i < 6; i++) ell(-14 + (i % 2) * 28, -56 + Math.floor(i / 2) * 18, 6, 6, { wash: ['#c8302a', '#3a8ac8', '#3aa86a'][i % 3], washA: 1, line: false }); pop();
+    push(-60, 760, 1); blob([[-40, 0], [-34, -60], [34, -60], [40, 0]], { wash: '#c86a3a', washA: 1, w: 2 }); for (let i = 0; i < 6; i++) pencil(spline([[0, -60], [-50 + i * 20, -140], [-70 + i * 26, -200]], false, 4), { w: 4, col: '#3a8a3a', pass2: false }); pop();
+    hatch(pathOf([[-500, 900], [1700, 900], [1700, 1440], [-500, 1440]]), bbOf([[-500, 900], [1700, 1440]]), { gap: 24, a: 0.05, col: '#8a8a94', ang: 0.6, key: 30160 });
+  }
   WORLD.today = (t, u, cat) => {
-    lay(9, () => { room(t); haze('#4a3a6a', 0.04); });
+    lay(9, () => { room(t); extra(t); haze('#4a3a6a', 0.04); });
     lay(2.6, () => { folk(t); });
     lay(1, () => { lightPool(560, 1460, 680, 120, 'rgba(255,220,170,1)', 0.36); cat(); table(t); });
     lay(0.65, () => { push(-150, 1950, 1.4); tiraCup(0, -10, 1.2, t, { key: 30130 }); pop(); push(1240, 1950, 1.4); mokaPot(0, -10, 1.3, t); pop();

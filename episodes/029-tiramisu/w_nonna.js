@@ -44,7 +44,7 @@
     castShadow(640, 1450, 320, 90, -0.5, 0.25);
   }
   WORLD.nonna = (t, u, cat) => {
-    lay(9, () => { kitchen(t); haze('#fff0d0', 0.05); });
+    lay(9, () => { kitchen(t); hatch(pathOf([[-500, -500], [1700, -500], [1700, 900], [-500, 900]]), bbOf([[-500, -500], [1700, 900]]), { gap: 26, a: 0.05, col: '#3a2a1a', ang: 0.9, key: 29435 }); shadeG(pathOf([[-500, 600], [1700, 600], [1700, 1440], [-500, 1440]]), 0, 1440, 0, 600, '#2a1a10', 0.18); haze('#fff0d0', 0.05); });
     lay(2.6, () => { family(t); shaft(260, 380, 300, 1400, -0.4, 'rgba(255,245,210,1)', 0.15); });
     lay(1, () => { lightPool(560, 1460, 660, 120, 'rgba(255,235,190,1)', 0.34); cat(); table(t); });
     lay(0.65, () => { push(-150, 200, 1.4); for (let i = 0; i < 4; i++) { const sw = Math.sin(t * 1.3 + i) * 8; pencil(spline([[i * 40, 0], [i * 36 + sw, 200], [i * 30 + sw * 2, 380]], false, 5), { w: 3, col: '#6a8a2a', pass2: false }); for (let j = 0; j < 4; j++) ell(i * 30 + sw * 1.5 + 6, 120 + j * 70, 14, 18, { wash: '#6a2a6a', washA: 1, w: 1 }); } pop(); push(1230, 1950, 1.4); ell(0, -40, 120, 40, { wash: '#c8783a', washA: 1, w: 3 }); pop();

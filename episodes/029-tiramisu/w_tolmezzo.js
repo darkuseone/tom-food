@@ -23,7 +23,7 @@
   function town(t) {                                                      // фасады с балконами и геранью, гостиница с вывеской, флаг Фриули, фонтан
     for (let i = 0; i < 4; i++) { const x = -350 + i * 440, h = 560; push(x, 1000, 1); rect(-200, -h, 400, h, { wash: ['#f0dcb8', '#e8c898', '#f4e4c8', '#e0c8a8'][i], washA: 1, w: 2.4, col: '#6a4a2a', key: 29600 + i }); poly([[-230, -h], [0, -h - 140], [230, -h]], { wash: '#6a4a3a', washA: 1, w: 2 });
       for (let r = 0; r < 2; r++) { rect(-180, -h + 160 + r * 200, 360, 16, { wash: '#7a4a24', washA: 1, w: 1.4 }); for (let j = 0; j < 9; j++) pencil([[-176 + j * 44, -h + 160 + r * 200], [-176 + j * 44, -h + 200 + r * 200]], { w: 4, col: '#7a4a24', pass2: false }); for (let j = 0; j < 6; j++) ell(-160 + j * 64, -h + 150 + r * 200, 16, 12, { wash: '#e83a3a', washA: 1, w: 1 }); for (let c = 0; c < 3; c++) rect(-140 + c * 110, -h + 60 + r * 200, 60, 80, { wash: '#4a5a6a', washA: 1, w: 1.4, col: '#f8f4ec' }); }
-      if (i === 1) { rect(-170, -h - 40, 340, 70, { wash: '#2a2a2a', washA: 1, w: 2, col: '#c8a040' }); txt('ALBERGO ROMA', 0, -h + 10, 40, { font: 'Osw', col: t > EV.tz_town ? '#ffe070' : '#a89060' }); if (t > EV.tz_town) glow(0, -h - 5, 180, 'rgba(255,220,120,1)', 0.22); hudBox('вывеска ALBERGO ROMA', -170, -h - 40, 170, -h + 30);
+      if (i === 2) { push(140, 0, 1); rect(-170, -h - 40, 340, 70, { wash: '#2a2a2a', washA: 1, w: 2, col: '#c8a040' }); txt('ALBERGO ROMA', 0, -h + 10, 40, { font: 'Osw', col: t > EV.tz_town ? '#ffe070' : '#a89060' }); if (t > EV.tz_town) glow(0, -h - 5, 180, 'rgba(255,220,120,1)', 0.22); hudBox('вывеска ALBERGO ROMA', -170, -h - 40, 170, -h + 30); pop();
         if (t > EV.tz_dish) { push(30, -h + 300, popK(t, EV.tz_dish, 0.35)); tiraCup(0, 0, 0.4, t, { spoon: false, key: 29610 }); pop(); } }
       pop(); }
     const up = t > EV.tz_fr ? sm(clamp((t - EV.tz_fr) / 0.6)) : 0; push(1000, 1160, 1); pencil([[0, 0], [0, -520]], { w: 6, col: '#5a4a3a', pass2: false }); push(0, -520 + (1 - up) * 300, 1); const fl = []; for (let i = 0; i <= 8; i++) fl.push([i * 28, Math.sin(t * 4 + i * 0.6) * 8 * i / 8]); shape(fl.concat(fl.slice().reverse().map(([a, b]) => [a, b + 150])), { wash: '#2a4a9a', washA: 1, w: 2, col: '#0a1a4a', key: 29620 }); blob([[90, 50], [110, 30], [130, 50], [150, 40], [140, 80], [112, 110], [84, 80], [74, 40]], { wash: '#f0c030', washA: 1, w: 1.4, col: '#8a6a10' }); pop(); pop();
@@ -42,7 +42,7 @@
     castShadow(640, 1450, 340, 100, 0.6, 0.28);
   }
   WORLD.tolmezzo = (t, u, cat) => {
-    lay(18, () => { peaks(t); haze('#e8f0ff', 0.06); });
+    lay(18, () => { peaks(t); hatch(pathOf([[-500, -500], [1700, -500], [1700, 900], [-500, 900]]), bbOf([[-500, -500], [1700, 900]]), { gap: 26, a: 0.05, col: '#3a2a1a', ang: 0.9, key: 29814 }); shadeG(pathOf([[-500, 600], [1700, 600], [1700, 1440], [-500, 1440]]), 0, 1440, 0, 600, '#2a1a10', 0.18); haze('#e8f0ff', 0.06); });
     lay(4, () => { town(t); });
     lay(2.6, () => { folk(t); shaft(1200, -200, 400, 1600, 0.4, 'rgba(240,248,255,1)', 0.14); });
     lay(1, () => { lightPool(560, 1460, 660, 120, 'rgba(240,245,255,1)', 0.3); cat(); ground(t); });

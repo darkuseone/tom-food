@@ -15,9 +15,9 @@
   function piazza(t) {                                                    // небо, ратуша с табло, аркады, голуби
     vgrad(-500, 900, ['#5a7ac0', '#f0b890', '#f8d8a8']); glow(900, 200, 300, 'rgba(255,220,170,1)', 0.25);
     push(560, 900, 1); rect(-420, -760, 840, 760, { wash: '#d8a878', washA: 1, w: 3, col: '#6a4a2a', key: 30000 }); for (let i = 0; i < 7; i++) blob([[-380 + i * 112, 0], [-380 + i * 112, -180], [-330 + i * 112, -240], [-280 + i * 112, -180], [-280 + i * 112, 0]], { wash: '#5a3a24', washA: 1, w: 2 }); rect(-60, -1000, 120, 240, { wash: '#c89868', washA: 1, w: 2 }); poly([[-70, -1000], [0, -1100], [70, -1000]], { wash: '#8a5a3a', washA: 1, w: 2 });
-    rect(-340, -680, 680, 300, { wash: '#1a1a1a', washA: 1, w: 6, col: '#c8a040' }); txt('FRIULI', -200, -620, 44, { font: 'Osw', col: '#f0c030' }); txt('TREVISO', 200, -620, 44, { font: 'Osw', col: '#f04040' });
+    push(170, 120, 0.68); rect(-340, -680, 680, 300, { wash: '#1a1a1a', washA: 1, w: 6, col: '#c8a040' }); txt('FRIULI', -200, -620, 44, { font: 'Osw', col: '#f0c030' }); txt('TREVISO', 200, -620, 44, { font: 'Osw', col: '#f04040' });
     const l = t > EV.vd_fr ? '1' : '?', r = t > EV.vd_tv ? '1' : '?'; txt(l, -200, -480, 110, { font: 'Osw', col: '#ffffff' }); txt(':', 0, -490, 110, { font: 'Osw', col: '#ffffff' }); txt(r, 200, -480, 110, { font: 'Osw', col: '#ffffff' });
-    if (t > EV.vd_fr) txt('рецепт · 1950-е', -200, -410, 24, { font: 'Hand', col: '#f0c030' }); if (t > EV.vd_tv) txt('слава · 1972/81', 200, -410, 24, { font: 'Hand', col: '#f04040' }); hudBox('табло дерби', -340, -680, 340, -380);
+    if (t > EV.vd_fr) txt('рецепт · 1950-е', -200, -410, 24, { font: 'Hand', col: '#f0c030' }); if (t > EV.vd_tv) txt('слава · 1972/81', 200, -410, 24, { font: 'Hand', col: '#f04040' }); hudBox('табло дерби', -340, -680, 340, -380); pop();
     pop();
     for (let i = 0; i < 6; i++) { const x = ((t * 50 + i * 260) % 1700) - 300, y = 260 + i * 30 + Math.sin(t * 3 + i) * 10, f = Math.sin(t * 9 + i) * 12; pencil(spline([[x - 18, y + f], [x - 6, y], [x, y]], false, 3), { w: 3, col: '#4a4a5a', pass2: false }); pencil(spline([[x, y], [x + 6, y], [x + 18, y + f]], false, 3), { w: 3, col: '#4a4a5a', pass2: false }); }
   }
@@ -34,9 +34,14 @@
     push(1060, 1450, 1); ell(0, -60, 80, 60, { wash: '#c8302a', washA: 1, w: 2 }); ell(0, -110, 80, 20, { wash: '#f4ecd8', washA: 1, w: 2 }); pop();
     castShadow(640, 1450, 320, 90, 0.5, 0.25);
   }
+  function extra(t) {                                                     // мелочи пьяццы: кафе-столики под зонтом, мороженщик, велосипед, голуби на мостовой
+    push(-120, 1240, 0.8); pencil([[0, 0], [0, -260]], { w: 5, col: '#3a3a3a', pass2: false }); blob([[-150, -260], [0, -340], [150, -260]], { wash: '#2a6a4a', washA: 1, w: 2 }); for (let i = 0; i < 6; i++) pencil([[0, -340], [-150 + i * 60, -260]], { w: 1.4, col: '#1a4a2a', pass2: false }); ell(0, 0, 80, 16, { wash: '#f4ecd8', washA: 1, w: 1.6 }); pop();
+    push(1180, 1250, 0.8); rect(-80, -120, 160, 120, { wash: '#f8f4ec', washA: 1, w: 2 }); for (let i = 0; i < 4; i++) rect(-70 + i * 36, -120, 30, 120, { wash: ['#f8a8c0', '#f8e0a0', '#a8d8c8', '#c8a0e8'][i], washA: 0.6, line: false }); ell(-40, 0, 26, 26, { wash: '#2a2a2a', washA: 0, w: 4, col: '#2a2a2a' }); ell(40, 0, 26, 26, { wash: '#2a2a2a', washA: 0, w: 4, col: '#2a2a2a' }); pop();
+    for (let i = 0; i < 5; i++) { const x = 200 + i * 160 + Math.sin(t * 2 + i) * 10; push(x, 1430, 0.5); ell(0, 0, 26, 16, { wash: '#7a7a8a', washA: 1, w: 1.4 }); ell(20, -14, 12, 10, { wash: '#6a6a7a', washA: 1, w: 1 }); poly([[30, -14], [40, -12], [30, -10]], { wash: '#f0a020', washA: 1, w: 1 }); pop(); }
+  }
   WORLD.verdict = (t, u, cat) => {
-    lay(10, () => { piazza(t); haze('#ffe0c0', 0.05); });
-    lay(2.6, () => { fans(t); shaft(1100, 0, 380, 1500, 0.45, 'rgba(255,230,180,1)', 0.14); });
+    lay(10, () => { piazza(t); hatch(pathOf([[-500, -500], [1700, -500], [1700, 900], [-500, 900]]), bbOf([[-500, -500], [1700, 900]]), { gap: 26, a: 0.05, col: '#3a2a1a', ang: 0.9, key: 29679 }); shadeG(pathOf([[-500, 600], [1700, 600], [1700, 1440], [-500, 1440]]), 0, 1440, 0, 600, '#2a1a10', 0.18); haze('#ffe0c0', 0.05); });
+    lay(2.6, () => { extra(t); fans(t); shaft(1100, 0, 380, 1500, 0.45, 'rgba(255,230,180,1)', 0.14); });
     lay(1, () => { lightPool(560, 1460, 660, 120, 'rgba(255,225,170,1)', 0.34); cat(); stand(t); });
     lay(0.65, () => { push(-150, 1950, 1.4); for (let i = 0; i < 5; i++) rect(-40, -60 - i * 50, 200, 40, { wash: i % 2 ? '#2a4a9a' : '#f0c030', washA: 1, w: 2 }); pop(); push(1230, 1950, 1.4); for (let i = 0; i < 5; i++) rect(-160, -60 - i * 50, 200, 40, { wash: i % 2 ? '#a82a2a' : '#f0c030', washA: 1, w: 2 }); pop();
       motes(12, [-200, 300, 1300, 1500], '#fff0d0', t, 30090, { sp: 2, sz: 3, a: 0.35, wob: 4 }); moodDark(560, 1000, 520, 1500, '#140a10', 0.42); });
@@ -45,7 +50,7 @@
     outfit: 'olympA', light: { side: 1, rim: '#ffe0b0' }, grade: ['#ffc8a0', 0.05],
     act: () => [[S0.verdict, 'suspicious'], [EV.vd_who, 'smug'], [EV.vd_fr, 'proud'], [EV.vd_tv, 'grin'], [EV.vd_draw, 'laugh']],
     pose: (t, u, b) => { const wh = t > EV.vd_who - 0.2 && t < EV.vd_who + 0.5; return Object.assign(b, { x: 720, y: 1600, s: 1.15, flip: true, look: t > EV.vd_fr && t < EV.vd_tv ? [-0.9, -0.3] : t > EV.vd_tv && t < EV.vd_draw ? [0.9, -0.3] : [-0.2, -0.4], hand: wh ? [60, -330] : t > EV.vd_draw ? [140, -460] : t > EV.vd_fr && t < EV.vd_tv ? [260, -380] : [150, -240], handF: t > EV.vd_tv && t < EV.vd_draw ? [-260, -380] : t > EV.vd_draw ? [-140, -460] : [-90, -230], point: t > EV.vd_fr && t < EV.vd_draw ? 1 : undefined, tailUp: t > EV.vd_draw }); },
-    hud: t => infoPlate(t, EV.vd_fr - 0.1, S1.verdict - 0.15, { kind: 'list', title: '★ КТО АВТОР?', rows: [['Фриули', 'рецепт старше · 1950-е', '#2a4a9a'], ['Тревизо', 'прославил · 1972/81', '#a82a2a']], y: 760 }),
+    hud: t => infoPlate(t, EV.vd_fr - 0.1, S1.verdict - 0.15, { kind: 'list', title: '★ КТО АВТОР?', rows: [['Фриули', 'рецепт старше · 1950-е', '#2a4a9a'], ['Тревизо', 'прославил · 1972/81', '#a82a2a']], x: 650, y: 880 }),
     cam: () => [[S0.verdict, 560, 1000, 0.2], [EV.vd_who, 560, 1060, 0.24], [EV.vd_fr, 560, 1100, 0.27], [EV.vd_draw, 600, 1120, 0.29], [S1.verdict, 610, 1130, 0.3]]
   };
   // ---------------------------------------------------------------- переход: судейская монета крутится в центре, растёт и раскрывает пьяццу

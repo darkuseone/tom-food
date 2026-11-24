@@ -34,8 +34,16 @@
     if (t > EV.ly_cocoa - 0.2) { const r = rng(hsh(FRAME, 29830)); const n = 70; for (let i = 0; i < n; i++) ell(-200 + r() * 1500, -100 + ((t - EV.ly_cocoa) * 500 + r() * 1800) % 1800, 4 + r() * 4, 4 + r() * 4, { wash: TI.cocoaL, washA: 0.9, line: false }); }
     if (t > EV.ly_sneeze) { const q = clamp((t - EV.ly_sneeze) / 0.7); for (let i = 0; i < 10; i++) { const a = -2.6 + i * 0.3; ell(560 + Math.cos(a) * 300 * q, 980 + Math.sin(a) * 200 * q, 60 * q + 10, 40 * q + 8, { wash: TI.cocoa, washA: 0.6 * (1 - q), line: false }); } push(700, 820, popK(t, EV.ly_sneeze, 0.3)); txt('АПЧХИ!', 0, 0, 80, { font: 'Osw', col: '#ffe070', rot: 0.08 }); pop(); }
   }
+  function detail(t) {                                                    // фактура микромира: кремовые пузыри, крошки печенья, капли кофе на стекле, штриховка теней
+    const r = rng(29850); for (let i = 0; i < 16; i++) { const x = -150 + r() * 1400, y = 700 + r() * 500; ell(x, y, 10 + r() * 14, 8 + r() * 10, { wash: '#fffaf0', washA: 0.7, w: 1, col: TI.creamD }); }
+    for (let i = 0; i < 18; i++) { const x = -150 + r() * 1400, y = 1250 + r() * 80; ell(x, y, 6, 4, { rot: r() * 3, wash: TI.sav, washA: 1, w: 1, col: TI.savD }); }
+    for (let i = 0; i < 8; i++) { const x = (i % 2 ? 1120 : -40) + r() * 40, y = 300 + i * 160; blob([[x - 10, y], [x, y - 22], [x + 10, y], [x, y + 8]], { wash: TI.coffee, washA: 0.6, w: 1, col: '#2a1408' }); }
+    hatch(pathOf([[-400, 1100], [1500, 1100], [1500, 1300], [-400, 1300]]), bbOf([[-400, 1100], [1500, 1300]]), { gap: 16, a: 0.12, col: TI.creamD, ang: 0.3, key: 29851 });
+    shadeG(pathOf([[-400, 900], [1500, 900], [1500, 1300], [-400, 1300]]), 0, 900, 0, 1300, '#a88a5a', 0.2); haze('#fff0d8', 0.04);
+    glow(560, -200, 400, 'rgba(255,220,160,1)', 0.18); motes(10, [-200, 0, 1300, 900], '#8a5a30', t, 29852, { sp: 10, sz: 3, a: 0.5, wob: 3 });
+  }
   WORLD.layers = (t, u, cat) => {
-    lay(6, () => { sky(t); });
+    lay(6, () => { sky(t); detail(t); });
     lay(1.4, () => { lake(t); });
     lay(1, () => { lightPool(560, 1300, 500, 90, 'rgba(255,230,180,1)', 0.25); raft(t); cat(); castShadow(560, 1290, 160, 40, 0.4, 0.2); if (t > EV.ly_cream + 0.3 && t < EV.ly_again + 0.6) { push(560, 1020, 1); ell(-30, 0, 40, 14, { wash: TI.cream, washA: 1, w: 1.4 }); ell(30, 0, 40, 14, { wash: TI.cream, washA: 1, w: 1.4 }); pop(); } });
     lay(0.7, () => { snow(t); motes(14, [-200, 100, 1300, 1500], '#f8e8c8', t, 29890, { sp: -6, sz: 4, a: 0.35, wob: 5 }); moodDark(560, 960, 600, 1500, '#1a0a04', 0.38); });

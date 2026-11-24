@@ -27,12 +27,11 @@
   }
   function boat(t) {                                                      // гондола Тома (передний борт), фонарик, подушки, надпись TIREMESÙ, искры
     push(560, 1460, 1); const g = blob([[-500, -60], [-440, 40], [440, 40], [560, -120], [520, -60]], { wash: '#1a1a1a', washA: 1, w: 3, col: '#000000', key: 29920 }); pencil([[-460, -40], [480, -50]], { w: 6, col: '#c8a040', pass2: false }); for (let i = 0; i < 3; i++) ell(-300 + i * 120, -60, 50, 20, { wash: ['#c8201a', '#e8a020', '#2a4a9a'][i], washA: 1, w: 1.6 }); pop();
-    if (t > EV.nm_tir) { push(560, 760, popK(t, EV.nm_tir, 0.35)); rect(-260, -50, 520, 100, { wash: '#fbf4e4', washA: 0.95, w: 3, col: '#8a2a1a' }); txt('TIREMESÙ', 0, 18, 64, { font: 'Osw', col: '#8a2a1a' }); hudBox('надпись TIREMESÙ', -260, -50, 260, 50); pop(); }
     const L = lift(t); if (L > 0.05) { const r = rng(hsh(FRAME, 29921)); for (let i = 0; i < 10; i++) ell(560 + (r() - 0.5) * 300, 1300 - L * 300 + r() * 300, 5, 5, { wash: '#ffe070', washA: L, line: false }); }
     castShadow(560, 1440, 360, 80, 0.4, 0.22);
   }
   WORLD.name = (t, u, cat) => {
-    lay(12, () => { venice(t); haze('#ffc8a0', 0.05); });
+    lay(12, () => { venice(t); hatch(pathOf([[-500, -500], [1700, -500], [1700, 900], [-500, 900]]), bbOf([[-500, -500], [1700, 900]]), { gap: 26, a: 0.05, col: '#3a2a1a', ang: 0.9, key: 29777 }); shadeG(pathOf([[-500, 600], [1700, 600], [1700, 1440], [-500, 1440]]), 0, 1440, 0, 600, '#2a1a10', 0.18); haze('#ffc8a0', 0.05); });
     lay(2.6, () => { gondolier(t); });
     lay(1, () => { lightPool(560, 1400, 640, 100, 'rgba(255,200,140,1)', 0.3); cat(); boat(t); });
     lay(0.65, () => { push(-150, 1700, 1.4); pencil([[0, 300], [0, -500]], { w: 18, col: '#f8f4ec', pass2: false }); for (let j = 0; j < 6; j++) pencil([[0, -460 + j * 120], [0, -410 + j * 120]], { w: 18, col: '#c8201a', pass2: false }); pop(); push(1240, 200, 1.4); for (let i = 0; i < 4; i++) { const sw = Math.sin(t * 1.4 + i) * 8; pencil(spline([[i * 40, 0], [i * 36 + sw, 200], [i * 30 + sw * 2, 360]], false, 5), { w: 3, col: '#4a7a3a', pass2: false }); for (let j = 0; j < 3; j++) ell(i * 30 + sw * 1.5, 160 + j * 80, 20, 16, { wash: '#e85a8a', washA: 1, w: 1 }); } pop();
@@ -42,7 +41,7 @@
     outfit: 'parisA', light: { side: 1, rim: '#ffc890' }, grade: ['#ff9a80', 0.06],
     act: () => [[S0.name, 'smug'], [EV.nm_ven, 'grin'], [EV.nm_tir, 'proud'], [EV.nm_up, 'awe'], [EV.nm_boost, 'laugh']],
     pose: (t, u, b) => { const L = lift(t); return Object.assign(b, { x: 640, y: 1560 - L * 320, s: 1.12, flip: true, rot: L > 0.3 && t > EV.nm_boost ? (t - EV.nm_boost) * 6 : 0, look: t > EV.nm_up ? [0, -0.8] : [-0.4, 0.3], hand: L > 0.1 ? [120, -460] : [180, -280], handF: L > 0.1 ? [-120, -460] : [-90, -230], prop: L > 0.1 ? undefined : 'cupTiraP', tailUp: L > 0.1 }); },
-    hud: t => infoPlate(t, EV.nm_up - 0.1, S1.name - 0.15, { kind: 'swap', title: 'ИМЯ', a: 'TIRAMI SU', b: '«ПОДНИМИ МЕНЯ»', ia: (s, tt) => INGR_C29.cocoa(s, tt), ib: (s, tt) => INGR_C29.coffee(s, tt), tb: EV.nm_up + 0.4, y: 700 }),
+    hud: t => infoPlate(t, EV.nm_tir - 0.1, S1.name - 0.15, { kind: 'swap', title: 'ИМЯ', a: 'TIRAMI SU', b: '«ПОДНИМИ МЕНЯ»', ia: (s, tt) => INGR_C29.cocoa(s, tt), ib: (s, tt) => INGR_C29.coffee(s, tt), tb: EV.nm_up + 0.4, y: 700 }),
     cam: () => [[S0.name, 560, 1020, 0.22], [EV.nm_tir, 560, 1040, 0.24], [EV.nm_up, 580, 960, 0.22], [S1.name, 600, 1060, 0.25]]
   };
   // ---------------------------------------------------------------- переход: отражение в воде колышется полосами и успокаивается
