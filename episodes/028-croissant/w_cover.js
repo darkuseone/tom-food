@@ -1,3 +1,3 @@
-/* Обложка 028: блюдо — герой кадра крупно, Том с реакцией; 2–3 слова; плашка с названием блюда. */
-const COVER = { scene: 'hook', t: 2.0, cam: { x: 560, y: 1060, z: 0.4 }, pose: { expr: 'shock', expr2: 'shock', ek: 1, tailUp: true },
-  title: [['TODO', '#f4e6c8'], ['TODO?!', '#d9482b']], size: 150, ty: 360, badge: 'КРУАССАН', sub: 'история за минуту' };
+/* Обложка 028: парижское кафе, Том с круассаном, в чашке отражается турецкий флаг; 2 строки; плашка КРУАССАН. */
+const COVER = { scene: 'hook', t: 1.9, cam: { x: 580, y: 1030, z: 0.36 }, pose: { expr: 'suspicious', expr2: 'shock', ek: 0.5, noBlink: true, squint: false, look: [-0.5, 0.3], prop: 'croissantP', hand: [170, -300] },
+  title: [['КРУАССАН —', '#f4e6c8'], ['АВСТРИЕЦ?!', '#d9482b']], size: 130, ty: 380, badge: 'КРУАССАН', sub: 'круассан' };

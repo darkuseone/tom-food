@@ -17,8 +17,8 @@
 
   function shop(t) {                                                      // стены: кафель-метро, меловая доска, полки с багетами, окно, лампы
     vgrad(-500, 1500, ['#f0e8d8', '#f8f0e0', '#e8dcc8']); for (let r = 0; r < 12; r++) for (let i = 0; i < 14; i++) rect(-500 + i * 160 + (r % 2) * 80, 700 + r * 60, 156, 56, { wash: '#f8f8f4', washA: 1, w: 1, col: '#c8c8c0' });
-    push(320, 380, 1); rect(-200, -200, 400, 360, { wash: '#2a3a34', washA: 1, w: 8, col: '#6a4a2a', key: 29100 }); txt('MENU', 0, -140, 44, { font: 'Hand', col: '#f8f4ec' }); const it = [['croissant', '1,40'], ['pain au chocolat', '1,60'], ['café crème', '2,80'], ['baguette', '1,20']]; it.forEach(([a, b], i) => { txt(a, -60, -80 + i * 54, 30, { font: 'Hand', col: '#f8f4ec' }); txt(b, 140, -80 + i * 54, 30, { font: 'Hand', col: '#f0c060' }); }); hudBox('меловая доска', -200, -200, 200, 160); pop();
-    push(880, 420, 1); rect(-180, -220, 360, 440, { wash: '#bfe0f0', washA: 1, w: 8, col: '#f4f0e8', key: 29101 }); vgrad(-220, 220, ['#c8e0f0', '#f8e8c8']); for (let i = 0; i < 3; i++) rect(-160 + i * 110, -60, 90, 280, { wash: '#e8dcc8', washA: 1, w: 1 }); pencil([[0, -220], [0, 220]], { w: 6, col: '#f4f0e8', pass2: false }); glow(0, 0, 260, 'rgba(255,240,200,1)', 0.25); pop();
+    push(680, 470, 0.75); rect(-200, -200, 400, 360, { wash: '#2a3a34', washA: 1, w: 8, col: '#6a4a2a', key: 29100 }); txt('MENU', 0, -140, 44, { font: 'Hand', col: '#f8f4ec' }); const it = [['croissant', '1,40'], ['pain au chocolat', '1,60'], ['café crème', '2,80'], ['baguette', '1,20']]; it.forEach(([a, b], i) => { txt(a, -60, -80 + i * 54, 30, { font: 'Hand', col: '#f8f4ec' }); txt(b, 140, -80 + i * 54, 30, { font: 'Hand', col: '#f0c060' }); }); hudBox('меловая доска', -200, -200, 200, 160); pop();
+    push(1060, 420, 1); rect(-180, -220, 360, 440, { wash: '#bfe0f0', washA: 1, w: 8, col: '#f4f0e8', key: 29101 }); vgrad(-220, 220, ['#c8e0f0', '#f8e8c8']); for (let i = 0; i < 3; i++) rect(-160 + i * 110, -60, 90, 280, { wash: '#e8dcc8', washA: 1, w: 1 }); pencil([[0, -220], [0, 220]], { w: 6, col: '#f4f0e8', pass2: false }); glow(0, 0, 260, 'rgba(255,240,200,1)', 0.25); pop();
     push(320, 780, 1); rect(-240, 0, 480, 16, { wash: '#8a5a2a', washA: 1, w: 1.6 }); for (let i = 0; i < 3; i++) { blob([[-200 + i * 160, 0], [-210 + i * 160, -60], [-130 + i * 160, -60], [-120 + i * 160, 0]], { wash: '#c89a5a', washA: 1, w: 2 }); for (let j = 0; j < 4; j++) baguette(-165 + i * 160 + j * 6, -60 - j * 8, 0.28, -1.3 + j * 0.1); } pop();
     for (const x of [160, 560, 960]) { push(x, -60, 1); pencil([[0, -300], [0, 0]], { w: 3, col: '#2a2a2a', pass2: false }); ell(0, 30, 50, 50, { wash: '#f8e8c0', washA: 0.9, w: 2, col: '#8a7a5a' }); glow(0, 30, 150, 'rgba(255,225,170,1)', 0.25); pop(); }
   }
@@ -36,8 +36,16 @@
     push(1050, 1450, 1); rect(-60, -40, 120, 40, { wash: '#f8f4ec', washA: 1, w: 1.6 }); txt('1,40 €', 0, -12, 26, { font: 'Osw', col: '#c8201a' }); pop();
     castShadow(640, 1450, 320, 90, 0.5, 0.25);
   }
+  function extra(t) {                                                     // мелочи булочной: часы, растение, касса, стопка коробок, флажки-гирлянда
+    push(250, 260, 1); ell(0, 0, 54, 54, { wash: '#f8f4ec', washA: 1, w: 4, col: '#2a2a2a' }); pencil([[0, 0], [Math.cos(t * 0.5) * 36, Math.sin(t * 0.5) * 36]], { w: 3, col: '#1a1a1a', pass2: false }); pencil([[0, 0], [0, -26]], { w: 4, col: '#1a1a1a', pass2: false }); pop();
+    push(-60, 760, 1); blob([[-40, 0], [-34, -60], [34, -60], [40, 0]], { wash: '#c86a3a', washA: 1, w: 2 }); for (let i = 0; i < 7; i++) pencil(spline([[0, -60], [-60 + i * 20, -150], [-80 + i * 26, -220 - (i % 3) * 20]], false, 4), { w: 4, col: '#3a8a3a', pass2: false }); pop();
+    push(560, 1250, 1); rect(-70, -80, 140, 80, { wash: '#3a3a40', washA: 1, w: 2 }); rect(-50, -110, 100, 30, { wash: '#2a2a30', washA: 1, w: 1.6 }); for (let i = 0; i < 6; i++) rect(-56 + (i % 3) * 40, -66 + Math.floor(i / 3) * 26, 28, 18, { wash: '#c8ccd4', washA: 1, w: 1 }); pop();
+    for (let i = 0; i < 9; i++) { const x = -200 + i * 170, y = 160 + Math.sin(i * 1.1) * 30 + Math.sin(t * 2 + i) * 4; poly([[x, y], [x + 60, y + 6], [x + 30, y + 60]], { wash: ['#2a3a8a', '#f8f4ec', '#c8201a'][i % 3], washA: 1, w: 1 }); }
+    pencil(Array.from({ length: 10 }, (_, i) => [-200 + i * 170, 160 + Math.sin(i * 1.1) * 30]), { w: 2, col: '#3a2a1a', pass2: false });
+    hatch(pathOf([[-500, 700], [1700, 700], [1700, 1440], [-500, 1440]]), bbOf([[-500, 700], [1700, 1440]]), { gap: 22, a: 0.05, col: '#a8a8a0', ang: 0.7, key: 29150 });
+  }
   WORLD.today = (t, u, cat) => {
-    lay(9, () => { shop(t); haze('#fff4e0', 0.04); });
+    lay(9, () => { shop(t); extra(t); haze('#fff4e0', 0.04); });
     lay(2.6, () => { folk(t); });
     lay(1, () => { lightPool(580, 1460, 680, 120, 'rgba(255,230,180,1)', 0.35); cat(); counter(t); });
     lay(0.65, () => { push(-140, 1950, 1.4); coffeeCup(0, -20, 1.4, t); pop(); push(1240, 1950, 1.4); for (let i = 0; i < 3; i++) croissant(0, -40 - i * 50, 0.4, t, { key: 29130 + i }); pop();

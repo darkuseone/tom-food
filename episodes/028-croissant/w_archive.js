@@ -30,14 +30,14 @@
     rect(-190, -190, 170, 150, { wash: '#c8a070', washA: 1, w: 2, col: '#5a3a1a' }); for (let i = 0; i < 3; i++) kipferl(-150 + i * 50, -70, 0.18, t, { key: 28532 + i }); ottomanFlag(-90, -40, 0.22, t, { key: 28535 }); for (let i = 0; i < 6; i++) pencil([[20, -190 + i * 24], [190, -186 + i * 24]], { w: 1.6, col: '#5a4a3a', a: 0.6, pass2: false });
     if (t > EV.ar_20) { const k = popK(t, EV.ar_20, 0.3); push(110, -110, k * 1.2, -0.15); rect(-90, -40, 180, 80, { wash: '#c8201a', washA: 0.12, w: 6, col: '#c8201a' }); txt('XX ВЕК', 0, 16, 44, { font: 'Osw', col: '#c8201a' }); pop(); } pop();
     if (t > EV.ar_tale && t < EV.ar_tale + 1) { const q = (t - EV.ar_tale); for (let i = 0; i < 6; i++) ell(380 + Math.cos(i) * 80 * q, 1250 - q * 120 + Math.sin(i * 2) * 30, 40 * q + 10, 26 * q + 6, { wash: '#d8d0c0', washA: 0.4 * (1 - q), line: false }); }
-    push(820, 1450, 1); pencil([[0, 0], [0, -200]], { w: 6, col: '#c8a040', pass2: false }); blob([[-80, -200], [-60, -260], [60, -260], [80, -200]], { wash: '#2a6a3a', washA: 1, w: 2.4, col: '#0a2a10' }); glow(0, -190, 160, 'rgba(255,230,160,1)', 0.35); pop();
-    push(1060, 1450, 1); pencil([[0, 0], [0, -40]], { w: 6, col: '#6a4a2a', pass2: false }); const g = ell(0, -110, 70, 70, { wash: '#3a7ab0', washA: 1, w: 2.4, col: '#1a2a4a' }); blob([[-40, -150], [-10, -170], [20, -120], [-20, -90]], { wash: '#6aa84a', washA: 1, line: false }); blob([[20, -80], [50, -100], [50, -60]], { wash: '#6aa84a', washA: 1, line: false }); pop();
+    push(1000, 1450, 1); pencil([[0, 0], [0, -200]], { w: 6, col: '#c8a040', pass2: false }); blob([[-80, -200], [-60, -260], [60, -260], [80, -200]], { wash: '#2a6a3a', washA: 1, w: 2.4, col: '#0a2a10' }); glow(0, -190, 160, 'rgba(255,230,160,1)', 0.35); pop();
+    push(1170, 1450, 1); pencil([[0, 0], [0, -40]], { w: 6, col: '#6a4a2a', pass2: false }); const g = ell(0, -110, 70, 70, { wash: '#3a7ab0', washA: 1, w: 2.4, col: '#1a2a4a' }); blob([[-40, -150], [-10, -170], [20, -120], [-20, -90]], { wash: '#6aa84a', washA: 1, line: false }); blob([[20, -80], [50, -100], [50, -60]], { wash: '#6aa84a', washA: 1, line: false }); pop();
     castShadow(560, 1450, 320, 90, -0.5, 0.25);
   }
   WORLD.archive = (t, u, cat) => {
     lay(9, () => { hall(t); haze('#a8c0a0', 0.05); });
     lay(2.6, () => { people(t); });
-    lay(1, () => { lightPool(700, 1460, 600, 120, 'rgba(255,230,160,1)', 0.36); cat(); desk(t); });
+    lay(1, () => { lightPool(900, 1460, 600, 120, 'rgba(255,230,160,1)', 0.36); cat(); desk(t); });
     lay(0.65, () => { push(-140, 1950, 1.4); for (let i = 0; i < 5; i++) rect(-80, -60 - i * 40, 200 - (i % 2) * 20, 36, { wash: ['#8a2a1a', '#2a4a6a', '#e8dcc0', '#4a6a2a', '#a8803a'][i], washA: 1, w: 2 }); pop(); push(1230, 1900, 1.4); for (let i = 0; i < 3; i++) rect(-60, -80 - i * 60, 180, 50, { wash: '#c8b890', washA: 1, w: 2 }); pop();
       motes(20, [200, 600, 1100, 1450], '#fff0c0', t, 28590, { sp: 2, sz: 3, a: 0.5, wob: 6 }); moodDark(600, 1000, 520, 1500, '#060c08', 0.5); });
   };
