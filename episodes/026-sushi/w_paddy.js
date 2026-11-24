@@ -27,7 +27,7 @@
   function terraces(t) {                                                  // ступени террас с водой-зеркалом, хижина на сваях, буйвол, пальмы
     for (let i = 0; i < 7; i++) { const y = 640 + i * 110, a = i * 0.7;
       const top = [[-500, y + Math.sin(a) * 30], [0, y - 20 + Math.cos(a) * 20], [500, y + 10], [1000, y - 30 + Math.sin(a) * 20], [1600, y]];
-      const p = shape(top.concat([[1600, y + 100], [-500, y + 100]]), { wash: lerpC('#8ab898', '#5a8a4a', i / 6), washA: 1, w: 1.6, col: '#2a4a2a', key: 26710 + i });
+      const p = shape(top.concat([[1600, y + 100], [-500, y + 100]]), { wash: lerpC('#8ab898', '#5a8a4a', i / 6), washA: 1, w: 1.6, col: '#2a4a2a', key: 26710 + i }); shadeG(p.path, 0, y + 100, 0, y, '#2a5a3a', 0.3);
       blob(top.map(([x, yy]) => [x, yy + 10]).concat([[1600, y + 60], [-500, y + 60]]), { wash: lerpC('#c8e0e8', '#a8c8b8', i / 6), washA: 0.8, line: false });
       pencil(top.map(([x, yy]) => [x, yy + 26]), { w: 3, col: '#fff4d8', a: 0.35, pass2: false });
       for (let j = 0; j < 14; j++) { const x = -460 + j * 150 + (i % 2) * 70; pencil([[x, y + 60], [x - 6, y + 34]], { w: 2, col: '#3a7a2a', a: 0.7, pass2: false }); pencil([[x + 8, y + 60], [x + 12, y + 30]], { w: 2, col: '#4a8a3a', a: 0.7, pass2: false }); } }
@@ -57,9 +57,9 @@
     push(1180, 2000, 1.5); for (let i = 0; i < 3; i++) { rect(i * 50, -900, 34, 900, { wash: '#7a9a3a', washA: 1, w: 2, col: '#2a4a1a' }); for (let j = 1; j < 6; j++) pencil([[i * 50, -j * 160], [i * 50 + 34, -j * 160]], { w: 4, col: '#3a5a1a', pass2: false }); } pop();
   }
   WORLD.paddy = (t, u, cat) => {
-    lay(26, () => { sky(t); });
+    lay(26, () => { sky(t); haze('#f8e8d0', 0.06); });
     lay(9, () => { terraces(t); haze('#e8f0e8', 0.07); });
-    lay(2.8, () => { yard(t); shaft(1000, 300, 380, 1400, 0.45, 'rgba(255,230,170,1)', 0.15); });
+    lay(2.8, () => { for (const x of [230, 1000]) castShadow(x, 1250, 140, 60, -0.5, 0.22); rays(880, 300, 2.3, 0.4, 900, 'rgba(255,230,170,1)', 0.08, 5, t); yard(t); shaft(1000, 300, 380, 1400, 0.45, 'rgba(255,230,170,1)', 0.15); });
     lay(1, () => { lightPool(560, 1460, 650, 120, 'rgba(255,220,160,1)', 0.32); cat(); jar(t); });
     lay(0.65, () => { front(t); motes(18, [-200, 300, 1300, 1500], '#fff8e0', t, 26790, { sp: 4, sz: 3, a: 0.4, wob: 5 }); moodDark(560, 1000, 520, 1500, '#1a2030', 0.35); });
   };

@@ -27,8 +27,8 @@
     for (let r = 0; r < 2; r++) for (let i = 0; i < 4; i++) vinegarCask(-300 + i * 140 + r * 70, 1240 - r * 170, 0.42, t, { key: 27550 + r * 4 + i, drip: false });
   }
   function banner(t) {                                                    // полотнище с иероглифом 酸 разворачивается с балки
-    const k = unroll(t); if (k <= 0) return; pencil([[380, 140], [1100, 140]], { w: 18, col: '#2a1408', pass2: false });
-    push(720, 150, 1); const h = 620 * k; const p = rect(-220, 0, 440, h, { wash: '#f4ecd8', washA: 1, w: 4, col: '#4a3a1a', key: 27560 }); shadeG(p.path, -220, 0, 220, 0, '#c8b890', 0.3);
+    const k = unroll(t); if (k <= 0) return; pencil([[380, 420], [1100, 420]], { w: 18, col: '#2a1408', pass2: false });
+    push(720, 430, 0.72); const h = 620 * k; const p = rect(-220, 0, 440, h, { wash: '#f4ecd8', washA: 1, w: 4, col: '#4a3a1a', key: 27560 }); shadeG(p.path, -220, 0, 220, 0, '#c8b890', 0.3);
     if (k > 0.6) { ctx.save(); ctx.globalAlpha = (k - 0.6) / 0.4; txt('酸', 0, 300, 300, { font: 'Osw', col: '#a8241e' }); txt('«КИСЛЫЙ»', 0, 520, 60, { font: 'Osw', col: '#2a1408' }); ctx.restore(); }
     ell(0, h, 230, 18, { wash: '#6a4a24', washA: 1, w: 2 }); hudBox('полотнище 酸', -220, 0, 220, h); pop();
   }
@@ -59,7 +59,7 @@
         hand: pour ? [220, -360] : hold ? [110, -440] : [150, -230], handF: [-90, -230], prop: pour ? 'ladleP' : hold ? 'nigiriP' : undefined, propAng: pour ? -0.6 : 0, squint: hold && t < EV.vn_rice + 0.8, tailUp: hold }); },
     hud: t => { infoPlate(t, EV.vn_pour, EV.vn_word - 0.5, { kind: 'swap', title: 'КИСЛИНКА', a: 'БРОЖЕНИЕ: ГОД', b: 'УКСУС: МИНУТА', ia: (s, tt) => INGR_C26.fish(s, tt), ib: (s, tt) => INGR_C26.vinegar(s, tt), tb: EV.vn_min });
     },
-    cam: () => [[S0.vinegar, 560, 1060, 0.24], [EV.vn_min, 560, 1120, 0.28], [EV.vn_word - 0.3, 560, 960, 0.2], [EV.vn_rice, 600, 1120, 0.28], [S1.vinegar, 610, 1140, 0.31]]
+    cam: () => [[S0.vinegar, 560, 1060, 0.24], [EV.vn_min, 560, 1120, 0.28], [EV.vn_word - 0.3, 580, 1060, 0.25], [EV.vn_rice, 600, 1120, 0.28], [S1.vinegar, 610, 1140, 0.31]]
   };
   // ---------------------------------------------------------------- переход: капля уксуса падает и расходится кругами, внутри — амбар
   TRANS_IN.vinegar = { a: 0.3, b: 0.45, runA: 0.4, fx(k, t, A, B) {

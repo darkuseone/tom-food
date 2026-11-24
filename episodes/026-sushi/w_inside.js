@@ -12,8 +12,8 @@
   EV.in_plop = LE('s5') + 0.25;
   SHAKES.push([EV.in_plop, 0.2, 9]);
   KEYW.push('руке!');
-  const slab = [[40, 1060], [280, 1000], [540, 1100], [770, 1290], [900, 1440], [950, 1500]];   // верх ломтя-горки (мировые координаты)
-  const onSlab = q => { const p = spline(slab, false, 40); const i = clamp(q) * (p.length - 1), a = Math.floor(i), b = Math.min(a + 1, p.length - 1), f = i - a; return [lerp(p[a][0], p[b][0], f), lerp(p[a][1], p[b][1], f)]; };
+  const slab = [[260, 1060], [420, 1000], [600, 1100], [770, 1290], [900, 1440], [950, 1500]];   // верх ломтя-горки (мировые координаты)
+  const onSlab = q => { const n = slab.length - 1, i = clamp(q) * n, a = Math.min(Math.floor(i), n - 1), f = i - a; return [lerp(slab[a][0], slab[a + 1][0], f), lerp(slab[a][1], slab[a + 1][1], f)]; };
 
   function far(t) {                                                       // фон: тёплая дымка кухни, пар, холм васаби, паруса имбиря, палочки-колонны
     vgrad(-400, 1500, ['#3a2214', '#7a4a2a', '#c8905a']); glow(560, -100, 700, 'rgba(255,200,130,1)', 0.25);
@@ -50,13 +50,13 @@
     outfit: 'itaB', light: { side: 1, rim: '#ffe8c0' }, grade: ['#ffb070', 0.06],
     act: () => [[S0.inside, 'awe'], [EV.in_climb, 'grin'], [EV.in_top, 'proud'], [EV.in_slide, 'laugh'], [EV.in_plop, 'shock'], [EV.in_plop + 0.5, 'grin']],
     pose: (t, u, b) => { let x, y, rot = 0, walk, lie = false;
-      if (t < EV.in_top) { const q = clamp((t - S0.inside) / (EV.in_top - S0.inside)); x = lerp(160, 300, q); y = lerp(1500, 1040, sm(q)) + Math.abs(Math.sin(q * 12)) * -20; walk = t * 9; }
+      if (t < EV.in_top) { const q = clamp((t - S0.inside) / (EV.in_top - S0.inside)); x = lerp(300, 400, q); y = lerp(1500, 1030, sm(q)) + Math.abs(Math.sin(q * 12)) * -20; walk = t * 9; }
       else if (t < EV.in_slide) { [x, y] = onSlab(0.14); }
       else if (t < EV.in_plop) { const q = sm(clamp((t - EV.in_slide) / (EV.in_plop - EV.in_slide))); [x, y] = onSlab(lerp(0.14, 1, q)); rot = 0.45; }
       else { const q = clamp((t - EV.in_plop) / 0.6); x = 960; y = lerp(1500, 1600, Math.min(q * 2, 1)) - (q > 0.5 ? Math.sin((q - 0.5) * 6.28) * 80 : 0); lie = q > 0.4; }
       return Object.assign(b, { x, y, s: 0.72, flip: false, rot, walk, look: t > EV.in_slide ? [0.5, 0.3] : [0.4, -0.4], hand: t > EV.in_top && t < EV.in_slide ? [80, -470] : t > EV.in_slide ? [140, -380] : [130, -280], handF: t > EV.in_slide ? [-140, -380] : [-90, -230], tailUp: t > EV.in_top, sweat: t > EV.in_plop }); },
     afterCat: (t, u, P) => { if (t > EV.in_plop + 0.3) { push(P.x, P.y - 150, 1); ell(0, 0, 130, 26, { wash: SU.soy, washA: 0.9, line: false }); pop(); } },
-    cam: () => [[S0.inside, 520, 1000, 0.18], [EV.in_top, 460, 900, 0.24], [EV.in_slide, 540, 940, 0.22], [EV.in_plop, 720, 1200, 0.26], [S1.inside, 740, 1220, 0.27]]
+    cam: () => [[S0.inside, 520, 1000, 0.18], [EV.in_top, 400, 960, 0.24], [EV.in_slide, 500, 1000, 0.22], [EV.in_plop, 720, 1200, 0.26], [S1.inside, 740, 1220, 0.27]]
   };
   // ---------------------------------------------------------------- переход: ладонь смыкается пальцами по краям кадра и раскрывается
   TRANS_IN.inside = { a: 0.25, b: 0.4, runA: 0.3, fx(k, t, A, B) {

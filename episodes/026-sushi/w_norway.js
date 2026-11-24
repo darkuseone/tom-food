@@ -26,8 +26,8 @@
   }
   function hall(t) {                                                      // зал: панели, экран со слайдом, баннер, флаги, торшеры
     vgrad(-500, 1500, ['#1a1410', '#2a1e16', '#3a2a1e']); for (let i = 0; i < 12; i++) { const p = rect(-500 + i * 200, -300, 198, 1700, { wash: i % 2 ? '#4a3220' : '#42301e', washA: 1, w: 1.4, col: '#1a0e06', key: 27410 + i }); rect(-480 + i * 200, -200, 158, 400, { wash: '#523a26', washA: 0.6, w: 1, col: '#1a0e06' }); }
-    push(560, 380, 1); rect(-300, -210, 600, 420, { wash: '#f4f4f0', washA: 1, w: 4, col: '#2a2a2a', key: 27430 }); ctx.save(); ctx.clip(pathOf([[-270, -180], [270, -180], [270, 180], [-270, 180]])); slideImg(t, slide(t)); ctx.restore(); pencil([[0, -210], [0, -260]], { w: 4, col: '#2a2a2a', pass2: false }); hudBox('слайд-экран', -300, -210, 300, 210); pop();
-    push(560, 80, 1); rect(-360, -40, 720, 80, { wash: '#c8302a', washA: 1, w: 2.4, col: '#4a0a08' }); txt('PROJECT JAPAN · 1985', 0, 16, 46, { font: 'Osw', col: '#fbf4e4' }); hudBox('баннер', -360, -40, 360, 40); pop();
+    push(700, 560, 0.72); rect(-300, -210, 600, 420, { wash: '#f4f4f0', washA: 1, w: 4, col: '#2a2a2a', key: 27430 }); ctx.save(); ctx.clip(pathOf([[-270, -180], [270, -180], [270, 180], [-270, 180]])); slideImg(t, slide(t)); ctx.restore(); pencil([[0, -210], [0, -260]], { w: 4, col: '#2a2a2a', pass2: false }); hudBox('слайд-экран', -300, -210, 300, 210); pop();
+    push(700, 330, 0.6); rect(-360, -40, 720, 80, { wash: '#c8302a', washA: 1, w: 2.4, col: '#4a0a08' }); txt('PROJECT JAPAN · 1985', 0, 16, 46, { font: 'Osw', col: '#fbf4e4' }); hudBox('баннер', -360, -40, 360, 40); pop();
     for (const [x, sd] of [[60, 1], [1060, -1]]) { push(x, 880, 1); pencil([[0, 0], [0, -500]], { w: 5, col: '#c8a860', pass2: false }); const k = t > EV.nw_nor ? popK(t, EV.nw_nor, 0.4) : 1; push(0, -500, 1, Math.sin(t * 2) * 0.03); rect(0, 0, 180 * sd, 120 * k, { wash: '#c8102e', washA: 1, w: 1.6 }); rect(50 * sd, 0, 30 * sd, 120 * k, { wash: '#ffffff', washA: 1, line: false }); rect(0, 45 * k, 180 * sd, 30 * k, { wash: '#ffffff', washA: 1, line: false }); rect(58 * sd, 0, 14 * sd, 120 * k, { wash: '#00205b', washA: 1, line: false }); rect(0, 53 * k, 180 * sd, 14 * k, { wash: '#00205b', washA: 1, line: false }); pop(); pop(); }
     for (const x of [-140, 1240]) { push(x, 1300, 1); pencil([[0, 0], [0, -460]], { w: 5, col: '#c8a860', pass2: false }); blob([[-70, -460], [-50, -560], [50, -560], [70, -460]], { wash: '#f4d890', washA: 1, w: 2 }); glow(0, -500, 220, 'rgba(255,200,120,1)', 0.28); pop(); }
   }
@@ -47,7 +47,7 @@
   }
   WORLD.norway = (t, u, cat) => {
     lay(8, () => { hall(t); haze('#2a3a5a', 0.05); });
-    lay(2.6, () => { crowd(t); });
+    lay(2.6, () => { crowd(t); for (let i = 0; i < 5; i++) castShadow(150 + i * 200, 1300, 120, 50, 0.4, 0.2); rays(700, 560, 1.57, 0.5, 700, 'rgba(210,230,255,1)', 0.08, 5, t); });
     lay(1, () => { shaft(470, 1380, 360, 1100, 3.3, 'rgba(210,230,255,1)', 0.16); lightPool(560, 1460, 640, 110, 'rgba(220,235,255,1)', 0.3); cat(); table(t); });
     lay(0.65, () => { push(-150, 400, 1.4); rect(-40, -600, 120, 1600, { wash: '#6a1a1a', washA: 1, w: 3, col: '#2a0a0a' }); for (let i = 0; i < 6; i++) pencil([[-20 + i * 18, -600], [-24 + i * 18 + Math.sin(t + i) * 4, 1000]], { w: 3, col: '#4a0a0a', pass2: false }); pop();
       motes(14, [200, 400, 900, 1400], '#e8f0ff', t, 27490, { sp: 2, sz: 3, a: 0.4, wob: 3 }); moodDark(560, 1000, 520, 1500, '#060a18', 0.5); });
@@ -56,7 +56,7 @@
     outfit: 'norA', light: { side: -1, rim: '#d8e8ff' }, grade: ['#a8c0e0', 0.06],
     act: () => [[S0.norway, 'suspicious'], [EV.nw_salmon, 'proud'], [EV.nw_nor, 'grin'], [EV.nw_80, 'wink'], [EV.nw_80 + 0.4, 'laugh']],
     pose: (t, u, b) => Object.assign(b, { x: 700, y: 1600, s: 1.15, flip: true, look: t < EV.nw_nor ? [-0.5, -0.4] : [-0.6, 0.2], hand: t > EV.nw_salmon ? [180, -330] : [150, -230], handF: [-90, -230], prop: 'salmonP', propAng: 0.05, tailUp: t > EV.nw_80 }),
-    hud: t => infoPlate(t, EV.nw_nor - 0.1, S1.norway - 0.1, { kind: 'num', title: 'ЛОСОСЬ В СУШИ', big: '1985', sub: 'идею привезли норвежцы', y: 700 }),
+    hud: t => infoPlate(t, EV.nw_nor - 0.1, S1.norway - 0.1, { kind: 'num', title: 'ЛОСОСЬ В СУШИ', big: '1985', sub: 'идею привезли норвежцы', x: 650, y: 790 }),
     cam: () => [[S0.norway, 560, 1040, 0.23], [EV.nw_nor, 580, 1100, 0.27], [S1.norway, 600, 1130, 0.3]]
   };
   // ---------------------------------------------------------------- переход: диагональная волна фьорда, по гребню прыгает лосось
