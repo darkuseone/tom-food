@@ -51,7 +51,7 @@
   TRANS_IN.archive = { a: 0.25, b: 0.5, runA: 0.3, fx(k, t, A, B) {
     const e = sm(k); drawBuf(B, 1, 540, 960);
     scr(() => { const r = rng(28599); for (let i = 0; i < 4; i++) for (let j = 0; j < 6; j++) { const x0 = i * 270, y0 = j * 320, d = clamp(e * 1.6 - r() * 0.6); if (d >= 1) continue; const dy = d * d * 1400, rot = (r() - 0.5) * d * 1.5;
-      ctx.save(); ctx.translate(x0 + 135, y0 + 160 + dy); ctx.rotate(rot); ctx.beginPath(); ctx.moveTo(-135 + r() * 20, -160); ctx.lineTo(135, -160 + r() * 20); ctx.lineTo(135 - r() * 20, 160); ctx.lineTo(-135, 160 - r() * 20); ctx.closePath(); ctx.clip(); ctx.translate(-x0 - 135, -y0 - 160); drawBuf(A, 1, 540, 960); ctx.restore();
+      ctx.save(); ctx.translate(x0 + 135, y0 + 160 + dy); ctx.rotate(rot); ctx.beginPath(); ctx.moveTo(-135 + r() * 20, -160); ctx.lineTo(135, -160 + r() * 20); ctx.lineTo(135 - r() * 20, 160); ctx.lineTo(-135, 160 - r() * 20); ctx.closePath(); ctx.clip(); ctx.translate(-x0 - 135, -y0 - 160); ctx.drawImage(A, 0, 0); ctx.restore();
       pencil([[x0, y0 + dy], [x0 + 270, y0 + dy + 10]], { w: 2, col: '#3a2a1a', a: 0.6 * (1 - d), pass2: false }); } });
   } };
 })();
