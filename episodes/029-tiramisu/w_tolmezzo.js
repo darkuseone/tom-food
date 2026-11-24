@@ -58,7 +58,7 @@
   };
   // ---------------------------------------------------------------- переход: горный хребет поднимается снизу волной и опускается, открывая городок
   TRANS_IN.tolmezzo = { a: 0.25, b: 0.45, runA: 0.4, fx(k, t, A, B) {
-    const up = k < 0.45 ? sm(k / 0.45) : 1 - sm((k - 0.45) / 0.55), base = lerp(2100, 160, up); drawBuf(k < 0.45 ? A : B, 1, 540, 960);
+    const up = Math.sin(clamp(k) * Math.PI), base = lerp(2100, 820, up); drawBuf(A, 1, 540, 960); drawBuf(B, 1, 540, 960, sm(clamp((k - 0.25) / 0.5)));
     scr(() => { const P = [[-20, 2100]]; for (let i = 0; i <= 12; i++) P.push([i * 92, base + (i % 2 ? 0 : 260) + Math.sin(i * 2.3) * 60]); P.push([1100, 2100]); poly(P, { wash: '#4a5a7a', washA: 1, w: 4, col: '#2a3a5a', key: 29698 }); for (let i = 1; i < 12; i += 2) { const x = i * 92, y = base + Math.sin(i * 2.3) * 60; poly([[x - 60, y + 100], [x, y], [x + 60, y + 100]], { wash: '#f8fbff', washA: 1, line: false }); } });
   } };
 })();
