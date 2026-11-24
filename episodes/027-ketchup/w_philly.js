@@ -38,9 +38,17 @@
     if (t > EV.ph_tom && t < EV.ph_tom + 0.8) { const q = (t - EV.ph_tom) / 0.8; for (let i = 0; i < 3; i++) tomato(lerp(1250, 1000, q) + i * 30, 1300 - Math.abs(Math.sin(q * 6 + i)) * 60, 0.55, { key: 27670 + i, rot: q * 6 }); }
     castShadow(640, 1450, 320, 90, -0.5, 0.25);
   }
+  function extra(t) {                                                     // мелочи улицы: фонарщик, собака, бочки, вывеска лавки, голуби, кадка с цветами
+    human(-60, 1270, 0.8, t, { body: '#3a3a4a', legs: '#2a2a2a', hair: '#5a3a1a', face: 'calm', armL: 'up', armR: 'hold', look: 0.4, seed: 27680, hat: 'cap', hatCol: '#2a2a2a', prop: 'stick' });
+    push(780, 1290, 0.6); blob([[-60, 0], [-50, -50], [40, -54], [70, -30], [60, 0]], { wash: '#c8a070', washA: 1, w: 2 }); ell(70, -60, 24, 20, { wash: '#c8a070', washA: 1, w: 2 }); poly([[70, -76], [84, -100], [90, -70]], { wash: '#8a6a40', washA: 1, w: 1.4 }); pencil([[-60, -30], [-90, -60 + Math.sin(t * 9) * 14]], { w: 6, col: '#c8a070', pass2: false }); for (const x of [-40, -10, 30, 50]) pencil([[x, 0], [x, 30]], { w: 6, col: '#c8a070', pass2: false }); pop();
+    for (let i = 0; i < 3; i++) { push(520 + i * 70, 1290, 0.5); blob([[-50, 0], [-56, -60], [-50, -120], [50, -120], [56, -60], [50, 0]], { wash: '#8a5a2a', washA: 1, w: 2 }); for (const y of [-100, -20]) pencil([[-54, y], [54, y]], { w: 5, col: '#3a3a3a', pass2: false }); pop(); }
+    push(1150, 760, 1); rect(-90, -40, 180, 80, { wash: '#2a3a2a', washA: 1, w: 2 }); txt('GROCER', 0, 12, 34, { font: 'Osw', col: '#e8c860' }); pop();
+    for (let i = 0; i < 4; i++) { const x = 300 + i * 60 + Math.sin(t * 2 + i) * 6; ell(x, 1180, 14, 10, { wash: '#8a8a94', washA: 1, w: 1.4 }); ell(x + 10, 1170, 7, 6, { wash: '#6a6a74', washA: 1, w: 1 }); }
+    push(980, 1300, 0.8); blob([[-40, 0], [-46, -50], [46, -50], [40, 0]], { wash: '#8a5a2a', washA: 1, w: 2 }); for (let i = 0; i < 5; i++) ell(-30 + i * 15, -60 - (i % 2) * 10, 10, 10, { wash: ['#e8402a', '#f0c030'][i % 2], washA: 1, w: 1 }); pop();
+  }
   WORLD.philly = (t, u, cat) => {
     lay(12, () => { street(t); haze('#ffd8b0', 0.05); });
-    lay(3, () => { market(t); shaft(1200, 0, 380, 1500, 0.5, 'rgba(255,220,170,1)', 0.14); });
+    lay(3, () => { extra(t); market(t); shaft(1200, 0, 380, 1500, 0.5, 'rgba(255,220,170,1)', 0.14); });
     lay(1, () => { lightPool(620, 1460, 680, 120, 'rgba(255,215,160,1)', 0.34); cat(); desk(t); });
     lay(0.65, () => { push(-140, 1900, 1.4); pencil([[0, 0], [0, -800]], { w: 14, col: '#1a1a1a', pass2: false }); rect(-40, -900, 80, 100, { wash: '#f8e8a0', washA: 0.8, w: 3, col: '#1a1a1a' }); glow(0, -850, 140, 'rgba(255,220,140,1)', 0.25); pop();
       push(1250, 160, 1.4); for (let i = 0; i < 6; i++) { const sw = Math.sin(t * 1.3 + i) * 10; pencil(spline([[i * 30, 0], [i * 28 + sw, 200], [i * 26 + sw * 2, 380]], false, 5), { w: 3, col: '#4a6a2a', pass2: false }); ell(i * 26 + sw * 2, 390, 22, 12, { wash: '#5a8a3a', washA: 1, line: false }); } pop();

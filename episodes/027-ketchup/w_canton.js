@@ -24,7 +24,7 @@
     for (let r = 0; r < 2; r++) { push(80 + r * 900, 1060, 1); pencil([[-180, 0], [-180, -280]], { w: 6, col: '#a8884a', pass2: false }); pencil([[180, 0], [180, -280]], { w: 6, col: '#a8884a', pass2: false }); for (let j = 0; j < 3; j++) { pencil([[-190, -260 + j * 80], [190, -260 + j * 80]], { w: 4, col: '#a8884a', pass2: false }); for (let i = 0; i < 6; i++) fish(-150 + i * 60, -220 + j * 80, 0.42, 1.57 + Math.sin(t * 2 + i + j) * 0.05, { key: 27900 + r * 30 + j * 6 + i }); } pop(); }
     for (let i = 0; i < 3; i++) brineVat(-40 + i * 300, 1250, 0.6, t, { key: 27940 + i * 3 });
     for (const [x, sd, fl] of [[220, 27950, 1], [880, 27951, -1]]) { human(x, 1240, 0.9, t, { body: '#3a4a7a', legs: '#2a2a2a', hair: '#1a1410', face: t > EV.cn_brine ? 'grin' : 'calm', armL: 'up', armR: 'hold', look: 0.4 * fl, seed: sd, flip: fl }); jpHat(x, 1240, 0.9, 'conical', null, fl); push(x + fl * 40, 1240 - 300, 1, fl * (0.3 + Math.sin(t * 3 + sd) * 0.3)); pencil([[0, 0], [0, 320]], { w: 6, col: '#a8884a', pass2: false }); pop(); }
-    push(560, 340, 1); rect(-300, -40, 600, 30, { wash: '#6a3a1a', washA: 1, w: 2 }); const k = t > EV.cn_word ? sm(clamp((t - EV.cn_word) / 0.5)) : 0; if (k > 0) { const h = 360 * k; rect(-130, -10, 260, h, { wash: '#f4e8c8', washA: 1, w: 3, col: '#6a4a1a', key: 27960 }); if (k > 0.6) { txt('鮭汁', 0, 140, 110, { font: 'Osw', col: '#a8201a' }); txt('кэ-цап', 0, 230, 40, { font: 'Hand', col: '#3a2a1a' }); txt('= рыбный рассол', 0, 300, 30, { font: 'Hand', col: '#3a2a1a' }); } ell(0, h, 140, 14, { wash: '#6a3a1a', washA: 1, w: 2 }); hudBox('свиток 鮭汁', -130, -10, 130, h); } pop();
+    push(720, 420, 0.8); rect(-300, -40, 600, 30, { wash: '#6a3a1a', washA: 1, w: 2 }); const k = t > EV.cn_word ? sm(clamp((t - EV.cn_word) / 0.5)) : 0; if (k > 0) { const h = 360 * k; rect(-130, -10, 260, h, { wash: '#f4e8c8', washA: 1, w: 3, col: '#6a4a1a', key: 27960 }); if (k > 0.6) { txt('鮭汁', 0, 140, 110, { font: 'Osw', col: '#a8201a' }); txt('кэ-цап', 0, 230, 40, { font: 'Hand', col: '#3a2a1a' }); txt('= рыбный рассол', 0, 300, 30, { font: 'Hand', col: '#3a2a1a' }); } ell(0, h, 140, 14, { wash: '#6a3a1a', washA: 1, w: 2 }); hudBox('свиток 鮭汁', -130, -10, 130, h); } pop();
     for (const x of [160, 960]) chochin(x, 360, 0.8, t, { key: 27970 + x });
   }
   function work(t) {                                                      // передний стол: главный чан (герой), весы, корзина рыбы, рыба выпрыгивает
@@ -34,9 +34,16 @@
     push(1050, 1450, 1); blob([[-90, 0], [-100, -70], [100, -70], [90, 0]], { wash: '#c89a5a', washA: 1, w: 2.4 }); for (let i = 0; i < 5; i++) fish(-60 + i * 30, -76, 0.45, -0.3 + i * 0.15, { key: 27989 + i }); pop();
     castShadow(640, 1450, 320, 100, -0.6, 0.28);
   }
+  function extra(t) {                                                     // мелочи двора: корзины, кувшины, весы старика, кошка у рыбы, бамбук
+    for (let i = 0; i < 4; i++) { push(-80 + i * 120, 1330, 0.8); blob([[-40, 0], [-46, -60], [-20, -80], [20, -80], [46, -60], [40, 0]], { wash: ['#8a5a3a', '#a86a3a', '#6a4a2a'][i % 3], washA: 1, w: 2, col: '#2a1408' }); ell(0, -80, 20, 6, { wash: '#2a1408', washA: 1, line: false }); pop(); }
+    push(1020, 1330, 1); pencil([[0, 0], [0, -200]], { w: 6, col: '#6a4a2a', pass2: false }); pencil([[-90, -200], [90, -200]], { w: 5, col: '#6a4a2a', pass2: false }); for (const sd of [-1, 1]) { pencil([[sd * 90, -200], [sd * 90, -120]], { w: 2, col: '#3a2a1a', pass2: false }); ell(sd * 90, -116, 34, 10, { wash: '#a87a4a', washA: 1, w: 1.6 }); } fish(-90, -130, 0.4, 0, { key: 27961 }); pop();
+    push(620, 1340, 0.6); blob([[-50, 0], [-40, -40], [0, -50], [40, -40], [56, 0]], { wash: '#3a3a3a', washA: 1, w: 2 }); ell(46, -54, 24, 22, { wash: '#3a3a3a', washA: 1, w: 2 }); poly([[30, -70], [36, -96], [50, -72]], { wash: '#3a3a3a', washA: 1, w: 1.4 }); poly([[52, -72], [64, -94], [68, -66]], { wash: '#3a3a3a', washA: 1, w: 1.4 }); ell(40, -54, 4, 4, { wash: '#f0d040', washA: 1, line: false }); ell(54, -54, 4, 4, { wash: '#f0d040', washA: 1, line: false }); pencil(spline([[-50, -20], [-90, -60], [-80, -100]], false, 4), { w: 6, col: '#3a3a3a', pass2: false }); pop();
+    push(1250, 1000, 1); for (let i = 0; i < 4; i++) { rect(i * 30, -600, 22, 800, { wash: '#7a9a3a', washA: 1, w: 1.6, col: '#2a4a1a' }); for (let j = 1; j < 5; j++) pencil([[i * 30, -600 + j * 160], [i * 30 + 22, -600 + j * 160]], { w: 3, col: '#3a5a1a', pass2: false }); } pop();
+    hatch(pathOf([[-400, 1180], [1500, 1180], [1500, 1340], [-400, 1340]]), bbOf([[-400, 1180], [1500, 1340]]), { gap: 16, a: 0.1, col: '#5a4a2a', ang: 0.2, key: 27962 });
+  }
   WORLD.canton = (t, u, cat) => {
     lay(14, () => { coast(t); haze('#f8f4e0', 0.05); });
-    lay(2.6, () => { yard(t); shaft(1000, -100, 380, 1600, 0.35, 'rgba(255,250,220,1)', 0.15); });
+    lay(2.6, () => { extra(t); yard(t); shaft(1000, -100, 380, 1600, 0.35, 'rgba(255,250,220,1)', 0.15); });
     lay(1, () => { lightPool(600, 1460, 680, 120, 'rgba(255,245,210,1)', 0.34); cat(); work(t); });
     lay(0.65, () => { push(-150, 1950, 1.4); brineVat(0, 0, 0.9, t, { key: 27995 }); pop(); push(1220, -40, 1.4); for (let i = 0; i < 4; i++) { const sw = Math.sin(t * 1.4 + i) * 8; fish(i * 40 + sw, 200 + i * 40, 0.6, 1.57, { key: 27996 + i }); pencil([[i * 40, -200], [i * 40 + sw, 160 + i * 40]], { w: 2, col: '#6a5a3a', pass2: false }); } pop();
       motes(14, [-200, 300, 1300, 1500], '#fffbe8', t, 27999, { sp: 2, sz: 3, a: 0.35, wob: 4 }); moodDark(600, 1000, 560, 1500, '#1a1410', 0.35); });
@@ -46,7 +53,7 @@
     act: () => [[S0.canton, 'awe'], [EV.cn_word, 'proud'], [EV.cn_brine, 'shock'], [EV.cn_ket, 'grin'], [EV.cn_sauce, 'suspicious'], [EV.cn_sauce + 0.4, 'laugh']],
     pose: (t, u, b) => { const sc = t > EV.cn_brine - 0.3, taste = t > EV.cn_sauce - 0.2;
       return Object.assign(b, { x: 720, y: 1600, s: 1.15, flip: true, look: t > EV.cn_word && t < EV.cn_brine ? [-0.3, -0.9] : [-0.6, 0.4], hand: taste ? [70, -330] : sc ? [260, -300] : [150, -230], handF: [-90, -230], prop: sc ? 'ladleBrineP' : undefined, propAng: taste ? -1.1 : -0.3, squint: taste && t < EV.cn_sauce + 0.4, tailUp: t > EV.cn_sauce + 0.4 }); },
-    hud: t => infoPlate(t, EV.cn_ket - 0.1, S1.canton - 0.15, { kind: 'swap', title: 'КЕТЧУП', a: 'ТОМАТНЫЙ', b: 'РЫБНЫЙ', ia: 'tomato', ib: (s, tt) => INGR_C27.fish(s, tt), tb: EV.cn_ket + 0.4 }),
+    hud: t => infoPlate(t, EV.cn_ket - 0.1, S1.canton - 0.15, { kind: 'swap', title: 'КЕТЧУП', a: 'ТОМАТНЫЙ', b: 'РЫБНЫЙ', ia: 'tomato', ib: (s, tt) => INGR_C27.fish(s, tt), tb: EV.cn_ket + 0.4, y: 800, x: 680 }),
     cam: () => [[S0.canton, 560, 1020, 0.22], [EV.cn_word, 560, 980, 0.22], [EV.cn_brine, 580, 1110, 0.28], [S1.canton, 620, 1130, 0.3]]
   };
   // ---------------------------------------------------------------- переход: крышка кувшина слетает, горлышко-овал растёт и открывает двор

@@ -37,8 +37,16 @@
     for (let i = 0; i < 3; i++) ketchupBottle(1000 + i * 60, 1450, 0.32, t, { key: 28045 + i, label: ['KETCHUP', 'MUSTARD', 'MAYO'][i], sub: '', fill: 0.8 });
     castShadow(640, 1450, 320, 90, 0.5, 0.25);
   }
+  function extra(t) {                                                     // мелочи кухни: магнитики, календарь, растение, кот-магнит, тостер, полотенце, рисунок ребёнка
+    push(-120, 600, 1); rect(-90, -120, 180, 240, { wash: '#f8f4ec', washA: 1, w: 2, col: '#6a5a4a' }); txt('НОЯБРЬ', 0, -86, 26, { font: 'Osw', col: '#c8301a' }); for (let r = 0; r < 4; r++) for (let c = 0; c < 5; c++) rect(-76 + c * 32, -60 + r * 40, 26, 30, { wash: r === 3 && c === 2 ? '#f0c040' : '#ffffff', washA: 1, w: 1 }); pop();
+    push(900, 300, 1); blob([[-40, 0], [-36, -50], [36, -50], [40, 0]], { wash: '#c86a3a', washA: 1, w: 2 }); for (let i = 0; i < 7; i++) pencil(spline([[0, -50], [-60 + i * 20, -140], [-80 + i * 26, -200 - (i % 3) * 20]], false, 4), { w: 4, col: '#3a8a3a', pass2: false }); pop();
+    push(980, 1260, 1); rect(-70, -90, 140, 90, { wash: '#c8ccd4', washA: 1, w: 2 }); rect(-50, -98, 40, 10, { wash: '#2a2a2a', washA: 1, w: 1 }); rect(10, -98, 40, 10, { wash: '#2a2a2a', washA: 1, w: 1 }); pop();
+    push(1140, 900, 1); rect(-30, -10, 60, 140, { wash: '#e8402a', washA: 1, w: 1.6 }); for (let i = 0; i < 5; i++) pencil([[-30, 10 + i * 24], [30, 10 + i * 24]], { w: 3, col: '#f8f4ec', pass2: false }); pop();
+    push(1000, 450, 1); rect(-60, -50, 120, 100, { wash: '#fbfbf8', washA: 1, w: 1.6 }); ell(-20, -10, 20, 20, { wash: '#f0c030', washA: 1, w: 1 }); pencil([[10, 20], [40, -20]], { w: 4, col: '#3a8ac8', pass2: false }); tomato(30, 10, 0.3, { key: 28060 }); pop();
+    hatch(pathOf([[-500, 880], [1700, 880], [1700, 1440], [-500, 1440]]), bbOf([[-500, 880], [1700, 1440]]), { gap: 20, a: 0.06, col: '#6a7a70', ang: 0.8, key: 28061 });
+  }
   WORLD.today = (t, u, cat) => {
-    lay(9, () => { room(t); haze('#fff0d8', 0.04); });
+    lay(9, () => { room(t); extra(t); haze('#fff0d8', 0.04); });
     lay(2.6, () => { folk(t); });
     lay(1, () => { lightPool(580, 1460, 680, 120, 'rgba(255,225,170,1)', 0.36); cat(); table(t); });
     lay(0.65, () => { push(-140, 1960, 1.4); for (let i = 0; i < 3; i++) ketchupBottle(i * 90, 0, 0.7, t, { key: 28050 + i, label: ['KETCHUP', 'BBQ', 'CHILI'][i], sub: '' }); pop(); push(1240, 1900, 1.4); const p = blob([[-120, -60], [-130, -200], [130, -200], [120, -60]], { wash: '#8a8a94', washA: 1, w: 3 }); for (let i = 0; i < 3; i++) { const ph = (t * 0.5 + i / 3) % 1; ell(Math.sin(t + i) * 30, -220 - ph * 200, 50 + ph * 40, 30, { wash: '#ffffff', washA: 0.25 * (1 - ph), line: false }); } pop();

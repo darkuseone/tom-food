@@ -34,9 +34,16 @@
     push(450, 1460, 1); for (let i = 0; i < 4; i++) pencil(ellPts(0, -10 - i * 6, 70 - i * 6, 18 - i, 0, 0, 24), { w: 6, col: '#c8a060', pass2: false }); pop();
     castShadow(640, 1450, 340, 100, -0.6, 0.28);
   }
+  function extra(t) {                                                     // мелочи палубы: сундук, сети, клетка с попугаем, якорь, ведро со шваброй
+    push(-60, 1300, 0.9); rect(-80, -80, 160, 80, { wash: '#6a3a1a', washA: 1, w: 2.4 }); rect(-80, -100, 160, 24, { wash: '#4a2a10', washA: 1, w: 2 }); rect(-10, -70, 20, 24, { wash: '#c8a040', washA: 1, w: 1.4 }); pop();
+    push(1150, 1100, 1); for (let i = 0; i < 6; i++) pencil(spline([[-80 + i * 30, -200], [-60 + i * 30, -100], [-80 + i * 30, 0]], false, 4), { w: 1.6, col: '#c8b890', pass2: false }); for (let j = 0; j < 5; j++) pencil([[-90, -190 + j * 40], [90, -180 + j * 40]], { w: 1.6, col: '#c8b890', pass2: false }); pop();
+    push(980, 900, 1); pencil([[0, -200], [0, -150]], { w: 3, col: '#3a3a3a', pass2: false }); blob([[-50, 0], [-50, -110], [0, -150], [50, -110], [50, 0]], { wash: '#c8a060', washA: 0.4, w: 2, col: '#6a5a3a' }); for (let i = 0; i < 5; i++) pencil([[-40 + i * 20, -120], [-40 + i * 20, 0]], { w: 2, col: '#6a5a3a', pass2: false }); ell(0, -50, 20, 28, { wash: '#3aa83a', washA: 1, w: 1.6 }); ell(0, -80, 14, 14, { wash: '#e8402a', washA: 1, w: 1.4 }); poly([[10, -82], [26, -76], [10, -72]], { wash: '#f0c030', washA: 1, w: 1 }); pop();
+    push(80, 1250, 0.8); pencil([[0, 0], [0, -160]], { w: 10, col: '#4a4a4a', pass2: false }); pencil(spline([[-80, -40], [0, 20], [80, -40]], false, 5), { w: 10, col: '#4a4a4a', pass2: false }); ell(0, -170, 22, 22, { wash: '#4a4a4a', washA: 0, w: 8, col: '#4a4a4a' }); pop();
+    hatch(pathOf([[-500, 1360], [1700, 1360], [1700, 1440], [-500, 1440]]), bbOf([[-500, 1360], [1700, 1440]]), { gap: 10, a: 0.2, col: '#2a1408', ang: 1.4, key: 27820 });
+  }
   WORLD.ship = (t, u, cat) => {
     lay(16, () => { sea(t); haze('#ffb890', 0.05); });
-    lay(2.8, () => { rigging(t); });
+    lay(2.8, () => { extra(t); rigging(t); });
     lay(1, () => { lightPool(620, 1460, 700, 120, 'rgba(255,190,130,1)', 0.34); cat(); deck(t); });
     lay(0.65, () => { push(-150, -200, 1.4); for (let i = 0; i < 4; i++) pencil([[i * 40, 0], [200 + i * 60, 1600]], { w: 4, col: '#3a2a1a', pass2: false }); pop(); push(1240, 300, 1.4); pencil([[0, -400], [0, 0]], { w: 3, col: '#2a1a10', pass2: false }); blob([[-40, 0], [-40, 80], [40, 80], [40, 0]], { wash: '#f8d890', washA: 0.8, w: 3, col: '#2a1a10' }); glow(0, 40, 120, 'rgba(255,200,120,1)', 0.25); pop();
       motes(12, [-200, 200, 1300, 1400], '#ffe8c8', t, 27890, { sp: 2, vx: 14, sz: 3, a: 0.35, wob: 4 }); moodDark(600, 1000, 520, 1500, '#1a0a20', 0.42); });

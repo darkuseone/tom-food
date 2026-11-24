@@ -30,7 +30,7 @@
     push(960, 1560, 1); const n = ell(0, 0, 170, 120, { wash: '#ffe8c0', washA: 0.85, w: 10, col: '#f8fcff' }); glow(0, 0, 220, 'rgba(255,240,200,1)', 0.3); for (let i = 0; i < 3; i++) pencil(ellPts(0, 0, 150 - i * 30, 100 - i * 20, 0, 0, 30), { w: 3, col: '#ffffff', a: 0.4, pass2: false }); pop();
   }
   function snail(t) {                                                     // улитка снаружи по стеклу — обгоняет, машет «ПОКА!»
-    const k = clamp((t - EV.bt_snail + 0.4) / (EV.bt_blop - EV.bt_snail + 0.6)), x = lerp(-120, 860, k), y = lerp(1200, 1300, k);
+    const k = clamp((t - EV.bt_snail + 0.4) / (EV.bt_blop - EV.bt_snail + 0.6)), x = lerp(150, 900, k), y = lerp(760, 820, k);
     push(x, y, 1.1); const b = blob([[-90, 0], [-60, -20], [40, -16], [90, -30], [100, -10], [80, 6], [-80, 8]], { wash: '#d8c8a0', washA: 0.9, w: 2.4, col: '#5a4a2a', key: 27410 });
     const sh = ell(-10, -60, 60, 56, { wash: '#c8823a', washA: 1, w: 2.4, col: '#4a2a10' }); pencil(spline([[-10, -60], [20, -70], [10, -100], [-30, -90], [-40, -50], [0, -30], [40, -60]], false, 6), { w: 3, col: '#6a3a10', pass2: false });
     pencil([[84, -26], [96, -70]], { w: 3, col: '#5a4a2a', pass2: false }); pencil([[92, -24], [114, -64]], { w: 3, col: '#5a4a2a', pass2: false }); ell(96, -72, 5, 5, { wash: '#1a1a1a', washA: 1, line: false }); ell(114, -66, 5, 5, { wash: '#1a1a1a', washA: 1, line: false });
@@ -40,13 +40,22 @@
     pop();
   }
   function speed(t) {                                                     // спидометр-табличка 45 м/ч (на стекле)
-    if (t < EV.bt_45 - 0.1) return; const k = popK(t, EV.bt_45 - 0.1, 0.35); push(640, 1000, k, 0.05); ell(0, 0, 120, 120, { wash: '#f8f4ec', washA: 1, w: 5, col: '#2a2a2a' }); for (let i = 0; i <= 8; i++) { const a = 3.6 + i * 0.27; pencil([[Math.cos(a) * 100, Math.sin(a) * 100], [Math.cos(a) * 84, Math.sin(a) * 84]], { w: 3, col: '#2a2a2a', pass2: false }); }
+    if (t < EV.bt_45 - 0.1) return; const k = popK(t, EV.bt_45 - 0.1, 0.35); push(640, 780, k * 0.85, 0.05); ell(0, 0, 120, 120, { wash: '#f8f4ec', washA: 1, w: 5, col: '#2a2a2a' }); for (let i = 0; i <= 8; i++) { const a = 3.6 + i * 0.27; pencil([[Math.cos(a) * 100, Math.sin(a) * 100], [Math.cos(a) * 84, Math.sin(a) * 84]], { w: 3, col: '#2a2a2a', pass2: false }); }
     const na = 3.65 + Math.sin(t * 2) * 0.02; pencil([[0, 0], [Math.cos(na) * 90, Math.sin(na) * 90]], { w: 6, col: '#c8201a', pass2: false }); ell(0, 0, 12, 12, { wash: '#2a2a2a', washA: 1, line: false }); txt('45 м/ч', 0, 70, 36, { font: 'Osw', col: '#c8201a' }); hudBox('спидометр', -120, -120, 120, 120); pop();
   }
+  function blur(t) {                                                      // за стеклом размыто: стол, тарелка фри, рука великана с ножом, солонка, подсвечник
+    push(200, 1500, 1); ell(0, 0, 260, 50, { wash: '#f8f4ec', washA: 0.5, line: false }); for (let i = 0; i < 9; i++) rect(-160 + i * 36, -90 - (i % 3) * 20, 24, 110, { wash: '#f4c040', washA: 0.45, line: false }); pop();
+    push(-60, 700, 1); blob([[-120, 0], [-60, -200], [60, -220], [140, -40], [80, 120], [-80, 120]], { wash: '#e8b88e', washA: 0.35, line: false }); pencil([[60, -220], [200, -480]], { w: 18, col: '#c8ccd4', a: 0.35, pass2: false }); pop();
+    push(1100, 1000, 1); blob([[-40, 0], [-46, -120], [-20, -150], [20, -150], [46, -120], [40, 0]], { wash: '#f8f8f8', washA: 0.4, line: false }); for (let i = 0; i < 4; i++) ell(-10 + i * 6, -150, 3, 3, { wash: '#3a3a3a', washA: 0.4, line: false }); pop();
+    push(900, 500, 1); rect(-14, -120, 28, 120, { wash: '#f8f0d8', washA: 0.5, line: false }); ell(0, -136, 10, 18, { wash: '#ffc060', washA: 0.7, line: false }); glow(0, -136, 80, 'rgba(255,200,120,1)', 0.25); pop();
+    hatch(pathOf([[-200, 1600], [1300, 1600], [1300, 1900], [-200, 1900]]), bbOf([[-200, 1600], [1300, 1900]]), { gap: 14, a: 0.12, col: '#3a0404', ang: 0.4, key: 27495 });
+    shadeG(pathOf([[-300, 200], [1400, 200], [1400, 2000], [-300, 2000]]), 0, 200, 0, 2000, '#4a0606', 0.2);
+    for (let i = 0; i < 6; i++) { const ph = (t * 0.3 + i / 6) % 1; ell(200 + i * 150, 1700 - ph * 1400, 4, 4, { wash: '#ffd0b0', washA: 0.7 * (1 - ph), line: false }); }
+  }
   WORLD.bottle = (t, u, cat) => {
-    lay(8, () => { outside(t); });
+    lay(8, () => { outside(t); blur(t); haze('#ffd8c0', 0.05); });
     lay(1.6, () => { ketchupSea(t); });
-    lay(1, () => { lightPool(560, 1300, 600, 120, 'rgba(255,200,170,1)', 0.25); cat(); castShadow(500, 1300, 200, 60, 0.4, 0.2); speed(t);
+    lay(1, () => { lightPool(560, 1300, 600, 120, 'rgba(255,200,170,1)', 0.25); cat(); castShadow(500, 1300, 200, 60, 0.4, 0.2);
       if (t > EV.bt_blop) { push(960, 1480, popK(t, EV.bt_blop, 0.3)); txt('БЛОП!', 0, -200, 90, { font: 'Osw', col: '#ffe070', rot: -0.1 }); pop(); } });
     lay(0.7, () => { glass(t); snail(t); motes(16, [-200, 200, 1300, 1700], '#ffd0c0', t, 27490, { sp: -4, sz: 5, a: 0.3, wob: 5 }); moodDark(540, 960, 600, 1500, '#2a0404', 0.4); });
   };
@@ -55,6 +64,7 @@
     act: () => [[S0.bottle, 'annoyed'], [EV.bt_snail, 'shock'], [EV.bt_45, 'annoyed'], [EV.bt_hour, 'scared'], [EV.bt_blop, 'shock'], [EV.bt_blop + 0.3, 'laugh']],
     pose: (t, u, b) => { const slow = clamp((t - S0.bottle) / (EV.bt_blop - S0.bottle)), out = t > EV.bt_blop; const x = out ? lerp(900, 1000, clamp((t - EV.bt_blop) / 0.4)) : lerp(380, 620, slow), y = out ? lerp(1480, 1300, clamp((t - EV.bt_blop) / 0.3)) : 1420;
       return Object.assign(b, { x, y, s: 0.72, flip: false, rot: out ? 0.6 : 0, walk: !out ? t * 2 : undefined, look: t > EV.bt_snail && t < EV.bt_blop ? [0.9, 0.3] : [0.6, 0.2], hand: t > EV.bt_hour && !out ? [100, -460] : [160, -250], handF: t > EV.bt_hour && !out ? [-100, -460] : [-80, -230], sweat: t > EV.bt_45, squash: b.squash + (out ? 0.12 : 0) }); },
+    hud: t => speed(t),
     cam: () => [[S0.bottle, 540, 1040, 0.2], [EV.bt_snail, 560, 1100, 0.24], [EV.bt_hour, 600, 1120, 0.26], [EV.bt_blop, 720, 1200, 0.26], [S1.bottle, 740, 1210, 0.27]]
   };
   // ---------------------------------------------------------------- переход: восьмигранное горлышко надвигается и всасывает кадр
