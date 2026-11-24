@@ -1,3 +1,3 @@
-/* Обложка 026: блюдо — герой кадра крупно, Том с реакцией; 2–3 слова; плашка с названием блюда. */
-const COVER = { scene: 'hook', t: 2.0, cam: { x: 560, y: 1060, z: 0.4 }, pose: { expr: 'shock', expr2: 'shock', ek: 1, tailUp: true },
-  title: [['TODO', '#f4e6c8'], ['TODO?!', '#d9482b']], size: 150, ty: 360, badge: 'СУШИ', sub: 'история за минуту' };
+/* Обложка 026: суши-бар, Том с нигири с лососем у самой морды, повар льёт уксус в кадку; 2 строки; плашка СУШИ. */
+const COVER = { scene: 'hook', t: 3.6, cam: { x: 600, y: 1010, z: 0.38 }, pose: { expr: 'suspicious', expr2: 'shock', ek: 0.5, noBlink: true, look: [-0.4, 0.2], hand: [150, -300], prop: 'nigiriP' },
+  title: [['ЗАЧЕМ В СУШИ', '#f4e6c8'], ['УКСУС?!', '#d9482b']], size: 130, ty: 380, badge: 'СУШИ', sub: 'суши' };
